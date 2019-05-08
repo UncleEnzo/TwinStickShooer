@@ -19,10 +19,16 @@ public class Gun : MonoBehaviour
     public float fireRate = 0.5F;
     private float nextFire = 0.5F;
 
+    //Recoil camera shake
+    private CameraController cam;
+
     void Start()
     {
         // if the sword is child object, this is the transform of the character (or shoulder)
         shoulder = transform.parent.transform;
+
+        //instantiate the camera controller
+        cam = FindObjectOfType<CameraController>();
     }
 
     // Update is called once per frame
@@ -41,6 +47,7 @@ public class Gun : MonoBehaviour
         {
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            cam.Shake((transform.parent.transform.position - transform.position).normalized ,1.5f, 0.05f);
         }
     }
 
