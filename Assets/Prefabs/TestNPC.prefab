@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 8231782970508570935}
   - component: {fileID: 8231782970508570932}
   - component: {fileID: 8231782970508570934}
+  - component: {fileID: 2110966023}
+  - component: {fileID: 2110966026}
   m_Layer: 0
-  m_Name: StationaryTestObject
+  m_Name: TestNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,10 +92,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.05369824, y: -0.04707861}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -104,5 +106,38 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 1.5981101, y: 1.3141832}
   m_EdgeRadius: 0
+--- !u!114 &2110966023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231782970508570933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f6c0696bce61f84695b0bbcb49988e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    name: Alchemist Tutor
+    sentences:
+    - Hey there. This is my Biome.  You can practice killing biohazards here.
+    - Press left mouse trigger to shoot.
+    - I'm about to spawn some enemies. Get ready!
+--- !u!114 &2110966026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231782970508570933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a282ccbcbb9494491631488209f3f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueTriggered: 0
+  speechRate: 0.5
+  animator: {fileID: 0}

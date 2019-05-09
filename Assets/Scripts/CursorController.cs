@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
-    [SerializeField] private Texture2D cursorSprite;
+    public Texture2D cursorSprite;
 
     // Start is called before the first frame update
     void Start()
