@@ -8,10 +8,11 @@ public class EnemyManager : MonoBehaviour {
     public GameObject[] enemies;
     public float minSpawnDistance;
     public float randomSpawnRange;
-    public Player player;
+    private Player player;
 
     void Start()
     {
+        player = FindObjectOfType<Player>();
         if (randomSpawnRange <= minSpawnDistance)
         {
             Debug.LogError("Random spawn range is less than or equal to the minimum spawn distance from player");
