@@ -11,10 +11,12 @@ public class TestNPC : MonoBehaviour
     public float speechRate = 1F;
     public Animator animator;
     private IEnumerator helpTextEnum;
+    private EnemyManager enemyManager;
 
     void Start()
     {
         helpTextEnum = helpText();
+        enemyManager = FindObjectOfType<EnemyManager>();
     }
     void Update()
     {
@@ -31,7 +33,12 @@ public class TestNPC : MonoBehaviour
         if ((dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue) || (dialogueTriggered && Input.GetMouseButtonDown(0) && Time.time > nextDialogue))
         {
             nextDialogue = Time.time + speechRate;
-            FindObjectOfType<DialogueManager>().displayNextSentence();
+            Boolean lastSentence = FindObjectOfType<DialogueManager>().displayNextSentence();
+
+            if (lastSentence)
+            {
+                enemyManager.instantiateEnemy(3, "Basic Enemy");
+            }
         }
     }
 

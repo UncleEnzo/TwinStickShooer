@@ -28,17 +28,19 @@ public class DialogueManager : MonoBehaviour
         }
         displayNextSentence();
     }
-    public void displayNextSentence()
+    public Boolean displayNextSentence()
     {
+        Boolean lastSentence = false;
         if (sentences.Count == 0)
         {
             endDialogue();
-            return;
+            return lastSentence = true;
         }
 
         string sentence = sentences.Dequeue();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
+        return lastSentence;
     }
 
     IEnumerator TypeSentence (string sentence)
