@@ -94,8 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8a023f1e950b2479b8f8da67a88f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionTransform: {fileID: 0}
-  item: {fileID: 11400000, guid: ee5414a3f82bee143be64dbdb55b8f4c, type: 2}
+  item: {fileID: 11400000, guid: 5acf3a5a132a8d940a03595a88a76f89, type: 2}
 --- !u!114 &3085158205632521486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78683d147994d46bd9ff8326818441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionTransform: {fileID: 0}
 --- !u!58 &3085158205632521484
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public Transform interactionTransform;
     private Interactable interactable;
 
     public virtual void interact()
@@ -32,7 +31,7 @@ public class Interactable : MonoBehaviour
         if (collider2D.tag == "Player")
         {
             collider2D.GetComponent<Player>().isInteractable = false;
-             collider2D.GetComponent<Player>().isItemPickUp = false;
+            //item pickup false set on player because object is destroyed and you never exit
         }
     }
 }

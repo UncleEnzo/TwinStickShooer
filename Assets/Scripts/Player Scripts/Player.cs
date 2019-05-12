@@ -16,13 +16,13 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown("e") && isInteractable == true)
         {
-            print("WE GOT IN BABY");
+            print("Interacting with NPC or object");
         }
 
         if(isItemPickUp == true)
         {
-            print("WE PICKED IT THE FUCK UP");
-            print(isItemPickUp);
+            print("Picked up Item");
+            isItemPickUp = false;
         }
     }
 
