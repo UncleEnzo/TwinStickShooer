@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public float walkDamageToPlayer = 2;
     public float moveSpeed;
     private Player player;
     private bool walking = true;
@@ -27,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     private void shootAtPlayer()
     {
-        GetComponentInChildren<GunControls>().fireGun();
+        GetComponentInChildren<GunFiring>().fireEnemyGun();
     }
   
     private void approachPlayer()

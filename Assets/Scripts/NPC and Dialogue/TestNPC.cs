@@ -20,6 +20,7 @@ public class TestNPC : MonoBehaviour
     }
     void Update()
     {
+
         if (playerInField && !dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue)
         {
             StopCoroutine(helpTextEnum);
@@ -51,12 +52,6 @@ public class TestNPC : MonoBehaviour
         }
     }
 
-    private IEnumerator helpText()
-    {
-        yield return new WaitForSeconds(1.5f);
-        animator.SetBool("isOpen", true);
-    }
-
     void OnTriggerExit2D(Collider2D collider2D)
     {
         if (collider2D == FindObjectOfType<Player>().GetComponent<CircleCollider2D>())
@@ -65,5 +60,11 @@ public class TestNPC : MonoBehaviour
             animator.SetBool("isOpen", false);
             StopCoroutine(helpTextEnum);
         }
+    }
+
+    private IEnumerator helpText()
+    {
+        yield return new WaitForSeconds(1.5f);
+        animator.SetBool("isOpen", true);
     }
 }

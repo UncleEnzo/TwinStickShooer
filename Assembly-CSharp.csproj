@@ -53,19 +53,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Dialogue.cs" />
-     <Compile Include="Assets\Scripts\DialogueManager.cs" />
-     <Compile Include="Assets\Scripts\DialogueTrigger.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
-     <Compile Include="Assets\Scripts\EnemyManager.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet\Bullet.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet\GunControls.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet\GunFiring.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet\GunProperties.cs" />
+     <Compile Include="Assets\Scripts\Interactable.cs" />
+     <Compile Include="Assets\Scripts\Inventory.cs" />
+     <Compile Include="Assets\Scripts\Item.cs" />
+     <Compile Include="Assets\Scripts\ItemPickup.cs" />
+     <Compile Include="Assets\Scripts\NPC and Dialogue\Dialogue.cs" />
+     <Compile Include="Assets\Scripts\NPC and Dialogue\DialogueManager.cs" />
+     <Compile Include="Assets\Scripts\NPC and Dialogue\DialogueTrigger.cs" />
+     <Compile Include="Assets\Scripts\NPC and Dialogue\TestNPC.cs" />
      <Compile Include="Assets\Scripts\Player\CameraController.cs" />
      <Compile Include="Assets\Scripts\Player\CursorController.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
-     <Compile Include="Assets\Scripts\TestNPC.cs" />
      <Compile Include="Assets\Scripts\Vitals.cs" />
+     <Compile Include="Assets\Scripts\Weapon Swap\WeaponSwitching.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/Alchemist Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

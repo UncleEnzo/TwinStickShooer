@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4440272899492755963}
   - component: {fileID: 5106151370106326939}
   - component: {fileID: 4665798870796060610}
+  - component: {fileID: 2687971488367456846}
   m_Layer: 8
   m_Name: Pistol
   m_TagString: Untagged
@@ -116,7 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8c052a89e5e71469be5173f511cc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 7991890147027848265, guid: 27d7034641cfc714d96d226274344496, type: 3}
 --- !u!114 &4665798870796060610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,10 +129,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc53a4f9262a3964680b112fbd8972d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawnPoint: []
+  bulletSpawnPoint:
+  - {fileID: 2837358917047641872}
   camShakeMagnitude: 1.5
   camShakeLength: 0.05
-  bulletsPerSecond: 5
+  bulletsPerSecond: 3
+  maxAmmo: 7
+  reloadTime: 2
+--- !u!114 &2687971488367456846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11991691623488481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94364d95c73b874eb7b5f0ff93f41ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 7991890147027848265, guid: 27d7034641cfc714d96d226274344496, type: 3}
 --- !u!1 &198921624569747572
 GameObject:
   m_ObjectHideFlags: 0

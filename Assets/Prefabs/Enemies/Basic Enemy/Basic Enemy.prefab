@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d656bcb38f8bbe4586ea33330b4fc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkDamageToPlayer: 2
   moveSpeed: 1
 --- !u!114 &4992413632460781757
 MonoBehaviour:

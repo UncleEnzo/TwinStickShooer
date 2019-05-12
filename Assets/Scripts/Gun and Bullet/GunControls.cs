@@ -9,27 +9,19 @@ public class GunControls : MonoBehaviour
 
     //general variables
     private Transform shoulder;
-    private float lastfired;
 
     //player only
     private CameraController cam;
     private Vector3 pointAtMouse;
-    private float playerArmLength = .5f;
+    private float playerArmLength = 1f;
 
     //enemy only
     private Vector3 pointAtPlayer;
-    private float enemyArmLength = .5f;
+    private float enemyArmLength = 1f;
 
-    //Properties for the current gun
-    GunProperties gunProperties;
-
-    //Properties for the bullets and their properties
-    public GameObject bullet;
-
-    // Start is called before the first frame update
     void Start()
     {
-        gunProperties = GetComponent<GunProperties>();
+       
         shoulder = transform.parent.transform;
         if (GetComponentInParent<Player>())
         {
@@ -42,20 +34,6 @@ public class GunControls : MonoBehaviour
     void Update()
     {
         gunControls();
-    }
-
-    public void fireGun()
-    {
-        if ((Time.time - lastfired) > (1 / gunProperties.bulletsPerSecond))
-        {
-            lastfired = Time.time;
-            foreach (Transform bulletShot in gunProperties.bulletSpawnPoint)
-            Instantiate(bullet, bulletShot.position, bulletShot.rotation);
-            if (isPlayerGun)
-            {
-                cam.Shake((transform.parent.transform.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
-            }
-        }
     }
 
     private void gunControls()

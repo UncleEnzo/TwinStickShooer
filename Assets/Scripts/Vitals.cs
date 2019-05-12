@@ -24,6 +24,10 @@ public class Vitals : MonoBehaviour
         {
             health -= collision.gameObject.GetComponent<Bullet>().damage;
         }
+        if(gameObject.tag == ("Player") && collision.gameObject.tag == "Enemy")
+        {
+            health -= collision.gameObject.GetComponent<Enemy>().walkDamageToPlayer;
+        }
         if (gameObject.tag == ("Enemy") && collision.gameObject.tag == "PlayerBullet")
         {
             health -= collision.gameObject.GetComponent<Bullet>().damage;

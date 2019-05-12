@@ -6,25 +6,23 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int speed;
-    private GunControls gun;
-
-    void Start()
-    {
-        gun = GetComponentInChildren<GunControls>();
-    }
+    public bool isInteractable = false;
+    public bool isItemPickUp = false;
 
     // Update is called once per frame
     void Update()
     {
         Move();
-        fireGun();
-    }
 
-    private void fireGun()
-    {
-        if (Input.GetMouseButton(0))
+        if (Input.GetKeyDown("e") && isInteractable == true)
         {
-           gun.fireGun();
+            print("WE GOT IN BABY");
+        }
+
+        if(isItemPickUp == true)
+        {
+            print("WE PICKED IT THE FUCK UP");
+            print(isItemPickUp);
         }
     }
 
@@ -41,14 +39,14 @@ public class Player : MonoBehaviour
             FindObjectOfType<Player>().enabled = true;
             FindObjectOfType<CursorController>().enabled = true;
             FindObjectOfType<CameraController>().enabled = true;
-            gun.enabled = true;
+            FindObjectOfType<GunFiring>().enabled = true;
         }
         if (!playerUsable)
         {
             FindObjectOfType<Player>().enabled = false;
             FindObjectOfType<CursorController>().enabled = false;
             FindObjectOfType<CameraController>().enabled = false;
-            gun.enabled = false;
+            FindObjectOfType<GunFiring>().enabled = false;
         }
     }
 }
