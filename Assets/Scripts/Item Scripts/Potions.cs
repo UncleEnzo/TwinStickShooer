@@ -5,15 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Potions", menuName = "Inventory/Potions" )]
 public class Potions : Item
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int healthModifier;
+    public int damageModifier;
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+public enum EquipmentSlot
+{
+
 }

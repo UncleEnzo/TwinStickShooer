@@ -26,8 +26,7 @@ public class GunControls : MonoBehaviour
         if (GetComponentInParent<Player>())
         {
             isPlayerGun = true;
-            //instantiate the camera controller
-            cam = FindObjectOfType<CameraController>();
+            cam = GetComponentInParent<CameraController>();
         }
     }
     // Update is called once per frame

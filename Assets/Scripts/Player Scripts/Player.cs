@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public int speed;
     public bool isInteractable = false;
-    public bool isItemPickUp = false;
+    public 
 
     // Update is called once per frame
     void Update()
@@ -17,12 +18,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown("e") && isInteractable == true)
         {
             print("Interacting with NPC or object");
-        }
-
-        if(isItemPickUp == true)
-        {
-            print("Picked up Item");
-            isItemPickUp = false;
         }
     }
 
@@ -36,17 +31,21 @@ public class Player : MonoBehaviour
     {
         if (playerUsable)
         {
-            FindObjectOfType<Player>().enabled = true;
-            FindObjectOfType<CursorController>().enabled = true;
-            FindObjectOfType<CameraController>().enabled = true;
-            FindObjectOfType<GunFiring>().enabled = true;
+            this.enabled = true;
+            GetComponent<CameraController>().enabled = true;
+            GetComponent<CursorController>().enabled = true;
+            GetComponentInChildren<GunFiring>().enabled = true;
+            GetComponentInChildren<GunControls>().enabled = true;
+            GetComponentInChildren<GunProperties>().enabled = false;
         }
         if (!playerUsable)
         {
-            FindObjectOfType<Player>().enabled = false;
-            FindObjectOfType<CursorController>().enabled = false;
-            FindObjectOfType<CameraController>().enabled = false;
-            FindObjectOfType<GunFiring>().enabled = false;
+            this.enabled = false;
+            GetComponent<CameraController>().enabled = false;
+            GetComponent<CursorController>().enabled = false;
+            GetComponentInChildren<GunFiring>().enabled = false;
+            GetComponentInChildren<GunControls>().enabled = false;
+            GetComponentInChildren<GunProperties>().enabled = false;
         }
     }
 }

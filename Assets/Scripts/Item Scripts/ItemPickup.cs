@@ -14,8 +14,7 @@ public class ItemPickup : Interactable
 
     void itemPickUp()
     {
-        print("pick up " + item.name);
-        FindObjectOfType<Player>().isItemPickUp = false;
+        print("Picked up " + item.name);
         bool wasPickedUp = Inventory.instance.Add(item);
         if (wasPickedUp)
         {

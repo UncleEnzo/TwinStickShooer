@@ -15,3 +15,5 @@ MonoBehaviour:
   name: Health Up Potion
   icon: {fileID: 21300000, guid: 7d2e53ab8d7d2f44c8aa5caf88e736db, type: 3}
   isDefaultItem: 0
+  healthModifier: 1
+  damageModifier: 0

@@ -21,7 +21,6 @@ public class Interactable : MonoBehaviour
 
         if (collider2D.tag == "Player" && gameObject.tag == "PickUp")
         {
-            collider2D.GetComponent<Player>().isItemPickUp = true;
             interact();
         }
     }
@@ -31,7 +30,6 @@ public class Interactable : MonoBehaviour
         if (collider2D.tag == "Player")
         {
             collider2D.GetComponent<Player>().isInteractable = false;
-            //item pickup false set on player because object is destroyed and you never exit
         }
     }
 }

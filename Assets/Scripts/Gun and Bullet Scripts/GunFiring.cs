@@ -21,7 +21,7 @@ public class GunFiring : MonoBehaviour
         currentAmmo = gunProperties.maxAmmo;
         if (GetComponentInParent<Player>())
         {
-            cam = FindObjectOfType<CameraController>();
+            cam = GetComponentInParent<CameraController>();
         }
         
     }
