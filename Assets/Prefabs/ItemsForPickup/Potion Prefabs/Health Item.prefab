@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3085158205632521486}
   - component: {fileID: 3085158205632521484}
   m_Layer: 0
-  m_Name: TestItem
+  m_Name: Health Item
   m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8a023f1e950b2479b8f8da67a88f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 5acf3a5a132a8d940a03595a88a76f89, type: 2}
+  potions: {fileID: 11400000, guid: 5acf3a5a132a8d940a03595a88a76f89, type: 2}
 --- !u!114 &3085158205632521486
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -66,6 +66,8 @@
      <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\ItemPickup.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Potions.cs" />
+     <Compile Include="Assets\Scripts\Item Scripts\WeaponPickup.cs" />
+     <Compile Include="Assets\Scripts\Item Scripts\Weapons.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\Dialogue.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueTrigger.cs" />

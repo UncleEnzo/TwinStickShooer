@@ -9,6 +9,7 @@ TagManager:
   - EnemyBullet
   - Interactable
   - PickUp
+  - WeaponHolder
   layers:
   - Default
   - TransparentFX

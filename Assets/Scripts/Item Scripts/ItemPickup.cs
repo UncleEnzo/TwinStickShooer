@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemPickup : Interactable
 {
-    public Item item;
+    public Potions potions;
 
     public override void interact()
     {
@@ -14,12 +14,11 @@ public class ItemPickup : Interactable
 
     void itemPickUp()
     {
-        print("Picked up " + item.name);
-        bool wasPickedUp = Inventory.instance.Add(item);
+        print("Picked up " + potions.name);
+        bool wasPickedUp = Inventory.instance.Add(potions);
         if (wasPickedUp)
         {
             Destroy(gameObject);
         }
-
     }
 }

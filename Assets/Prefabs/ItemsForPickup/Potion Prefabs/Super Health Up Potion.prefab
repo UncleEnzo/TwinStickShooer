@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8a023f1e950b2479b8f8da67a88f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 25da76c7a9ba60241ab69a5d96eb7476, type: 2}
+  potions: {fileID: 11400000, guid: 25da76c7a9ba60241ab69a5d96eb7476, type: 2}
 --- !u!114 &5643607579732925546
 MonoBehaviour:
   m_ObjectHideFlags: 0
