@@ -13,15 +13,14 @@ public class GunControls : MonoBehaviour
     //player only
     private CameraController cam;
     private Vector3 pointAtMouse;
-    private float playerArmLength = 1f;
+    private float playerArmLength = .5f;
 
     //enemy only
     private Vector3 pointAtPlayer;
-    private float enemyArmLength = 1f;
+    private float enemyArmLength = .5f;
 
     void Start()
     {
-       
         shoulder = transform.parent.transform;
         if (GetComponentInParent<Player>())
         {
@@ -51,9 +50,9 @@ public class GunControls : MonoBehaviour
         }
     }
 
-    private void lookAtPoint(Vector3 point)
+    private void lookAtPoint(Vector3 mouseTransform)
     {
-        var dir = point - transform.position;
+        var dir = mouseTransform - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
