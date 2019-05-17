@@ -75,6 +75,7 @@
      <Compile Include="Assets\Scripts\Player Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\CursorController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerAnimController.cs" />
      <Compile Include="Assets\Scripts\Vitals.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">

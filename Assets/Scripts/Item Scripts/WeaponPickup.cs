@@ -37,6 +37,7 @@ public class WeaponPickup : Interactable
         {
             allWeapons[weaponSlotIndex] = weaponType;
             Instantiate(weapon, weaponHolder.transform);
+            weaponHolder.GetComponent<WeaponSwitching>().selectWeapon();  // currently not working.  Picked up weapon is not chosen
         }
         else
         {

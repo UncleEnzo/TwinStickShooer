@@ -91,7 +91,7 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
-    private void selectWeapon()
+    public void selectWeapon()
     {
         int i = 0;
         foreach(Transform weapon in transform)
@@ -99,10 +99,12 @@ public class WeaponSwitching : MonoBehaviour
             if (i == selectedWeapon)
             {
                 weapon.gameObject.SetActive(true);
+                print("Set Selected weapon active");
             }
             else
             {
                 weapon.gameObject.SetActive(false);
+                print("Set other weapons inactive");
             }
             i++;
         }
