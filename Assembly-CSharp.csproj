@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Bullet.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EquipToPlayer.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunControls.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunFiring.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunProperties.cs" />
@@ -66,8 +67,6 @@
      <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\ItemPickup.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Potions.cs" />
-     <Compile Include="Assets\Scripts\Item Scripts\WeaponPickup.cs" />
-     <Compile Include="Assets\Scripts\Item Scripts\Weapons.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\Dialogue.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueTrigger.cs" />

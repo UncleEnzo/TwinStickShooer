@@ -19,9 +19,8 @@ public class GunControls : MonoBehaviour
     private Vector3 pointAtPlayer;
     private float enemyArmLength = .5f;
 
-    void Start()
+    void OnEnable()
     {
-        shoulder = transform.parent.transform;
         if (GetComponentInParent<Player>())
         {
             isPlayerGun = true;
@@ -31,7 +30,12 @@ public class GunControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gunControls();
+        if (GetComponentInParent<Player>())
+        {
+            shoulder = transform.parent.transform;
+            gunControls();
+        }
+       
     }
 
     private void gunControls()
