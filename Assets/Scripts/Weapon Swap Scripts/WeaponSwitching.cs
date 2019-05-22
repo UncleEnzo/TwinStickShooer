@@ -4,22 +4,43 @@ using UnityEngine;
 
 public class WeaponSwitching : MonoBehaviour
 {
-    public int selectedWeapon = 0;
-    public WeaponType[] allWeapons;
+    private int selectedWeapon = 0;
+    private int weaponCount = 0;
+    private int previousWeaponCount = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
         selectWeapon();
+        weaponCount = transform.childCount;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        //Calls select weapon if scroll wheel is used
         int previousSelectedWeapon = selectedWeapon;
+        weaponSwitchScrollWheel();
+        if (previousSelectedWeapon != selectedWeapon)
+        {
+            selectWeapon();
+        }
 
-        weaponSwitchScrollWheel(); // need to make rules for how to create
+        //Calls select weapon if new weapon is added
+        weaponCount = transform.childCount;
+        autoSelectNewWeaponInHolster();
+        previousWeaponCount = weaponCount;
+    }
+
+    private void autoSelectNewWeaponInHolster()
+    {
+        if (previousWeaponCount != weaponCount)
+        {
+            selectedWeapon = transform.childCount - 1;
+            selectWeapon();
+        }
     }
 
     private void weaponSwitchScrollWheel()
@@ -51,17 +72,17 @@ public class WeaponSwitching : MonoBehaviour
     public void selectWeapon()
     {
         int i = 0;
-        foreach(Transform weapon in transform)
+        foreach (Transform weapon in transform)
         {
             if (i == selectedWeapon)
             {
+                weapon.GetComponent<GunFiring>().enabled = true; //reenables reload
                 weapon.gameObject.SetActive(true);
-                print("Set Selected weapon active");
             }
             else
             {
+                weapon.GetComponent<GunFiring>().enabled = false; //Cuts reload short if switching in middle
                 weapon.gameObject.SetActive(false);
-                print("Set other weapons inactive");
             }
             i++;
         }

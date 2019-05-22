@@ -9,21 +9,17 @@ public class EquipToPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<GunControls>().enabled = false;
-        GetComponent<GunFiring>().enabled = false;
-        GetComponent<GunProperties>().enabled = false;
         playerWeaponHolder = GameObject.Find("WeaponHolder");
 
-        //issue with this foreach loop > If the player has the gun, and it's in the playing field, it will fire, need to be specific about activating only the one that the player has
-        //Issue where the guns fire even though everything is disabled
-        if (playerWeaponHolder.transform.parent == gameObject.transform)
+        if (gameObject.transform.IsChildOf(playerWeaponHolder.transform))
         {
-            Destroy(gameObject.GetComponent<Collider2D>());
             GetComponent<GunControls>().enabled = true;
             GetComponent<GunFiring>().enabled = true;
             GetComponent<GunProperties>().enabled = true;
-            print("PLAYER HAS THIS GUN AND it'S USABLE");
-            Destroy(this);
+        }
+        else
+        {
+            GetComponent<Collider2D>().enabled = true;
         }
     }
 
@@ -39,24 +35,23 @@ public class EquipToPlayer : MonoBehaviour
                 if (weapon.GetComponent<GunProperties>().weaponType == GetComponent<GunProperties>().weaponType)
                 {
                     playerHasGun = true;
-                    print("Player has this gun and it won't be added");
                 }
             }
             if (playerHasGun == true)
             {
-                print("WEAPON EXISTS, DESTROYING");
                 Destroy(gameObject);
-            } else {
+            }
+            else
+            {
                 transform.SetParent(collider.transform.Find("WeaponHolder"));
                 GetComponent<GunControls>().enabled = true;
                 GetComponent<GunFiring>().enabled = true;
                 GetComponent<GunProperties>().enabled = true;
-                Destroy(gameObject.GetComponent<Collider2D>());
-                Destroy(this);
+                GetComponent<Collider2D>().enabled = false;
                 print("NEW GUN, ADDING TO WEAPON HOLSTER");
             }
         }
     }
 }
-       
+
 

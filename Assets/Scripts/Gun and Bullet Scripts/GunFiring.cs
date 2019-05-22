@@ -7,7 +7,7 @@ public class GunFiring : MonoBehaviour
     //general variables
     private CameraController cam;
     private float lastfired;
-    private bool isReloading =false;
+    private bool isReloading = false;
     private int currentAmmo;
 
     //Properties for the gun and bullet
@@ -19,16 +19,17 @@ public class GunFiring : MonoBehaviour
     {
         gunProperties = GetComponent<GunProperties>();
         currentAmmo = gunProperties.maxAmmo;
-        if (GetComponentInParent<Player>())
-        {
-            cam = GetComponentInParent<CameraController>();
-        }
-        
+        cam = FindObjectOfType<CameraController>();
     }
 
-    void onEnable()
+    void OnEnable()
     {
         isReloading = false;
+    }
+
+    void onDisable()
+    {
+        StopCoroutine(reload());
     }
 
     // Update is called once per frame
@@ -69,8 +70,8 @@ public class GunFiring : MonoBehaviour
             {
                 Instantiate(bullet, bulletShot.position, bulletShot.rotation);
                 currentAmmo--;
-                cam.Shake((transform.parent.transform.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
-            }                
+            }
+            cam.Shake((transform.parent.transform.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
         }
     }
 

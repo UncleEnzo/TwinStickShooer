@@ -14,6 +14,7 @@ public class GunControls : MonoBehaviour
     private CameraController cam;
     private Vector3 pointAtMouse;
     private float playerArmLength = .5f;
+    private bool gunFacingRight = true;
 
     //enemy only
     private Vector3 pointAtPlayer;
@@ -30,12 +31,29 @@ public class GunControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponentInParent<Player>())
+        shoulder = transform.parent.transform;
+        gunControls();
+        monitorGunSpriteFlip();
+    }
+
+    private void monitorGunSpriteFlip()
+    {
+        //Flips gunsprite over the Y axis
+        Transform player = gameObject.transform.root;
+        if (player.transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x - gameObject.transform.localPosition.x > 0 && !gunFacingRight)
         {
-            shoulder = transform.parent.transform;
-            gunControls();
+            flipGunSprite();
         }
-       
+        else if (player.transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x - gameObject.transform.localPosition.x < 0 && gunFacingRight)
+        {
+            flipGunSprite();
+        }
+    }
+
+    private void flipGunSprite()
+    {
+        gameObject.GetComponent<SpriteRenderer>().flipY = !gameObject.GetComponent<SpriteRenderer>().flipY;
+        gunFacingRight = !gunFacingRight;
     }
 
     private void gunControls()

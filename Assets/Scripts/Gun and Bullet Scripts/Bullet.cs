@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
     public float damage = 1f;
+    public float timeBulletSelfDestruct = 3f;
+    public float knockBack = 300f;
     Rigidbody2D rigidBody2D;
 
     //bullet accuracy (Use for spread weapons as well)
@@ -26,8 +28,6 @@ public class Bullet : MonoBehaviour
         {
             rigidBody2D.velocity = transform.right * speed;
         }
-
-        //rigidBody2D.velocity = transform.right * speed;
         destroySelf();
     }
 
@@ -62,11 +62,17 @@ public class Bullet : MonoBehaviour
 
     private void destroySelf()
     {
-        Destroy(gameObject, 5);
+        Destroy(gameObject, timeBulletSelfDestruct);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Vector2 force = transform.position - collision.collider.transform.position;
+            force.Normalize();
+            collision.collider.GetComponent<Rigidbody2D>().AddForce(-force * knockBack);
+        }
         Destroy(gameObject);
     }
 }
