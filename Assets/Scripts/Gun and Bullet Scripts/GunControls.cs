@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Diagnostics;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,13 +26,13 @@ public class GunControls : MonoBehaviour
         if (GetComponentInParent<Player>())
         {
             isPlayerGun = true;
-            cam = GetComponentInParent<CameraController>();
+            cam = FindObjectOfType<CameraController>();
         }
     }
     // Update is called once per frame
     void Update()
     {
-        shoulder = transform.parent.transform;
+        shoulder = transform.root.transform;
         gunControls();
         monitorGunSpriteFlip();
     }
@@ -39,12 +40,11 @@ public class GunControls : MonoBehaviour
     private void monitorGunSpriteFlip()
     {
         //Flips gunsprite over the Y axis
-        Transform player = gameObject.transform.root;
-        if (player.transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x - gameObject.transform.localPosition.x > 0 && !gunFacingRight)
+        if (transform.root.transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x - gameObject.transform.localPosition.x > 0 && !gunFacingRight)
         {
             flipGunSprite();
         }
-        else if (player.transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x - gameObject.transform.localPosition.x < 0 && gunFacingRight)
+        else if (transform.root.transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x - gameObject.transform.localPosition.x < 0 && gunFacingRight)
         {
             flipGunSprite();
         }
@@ -74,15 +74,15 @@ public class GunControls : MonoBehaviour
 
     private void lookAtPoint(Vector3 mouseTransform)
     {
-        var dir = mouseTransform - transform.position;
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Vector3 dir = mouseTransform - transform.root.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    private void rotateAroundShoulder(Vector3 point, float armLength)
+    private void rotateAroundShoulder(Vector3 mouseTransform, float armLength)
     {
-        Vector3 shoulderToMouseDir = point - shoulder.position;
+        Vector3 shoulderToMouseDir = mouseTransform - shoulder.position;
         shoulderToMouseDir.z = 0;
-        transform.position = shoulder.position + (armLength * shoulderToMouseDir.normalized);
+        gameObject.transform.position = shoulder.position + (armLength * shoulderToMouseDir.normalized);
     }
 }

@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         if (playerUsable)
         {
             this.enabled = true;
-            GetComponent<CameraController>().enabled = true;
+            FindObjectOfType<CameraController>().enabled = true;
             GetComponent<CursorController>().enabled = true;
             GetComponentInChildren<GunFiring>().enabled = true;
             GetComponentInChildren<GunControls>().enabled = true;
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         if (!playerUsable)
         {
             this.enabled = false;
-            GetComponent<CameraController>().enabled = false;
+            FindObjectOfType<CameraController>().enabled = false;
             GetComponent<CursorController>().enabled = false;
             GetComponentInChildren<GunFiring>().enabled = false;
             GetComponentInChildren<GunControls>().enabled = false;

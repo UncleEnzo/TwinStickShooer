@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Vitals : MonoBehaviour
 {
-    public float health;
+    public float health = 3f;
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -24,7 +24,7 @@ public class Vitals : MonoBehaviour
         {
             health -= collision.gameObject.GetComponent<Bullet>().damage;
         }
-        if(gameObject.tag == ("Player") && collision.gameObject.tag == "Enemy")
+        if (gameObject.tag == ("Player") && collision.gameObject.tag == "Enemy")
         {
             health -= collision.gameObject.GetComponent<Enemy>().walkDamageToPlayer;
         }

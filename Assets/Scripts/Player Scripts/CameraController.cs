@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public Transform player;
     Vector3 target, mousePos, refVel, shakeOffset;
     float cameraDist = 3.5f;
     float smoothTime = 0.2f, zStart;
     float shakeMag, shakeTimeEnd;
     Vector3 shakeVector;
-    bool shaking; 
+    bool shaking;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        target = transform.position;
+        target = player.position;
         zStart = Camera.main.transform.position.z;
     }
 
@@ -34,7 +35,7 @@ public class CameraController : MonoBehaviour
         ret *= 2;
         ret -= Vector2.one;
         float max = 0.9f;
-        if(Mathf.Abs(ret.x) > max || Mathf.Abs(ret.y) > max)
+        if (Mathf.Abs(ret.x) > max || Mathf.Abs(ret.y) > max)
         {
             ret = ret.normalized;
         }
@@ -44,7 +45,7 @@ public class CameraController : MonoBehaviour
     Vector3 UpdateTargetPos()
     {
         Vector3 mouseOffSet = mousePos * cameraDist;
-        Vector3 ret = transform.position + mouseOffSet;
+        Vector3 ret = player.position + mouseOffSet;
         ret += shakeOffset;
         ret.z = zStart;
         return ret;
@@ -53,8 +54,8 @@ public class CameraController : MonoBehaviour
     void UpdateCameraPosition()
     {
         Vector3 tempPos;
-        tempPos = Vector3.SmoothDamp(Camera.main.transform.position, target, ref refVel, smoothTime);
-        Camera.main.transform.position = tempPos;
+        tempPos = Vector3.SmoothDamp(transform.position, target, ref refVel, smoothTime);
+        transform.position = tempPos;
     }
 
     public void Shake(Vector3 direction, float magnitude, float length)
