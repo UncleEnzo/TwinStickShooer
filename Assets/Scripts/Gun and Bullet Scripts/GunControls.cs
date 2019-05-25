@@ -5,34 +5,24 @@ using UnityEngine;
 
 public class GunControls : MonoBehaviour
 {
-    //determine if gun is attached to player
-    bool isPlayerGun = false;
-
     //general variables
-    private Transform shoulder;
-
-    //player only
+    private Transform playerTransform;
     private CameraController cam;
     private Vector3 pointAtMouse;
     private float playerArmLength = .5f;
     private bool gunFacingRight = true;
 
-    //enemy only
-    private Vector3 pointAtPlayer;
-    private float enemyArmLength = .5f;
-
     void OnEnable()
     {
-        if (GetComponentInParent<Player>())
+        if (GetComponentInParent<WeaponSwitching>())
         {
-            isPlayerGun = true;
             cam = FindObjectOfType<CameraController>();
         }
     }
     // Update is called once per frame
     void Update()
     {
-        shoulder = transform.root.transform;
+        playerTransform = FindObjectOfType<Player>().transform;
         gunControls();
         monitorGunSpriteFlip();
     }
@@ -40,11 +30,11 @@ public class GunControls : MonoBehaviour
     private void monitorGunSpriteFlip()
     {
         //Flips gunsprite over the Y axis
-        if (transform.root.transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x - gameObject.transform.localPosition.x > 0 && !gunFacingRight)
+        if (playerTransform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x > 0 && !gunFacingRight)
         {
             flipGunSprite();
         }
-        else if (transform.root.transform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x - gameObject.transform.localPosition.x < 0 && gunFacingRight)
+        else if (playerTransform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)).x < 0 && gunFacingRight)
         {
             flipGunSprite();
         }
@@ -58,31 +48,22 @@ public class GunControls : MonoBehaviour
 
     private void gunControls()
     {
-        if (isPlayerGun)
-        {
-            pointAtMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            lookAtPoint(pointAtMouse);
-            rotateAroundShoulder(pointAtMouse, playerArmLength);
-        }
-        else
-        {
-            pointAtPlayer = FindObjectOfType<Player>().GetComponentInParent<Transform>().position;
-            lookAtPoint(pointAtPlayer);
-            rotateAroundShoulder(pointAtPlayer, enemyArmLength);
-        }
+        pointAtMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        lookAtPoint(pointAtMouse);
+        rotateAroundShoulder(pointAtMouse, playerArmLength);
     }
 
     private void lookAtPoint(Vector3 mouseTransform)
     {
-        Vector3 dir = mouseTransform - transform.root.position;
+        Vector3 dir = mouseTransform - playerTransform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     private void rotateAroundShoulder(Vector3 mouseTransform, float armLength)
     {
-        Vector3 shoulderToMouseDir = mouseTransform - shoulder.position;
+        Vector3 shoulderToMouseDir = mouseTransform - playerTransform.position;
         shoulderToMouseDir.z = 0;
-        gameObject.transform.position = shoulder.position + (armLength * shoulderToMouseDir.normalized);
+        transform.position = playerTransform.position + (armLength * shoulderToMouseDir.normalized);
     }
 }

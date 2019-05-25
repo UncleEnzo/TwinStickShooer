@@ -9,6 +9,7 @@ public class GunFiring : MonoBehaviour
     private float lastfired;
     private bool isReloading = false;
     private int currentAmmo;
+    private Transform player;
 
     //Properties for the gun and bullet
     private GunProperties gunProperties;
@@ -35,6 +36,7 @@ public class GunFiring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player = FindObjectOfType<Player>().transform;
         firePlayerGun();
     }
 
@@ -71,19 +73,7 @@ public class GunFiring : MonoBehaviour
                 Instantiate(bullet, bulletShot.position, bulletShot.rotation);
                 currentAmmo--;
             }
-            cam.Shake((transform.parent.transform.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
-        }
-    }
-
-    public void fireEnemyGun()
-    {
-        if ((Time.time - lastfired) > (1 / gunProperties.bulletsPerSecond))
-        {
-            lastfired = Time.time;
-            foreach (Transform bulletShot in gunProperties.bulletSpawnPoint)
-            {
-                Instantiate(bullet, bulletShot.position, bulletShot.rotation);
-            }
+            cam.Shake((player.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
         }
     }
 }

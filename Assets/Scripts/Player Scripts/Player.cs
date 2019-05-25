@@ -28,23 +28,17 @@ public class Player : MonoBehaviour
 
     public void enablePlayer(Boolean playerUsable)
     {
-        if (playerUsable)
-        {
-            this.enabled = true;
-            FindObjectOfType<CameraController>().enabled = true;
-            GetComponent<CursorController>().enabled = true;
-            GetComponentInChildren<GunFiring>().enabled = true;
-            GetComponentInChildren<GunControls>().enabled = true;
-            GetComponentInChildren<GunProperties>().enabled = false;
-        }
-        if (!playerUsable)
-        {
-            this.enabled = false;
-            FindObjectOfType<CameraController>().enabled = false;
-            GetComponent<CursorController>().enabled = false;
-            GetComponentInChildren<GunFiring>().enabled = false;
-            GetComponentInChildren<GunControls>().enabled = false;
-            GetComponentInChildren<GunProperties>().enabled = false;
-        }
+        GameObject weaponHolder = GameObject.FindWithTag("WeaponHolder");
+        CameraController camControl = FindObjectOfType<CameraController>();
+
+        camControl.enabled = playerUsable;
+        GetComponent<CursorController>().enabled = playerUsable;
+        Transform currentWeapon = weaponHolder.GetComponent<WeaponSwitching>().getSelectedWeapon();
+        currentWeapon.GetComponentInChildren<GunFiring>().enabled = playerUsable;
+        currentWeapon.GetComponentInChildren<GunControls>().enabled = playerUsable;
+        currentWeapon.GetComponentInChildren<GunProperties>().enabled = playerUsable;
+        weaponHolder.GetComponent<WeaponSwitching>().enabled = playerUsable;
+        GetComponentInChildren<PlayerAnimController>().isEnabled = playerUsable;
+        this.enabled = playerUsable;
     }
 }

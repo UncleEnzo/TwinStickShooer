@@ -230,8 +230,8 @@ MonoBehaviour:
   - {fileID: 7934973120251037231}
   - {fileID: 4546463749371558830}
   - {fileID: 8447782534307369106}
-  camShakeMagnitude: 3.37
-  camShakeLength: 0.05
+  camShakeMagnitude: 2
+  camShakeLength: 0.03
   bulletsPerSecond: 2
   maxAmmo: 6
   reloadTime: 4

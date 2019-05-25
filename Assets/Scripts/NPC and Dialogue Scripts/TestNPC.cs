@@ -20,7 +20,6 @@ public class TestNPC : MonoBehaviour
     }
     void Update()
     {
-
         if (playerInField && !dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue)
         {
             StopCoroutine(helpTextEnum);
@@ -45,7 +44,7 @@ public class TestNPC : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if(collider2D == FindObjectOfType<Player>().GetComponent<CircleCollider2D>())
+        if (collider2D == FindObjectOfType<Player>().GetComponent<CircleCollider2D>())
         {
             playerInField = true;
             StartCoroutine(helpTextEnum);

@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     public float knockBack = 300f;
     Rigidbody2D rigidBody2D;
 
-    //bullet accuracy (Use for spread weapons as well)
+    //bullet accuracy (Use for spread weapons as well) 0F equals perfect accuracy
     public float bulletAccuracy = 0f;
 
     //bullet angle
@@ -63,16 +63,5 @@ public class Bullet : MonoBehaviour
     private void destroySelf()
     {
         Destroy(gameObject, timeBulletSelfDestruct);
-    }
-
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            Vector2 force = transform.position - collision.collider.transform.position;
-            force.Normalize();
-            collision.collider.GetComponent<Rigidbody2D>().AddForce(-force * knockBack);
-        }
-        Destroy(gameObject);
     }
 }

@@ -22,15 +22,15 @@ public class Enemy : MonoBehaviour
         {
             approachPlayer();
         }
-        
+
         shootAtPlayer();
     }
 
     private void shootAtPlayer()
     {
-        GetComponentInChildren<GunFiring>().fireEnemyGun();
+        GetComponentInChildren<EnemyGunFire>().fireEnemyGun();
     }
-  
+
     private void approachPlayer()
     {
         Vector3 destination = player.transform.position;

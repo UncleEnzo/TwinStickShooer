@@ -134,8 +134,8 @@ MonoBehaviour:
   weaponType: 0
   bulletSpawnPoint:
   - {fileID: 2837358917047641872}
-  camShakeMagnitude: 1.5
-  camShakeLength: 0.05
+  camShakeMagnitude: 1
+  camShakeLength: 0.03
   bulletsPerSecond: 3
   maxAmmo: 7
   reloadTime: 2

@@ -6,9 +6,20 @@ public class Vitals : MonoBehaviour
 {
     public float health = 3f;
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collidingObject)
     {
-        takeDamage(collision);
+        if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
+        {
+            //   Vector2 force = transform.position - collidingObject.collider.transform.position;
+            //  force.Normalize();
+            //   collidingObject.collider.GetComponent<Rigidbody2D>().AddForce(-force * knockBack);
+            Destroy(collidingObject.gameObject);
+        }
+        if (collidingObject.gameObject.tag == "EnemyBullet" && gameObject.tag == "Player")
+        {
+            Destroy(collidingObject.gameObject);
+        }
+        takeDamage(collidingObject);
         die();
     }
     private void die()
@@ -18,7 +29,7 @@ public class Vitals : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void takeDamage(Collision2D collision)
+    private void takeDamage(Collider2D collision)
     {
         if (gameObject.tag == ("Player") && collision.gameObject.tag == "EnemyBullet")
         {

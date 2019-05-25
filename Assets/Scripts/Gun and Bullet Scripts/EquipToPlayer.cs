@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EquipToPlayer : MonoBehaviour
 {
-    private GameObject playerWeaponHolder;
+    private GameObject weaponHolder;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerWeaponHolder = GameObject.Find("WeaponHolder");
+        weaponHolder = GameObject.Find("WeaponHolder");
 
-        if (gameObject.transform.IsChildOf(playerWeaponHolder.transform))
+        if (gameObject.transform.IsChildOf(weaponHolder.transform))
         {
             GetComponent<GunControls>().enabled = true;
             GetComponent<GunFiring>().enabled = true;
@@ -29,8 +29,7 @@ public class EquipToPlayer : MonoBehaviour
         {
             print(GetComponent<GunProperties>().weaponType);
             bool playerHasGun = false;
-            Transform weaponHolder = collider.transform.Find("WeaponHolder");
-            foreach (Transform weapon in weaponHolder)
+            foreach (Transform weapon in weaponHolder.transform)
             {
                 if (weapon.GetComponent<GunProperties>().weaponType == GetComponent<GunProperties>().weaponType)
                 {
@@ -43,7 +42,7 @@ public class EquipToPlayer : MonoBehaviour
             }
             else
             {
-                transform.SetParent(collider.transform.Find("WeaponHolder"));
+                transform.SetParent(weaponHolder.transform);
                 GetComponent<GunControls>().enabled = true;
                 GetComponent<GunFiring>().enabled = true;
                 GetComponent<GunProperties>().enabled = true;

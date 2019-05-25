@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     public Transform player;
     Vector3 target, mousePos, refVel, shakeOffset;
     float cameraDist = 3.5f;
-    float smoothTime = 0.2f, zStart;
+    float smoothTime = .05f, zStart;
     float shakeMag, shakeTimeEnd;
     Vector3 shakeVector;
     bool shaking;

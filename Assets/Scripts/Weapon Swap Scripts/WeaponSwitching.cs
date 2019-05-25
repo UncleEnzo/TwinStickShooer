@@ -69,6 +69,21 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
+    public Transform getSelectedWeapon()
+    {
+        int i = 0;
+        foreach (Transform weapon in transform)
+        {
+            if (i == selectedWeapon)
+            {
+                return weapon;
+            }
+            i++;
+        }
+        print("COULD NOT GET SELECTED WEAPON. RETURNING NULL.");
+        return null;
+    }
+
     public void selectWeapon()
     {
         int i = 0;
@@ -76,15 +91,20 @@ public class WeaponSwitching : MonoBehaviour
         {
             if (i == selectedWeapon)
             {
-                weapon.GetComponent<GunFiring>().enabled = true; //reenables reload
-                weapon.gameObject.SetActive(true);
+                gunEnabled(weapon, true);
             }
             else
             {
-                weapon.GetComponent<GunFiring>().enabled = false; //Cuts reload short if switching in middle
-                weapon.gameObject.SetActive(false);
+                gunEnabled(weapon, false);
             }
             i++;
         }
+    }
+
+    private void gunEnabled(Transform weapon, bool gunEnabled)
+    {
+        weapon.GetComponent<GunFiring>().enabled = gunEnabled; //Stops reload coroutine so it doesn't jam up
+        weapon.GetComponent<SpriteRenderer>().enabled = gunEnabled;
+        weapon.GetComponent<GunProperties>().enabled = gunEnabled;
     }
 }

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4747809837976251010}
   - component: {fileID: 2152946770637454934}
   - component: {fileID: 7273620325785498795}
-  - component: {fileID: 6485122885691290444}
   - component: {fileID: 3457169450589631084}
-  - component: {fileID: 6648792617512847438}
+  - component: {fileID: 1621340655}
+  - component: {fileID: 1621340658}
   m_Layer: 8
   m_Name: Pistol
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6432417807299188401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.69699997, y: 0.17400001, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_Children:
   - {fileID: 9083269439077952064}
@@ -73,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.9622642, g: 0.11347453, b: 0.11347453, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 71ee662e80e33cc4d846d367991d31c2, type: 3}
+  m_Color: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 2.048, y: 1.152}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -105,18 +105,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6485122885691290444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6432417807299188401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8c052a89e5e71469be5173f511cc21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3457169450589631084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc53a4f9262a3964680b112fbd8972d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 0
   bulletSpawnPoint:
   - {fileID: 9083269439077952064}
   camShakeMagnitude: 1.5
@@ -136,7 +125,7 @@ MonoBehaviour:
   bulletsPerSecond: 1
   maxAmmo: 10
   reloadTime: 1
---- !u!114 &6648792617512847438
+--- !u!114 &1621340655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,10 +134,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6432417807299188401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a94364d95c73b874eb7b5f0ff93f41ee, type: 3}
+  m_Script: {fileID: 11500000, guid: eba062839b6c7304a9d19bdf5b2f874e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 8811877118635120156, guid: 2327655127ba37e4886657ee7e910324, type: 3}
+--- !u!114 &1621340658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432417807299188401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609449a9767fac9478d329801efac53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6605836872794101028
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6605836872794101028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.095, y: -0.007, z: 0}
+  m_LocalPosition: {x: 0.391, y: -0.152, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 4747809837976251010}
