@@ -233,8 +233,8 @@ MonoBehaviour:
   camShakeMagnitude: 2
   camShakeLength: 0.03
   bulletsPerSecond: 2
-  maxAmmo: 6
-  reloadTime: 4
+  maxAmmo: 5
+  reloadTime: 3
 --- !u!114 &8697919473634725285
 MonoBehaviour:
   m_ObjectHideFlags: 0

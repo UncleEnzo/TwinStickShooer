@@ -33,6 +33,7 @@ public class EnemyGunFire : MonoBehaviour
     IEnumerator reload()
     {
         isReloading = true;
+        print("Enemy Reloading");
         yield return new WaitForSeconds(gunProperties.reloadTime);
         currentAmmo = gunProperties.maxAmmo;
         isReloading = false;
@@ -56,6 +57,7 @@ public class EnemyGunFire : MonoBehaviour
             {
                 Instantiate(bullet, bulletShot.position, bulletShot.rotation);
             }
+            currentAmmo--;
         }
     }
 }

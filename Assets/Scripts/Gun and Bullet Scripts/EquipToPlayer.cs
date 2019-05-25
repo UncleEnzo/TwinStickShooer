@@ -27,7 +27,6 @@ public class EquipToPlayer : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            print(GetComponent<GunProperties>().weaponType);
             bool playerHasGun = false;
             foreach (Transform weapon in weaponHolder.transform)
             {
@@ -47,7 +46,7 @@ public class EquipToPlayer : MonoBehaviour
                 GetComponent<GunFiring>().enabled = true;
                 GetComponent<GunProperties>().enabled = true;
                 GetComponent<Collider2D>().enabled = false;
-                print("NEW GUN, ADDING TO WEAPON HOLSTER");
+                print("New Gun added to WeaponHolster");
             }
         }
     }

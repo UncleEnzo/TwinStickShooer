@@ -71,8 +71,8 @@ public class GunFiring : MonoBehaviour
             foreach (Transform bulletShot in gunProperties.bulletSpawnPoint)
             {
                 Instantiate(bullet, bulletShot.position, bulletShot.rotation);
-                currentAmmo--;
             }
+            currentAmmo--;
             cam.Shake((player.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
         }
     }
