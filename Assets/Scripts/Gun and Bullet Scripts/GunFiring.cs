@@ -8,19 +8,24 @@ public class GunFiring : MonoBehaviour
     private CameraController cam;
     private float lastfired;
     private bool isReloading = false;
-    private int currentAmmo;
+    public int currentAmmo;
     private Transform player;
 
     //Properties for the gun and bullet
-    private GunProperties gunProperties;
     public GameObject bullet;
+    private GunProperties gunProperties;
+    private PlayerHUBController playerHUBController;
+
 
     // Start is called before the first frame update
     void Start()
     {
         gunProperties = GetComponent<GunProperties>();
         currentAmmo = gunProperties.maxAmmo;
+
         cam = FindObjectOfType<CameraController>();
+        playerHUBController = FindObjectOfType<PlayerHUBController>();
+        playerHUBController.updateDisplayHubAmmo(currentAmmo);
     }
 
     void OnEnable()
@@ -46,6 +51,7 @@ public class GunFiring : MonoBehaviour
         print("Reloading");
         yield return new WaitForSeconds(gunProperties.reloadTime);
         currentAmmo = gunProperties.maxAmmo;
+        playerHUBController.updateDisplayHubAmmo(currentAmmo);
         isReloading = false;
     }
 
@@ -73,6 +79,7 @@ public class GunFiring : MonoBehaviour
                 Instantiate(bullet, bulletShot.position, bulletShot.rotation);
             }
             currentAmmo--;
+            playerHUBController.updateDisplayHubAmmo(currentAmmo);
             cam.Shake((player.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
         }
     }

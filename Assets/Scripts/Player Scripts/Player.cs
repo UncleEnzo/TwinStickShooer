@@ -17,6 +17,25 @@ public class Player : MonoBehaviour
         {
             print("Interacting with NPC or object");
         }
+
+        //Cheat to autoswitch to next scene
+        if (Input.GetKeyDown("n"))
+        {
+            SceneLoader sceneLoader = FindObjectOfType<SceneLoader>();
+            sceneLoader.LoadNextScene();
+        }
+        //Cheat to load gameover screen
+        if (Input.GetKeyDown("g"))
+        {
+            SceneLoader sceneLoader = FindObjectOfType<SceneLoader>();
+            sceneLoader.loadGameOverScene();
+        }
+        //Cheat to load Dev Testing Scene
+        if (Input.GetKeyDown("t"))
+        {
+            SceneLoader sceneLoader = FindObjectOfType<SceneLoader>();
+            sceneLoader.loadDevTestScene();
+        }
     }
 
     public void Move()

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3053726900855198473}
   - component: {fileID: 3053726900855198474}
+  - component: {fileID: 1379561464547814290}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: WeaponHolder
@@ -44,6 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4ce3f59998b2c44bceba9494a502b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1379561464547814290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053726900855198472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b92a49804266c294ea49914fbecbc405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponCount: 0
+  currentGunTypes: 
+  weaponsToInstantiate:
+  - {fileID: 11991691623488481, guid: a2655f28b64c3014583ab2cedf6543f3, type: 3}
+  - {fileID: 7534039688406982307, guid: 9a0e8cacde3b6604089bf2900194860f, type: 3}
 --- !u!1001 &4205202297194185585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,11 +133,6 @@ PrefabInstance:
         type: 3}
       propertyPath: camShakeMagnitude
       value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665798870796060610, guid: a2655f28b64c3014583ab2cedf6543f3,
-        type: 3}
-      propertyPath: camShakeLength
-      value: 0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2655f28b64c3014583ab2cedf6543f3, type: 3}

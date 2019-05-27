@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,13 +8,18 @@ public class WeaponSwitching : MonoBehaviour
     private int selectedWeapon = 0;
     private int weaponCount = 0;
     private int previousWeaponCount = 0;
+    public PlayerSavedData localWeaponData = new PlayerSavedData();
+
+    private PlayerHUBController playerHUBController;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        playerHUBController = FindObjectOfType<PlayerHUBController>();
         selectWeapon();
         weaponCount = transform.childCount;
+        addWeaponToPersist();
     }
 
 
@@ -40,6 +46,22 @@ public class WeaponSwitching : MonoBehaviour
         {
             selectedWeapon = transform.childCount - 1;
             selectWeapon();
+            addWeaponToPersist();
+        }
+    }
+
+    private void addWeaponToPersist()
+    {
+        //Update childcount
+        localWeaponData.weaponCount = transform.childCount;
+
+        //add to weapontype array
+        foreach (Transform weapon in transform)
+        {
+            if (!localWeaponData.gunTypes.Contains(weapon.GetComponent<GunProperties>().weaponType))
+            {
+                localWeaponData.gunTypes.Add(weapon.GetComponent<GunProperties>().weaponType);
+            }
         }
     }
 
@@ -92,6 +114,8 @@ public class WeaponSwitching : MonoBehaviour
             if (i == selectedWeapon)
             {
                 gunEnabled(weapon, true);
+                playerHUBController.updateDisplayHubGun(weapon.GetComponent<GunProperties>().weaponType);
+                playerHUBController.updateDisplayHubAmmo(weapon.GetComponent<GunFiring>().currentAmmo);
             }
             else
             {

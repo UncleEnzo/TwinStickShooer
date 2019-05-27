@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunControls.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunFire.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EquipToPlayer.cs" />
@@ -69,6 +70,8 @@
      <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\ItemPickup.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Potions.cs" />
+     <Compile Include="Assets\Scripts\Level Handlers\PersistentGameData.cs" />
+     <Compile Include="Assets\Scripts\Level Handlers\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\Dialogue.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueTrigger.cs" />
@@ -77,8 +80,28 @@
      <Compile Include="Assets\Scripts\Player Scripts\CursorController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerAnimController.cs" />
-     <Compile Include="Assets\Scripts\Vitals.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
+     <Compile Include="Assets\Scripts\PlayerHUBController.cs" />
+     <Compile Include="Assets\Scripts\PlayerSavedData.cs" />
+     <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/Alchemist Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
