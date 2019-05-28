@@ -9,7 +9,7 @@ public class GunControls : MonoBehaviour
     private Transform playerTransform;
     private CameraController cam;
     private Vector3 pointAtMouse;
-    private float playerArmLength = .5f;
+    public float playerArmLength = .5f;
     private bool gunFacingRight = true;
 
     void OnEnable()

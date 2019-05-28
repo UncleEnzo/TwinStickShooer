@@ -62,6 +62,7 @@ MonoBehaviour:
   weaponsToInstantiate:
   - {fileID: 11991691623488481, guid: a2655f28b64c3014583ab2cedf6543f3, type: 3}
   - {fileID: 7534039688406982307, guid: 9a0e8cacde3b6604089bf2900194860f, type: 3}
+  - {fileID: 11991691623488481, guid: 605944dbd8c944f44847776aecb7cf16, type: 3}
 --- !u!1001 &4205202297194185585
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -24,7 +24,7 @@ TagManager:
   - 
   - 
   - Bullets
-  - 
+  - Map
   - 
   - 
   - 
@@ -50,4 +50,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 4179282415
+    locked: 0
+  - name: Map
+    uniqueID: 3308018881
     locked: 0

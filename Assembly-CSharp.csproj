@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\ItemPickup.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Potions.cs" />
+     <Compile Include="Assets\Scripts\Level Handlers\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\PersistentGameData.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\Dialogue.cs" />
