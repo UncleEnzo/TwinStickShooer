@@ -8,7 +8,7 @@ public class GunFiring : MonoBehaviour
     private CameraController cam;
     private float lastfired;
     private bool isReloading = false;
-    public int currentAmmo;
+    private int currentAmmo;
     private Transform player;
 
     //Properties for the gun and bullet
@@ -82,5 +82,10 @@ public class GunFiring : MonoBehaviour
             playerHUBController.updateDisplayHubAmmo(currentAmmo);
             cam.Shake((player.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
         }
+    }
+
+    public int getCurrentAmmo()
+    {
+        return currentAmmo;
     }
 }

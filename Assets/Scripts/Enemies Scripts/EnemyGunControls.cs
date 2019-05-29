@@ -10,7 +10,7 @@ public class EnemyGunControls : MonoBehaviour
     private Transform playerTransform;
     private bool gunFacingRight = true;
     private Vector3 pointAtPlayer;
-    private float enemyArmLength = .5f;
+    public float enemyArmLength = .5f;
 
     // Update is called once per frame
     void Update()

@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8c052a89e5e71469be5173f511cc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerArmLength: 0.5
+  playerArmLength: 0.3
 --- !u!114 &4665798870796060610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,8 +137,8 @@ MonoBehaviour:
   - {fileID: 2837358917047641872}
   camShakeMagnitude: 0.7
   camShakeLength: 0.02
-  bulletsPerSecond: 8
-  maxAmmo: 60
+  bulletsPerSecond: 6
+  maxAmmo: 40
   reloadTime: 3
 --- !u!114 &2687971488367456846
 MonoBehaviour:
@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a94364d95c73b874eb7b5f0ff93f41ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAmmo: 0
   bullet: {fileID: 7991890147027848265, guid: 6d734a164baec2f409af91447160d03a, type: 3}
 --- !u!114 &2968811773879384823
 MonoBehaviour:

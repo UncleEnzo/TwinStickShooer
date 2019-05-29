@@ -50,7 +50,7 @@ public class PlayerHealth : MonoBehaviour
         }
         if (collision.gameObject.tag == "Enemy")
         {
-            localPlayerData.health -= collision.gameObject.GetComponent<Enemy>().walkDamageToPlayer;
+            localPlayerData.health -= collision.gameObject.GetComponent<Enemy>().collideDamageToPlayer;
             playerHUB.updateDisplayHubHealth(localPlayerData.health);
         }
     }

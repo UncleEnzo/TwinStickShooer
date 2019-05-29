@@ -13,4 +13,4 @@ public class GunProperties : MonoBehaviour
     public int maxAmmo = 10;
     public float reloadTime = 2f;
 }
-public enum WeaponType { Pistol, Shotgun, AssaultRifle, MachineGun, RocketLaucher, RailGun, Knife }
+public enum WeaponType { Pistol, Shotgun, AssaultRifle, SniperRifle, MachineGun, RocketLaucher, RailGun, Knife }
