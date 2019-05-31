@@ -54,22 +54,24 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunControls.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunFire.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
-     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Bullet.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\BulletSpawnController.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EquipToPlayer.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunControls.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunFiring.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunProperties.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\PlayerBullet.cs" />
      <Compile Include="Assets\Scripts\Interactable.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryUI.cs" />
+     <Compile Include="Assets\Scripts\Item Scripts\CraftComponent.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\ItemPickup.cs" />
-     <Compile Include="Assets\Scripts\Item Scripts\Potions.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\PersistentGameData.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\SceneLoader.cs" />

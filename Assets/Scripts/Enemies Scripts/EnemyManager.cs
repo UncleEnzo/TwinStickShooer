@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-
-    public Dictionary<string, GameObject> enemyTypes;
-    public GameObject[] enemies;
+    public GameObject[] enemyCollection;
     public float minSpawnDistance;
     public float randomSpawnRange;
     private Player player;
@@ -19,21 +17,17 @@ public class EnemyManager : MonoBehaviour
             Debug.LogError("Random spawn range is less than or equal to the minimum spawn distance from player");
         }
         FindObjectOfType<Player>();
-        enemyTypes = new Dictionary<string, GameObject>();
-        foreach (GameObject enemy in enemies)
-        {
-            if (!enemyTypes.ContainsKey(enemy.name))
-            {
-                enemyTypes.Add(enemy.name, enemy);
-            }
-        }
     }
 
-    public void instantiateEnemy(int numberOfEnemies, string enemyName)
+
+    //note: Need to create a separate functions that spawns a specific enemy
+    //need to add some rules to the randomness
+    public void instantiateRandomEnemies(int numberOfEnemies)
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            Instantiate(enemyTypes[enemyName], randomEnemyPosition(), player.transform.rotation);
+            int randomEnemy = Random.Range(0, enemyCollection.Length);
+            Instantiate(enemyCollection[randomEnemy], randomEnemyPosition(), player.transform.rotation);
         }
 
     }

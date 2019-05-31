@@ -9,8 +9,9 @@ public class Enemy : MonoBehaviour
     public float collideDamageToPlayer = 2f;
     public float moveSpeed;
     private Player player;
-    private bool walking = true;
+    public bool walking = true;
     private bool preparingToFire = false;
+    private bool isKnockedBack = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,14 +22,34 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkIfKnockedBack();
         float distFromPlayer = Vector3.Distance(player.transform.position, transform.position);
         followPlayer(distFromPlayer);
         shootAtPlayer(distFromPlayer);
     }
 
+    private void checkIfKnockedBack()
+    {
+        Vector2 canMove = new Vector2(0f, 0f);
+        if (GetComponent<Rigidbody2D>().velocity == canMove)
+        {
+            isKnockedBack = false;
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D collidingObject)
+    {
+        if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
+        {
+            isKnockedBack = true;
+            Vector2 force = collidingObject.GetComponent<PlayerBullet>().getBulletTrajectory();
+            force.Normalize();
+            GetComponent<Rigidbody2D>().AddForce(force * collidingObject.GetComponent<PlayerBullet>().getBulletKnockBack());
+        }
+    }
     private void followPlayer(float distFromPlayer)
     {
-        if (!preparingToFire)
+        if (!preparingToFire && !isKnockedBack)
         {
             if (distFromPlayer <= firingRange)
             {

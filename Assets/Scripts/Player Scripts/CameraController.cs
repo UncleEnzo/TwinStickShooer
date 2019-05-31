@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform player;
+    private Transform player;
     Vector3 target, mousePos, refVel, shakeOffset;
     float cameraDist = 3.5f;
     float smoothTime = .05f, zStart;
@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = FindObjectOfType<Player>().transform;
         target = player.position;
         zStart = Camera.main.transform.position.z;
     }

@@ -5,15 +5,10 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public float health = 3f;
-
-
     public void OnTriggerEnter2D(Collider2D collidingObject)
     {
         if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
         {
-            //   Vector2 force = transform.position - collidingObject.collider.transform.position;
-            //  force.Normalize();
-            //   collidingObject.collider.GetComponent<Rigidbody2D>().AddForce(-force * knockBack);
             Destroy(collidingObject.gameObject);
         }
         takeDamage(collidingObject);
@@ -30,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (collision.gameObject.tag == "PlayerBullet")
         {
-            health -= collision.gameObject.GetComponent<Bullet>().damage;
+            health -= collision.gameObject.GetComponent<PlayerBullet>().getBulletDamage();
         }
     }
 }

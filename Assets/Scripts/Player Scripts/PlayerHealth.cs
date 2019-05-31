@@ -45,7 +45,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.gameObject.tag == "EnemyBullet")
         {
-            localPlayerData.health -= collision.gameObject.GetComponent<Bullet>().damage;
+            localPlayerData.health -= collision.gameObject.GetComponent<EnemyBullet>().bulletDamage;
             playerHUB.updateDisplayHubHealth(localPlayerData.health);
         }
         if (collision.gameObject.tag == "Enemy")

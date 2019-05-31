@@ -43,8 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6287698a741bbb4e9375d6e870be05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
+  enemyCollection:
   - {fileID: 309343144516758889, guid: 22c7e87a7eea1b54f969c0e72a54dc4c, type: 3}
+  - {fileID: 309343144516758889, guid: 34c70e5240a91e643a56d1a07696ea01, type: 3}
+  - {fileID: 309343144516758889, guid: bc87a544df1ccbd4a8450c6c5d4256d6, type: 3}
   minSpawnDistance: 3
   randomSpawnRange: 4
-  player: {fileID: 0}

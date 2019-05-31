@@ -12,5 +12,13 @@ public class GunProperties : MonoBehaviour
     public float bulletsPerSecond = 5;
     public int maxAmmo = 10;
     public float reloadTime = 2f;
+
+    //bullet properties
+    public float bulletSpeed = 15f;
+    public float bulletDamage = 1f;
+    public float timeBulletSelfDestruct = 3f;
+    public float knockBack = 300f;
+    public float bulletAccuracy = 0f; //0 = perfect accuracy
+    public float bulletAngle = 0f;
 }
 public enum WeaponType { Pistol, Shotgun, AssaultRifle, SniperRifle, MachineGun, RocketLaucher, RailGun, Knife }

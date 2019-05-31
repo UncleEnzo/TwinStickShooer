@@ -26,7 +26,7 @@ public class InventoryUI : MonoBehaviour
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
 
-            if(inventoryUI.activeSelf == true)
+            if (inventoryUI.activeSelf == true)
             {
                 player.enablePlayer(false);
                 Time.timeScale = .2f;
@@ -38,7 +38,10 @@ public class InventoryUI : MonoBehaviour
             }
         }
     }
- 
+
+    //Need to update this so that if you pick up the same item you have multiple
+    //need to add a counter somehow
+    //need to add the ability for the items to be spent
     void UpdateUI()
     {
         for (int i = 0; i < slots.Length; i++)

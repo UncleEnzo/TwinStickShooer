@@ -15,14 +15,17 @@ public class GunFiring : MonoBehaviour
     public GameObject bullet;
     private GunProperties gunProperties;
     private PlayerHUBController playerHUBController;
+    private AudioSource gunSounds;
+    public AudioClip gunShotSound;
+    public AudioClip gunReloadSound;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        gunSounds = GetComponent<AudioSource>();
         gunProperties = GetComponent<GunProperties>();
         currentAmmo = gunProperties.maxAmmo;
-
         cam = FindObjectOfType<CameraController>();
         playerHUBController = FindObjectOfType<PlayerHUBController>();
         playerHUBController.updateDisplayHubAmmo(currentAmmo);
@@ -49,7 +52,9 @@ public class GunFiring : MonoBehaviour
     {
         isReloading = true;
         print("Reloading");
+        gunSounds.PlayOneShot(gunReloadSound); //gunsound for starting reload
         yield return new WaitForSeconds(gunProperties.reloadTime);
+        //When you have a new gunsound for reload finished, put it here
         currentAmmo = gunProperties.maxAmmo;
         playerHUBController.updateDisplayHubAmmo(currentAmmo);
         isReloading = false;
@@ -76,8 +81,10 @@ public class GunFiring : MonoBehaviour
             lastfired = Time.time;
             foreach (Transform bulletShot in gunProperties.bulletSpawnPoint)
             {
-                Instantiate(bullet, bulletShot.position, bulletShot.rotation);
+                PlayerBullet newBullet = Object.Instantiate(bullet, bulletShot.position, bulletShot.rotation).GetComponent<PlayerBullet>();
+                newBullet.setPlayerBulletProperties(gunProperties.bulletSpeed, gunProperties.bulletDamage, gunProperties.timeBulletSelfDestruct, gunProperties.knockBack, gunProperties.bulletAccuracy, gunProperties.bulletAngle);
             }
+            gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;
             playerHUBController.updateDisplayHubAmmo(currentAmmo);
             cam.Shake((player.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);

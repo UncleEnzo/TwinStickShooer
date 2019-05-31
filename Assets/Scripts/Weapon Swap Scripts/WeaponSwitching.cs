@@ -9,7 +9,6 @@ public class WeaponSwitching : MonoBehaviour
     private int weaponCount = 0;
     private int previousWeaponCount = 0;
     public PlayerSavedData localWeaponData = new PlayerSavedData();
-
     private PlayerHUBController playerHUBController;
 
 
