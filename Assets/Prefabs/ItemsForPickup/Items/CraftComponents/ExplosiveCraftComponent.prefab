@@ -71,8 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0.25762197, b: 0.023584902, a: 1}
+  m_Sprite: {fileID: 21300188, guid: 5f32863e34a122b41b677f1d8d139db4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8a023f1e950b2479b8f8da67a88f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  craftComponent: {fileID: 11400000, guid: ab9ad0c190015d74ea6ccaa3588fddc0, type: 2}
+  item: {fileID: 11400000, guid: ab9ad0c190015d74ea6ccaa3588fddc0, type: 2}
 --- !u!114 &3085158205632521486
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: GunPowderCraftComponent
   icon: {fileID: 21300128, guid: 5f32863e34a122b41b677f1d8d139db4, type: 3}
-  isDefaultItem: 0
+  isCraftComponent: 0
+  craftItemType: 1

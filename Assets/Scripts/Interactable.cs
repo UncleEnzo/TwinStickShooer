@@ -8,7 +8,6 @@ public class Interactable : MonoBehaviour
 
     public virtual void interact()
     {
-        print("Interaction or PickUp available");
     }
 
     void OnTriggerEnter2D(Collider2D collider2D)

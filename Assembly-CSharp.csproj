@@ -66,12 +66,15 @@
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunProperties.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\PlayerBullet.cs" />
      <Compile Include="Assets\Scripts\Interactable.cs" />
+     <Compile Include="Assets\Scripts\Inventory\CraftItemManager.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryUI.cs" />
+     <Compile Include="Assets\Scripts\Inventory\RecipeItemManager.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\CraftComponent.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\ItemPickup.cs" />
+     <Compile Include="Assets\Scripts\Item Scripts\RecipeComponent.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\PersistentGameData.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\SceneLoader.cs" />
@@ -86,6 +89,9 @@
      <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\PlayerHUBController.cs" />
      <Compile Include="Assets\Scripts\PlayerSavedData.cs" />
+     <Compile Include="Assets\Scripts\Stats\CharacterStats.cs" />
+     <Compile Include="Assets\Scripts\Stats\PlayerStats.cs" />
+     <Compile Include="Assets\Scripts\Stats\Stat.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
