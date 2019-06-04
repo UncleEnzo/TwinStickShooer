@@ -75,6 +75,8 @@
      <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\ItemPickup.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\RecipeComponent.cs" />
+     <Compile Include="Assets\Scripts\Item Scripts\Recipes\BulletSpeedRecipe.cs" />
+     <Compile Include="Assets\Scripts\Item Scripts\Recipes\HealthPotion.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\PersistentGameData.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\SceneLoader.cs" />

@@ -8,7 +8,6 @@ public class PlayerHealth : MonoBehaviour
     private PlayerHUBController playerHUB;
     private float healthDefault = 8f;
 
-
     public void Start()
     {
         PersistentGameData persistentGameData = FindObjectOfType<PersistentGameData>();
@@ -24,6 +23,11 @@ public class PlayerHealth : MonoBehaviour
         playerHUB.updateDisplayHubHealth(localPlayerData.health);
     }
 
+    public void heal(float healthIncrease)
+    {
+        localPlayerData.health += healthIncrease;
+        playerHUB.updateDisplayHubHealth(localPlayerData.health);
+    }
 
     public void OnTriggerEnter2D(Collider2D collidingObject)
     {

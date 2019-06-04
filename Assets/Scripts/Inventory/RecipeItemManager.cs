@@ -25,7 +25,12 @@ public class RecipeItemManager : MonoBehaviour
         bool meetsRequiredCount = false;
         foreach (InventorySlot slot in inventory.inventorySlots)
         {
-            if (slot.firstItem != null && (int)slot.firstItem.craftItemType == craftItemType)
+            if (craftItemRequirement <= 0)
+            {
+                hasComponent = true;
+                meetsRequiredCount = true;
+            }
+            else if (slot.firstItem != null && (int)slot.firstItem.craftItemType == craftItemType)
             {
                 hasComponent = true;
                 if (slot.Count >= craftItemRequirement)
@@ -45,24 +50,18 @@ public class RecipeItemManager : MonoBehaviour
     {
         foreach (InventorySlot slot in inventory.inventorySlots)
         {
-            if (slot.firstItem != null && (int)slot.firstItem.craftItemType == 0)
+            removeNumOfItems(0, greenRequirement, slot);
+            removeNumOfItems(1, purpleRequirement, slot);
+            removeNumOfItems(2, blackRequirement, slot);
+        }
+    }
+    private void removeNumOfItems(int craftItemType, int requirement, InventorySlot slot)
+    {
+        if (slot.firstItem != null && (int)slot.firstItem.craftItemType == craftItemType)
+        {
+            if (requirement > 0)
             {
-                for (int i = 0; i == greenRequirement; i++)
-                {
-                    inventory.RemoveItem(slot.firstItem);
-                }
-
-            }
-            if (slot.firstItem != null && (int)slot.firstItem.craftItemType == 1)
-            {
-                for (int i = 0; i == purpleRequirement; i++)
-                {
-                    inventory.RemoveItem(slot.firstItem);
-                }
-            }
-            if (slot.firstItem != null && (int)slot.firstItem.craftItemType == 2)
-            {
-                for (int i = 0; i == blackRequirement; i++)
+                for (int i = 0; i != requirement; i++)
                 {
                     inventory.RemoveItem(slot.firstItem);
                 }
