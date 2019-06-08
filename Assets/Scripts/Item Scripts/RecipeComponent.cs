@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RecipeComponent : Item
 {
+    [SerializeField]
+    protected PowerUp powerUp;
     //Required Components to use the recipe
     public int greenRequirement = 1;
     public int purpleRequirement = 1;

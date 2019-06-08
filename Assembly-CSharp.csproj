@@ -66,7 +66,6 @@
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunProperties.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\PlayerBullet.cs" />
      <Compile Include="Assets\Scripts\Interactable.cs" />
-     <Compile Include="Assets\Scripts\Inventory\CraftItemManager.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryUI.cs" />
@@ -91,6 +90,9 @@
      <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\PlayerHUBController.cs" />
      <Compile Include="Assets\Scripts\PlayerSavedData.cs" />
+     <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUp.cs" />
+     <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpAction.cs" />
+     <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpController.cs" />
      <Compile Include="Assets\Scripts\Stats\CharacterStats.cs" />
      <Compile Include="Assets\Scripts\Stats\PlayerStats.cs" />
      <Compile Include="Assets\Scripts\Stats\Stat.cs" />

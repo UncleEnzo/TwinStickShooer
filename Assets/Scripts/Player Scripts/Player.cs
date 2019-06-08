@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int speed;
+    public float speed;
     public bool isInteractable = false;
 
     // Update is called once per frame
