@@ -12,7 +12,9 @@ public class InventoryUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventory = Inventory.instance;
+        //Ensures that the UI is enabled, then deactived on start up, making it usable right away
+        //If it starts deactivated, it will not update until it is opened once
+        inventoryUI.SetActive(false);
         player = FindObjectOfType<Player>();
     }
 
