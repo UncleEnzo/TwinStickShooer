@@ -5,24 +5,60 @@ using UnityEngine.UI;
 
 public class PowerUpAction : MonoBehaviour
 {
-    //needs to calculate the amount of times it is called so that when it ends,
+    //Needs to calculate the amount of times it is called so that when it ends,
     //the end action can cancel the amount of a recipe was used
     //without disabling the effects of other recipes
-    float speedIncreaseValue = 5f;
-    int activeEffectStackCount = 0;
+    float healingIncrease = 1f;
+
+    public void HealStartAction()
+    {
+        print("Triggered HP Up");
+        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
+        playerHealth.localPlayerData.health += healingIncrease;
+        FindObjectOfType<PlayerHUBController>().updateDisplayHubHealth(playerHealth.localPlayerData.health);
+    }
+
+    float speedUpIncrease = 5f;
+    int speedUpStackCount = 0;
 
     public void HighSpeedStartAction()
     {
         print("Triggered HighSpeedRecipe");
-        activeEffectStackCount += 1;
-        FindObjectOfType<Player>().speed += speedIncreaseValue;
+        speedUpStackCount += 1;
+        FindObjectOfType<Player>().speed += speedUpIncrease;
     }
 
     public void HighSpeedEndAction()
     {
         print("HighSpeedRecipe Expired");
-        float speedReduction = speedIncreaseValue * activeEffectStackCount;
+        float speedReduction = speedUpIncrease * speedUpStackCount;
         FindObjectOfType<Player>().speed -= speedReduction;
-        activeEffectStackCount = 0;
+        speedUpStackCount = 0;
+    }
+
+    float bulletSpeedIncrease = 5f;
+    int bulletSpeedStackCount = 0;
+
+    public void BulletSpeedStartAction()
+    {
+        print("Triggered Bullet Speed Recipe");
+        bulletSpeedStackCount += 1;
+        GunProperties[] gunProperties = FindObjectsOfType<GunProperties>();
+        foreach (GunProperties gunProperty in gunProperties)
+        {
+            gunProperty.bulletSpeed += bulletSpeedIncrease;
+        }
+    }
+
+    public void BulletSpeedEndAction()
+    {
+        print("Bullet Speed Recipe Expired");
+        float bulletSpeedReduction = bulletSpeedIncrease * bulletSpeedStackCount;
+        GunProperties[] gunProperties = FindObjectsOfType<GunProperties>();
+        foreach (GunProperties gunProperty in gunProperties)
+        {
+            gunProperty.bulletSpeed -= bulletSpeedReduction;
+        }
+        bulletSpeedStackCount = 0;
     }
 }

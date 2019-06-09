@@ -15,18 +15,15 @@ MonoBehaviour:
   name: Health Potion Recipe
   icon: {fileID: 21300000, guid: 92e1d7c7517e21f46beb605a2388d46d, type: 3}
   craftItemType: 3
-  greenRequirement: 1
-  purpleRequirement: 1
-  blackRequirement: 1
   powerUp:
-    name: HighSpeed
-    duration: 5
+    name: Healing Potion
+    duration: 0
     startAction:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4693464106337697609, guid: 52b0f5ad5f0d2cf409889754ecc59481,
             type: 3}
-          m_MethodName: HighSpeedStartAction
+          m_MethodName: HealStartAction
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -43,7 +40,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 4693464106337697609, guid: 52b0f5ad5f0d2cf409889754ecc59481,
             type: 3}
-          m_MethodName: HighSpeedEndAction
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -55,5 +52,8 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+  greenRequirement: 1
+  purpleRequirement: 1
+  blackRequirement: 1
   healthIncrease: 1
   useEffect: 0

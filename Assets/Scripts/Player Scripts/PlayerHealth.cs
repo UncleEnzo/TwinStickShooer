@@ -23,12 +23,6 @@ public class PlayerHealth : MonoBehaviour
         playerHUB.updateDisplayHubHealth(localPlayerData.health);
     }
 
-    public void heal(float healthIncrease)
-    {
-        localPlayerData.health += healthIncrease;
-        playerHUB.updateDisplayHubHealth(localPlayerData.health);
-    }
-
     public void OnTriggerEnter2D(Collider2D collidingObject)
     {
         if (collidingObject.gameObject.tag == "EnemyBullet" && gameObject.tag == "Player")

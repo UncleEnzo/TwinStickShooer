@@ -15,7 +15,44 @@ MonoBehaviour:
   name: BulletSpeedRecipe
   icon: {fileID: 21300000, guid: 92e1d7c7517e21f46beb605a2388d46d, type: 3}
   craftItemType: 3
+  powerUp:
+    name: Bullet Speed Up
+    duration: 15
+    startAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4693464106337697609, guid: 52b0f5ad5f0d2cf409889754ecc59481,
+            type: 3}
+          m_MethodName: BulletSpeedStartAction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4693464106337697609, guid: 52b0f5ad5f0d2cf409889754ecc59481,
+            type: 3}
+          m_MethodName: BulletSpeedEndAction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
   greenRequirement: 0
   purpleRequirement: 2
   blackRequirement: 1
-  bulletSpeed: 10
+  useEffect: 0

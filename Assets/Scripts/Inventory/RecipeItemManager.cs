@@ -14,9 +14,10 @@ public class RecipeItemManager : MonoBehaviour
     #endregion
 
     private Inventory inventory;
+
     void Start()
     {
-        inventory = GetComponent<Inventory>();
+        inventory = FindObjectOfType<Inventory>();
     }
 
     public bool checkRequirements(int craftItemType, int craftItemRequirement)
