@@ -12,7 +12,14 @@ public class PowerUpAction : MonoBehaviour
 
     public void HealStartAction()
     {
-        print("Triggered HP Up");
+        Debug.Log("Triggered HP Up");
+        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
+        playerHealth.localPlayerData.health += healingIncrease;
+        FindObjectOfType<PlayerHUBController>().updateDisplayHubHealth(playerHealth.localPlayerData.health);
+    }
+    public void HealEndAction()
+    {
+        Debug.Log("End HP Up. Decriment stack count");
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
         playerHealth.localPlayerData.health += healingIncrease;
         FindObjectOfType<PlayerHUBController>().updateDisplayHubHealth(playerHealth.localPlayerData.health);
@@ -23,25 +30,24 @@ public class PowerUpAction : MonoBehaviour
 
     public void HighSpeedStartAction()
     {
-        print("Triggered HighSpeedRecipe");
+        Debug.Log("Triggered HighSpeedRecipe");
         speedUpStackCount += 1;
         FindObjectOfType<Player>().speed += speedUpIncrease;
     }
 
     public void HighSpeedEndAction()
     {
-        print("HighSpeedRecipe Expired");
+        Debug.Log("HighSpeedRecipe Expired");
         float speedReduction = speedUpIncrease * speedUpStackCount;
         FindObjectOfType<Player>().speed -= speedReduction;
         speedUpStackCount = 0;
     }
-
     float bulletSpeedIncrease = 5f;
     int bulletSpeedStackCount = 0;
 
     public void BulletSpeedStartAction()
     {
-        print("Triggered Bullet Speed Recipe");
+        Debug.Log("Triggered Bullet Speed Recipe");
         bulletSpeedStackCount += 1;
         GunProperties[] gunProperties = FindObjectsOfType<GunProperties>();
         foreach (GunProperties gunProperty in gunProperties)
@@ -52,7 +58,7 @@ public class PowerUpAction : MonoBehaviour
 
     public void BulletSpeedEndAction()
     {
-        print("Bullet Speed Recipe Expired");
+        Debug.Log("Bullet Speed Recipe Expired");
         float bulletSpeedReduction = bulletSpeedIncrease * bulletSpeedStackCount;
         GunProperties[] gunProperties = FindObjectsOfType<GunProperties>();
         foreach (GunProperties gunProperty in gunProperties)
@@ -61,4 +67,5 @@ public class PowerUpAction : MonoBehaviour
         }
         bulletSpeedStackCount = 0;
     }
+
 }

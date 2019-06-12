@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4693464106337697615}
   - component: {fileID: 4693464106337697609}
   - component: {fileID: 1051054371756000732}
+  - component: {fileID: 270274094}
   m_Layer: 0
   m_Name: PowerUpController
   m_TagString: Untagged
@@ -45,10 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4493d642c0ef05840acd080b8f2b4565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUps: []
-  recipeNameUIText: {fileID: 0}
-  stackCountUIText: {fileID: 0}
-  recipeTimerUI: {fileID: 0}
 --- !u!114 &4693464106337697609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,5 +70,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7c8ee8d119cc94f82e05ed4c63e7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 7898266330476304979, guid: f745c2acb1e46ce48b00f33d85e5ddd7,
+--- !u!114 &270274094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693464106337697614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3857afdb028cc2e4aa2e670c145f4681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerupSprites:
+  - {fileID: 21300000, guid: 9443700744301b940bd2d2cc2917a1ad, type: 3}
+  - {fileID: 21300000, guid: b8c8fc3e2641d4247adffd2c9b5472a7, type: 3}
+  - {fileID: 21300000, guid: 9754ad4c2f2df9c40a93234ad1593f0f, type: 3}
+  - {fileID: 21300000, guid: 0abcad6e677a58f46b814aa4f84e147d, type: 3}
+  - {fileID: 21300000, guid: e3d23a190e9ac714f8ded1821e65328d, type: 3}
+  - {fileID: 21300000, guid: f8461f5690e38ef42beef5bf4f8a3dab, type: 3}
+  powerUpIcon: {fileID: 8521165883127184300, guid: c114cccd96bd585489d82120cc5e8aed,
+    type: 3}
+  powerupIconPanel: {fileID: 7906252613936454866, guid: e2e1b3f595bc55640b54d59f5df7e4ef,
     type: 3}

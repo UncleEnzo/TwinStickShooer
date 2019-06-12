@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a453376794f0f2468ab2ea7e90474b6, type: 3}
+  m_Name: SpeedUpRecipe
+  m_EditorClassIdentifier: 
+  name: Speed Up Recipe
+  icon: {fileID: 21300000, guid: 92e1d7c7517e21f46beb605a2388d46d, type: 3}
+  craftItemType: 3
+  powerUp:
+    name: Move Speed Up
+    duration: 10
+    spriteNum: 1
+    stackCap: 3
+    currentStack: 0
+    startAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4693464106337697609, guid: 52b0f5ad5f0d2cf409889754ecc59481,
+            type: 3}
+          m_MethodName: HighSpeedStartAction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4693464106337697609, guid: 52b0f5ad5f0d2cf409889754ecc59481,
+            type: 3}
+          m_MethodName: HighSpeedEndAction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  greenRequirement: 2
+  purpleRequirement: 0
+  blackRequirement: 0

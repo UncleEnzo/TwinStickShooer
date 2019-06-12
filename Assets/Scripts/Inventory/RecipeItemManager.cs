@@ -13,18 +13,11 @@ public class RecipeItemManager : MonoBehaviour
     }
     #endregion
 
-    private Inventory inventory;
-
-    void Start()
-    {
-        inventory = FindObjectOfType<Inventory>();
-    }
-
     public bool checkRequirements(int craftItemType, int craftItemRequirement)
     {
         bool hasComponent = false;
         bool meetsRequiredCount = false;
-        foreach (InventorySlot slot in inventory.inventorySlots)
+        foreach (InventorySlot slot in FindObjectOfType<Inventory>().inventorySlots)
         {
             if (craftItemRequirement <= 0)
             {
@@ -49,7 +42,7 @@ public class RecipeItemManager : MonoBehaviour
 
     public void useRecipeComponents(int greenRequirement, int purpleRequirement, int blackRequirement)
     {
-        foreach (InventorySlot slot in inventory.inventorySlots)
+        foreach (InventorySlot slot in FindObjectOfType<Inventory>().inventorySlots)
         {
             removeNumOfItems(0, greenRequirement, slot);
             removeNumOfItems(1, purpleRequirement, slot);
@@ -64,7 +57,7 @@ public class RecipeItemManager : MonoBehaviour
             {
                 for (int i = 0; i != requirement; i++)
                 {
-                    inventory.RemoveItem(slot.firstItem);
+                    FindObjectOfType<Inventory>().RemoveItem(slot.firstItem);
                 }
             }
         }

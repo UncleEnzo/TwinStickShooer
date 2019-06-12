@@ -160,6 +160,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc27f733fcdfa84fb7fcb6e91cf1b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
+    type: 3}
+  purpleCraftComponent: {fileID: 5643607579732925551, guid: c2c8ffbfb808e1e419e25b22850099ff,
+    type: 3}
+  blackCraftComponent: {fileID: 3085158205632521483, guid: 7c730ae6c09ae754e95abae41b190de9,
+    type: 3}
+  minDropCount: 0
+  maxDropCount: 7
+  minDropDist: 2
+  maxDropDist: 2
   health: 4
 --- !u!1001 &6250441306323538494
 PrefabInstance:

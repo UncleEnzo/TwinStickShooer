@@ -9,13 +9,16 @@ public class PowerUp
 {
     [SerializeField]
     public string name;
-
     [SerializeField]
     public float duration;
+    [SerializeField]
+    public int spriteNum;
 
     [SerializeField]
+    public int stackCap;
+    public int currentStack = 0;
+    [SerializeField]
     public UnityEvent startAction;
-
     [SerializeField]
     public UnityEvent endAction;
 

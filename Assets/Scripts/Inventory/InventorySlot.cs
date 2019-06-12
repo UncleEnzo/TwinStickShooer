@@ -7,10 +7,8 @@ public class InventorySlot : MonoBehaviour
 {
     public int inventoryId = 0;
     public Image icon;
-    public Button removeButton;
     public Text txtCount;
-    //Item item;
-    private Stack<Item> itemStack = new Stack<Item>(); //new for stacking
+    private Stack<Item> itemStack = new Stack<Item>();
     public void Start()
     {
         txtCount.text = "";
@@ -24,7 +22,7 @@ public class InventorySlot : MonoBehaviour
         item.inventorySlot = this;
         itemStack.Push(item);
     }
-    public Item firstItem //new for stacking
+    public Item firstItem
     {
         get
         {
@@ -38,7 +36,7 @@ public class InventorySlot : MonoBehaviour
             }
         }
     }
-    public bool isStackable(Item item) //new for stacking
+    public bool isStackable(Item item)
     {
         if (isEmpty)
         {
@@ -84,11 +82,6 @@ public class InventorySlot : MonoBehaviour
         {
             return itemStack.Count;
         }
-    }
-    //Called when X button in UI is pressed
-    public void onRemoveButton()
-    {
-        Inventory.instance.RemoveItem(firstItem);
     }
 
     //Called when button is pressed, then goes to that item and calls its useItem Function()

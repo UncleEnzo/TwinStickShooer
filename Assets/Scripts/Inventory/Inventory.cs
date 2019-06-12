@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Inventory : MonoBehaviour
 {
@@ -23,6 +25,10 @@ public class Inventory : MonoBehaviour
     public Transform itemsParent;
     public event EventHandler<InventoryEventArgs> ItemAdded;
     public event EventHandler<InventoryEventArgs> ItemRemoved;
+    private GameObject recipeIconPanel;
+    public GameObject recipeIcon;
+    private List<Item> recipes = new List<Item>();
+    public List<GameObject> recipeIcons = new List<GameObject>();
 
     public void Start()
     {
@@ -36,35 +42,52 @@ public class Inventory : MonoBehaviour
             slot.inventoryId = id;
             id++;
         }
+        recipeIconPanel = GameObject.Find("Canvas").transform.Find("RecipePanel").gameObject;
     }
-
     private void InventoryScript_ItemAdded(object sender, InventoryEventArgs e)
     {
-        int index = -1;
-        foreach (InventorySlot slot in itemsParent.GetComponentsInChildren<InventorySlot>())
+        //if Item is recipe add to bottom of screen
+        if ((int)e.Item.craftItemType == 3)
         {
-            index++;
-
-            if (index == e.Item.inventorySlot.Id)
+            if (!recipes.Contains(e.Item))
             {
-                slot.icon.sprite = e.Item.icon;
-                slot.icon.enabled = true;
-                slot.removeButton.interactable = true;
+                GameObject icon = Instantiate<GameObject>(recipeIcon);
+                icon.transform.GetChild(1).GetComponent<Button>().interactable = false;
+                recipeIcons.Add(icon);
+                GameObject recipeSprite = icon.transform.GetChild(1).GetChild(0).gameObject;
+                recipeSprite.GetComponent<Image>().sprite = e.Item.icon;
+                recipes.Add(e.Item);
+                icon.transform.SetParent(recipeIconPanel.transform);
+                icon.SetActive(true);
+                icon.GetComponent<TriggerRecipe>().item = e.Item;
+            }
+        }
+        //Otherwise place it as a crafting component
+        else
+        {
+            int index = -1;
+            foreach (InventorySlot slot in itemsParent.GetComponentsInChildren<InventorySlot>())
+            {
+                index++;
+                if (index == e.Item.inventorySlot.Id)
+                {
+                    slot.icon.sprite = e.Item.icon;
+                    slot.icon.enabled = true;
 
-                int itemCount = e.Item.inventorySlot.Count;
-                if (itemCount > 1)
-                {
-                    slot.txtCount.text = itemCount.ToString();
+                    int itemCount = e.Item.inventorySlot.Count;
+                    if (itemCount > 1)
+                    {
+                        slot.txtCount.text = itemCount.ToString();
+                    }
+                    else
+                    {
+                        slot.txtCount.text = "";
+                    }
+                    break;
                 }
-                else
-                {
-                    slot.txtCount.text = "";
-                }
-                break;
             }
         }
     }
-
     private void InventoryScript_ItemRemoved(object sender, InventoryEventArgs e)
     {
         int index = -1;
@@ -86,7 +109,6 @@ public class Inventory : MonoBehaviour
                 {
                     slot.icon.sprite = null;
                     slot.icon.enabled = false;
-                    slot.removeButton.interactable = false;
                 }
             }
         }
@@ -102,7 +124,6 @@ public class Inventory : MonoBehaviour
         }
         return null;
     }
-
     private InventorySlot findNextEmptySlot()
     {
         foreach (InventorySlot slot in inventorySlots)
@@ -114,26 +135,31 @@ public class Inventory : MonoBehaviour
         }
         return null;
     }
-
-    //Add logic to differentiate between stackable and non-stackable
     public bool AddItem(Item item)
     {
-        InventorySlot freeSlot = findStackableSlot(item);
-        if (freeSlot == null)
+        if ((int)item.craftItemType == 3)
         {
-            freeSlot = findNextEmptySlot();
+            ItemAdded(this, new InventoryEventArgs(item));
+            return true;
         }
-        if (freeSlot != null)
+        else
         {
-            freeSlot.AddItem(item);
-            if (ItemAdded != null)
+            InventorySlot freeSlot = findStackableSlot(item);
+            if (freeSlot == null)
             {
-                ItemAdded(this, new InventoryEventArgs(item));
+                freeSlot = findNextEmptySlot();
             }
+            if (freeSlot != null)
+            {
+                freeSlot.AddItem(item);
+                if (ItemAdded != null)
+                {
+                    ItemAdded(this, new InventoryEventArgs(item));
+                }
+            }
+            return true;
         }
-        return true;
     }
-
     public void RemoveItem(Item item)
     {
         foreach (InventorySlot inventorySlot in inventorySlots)
@@ -148,4 +174,5 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
 }
