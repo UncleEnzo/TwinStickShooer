@@ -20,9 +20,6 @@ public class PowerUpAction : MonoBehaviour
     public void HealEndAction()
     {
         Debug.Log("End HP Up. Decriment stack count");
-        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
-        playerHealth.localPlayerData.health += healingIncrease;
-        FindObjectOfType<PlayerHUBController>().updateDisplayHubHealth(playerHealth.localPlayerData.health);
     }
 
     float speedUpIncrease = 5f;
