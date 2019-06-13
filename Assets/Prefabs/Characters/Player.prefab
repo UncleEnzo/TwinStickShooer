@@ -201,10 +201,10 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!114 &7625524876518625123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,8 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff254b3579800b54bacd298b69fbd38c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 12.83
   isInteractable: 0
+  keyboardMoveRigidBody2D: {fileID: 7625524876518625121}
 --- !u!114 &7625524876518625122
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
         zStart = Camera.main.transform.position.z;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         mousePos = CaptureMousePos();
         shakeOffset = UpdateShake();

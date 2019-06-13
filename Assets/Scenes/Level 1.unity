@@ -13280,10 +13280,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 782287692, guid: 4effee48721e41545bbb9389437dd458, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1376000276}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4effee48721e41545bbb9389437dd458, type: 3}
 --- !u!1001 &4814735960988076585
@@ -13421,21 +13417,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7625524876518625123, guid: 9d11e43d5466f394880f1484afd1f325,
-        type: 3}
-      propertyPath: speed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7625524876518625121, guid: 9d11e43d5466f394880f1484afd1f325,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7625524876518625120, guid: 9d11e43d5466f394880f1484afd1f325,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d11e43d5466f394880f1484afd1f325, type: 3}

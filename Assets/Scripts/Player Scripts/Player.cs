@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Runtime.InteropServices;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
@@ -8,22 +9,34 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public bool isInteractable = false;
+    public Rigidbody2D keyboardMoveRigidBody2D;
+    Vector3 movement;
 
-    // Update is called once per frame
     void Update()
     {
-        Move();
         if (Input.GetKeyDown("e") && isInteractable == true)
         {
             print("Interacting with NPC or object");
         }
     }
 
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        Move();
+    }
+
     public void Move()
     {
-        //Move character
-        Vector3 keyboardMove = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        transform.position += keyboardMove * speed * Time.deltaTime;
+        // movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
+        // if (movement.magnitude > 1.0f)
+        // {
+        //     movement.Normalize();
+        // }
+        // keyboardMoveRigidBody2D.velocity = new Vector2(movement.x, movement.y);// * speed
+        Vector3 tempVect = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 1);
+        tempVect = tempVect.normalized * speed * Time.deltaTime;
+        keyboardMoveRigidBody2D.MovePosition(transform.position + tempVect);
     }
 
     public void enablePlayer(Boolean playerUsable)

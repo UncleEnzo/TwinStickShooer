@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpeedUpRecipe
   m_EditorClassIdentifier: 
   name: Speed Up Recipe
-  icon: {fileID: 21300000, guid: 92e1d7c7517e21f46beb605a2388d46d, type: 3}
+  icon: {fileID: 21300000, guid: b8c8fc3e2641d4247adffd2c9b5472a7, type: 3}
   craftItemType: 3
   powerUp:
     name: Move Speed Up
