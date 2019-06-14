@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         checkIfKnockedBack();
+        enemySpriteFlip();
         float distFromPlayer = Vector3.Distance(player.transform.position, transform.position);
         followPlayer(distFromPlayer);
         shootAtPlayer(distFromPlayer);
@@ -47,6 +48,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void enemySpriteFlip()
+    {
+        if (aiPath.desiredVelocity.x >= 0.01f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else if (aiPath.desiredVelocity.x <= -0.01f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+    }
     public void OnCollisionEnter2D(Collision2D collidingObject)
     {
         if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
