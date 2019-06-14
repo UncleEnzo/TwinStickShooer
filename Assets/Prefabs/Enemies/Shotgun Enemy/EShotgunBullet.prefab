@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5850502350962868994}
   - component: {fileID: 5850502350962868995}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5850502352277750030}
   - component: {fileID: 7815746468472876935}
   - component: {fileID: 8215843367249807550}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: EShotgunBullet
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce45f113f3f6a94584d35798bb26ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 15
+  bulletSpeed: 8
   bulletDamage: 1
   timeBulletSelfDestruct: 3
   knockBack: 300

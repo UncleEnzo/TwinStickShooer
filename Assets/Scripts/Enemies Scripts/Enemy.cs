@@ -1,26 +1,36 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.ComponentModel.Design;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
     public float waitBeforeFire = 1f;
     public float firingRange = 5f;
     public float collideDamageToPlayer = 2f;
-    public float moveSpeed;
+    public float moveSpeed = 5f;
     private Player player;
     public bool walking = true;
     private bool preparingToFire = false;
     private bool isKnockedBack = false;
+    private Rigidbody2D rb;
+    public AIPath aiPath;
+    private AIDestinationSetter AIDestinationSetter;
 
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
+        rb = GetComponent<Rigidbody2D>();
+        aiPath.canMove = false;
+        AIDestinationSetter = GetComponent<AIDestinationSetter>();
+        AIDestinationSetter.target = player.transform;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         checkIfKnockedBack();
         float distFromPlayer = Vector3.Distance(player.transform.position, transform.position);
@@ -37,14 +47,15 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D collidingObject)
+    public void OnCollisionEnter2D(Collision2D collidingObject)
     {
         if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
         {
             isKnockedBack = true;
-            Vector2 force = collidingObject.GetComponent<PlayerBullet>().getBulletTrajectory();
+
+            Vector2 force = collidingObject.gameObject.GetComponent<PlayerBullet>().getBulletTrajectory();
             force.Normalize();
-            GetComponent<Rigidbody2D>().AddForce(force * collidingObject.GetComponent<PlayerBullet>().getBulletKnockBack());
+            GetComponent<Rigidbody2D>().AddForce(force * collidingObject.gameObject.GetComponent<PlayerBullet>().getBulletKnockBack());
         }
     }
     private void followPlayer(float distFromPlayer)
@@ -53,15 +64,11 @@ public class Enemy : MonoBehaviour
         {
             if (distFromPlayer <= firingRange)
             {
-                walking = false;
+                aiPath.canMove = false;
             }
             else
             {
-                walking = true;
-            }
-            if (walking)
-            {
-                approachPlayer();
+                aiPath.canMove = true;
             }
         }
     }
@@ -84,7 +91,10 @@ public class Enemy : MonoBehaviour
 
     private void approachPlayer()
     {
-        Vector3 destination = player.transform.position;
-        transform.position = Vector2.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+        // Vector3 destination = player.transform.position;
+        // Vector3 tempVect = new Vector3(destination.x, destination.y, 1);
+        // tempVect = tempVect.normalized * moveSpeed * Time.deltaTime;
+        // rb.MovePosition(transform.position + tempVect);
+
     }
 }

@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour
     public float minDropDist = 2f;
     public float maxDropDist = 2f;
     public float health = 3f;
-    public void OnTriggerEnter2D(Collider2D collidingObject)
+    public void OnCollisionEnter2D(Collision2D collidingObject)
     {
         if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
         {
@@ -30,7 +30,7 @@ public class EnemyHealth : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void takeDamage(Collider2D collision)
+    private void takeDamage(Collision2D collision)
     {
         if (collision.gameObject.tag == "PlayerBullet")
         {

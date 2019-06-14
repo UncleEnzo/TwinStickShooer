@@ -21,5 +21,6 @@ public class GunProperties : MonoBehaviour
     public float knockBack = 300f;
     public float bulletAccuracy = 0f; //0 = perfect accuracy
     public float bulletAngle = 0f;
+    public bool bulletBounce = false;
 }
 public enum WeaponType { Pistol, Shotgun, AssaultRifle, SniperRifle, MachineGun, RocketLaucher, RailGun, Knife }

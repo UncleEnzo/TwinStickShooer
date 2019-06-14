@@ -82,7 +82,7 @@ public class GunFiring : MonoBehaviour
             foreach (Transform bulletShot in gunProperties.bulletSpawnPoint)
             {
                 PlayerBullet newBullet = Object.Instantiate(bullet, bulletShot.position, bulletShot.rotation).GetComponent<PlayerBullet>();
-                newBullet.setPlayerBulletProperties(gunProperties.bulletSpeed, gunProperties.bulletDamage, gunProperties.timeBulletSelfDestruct, gunProperties.knockBack, gunProperties.bulletAccuracy, gunProperties.bulletAngle);
+                newBullet.setPlayerBulletProperties(gunProperties.bulletSpeed, gunProperties.bulletDamage, gunProperties.timeBulletSelfDestruct, gunProperties.knockBack, gunProperties.bulletAccuracy, gunProperties.bulletAngle, gunProperties.bulletBounce);
             }
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;

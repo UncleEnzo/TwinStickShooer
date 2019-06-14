@@ -28,12 +28,6 @@ public class Player : MonoBehaviour
 
     public void Move()
     {
-        // movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f);
-        // if (movement.magnitude > 1.0f)
-        // {
-        //     movement.Normalize();
-        // }
-        // keyboardMoveRigidBody2D.velocity = new Vector2(movement.x, movement.y);// * speed
         Vector3 tempVect = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 1);
         tempVect = tempVect.normalized * speed * Time.deltaTime;
         keyboardMoveRigidBody2D.MovePosition(transform.position + tempVect);

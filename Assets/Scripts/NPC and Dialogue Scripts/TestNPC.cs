@@ -44,7 +44,7 @@ public class TestNPC : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collider2D == FindObjectOfType<Player>().GetComponent<CircleCollider2D>())
+        if (collider2D == FindObjectOfType<Player>().GetComponent<Collider2D>())
         {
             playerInField = true;
             StartCoroutine(helpTextEnum);
@@ -53,7 +53,7 @@ public class TestNPC : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collider2D)
     {
-        if (collider2D == FindObjectOfType<Player>().GetComponent<CircleCollider2D>())
+        if (collider2D == FindObjectOfType<Player>().GetComponent<Collider2D>())
         {
             playerInField = false;
             animator.SetBool("isOpen", false);

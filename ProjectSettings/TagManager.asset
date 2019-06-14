@@ -14,6 +14,7 @@ TagManager:
   - HealthUI
   - AmmoUI
   - GunUI
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -23,13 +24,13 @@ TagManager:
   - UI
   - 
   - 
-  - Bullets
-  - Map
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerBullet
+  - EnemyBullet
+  - Player
+  - Enemy
+  - Wall
+  - Ground
+  - Pitfall
   - 
   - 
   - 

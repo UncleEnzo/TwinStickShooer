@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7991890147027848277}
   - component: {fileID: 6029987137506943708}
   - component: {fileID: 405441438084721978}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: EAssaultRifleBullet
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce45f113f3f6a94584d35798bb26ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 15
+  bulletSpeed: 8
   bulletDamage: 1
   timeBulletSelfDestruct: 3
   knockBack: 300

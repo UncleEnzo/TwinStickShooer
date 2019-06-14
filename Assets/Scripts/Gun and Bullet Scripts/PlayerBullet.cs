@@ -11,6 +11,7 @@ public class PlayerBullet : MonoBehaviour
     private float knockBack;
     private float bulletAccuracy;
     private float bulletAngle;
+    private bool bulletBounce;
     private Vector2 bulletTrajectory;
 
     void Start()
@@ -37,7 +38,7 @@ public class PlayerBullet : MonoBehaviour
         return new Vector2(Mathf.Cos(rotateAngle * Mathf.Deg2Rad), Mathf.Sin(rotateAngle * Mathf.Deg2Rad)).normalized;
     }
 
-    public void setPlayerBulletProperties(float bulletSpeed, float bulletDamage, float timeBulletSelfDestruct, float knockBack, float bulletAccuracy, float bulletAngle)
+    public void setPlayerBulletProperties(float bulletSpeed, float bulletDamage, float timeBulletSelfDestruct, float knockBack, float bulletAccuracy, float bulletAngle, bool bulletBounce)
     {
         this.bulletSpeed = bulletSpeed;
         this.bulletDamage = bulletDamage;
@@ -45,6 +46,15 @@ public class PlayerBullet : MonoBehaviour
         this.knockBack = knockBack;
         this.bulletAccuracy = bulletAccuracy;
         this.bulletAngle = bulletAngle;
+        this.bulletBounce = bulletBounce;
+    }
+
+    void OnCollisionEnter2D(Collision2D collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == "Wall" && bulletBounce == false)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void destroySelf()
