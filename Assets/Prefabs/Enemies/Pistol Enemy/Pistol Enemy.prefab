@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 309343144516758889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 0}
   m_Children:
   - {fileID: 3999332736515656059}
   m_Father: {fileID: 0}
@@ -128,6 +128,7 @@ MonoBehaviour:
   waitBeforeFire: 0.75
   firingRange: 5
   collideDamageToPlayer: 2
+  knockTime: 0.25
   moveSpeed: 1
   walking: 1
   aiPath: {fileID: 518032821}
@@ -324,16 +325,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1769220241367476178, guid: f597f036daa41ea42a1a4782a9ea0873,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1769220241367476178, guid: f597f036daa41ea42a1a4782a9ea0873,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 198921624569747572, guid: f597f036daa41ea42a1a4782a9ea0873,
         type: 3}
