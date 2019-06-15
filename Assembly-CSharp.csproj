@@ -53,14 +53,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Cheats.cs" />
-     <Compile Include="Assets\Prefabs\ObjectPooler.cs" />
+     <Compile Include="Assets\ObjectPooler.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunControls.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunFire.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\BulletSpawnController.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EquipToPlayer.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunControls.cs" />
@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryUI.cs" />
      <Compile Include="Assets\Scripts\Inventory\RecipeItemManager.cs" />
+     <Compile Include="Assets\Scripts\Inventory\TriggerRecipe.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\CraftComponent.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\ItemPickup.cs" />
@@ -88,6 +89,7 @@
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueTrigger.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\TestNPC.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Player Scripts\Cheats.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\CursorController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerAnimController.cs" />
@@ -99,9 +101,10 @@
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpController.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpUIDrawer.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpUIInfo.cs" />
+     <Compile Include="Assets\Scripts\Rooms\Door.cs" />
+     <Compile Include="Assets\Scripts\Rooms\EnemyRoom.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />
-     <Compile Include="Assets\TriggerRecipe.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

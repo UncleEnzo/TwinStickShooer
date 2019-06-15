@@ -13,7 +13,6 @@ public class ItemPickup : Interactable
 
     void itemPickUp()
     {
-        print("Picked up " + item.name);
         bool wasPickedUp = Inventory.instance.AddItem(item);
         if (wasPickedUp)
         {

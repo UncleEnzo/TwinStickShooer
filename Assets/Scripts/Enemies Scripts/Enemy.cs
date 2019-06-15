@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float waitBeforeFire = 1f;
     public float firingRange = 5f;
     public float collideDamageToPlayer = 2f;
+    public float knockTime = .25f;
     public float moveSpeed = 5f;
     private Player player;
     public bool walking = true;
@@ -52,11 +53,18 @@ public class Enemy : MonoBehaviour
         if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
         {
             isKnockedBack = true;
-
-            Vector2 force = collidingObject.gameObject.GetComponent<PlayerBullet>().getBulletTrajectory();
-            force.Normalize();
-            GetComponent<Rigidbody2D>().AddForce(force * collidingObject.gameObject.GetComponent<PlayerBullet>().getBulletKnockBack());
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Vector2 difference = collidingObject.gameObject.GetComponent<PlayerBullet>().getBulletTrajectory();
+            difference = difference.normalized * collidingObject.gameObject.GetComponent<PlayerBullet>().getBulletKnockBack();
+            rb.AddForce(difference, ForceMode2D.Impulse);
+            StartCoroutine(knockCo(rb));
         }
+    }
+
+    private IEnumerator knockCo(Rigidbody2D rb)
+    {
+        yield return new WaitForSeconds(knockTime);
+        rb.velocity = Vector2.zero;
     }
     private void followPlayer(float distFromPlayer)
     {
@@ -70,6 +78,10 @@ public class Enemy : MonoBehaviour
             {
                 aiPath.canMove = true;
             }
+        }
+        else
+        {
+            aiPath.canMove = false;
         }
     }
 
@@ -87,14 +99,5 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(waitBeforeFire);
         GetComponentInChildren<EnemyGunFire>().fireEnemyGun();
         preparingToFire = false;
-    }
-
-    private void approachPlayer()
-    {
-        // Vector3 destination = player.transform.position;
-        // Vector3 tempVect = new Vector3(destination.x, destination.y, 1);
-        // tempVect = tempVect.normalized * moveSpeed * Time.deltaTime;
-        // rb.MovePosition(transform.position + tempVect);
-
     }
 }

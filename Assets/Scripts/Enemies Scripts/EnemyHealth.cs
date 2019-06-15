@@ -27,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
         {
             //Play some animation, particles, and sounds
             dropCraftComponents();
+            FindObjectOfType<EnemyRoom>().removeEnemyFromList();
             Destroy(gameObject);
         }
     }
