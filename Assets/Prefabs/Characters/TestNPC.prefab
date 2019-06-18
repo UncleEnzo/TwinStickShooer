@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 8231782970508570934}
   - component: {fileID: 2110966023}
   - component: {fileID: 2110966026}
+  - component: {fileID: 1940034615}
+  - component: {fileID: 1940034614}
+  - component: {fileID: 1940034613}
   m_Layer: 0
   m_Name: TestNPC
   m_TagString: Interactable
@@ -29,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8231782970508570933}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.2778445, y: -0.627, z: 11.701331}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -68,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1061712061
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300004, guid: e2cfefa3c32f33a469d977fef424e081, type: 3}
   m_Color: {r: 0.04705882, g: 0.93333334, b: 0.11073601, a: 1}
@@ -138,6 +141,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a282ccbcbb9494491631488209f3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ToolTipOn: {fileID: 11400000, guid: 9cfeb348b0819164e915ea5d90a2cf89, type: 2}
+  ToolTipOff: {fileID: 11400000, guid: aae9e5a69e79c4d4fbeaa28ba566cd8a, type: 2}
   dialogueTriggered: 0
   speechRate: 0.5
+--- !u!114 &1940034615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231782970508570933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca33c75877e83540be83c826d6b6746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   animator: {fileID: 0}
+--- !u!114 &1940034614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231782970508570933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459f090da048d9e4285f0bfef21655d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: 9cfeb348b0819164e915ea5d90a2cf89, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1940034615}
+        m_MethodName: Enable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1940034613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231782970508570933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459f090da048d9e4285f0bfef21655d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 11400000, guid: aae9e5a69e79c4d4fbeaa28ba566cd8a, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1940034615}
+        m_MethodName: Disable
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

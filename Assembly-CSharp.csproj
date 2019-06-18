@@ -105,6 +105,9 @@
      <Compile Include="Assets\Scripts\Rooms\EnemyRoom.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />
+     <Compile Include="Assets\Signal.cs" />
+     <Compile Include="Assets\SignalListener.cs" />
+     <Compile Include="Assets\ToolTip.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

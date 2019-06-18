@@ -5,25 +5,23 @@ using UnityEngine;
 
 public class TestNPC : MonoBehaviour
 {
+    public Signal ToolTipOn;
+    public Signal ToolTipOff;
     private Boolean playerInField;
     public Boolean dialogueTriggered = false;
     private float nextDialogue = 1F;
     public float speechRate = 1F;
-    public Animator animator;
-    private IEnumerator helpTextEnum;
     private EnemySpawner enemySpawner;
 
     void Start()
     {
-        helpTextEnum = helpText();
         enemySpawner = FindObjectOfType<EnemySpawner>();
     }
     void Update()
     {
         if (playerInField && !dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue)
         {
-            StopCoroutine(helpTextEnum);
-            animator.SetBool("isOpen", false);
+            ToolTipOff.Raise();
             nextDialogue = Time.time + speechRate;
             dialogueTriggered = true;
             GetComponent<DialogueTrigger>().triggerDialogue();
@@ -47,7 +45,7 @@ public class TestNPC : MonoBehaviour
         if (collider2D == FindObjectOfType<Player>().GetComponent<Collider2D>())
         {
             playerInField = true;
-            StartCoroutine(helpTextEnum);
+            ToolTipOn.Raise();
         }
     }
 
@@ -55,15 +53,8 @@ public class TestNPC : MonoBehaviour
     {
         if (collider2D == FindObjectOfType<Player>().GetComponent<Collider2D>())
         {
+            ToolTipOff.Raise();
             playerInField = false;
-            animator.SetBool("isOpen", false);
-            StopCoroutine(helpTextEnum);
         }
-    }
-
-    private IEnumerator helpText()
-    {
-        yield return new WaitForSeconds(1.5f);
-        animator.SetBool("isOpen", true);
     }
 }
