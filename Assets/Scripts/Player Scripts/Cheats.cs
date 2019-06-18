@@ -25,5 +25,10 @@ public class Cheats : MonoBehaviour
             SceneLoader sceneLoader = FindObjectOfType<SceneLoader>();
             sceneLoader.loadDevTestScene();
         }
+
+        if (Input.GetKeyDown("p"))
+        {
+            GetComponentInChildren<EnemySpawner>().instantiateRandomEnemies(10);
+        }
     }
 }

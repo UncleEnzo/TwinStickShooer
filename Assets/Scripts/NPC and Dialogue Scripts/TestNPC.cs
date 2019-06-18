@@ -11,12 +11,12 @@ public class TestNPC : MonoBehaviour
     public float speechRate = 1F;
     public Animator animator;
     private IEnumerator helpTextEnum;
-    private EnemyManager enemyManager;
+    private EnemySpawner enemySpawner;
 
     void Start()
     {
         helpTextEnum = helpText();
-        enemyManager = FindObjectOfType<EnemyManager>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
     }
     void Update()
     {
@@ -37,7 +37,7 @@ public class TestNPC : MonoBehaviour
 
             if (lastSentence)
             {
-                enemyManager.instantiateRandomEnemies(6);
+                enemySpawner.instantiateRandomEnemies(6);
             }
         }
     }

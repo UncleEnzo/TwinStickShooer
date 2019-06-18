@@ -4,97 +4,87 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public float distPadding = 3f; //happens to both environment collider and instantiating object
-    public GameObject enemy;
-    public Collider2D[] colliders;
-    public float radius;
+    //Notes: Keep sweep range low and radius low (Consider removing sweep entirely and go for larger radius)
+    //Notes: Avoid putting ground beneath walls if possible, so objects down spawn in that space inside wall colliders where there is ground
+    //Notes: Use larget ranges for min and max range.  The smaller it is, the longer it takes to spawn
+    public GameObject[] enemyCollection;
+    public float radiusCast = 3f;
+    public Vector2 spawnPoint;
+    public float randomRangeMin; // Make sure this is negative
+    public float randomRangeMax;
 
-    void Update()
+    public void instantiateRandomEnemies(int numberOfEnemies)
     {
-        testEnemySpawn();
-    }
-
-    private void testEnemySpawn()
-    {
-        if (Input.GetKeyDown("p"))
+        for (int i = 0; i < numberOfEnemies; i++)
         {
-            for (int i = 0; i < 20; i++)
-            {
-                spawnEnemy();
-            }
+            spawnEnemy(-1);
         }
     }
 
-    public void spawnEnemy()
+    public void instantiateSelectedEnemies(int numberOfEnemies, int enemyToSpawn)
     {
-        Vector3 spawnPos = new Vector3(0, 0, 0);
-        bool canSpawnHere = false;
-        int safetyNet = 0;
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            spawnEnemy(enemyToSpawn);
+        }
+    }
 
+    private void spawnEnemy(int enemyToSpawn)
+    {
+        if (enemyToSpawn > enemyCollection.Length - 1 || enemyToSpawn < -1)
+        {
+            print("Int enemyToSpawn is out of bounds of the enemyCollections array.");
+            return;
+        }
+        if (randomRangeMin > 0)
+        {
+            print("Your minimum range is a positive value.");
+            return;
+        }
+        int safetyNet = 0;
+        bool canSpawnHere = false;
         while (!canSpawnHere)
         {
-            //Todo Set spawn pause range to dimensions of the OverlapBoxAll size
-            float spawnPosX = Random.Range(-8.5f, 9.5f);
-            float spawnPosY = Random.Range(-4.5f, 5.5f);
-            spawnPos = new Vector3(spawnPosX, spawnPosY, 0);
-
-            //Switch to OverlapBoxAll once prove it works, and for size calculate size of level using tilebounds??
-            //Todo Need to deterministically put this Overlap in the center of each room instead of tranform.position.  Again, probably done with tilebounds. 
-            colliders = Physics2D.OverlapCircleAll(transform.position, radius);
-            bool environmentCanSpawnHere = PreventSpawnOverlapEnvironment(spawnPos, colliders);
-            bool objectCanSpawnHere = PreventSpawnOverlapInstantiatingObject(spawnPos, enemy);
-            if (objectCanSpawnHere && environmentCanSpawnHere)
+            float spawnPosX = Random.Range(randomRangeMin, randomRangeMax);
+            float spawnPosY = Random.Range(randomRangeMin, randomRangeMax);
+            Vector2 spawnPos = new Vector2(transform.position.x + spawnPosX, transform.position.y + spawnPosY);
+            //NOTE: Ideally you want to make the insides of walls to not have ground on them
+            RaycastHit2D[] rayCastResultRight = Physics2D.CircleCastAll(spawnPos, radiusCast, Vector2.right, 2f);
+            RaycastHit2D[] rayCastResultLeft = Physics2D.CircleCastAll(spawnPos, radiusCast, Vector2.left, 2f);
+            RaycastHit2D[] rayCastResultUp = Physics2D.CircleCastAll(spawnPos, radiusCast, Vector2.up, 2f);
+            RaycastHit2D[] rayCastResultDown = Physics2D.CircleCastAll(spawnPos, radiusCast, Vector2.down, 2f);
+            if (rayCastResultRight.Length == 1 && rayCastResultRight[0].collider.gameObject.tag == "Ground")
             {
-                canSpawnHere = true;
+                if (rayCastResultLeft.Length == 1 && rayCastResultLeft[0].collider.gameObject.tag == "Ground")
+                {
+                    if (rayCastResultUp.Length == 1 && rayCastResultUp[0].collider.gameObject.tag == "Ground")
+                    {
+                        if (rayCastResultDown.Length == 1 && rayCastResultDown[0].collider.gameObject.tag == "Ground")
+                        {
+                            if (enemyToSpawn == -1)
+                            {
+                                int enemy = Random.Range(0, enemyCollection.Length);
+                                GameObject newEnemy = Instantiate(enemyCollection[enemy], spawnPos, Quaternion.identity) as GameObject;
+                            }
+                            else
+                            {
+                                GameObject newEnemy = Instantiate(enemyCollection[enemyToSpawn], spawnPos, Quaternion.identity) as GameObject;
+                            }
+                            canSpawnHere = true;
+                        }
+                    }
+                }
             }
             if (canSpawnHere)
             {
                 break;
             }
             safetyNet++;
-            if (safetyNet > 100)
+            if (safetyNet > 200)
             {
                 Debug.Log("Too many attempts");
                 break;
             }
         }
-
-        GameObject newEnemy = Instantiate(enemy, spawnPos, Quaternion.identity) as GameObject;
-    }
-
-    private bool PreventSpawnOverlapInstantiatingObject(Vector3 spawnPos, GameObject objectToSpawn)
-    {
-        Collider2D[] colliders = new Collider2D[1];
-        colliders[0] = objectToSpawn.GetComponent<Collider2D>();
-        return PreventSpawnOverlap(spawnPos, colliders);
-    }
-
-    private bool PreventSpawnOverlapEnvironment(Vector3 spawnPos, Collider2D[] colliders)
-    {
-        return PreventSpawnOverlap(spawnPos, colliders);
-    }
-
-    private bool PreventSpawnOverlap(Vector3 spawnPos, Collider2D[] colliders)
-    {
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            Vector3 centerPoint = colliders[i].bounds.center;
-            float width = colliders[i].bounds.extents.x + distPadding;
-            float height = colliders[i].bounds.extents.y + distPadding;
-
-            float leftExtent = centerPoint.x - width;
-            float rightExtent = centerPoint.x + width;
-            float lowerExtent = centerPoint.y - height;
-            float upperExtent = centerPoint.y + height;
-
-            if (spawnPos.x >= leftExtent && spawnPos.x <= rightExtent)
-            {
-                if (spawnPos.y >= lowerExtent && spawnPos.y <= upperExtent)
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }

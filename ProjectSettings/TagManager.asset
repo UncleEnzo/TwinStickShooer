@@ -15,6 +15,7 @@ TagManager:
   - AmmoUI
   - GunUI
   - Wall
+  - Ground
   layers:
   - Default
   - TransparentFX
