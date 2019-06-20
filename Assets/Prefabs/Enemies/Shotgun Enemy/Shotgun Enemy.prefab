@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c25abd5b955e884f8770323846d2a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingHealth: 3
   health: 3
   waitBeforeFire: 1.5
   firingRange: 5
@@ -167,6 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc27f733fcdfa84fb7fcb6e91cf1b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
     type: 3}
   purpleCraftComponent: {fileID: 5643607579732925551, guid: c2c8ffbfb808e1e419e25b22850099ff,

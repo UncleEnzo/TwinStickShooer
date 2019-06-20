@@ -35,7 +35,7 @@ public class TestNPC : MonoBehaviour
 
             if (lastSentence)
             {
-                enemySpawner.instantiateRandomEnemies(6);
+                enemySpawner.activateRandomEnemies(6);
             }
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyTakeDamage : MonoBehaviour
 {
     private Enemy enemy;
+    public Signal enemyKilled;
     public GameObject greenCraftComponent;
     public GameObject purpleCraftComponent;
     public GameObject blackCraftComponent;
@@ -32,7 +33,7 @@ public class EnemyTakeDamage : MonoBehaviour
         {
             //Play some animation, particles, and sounds
             dropCraftComponents();
-            FindObjectOfType<EnemyRoom>().reduceEnemyCount();
+            enemyKilled.Raise();
             gameObject.SetActive(false);
         }
     }

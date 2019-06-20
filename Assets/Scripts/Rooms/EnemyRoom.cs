@@ -1,74 +1,94 @@
-﻿using System.ComponentModel.Design;
+﻿using System.Linq;
+using System.ComponentModel.Design;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyRoom : MonoBehaviour
 {
-    private List<Door> doors = new List<Door>();
+    private List<GameObject> doors = new List<GameObject>();
+    public SignalListener killDoorTriggered;
     public SignalListener enemyUpdate;
-    private int enemyCount = 0;
+    public EnemySpawner enemyspawner;
+    public int numOfEnemiesToSpawn = 5;
+    public int numRemainingEnemies = 0;
     void Start()
     {
-        Door[] doorFullList = FindObjectsOfType<Door>();
-        foreach (Door door in doorFullList)
+        numOfEnemiesToSpawn = Random.Range(5, 10);
+        //opens all kill doors in the map
+        Door[] allDoorsInMap = FindObjectsOfType<Door>();
+        foreach (Door door in allDoorsInMap)
         {
-            if (door.thisDoorType == DoorType.enemy)
+            if (door.thisDoorType == DoorType.enemy && !door.open)
             {
-                //Opens all enemy room doors and adds them to a list
-                if (!door.open)
-                {
-                    door.Open();
-                }
-                doors.Add(door);
+                door.Open();
             }
         }
     }
 
-    void Update()
+    public void GetTileMapData(GameObject tileMap)
     {
-        bool enemiesDefeated = checkEnemyCount();
-        if (enemiesDefeated)
+        //Cleans out the previous list of doors
+        foreach (GameObject door in doors)
+        {
+            doors.Remove(door);
+        }
+        //creates a new list of doors for the new tilemap
+        foreach (Transform child in tileMap.transform)
+        {
+            if (child.gameObject.layer == LayerMask.NameToLayer("Door"))
+            {
+                doors.Add(child.gameObject);
+            }
+        }
+    }
+    public void killDoorActivate()
+    {
+        CloseDoors();
+        foreach (GameObject door in doors)
+        {
+            door.GetComponentInChildren<Door>().isTriggerCollider.enabled = false;
+        }
+        FindObjectOfType<PowerUpController>().timerPaused = false;
+        FindObjectOfType<PowerUpUIDrawer>().timerPaused = false;
+        enemyspawner.spawnKillRoomRandomEnemies(numOfEnemiesToSpawn);
+        //numRemainingEnemies = numOfEnemiesToSpawn;
+    }
+
+    public void enemyKilledCount()
+    {
+        numRemainingEnemies--;
+        if (numRemainingEnemies <= 0)
         {
             OpenDoors();
+            FindObjectOfType<PowerUpController>().timerPaused = true;
+            FindObjectOfType<PowerUpUIDrawer>().timerPaused = true;
+            numRemainingEnemies = 0;
         }
-        else
-        {
-            CloseDoors();
-        }
+        print("ENEMY KILL COUNT GOING DOWN: " + numRemainingEnemies);
     }
 
     private bool checkEnemyCount()
     {
-        if (enemyCount == 0)
+        if (numOfEnemiesToSpawn == 0)
         {
             return true;
         }
         return false;
     }
 
-    public void addEnemyCount()
-    {
-        enemyCount++;
-    }
-
-    //Called by enemy when it dies
-    public void reduceEnemyCount()
-    {
-        enemyCount--;
-    }
     public void CloseDoors()
     {
-        foreach (Door door in doors)
+        foreach (GameObject door in doors)
         {
-            door.Close();
+            door.GetComponentInChildren<Door>().Close();
         }
     }
     public void OpenDoors()
     {
-        foreach (Door door in doors)
+        foreach (GameObject door in doors)
         {
-            door.Open();
+            door.GetComponentInChildren<Door>().Open();
         }
     }
 }

@@ -5,14 +5,17 @@ using UnityEngine.UI;
 
 public class PowerUpUIDrawer : MonoBehaviour
 {
+    public bool timerPaused = true;
     public Sprite[] powerupSprites;
     public GameObject powerUpIcon;
+    public Text powerupTimerPause;
     private GameObject powerupIconPanel;
     private Dictionary<PowerUp, PowerUpUIInfo> powerUps = new Dictionary<PowerUp, PowerUpUIInfo>();
     private List<PowerUp> keys = new List<PowerUp>();
 
     void Start()
     {
+        powerupTimerPause.text = "";
         powerupIconPanel = GameObject.Find("Canvas").transform.Find("PowerUpPanel").gameObject;
     }
 
@@ -63,7 +66,15 @@ public class PowerUpUIDrawer : MonoBehaviour
                 PowerUpUIInfo powerupInfo = powerUps[effect];
                 if (powerupInfo.timeLeft > 0)
                 {
-                    powerupInfo.timeLeft -= Time.deltaTime;
+                    if (timerPaused)
+                    {
+                        powerupTimerPause.text = "Timers Paused";
+                    }
+                    if (!timerPaused)
+                    {
+                        powerupTimerPause.text = "";
+                        powerupInfo.timeLeft -= Time.deltaTime;
+                    }
                 }
                 else
                 {

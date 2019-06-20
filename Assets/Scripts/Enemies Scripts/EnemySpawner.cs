@@ -12,8 +12,13 @@ public class EnemySpawner : MonoBehaviour
     public Vector2 spawnPoint;
     public float randomRangeMin; // Make sure this is negative
     public float randomRangeMax;
-    public EnemyRoom enemyRoom;
 
+    //NEED TO REVISE THE SPAWNER SO IT WORKS BETTER
+    public void GetTileMapData(GameObject tileMap)
+    {
+        //WHEN YOU ENTER THE DOOR, THIS IS HOW YOU WILL RECIEVE THE TILEMAP
+        //USE THIS TO BETTER SPAWN ENEMIES
+    }
     public void spawnKillRoomRandomEnemies(int numberOfEnemies)
     {
         for (int i = 0; i < numberOfEnemies; i++)
@@ -21,7 +26,8 @@ public class EnemySpawner : MonoBehaviour
             bool spawnSucceeded = spawnEnemy(-1);
             if (spawnSucceeded)
             {
-                enemyRoom.addEnemyCount();
+                EnemyRoom enemyRoom = FindObjectOfType<EnemyRoom>();
+                enemyRoom.numRemainingEnemies = enemyRoom.numRemainingEnemies + 1;
             }
         }
     }
@@ -33,12 +39,12 @@ public class EnemySpawner : MonoBehaviour
             bool spawnSucceeded = spawnEnemy(enemyToSpawn);
             if (spawnSucceeded)
             {
-                enemyRoom.addEnemyCount();
+                //   enemyRoom.addEnemyCount();
             }
         }
     }
 
-    public void instantiateRandomEnemies(int numberOfEnemies)
+    public void activateRandomEnemies(int numberOfEnemies)
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {
@@ -46,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void instantiateSelectedEnemies(int numberOfEnemies, int enemyToSpawn)
+    public void activateSelectedEnemies(int numberOfEnemies, int enemyToSpawn)
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {

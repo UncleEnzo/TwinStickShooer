@@ -16,6 +16,7 @@ TagManager:
   - GunUI
   - Wall
   - Ground
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Ground
   - Pitfall
   - Obstacle
-  - 
+  - Door
   - 
   - 
   - 

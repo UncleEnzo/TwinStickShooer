@@ -28,7 +28,7 @@ public class Cheats : MonoBehaviour
 
         if (Input.GetKeyDown("p"))
         {
-            GetComponentInChildren<EnemySpawner>().instantiateRandomEnemies(10);
+            GetComponentInChildren<EnemySpawner>().activateRandomEnemies(10);
         }
     }
 }

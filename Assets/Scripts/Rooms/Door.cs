@@ -12,18 +12,36 @@ public enum DoorType
 public class Door : Interactable
 {
     [Header("Door variables")]
+    public BoxCollider2D doorClosedCollider;
+    public BoxCollider2D isTriggerCollider;
     public DoorType thisDoorType;
     public bool open = false;
     //public Inventory playerInventory; NOTE: For Key
     public SpriteRenderer doorSprite;
-    public BoxCollider2D physicsCollider;
+    // public BoxCollider2D physicsCollider;
     public Sprite openDoor;
     public Sprite closedEnemyDoor;
     public Sprite closedKeyDoor;
+    public Signal KillDoorTriggered;
 
-    void Update()
+    private GameObject tileMapGameObject;
+
+    void Start()
     {
-        if (Input.GetKeyDown("e") && thisDoorType == DoorType.key)
+        tileMapGameObject = this.transform.root.gameObject;
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !other.isTrigger && open && thisDoorType == DoorType.enemy)
+        {
+            FindObjectOfType<EnemyRoom>().SendMessage("GetTileMapData", tileMapGameObject);
+            FindObjectOfType<EnemySpawner>().SendMessage("GetTileMapData", tileMapGameObject);
+            KillDoorTriggered.Raise();
+        }
+
+        //Need to make sure you're not fighting enemies in a kill room also
+        if (other.CompareTag("Player") && !other.isTrigger && Input.GetKeyDown("e") && thisDoorType == DoorType.key)
         {
             // if (playerInventory.numberOfKeys > 0){
             //if player has key, then open Insert when you make keys
@@ -39,32 +57,24 @@ public class Door : Interactable
             // }
         }
     }
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && !other.isTrigger && open)
-        {
-            FindObjectOfType<EnemySpawner>().spawnKillRoomRandomEnemies(5);
-        }
-    }
     public void Open()
     {
         if (thisDoorType == DoorType.key)
         {
-            doorSprite.sprite = closedKeyDoor;
+            doorSprite.sprite = openDoor;
         }
         if (thisDoorType == DoorType.enemy)
         {
-            doorSprite.sprite = closedEnemyDoor;
+            doorSprite.sprite = openDoor;
         }
         open = true;
-        physicsCollider.enabled = false;
+        doorClosedCollider.enabled = false;
     }
 
     public void Close()
     {
-        doorSprite.enabled = true;
         open = false;
-        physicsCollider.enabled = true;
+        doorClosedCollider.enabled = true;
+        doorSprite.sprite = closedEnemyDoor;
     }
-
 }

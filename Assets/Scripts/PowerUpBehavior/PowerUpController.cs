@@ -7,18 +7,11 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 public class PowerUpController : MonoBehaviour
 {
-    //STUFF TO POTENTIALLY TAKE OUT
-    // public Text recipeNameUIText;
-    // public Text stackCountUIText;
-    // public Text recipeTimerUI;
     public static Dictionary<PowerUp, float> activeEffects = new Dictionary<PowerUp, float>();
 
-    private static List<PowerUp> keys = new List<PowerUp>();
+    public bool timerPaused = true;
 
-    void Start()
-    {
-        //endRecipeUIUpdate();
-    }
+    private static List<PowerUp> keys = new List<PowerUp>();
 
     // Update is called once per frame
     void Update()
@@ -26,7 +19,7 @@ public class PowerUpController : MonoBehaviour
         HandleEffects();
     }
 
-    private static void HandleEffects()
+    private void HandleEffects()
     {
         bool changed = false;
         if (activeEffects.Count > 0)
@@ -35,7 +28,10 @@ public class PowerUpController : MonoBehaviour
             {
                 if (activeEffects[powerup] > 0)
                 {
-                    activeEffects[powerup] -= Time.deltaTime;
+                    if (!timerPaused)
+                    {
+                        activeEffects[powerup] -= Time.deltaTime;
+                    }
                 }
                 else
                 {

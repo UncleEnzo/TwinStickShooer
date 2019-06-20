@@ -51,3 +51,5 @@ MonoBehaviour:
   spawnPoint: {x: 0, y: 0}
   randomRangeMin: -10
   randomRangeMax: 10
+  enemyRoom: {fileID: 517935590712639829, guid: 3dc5e8aa9f365e7469079708c1abc3a3,
+    type: 3}

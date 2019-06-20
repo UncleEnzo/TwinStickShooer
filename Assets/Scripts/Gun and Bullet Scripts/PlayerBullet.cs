@@ -52,7 +52,7 @@ public class PlayerBullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if (collisionInfo.gameObject.tag == "Wall" && bulletBounce == false)
+        if (collisionInfo.gameObject.tag == "Wall" && bulletBounce == false || collisionInfo.gameObject.layer == LayerMask.NameToLayer("Door"))
         {
             gameObject.SetActive(false);
         }
