@@ -53,14 +53,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ObjectPooler.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\AREnemy\AREnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunControls.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunFire.cs" />
-     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyHealth.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyKnockback.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyTakeDamage.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\PistolEnemy\PistolEnemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\ShotgunEnemy\ShotgunEnemy.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\BulletSpawnController.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EquipToPlayer.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunControls.cs" />
@@ -88,6 +91,7 @@
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueTrigger.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\TestNPC.cs" />
+     <Compile Include="Assets\Scripts\ObjectPooler.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Cheats.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\CursorController.cs" />

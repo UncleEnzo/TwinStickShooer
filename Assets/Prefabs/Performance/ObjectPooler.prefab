@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1589050017157952207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1589050017157952192}
+  - component: {fileID: 1589050017157952193}
+  m_Layer: 0
+  m_Name: ObjectPooler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1589050017157952192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589050017157952207}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.176781, y: 0.8110075, z: -0.21484375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1589050017157952193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589050017157952207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cef79f70d33bc6948a96278ff646733d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToPool:
+  - objectToPool: {fileID: 7991890147027848265, guid: 27d7034641cfc714d96d226274344496,
+      type: 3}
+    amountToPool: 3
+    shouldExpand: 1
+  - objectToPool: {fileID: 7991890147027848265, guid: 6d734a164baec2f409af91447160d03a,
+      type: 3}
+    amountToPool: 5
+    shouldExpand: 1
+  - objectToPool: {fileID: 5850502352277750034, guid: 78ef0501a91265d42bf456ecf68532e8,
+      type: 3}
+    amountToPool: 5
+    shouldExpand: 1
+  - objectToPool: {fileID: 7991890147027848265, guid: 53d29cab04a179942b6a41cf43d8ff31,
+      type: 3}
+    amountToPool: 1
+    shouldExpand: 1
+  - objectToPool: {fileID: 7991890147027848265, guid: fa8b83573f9f2e24f99e6fda0fd42fbb,
+      type: 3}
+    amountToPool: 10
+    shouldExpand: 1
+  - objectToPool: {fileID: 7991890147027848265, guid: 6ea430b99f406be46a8a52e7c463cdad,
+      type: 3}
+    amountToPool: 3
+    shouldExpand: 1
+  - objectToPool: {fileID: 7991890147027848265, guid: 53f0d0a7831a79c4db2ed708cbc75f1f,
+      type: 3}
+    amountToPool: 2
+    shouldExpand: 1
+  - objectToPool: {fileID: 5850502352277750034, guid: 9a5c342daf2f69a4384e7788c9407e86,
+      type: 3}
+    amountToPool: 6
+    shouldExpand: 1
+  - objectToPool: {fileID: 309343144516758889, guid: 22c7e87a7eea1b54f969c0e72a54dc4c,
+      type: 3}
+    amountToPool: 2
+    shouldExpand: 1
+  - objectToPool: {fileID: 309343144516758889, guid: 34c70e5240a91e643a56d1a07696ea01,
+      type: 3}
+    amountToPool: 2
+    shouldExpand: 1
+  - objectToPool: {fileID: 309343144516758889, guid: bc87a544df1ccbd4a8450c6c5d4256d6,
+      type: 3}
+    amountToPool: 2
+    shouldExpand: 1
+  - objectToPool: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
+      type: 3}
+    amountToPool: 10
+    shouldExpand: 1
+  - objectToPool: {fileID: 5643607579732925551, guid: c2c8ffbfb808e1e419e25b22850099ff,
+      type: 3}
+    amountToPool: 10
+    shouldExpand: 1
+  - objectToPool: {fileID: 3085158205632521483, guid: 7c730ae6c09ae754e95abae41b190de9,
+      type: 3}
+    amountToPool: 10
+    shouldExpand: 1
+  pooledObjects: []

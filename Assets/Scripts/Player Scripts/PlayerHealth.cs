@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collidingObject.gameObject.tag == "EnemyBullet" && gameObject.tag == "Player")
         {
-            Destroy(collidingObject.gameObject);
+            collidingObject.gameObject.SetActive(false);
         }
         takeDamage(collidingObject);
         die();

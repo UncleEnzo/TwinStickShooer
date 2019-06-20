@@ -1,41 +1,74 @@
-﻿using System.Collections;
+﻿using System.ComponentModel.Design;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyRoom : MonoBehaviour
 {
-    public EnemyHealth[] enemies;
-    public Door[] doors;
-
-    //OnTriggerEnter2D spawn enemies
-
-    //need to create a method that populates the enemies list
-    //need to make a method that populates the doors list
-
-    //Called by enemy when it dies
-    public void removeEnemyFromList()
+    private List<Door> doors = new List<Door>();
+    public SignalListener enemyUpdate;
+    private int enemyCount = 0;
+    void Start()
     {
-        for (int i = 0; i < enemies.Length; i++)
+        Door[] doorFullList = FindObjectsOfType<Door>();
+        foreach (Door door in doorFullList)
         {
-            if (enemies[i].gameObject.activeInHierarchy) // Need to remove enemy from list
+            if (door.thisDoorType == DoorType.enemy)
             {
-                return;
+                //Opens all enemy room doors and adds them to a list
+                if (!door.open)
+                {
+                    door.Open();
+                }
+                doors.Add(door);
             }
         }
-        OpenDoors();
+    }
+
+    void Update()
+    {
+        bool enemiesDefeated = checkEnemyCount();
+        if (enemiesDefeated)
+        {
+            OpenDoors();
+        }
+        else
+        {
+            CloseDoors();
+        }
+    }
+
+    private bool checkEnemyCount()
+    {
+        if (enemyCount == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void addEnemyCount()
+    {
+        enemyCount++;
+    }
+
+    //Called by enemy when it dies
+    public void reduceEnemyCount()
+    {
+        enemyCount--;
     }
     public void CloseDoors()
     {
-        for (int i = 0; i < doors.Length; i++)
+        foreach (Door door in doors)
         {
-            doors[i].Close();
+            door.Close();
         }
     }
     public void OpenDoors()
     {
-        for (int i = 0; i < doors.Length; i++)
+        foreach (Door door in doors)
         {
-            doors[i].Open();
+            door.Open();
         }
     }
 }

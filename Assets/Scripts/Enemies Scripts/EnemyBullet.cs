@@ -12,23 +12,23 @@ public class EnemyBullet : MonoBehaviour
     public float bulletAngle = 0f;
 
     public bool bulletBounce = false;
-
-    void Start()
+    void OnRenderObject()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         rigidBody2D.velocity = transform.right * bulletSpeed;
-        destroySelf();
+        StartCoroutine(SetInactiveSelf());
     }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if (collisionInfo.gameObject.tag == "Wall" && bulletBounce == false)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
-    private void destroySelf()
+    IEnumerator SetInactiveSelf()
     {
-        Destroy(gameObject, timeBulletSelfDestruct);
+        yield return new WaitForSeconds(timeBulletSelfDestruct);
+        gameObject.SetActive(false);
     }
 }

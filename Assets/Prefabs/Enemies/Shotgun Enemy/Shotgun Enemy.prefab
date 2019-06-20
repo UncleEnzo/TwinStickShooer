@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 309343144516758871}
   - component: {fileID: 309343144516758888}
   - component: {fileID: 309343144516758869}
-  - component: {fileID: 309343144516758870}
   - component: {fileID: 5355450356106762365}
+  - component: {fileID: 6083505996664514928}
   - component: {fileID: 1766093628573099724}
+  - component: {fileID: 4841859549499287150}
   - component: {fileID: 2132504225}
   - component: {fileID: 2132504226}
   - component: {fileID: 2132504227}
@@ -113,25 +114,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1437602, y: 0.14523658}
   m_EdgeRadius: 0
---- !u!114 &309343144516758870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309343144516758889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d656bcb38f8bbe4586ea33330b4fc1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waitBeforeFire: 1.5
-  firingRange: 5
-  collideDamageToPlayer: 2
-  knockTime: 0.25
-  moveSpeed: 1
-  walking: 1
-  aiPath: {fileID: 2132504226}
 --- !u!50 &5355450356106762365
 Rigidbody2D:
   serializedVersion: 4
@@ -153,6 +135,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &6083505996664514928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309343144516758889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c25abd5b955e884f8770323846d2a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  waitBeforeFire: 1.5
+  firingRange: 5
+  collideDamageToPlayer: 2
+  moveSpeed: 5
+  walking: 1
+  isKnockedBack: 0
+  aiPath: {fileID: 2132504226}
 --- !u!114 &1766093628573099724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +177,19 @@ MonoBehaviour:
   maxDropCount: 7
   minDropDist: 2
   maxDropDist: 2
-  health: 4
+--- !u!114 &4841859549499287150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309343144516758889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46e826adeacca2459ecf98513c18386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockTime: 0.25
 --- !u!114 &2132504225
 MonoBehaviour:
   m_ObjectHideFlags: 0

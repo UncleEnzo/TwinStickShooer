@@ -81,8 +81,14 @@ public class GunFiring : MonoBehaviour
             lastfired = Time.time;
             foreach (Transform bulletShot in gunProperties.bulletSpawnPoint)
             {
-                PlayerBullet newBullet = Object.Instantiate(bullet, bulletShot.position, bulletShot.rotation).GetComponent<PlayerBullet>();
-                newBullet.setPlayerBulletProperties(gunProperties.bulletSpeed, gunProperties.bulletDamage, gunProperties.timeBulletSelfDestruct, gunProperties.knockBack, gunProperties.bulletAccuracy, gunProperties.bulletAngle, gunProperties.bulletBounce);
+                GameObject newBullet = ObjectPooler.SharedInstance.GetPooledObject(bullet.name + "(Clone)");
+                if (newBullet != null)
+                {
+                    newBullet.transform.position = bulletShot.position;
+                    newBullet.transform.rotation = bulletShot.rotation;
+                    newBullet.SetActive(true);
+                }
+                newBullet.GetComponent<PlayerBullet>().setPlayerBulletProperties(gunProperties.bulletSpeed, gunProperties.bulletDamage, gunProperties.timeBulletSelfDestruct, gunProperties.knockBack, gunProperties.bulletAccuracy, gunProperties.bulletAngle, gunProperties.bulletBounce);
             }
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;

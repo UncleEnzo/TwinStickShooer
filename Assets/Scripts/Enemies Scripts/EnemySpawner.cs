@@ -12,6 +12,31 @@ public class EnemySpawner : MonoBehaviour
     public Vector2 spawnPoint;
     public float randomRangeMin; // Make sure this is negative
     public float randomRangeMax;
+    public EnemyRoom enemyRoom;
+
+    public void spawnKillRoomRandomEnemies(int numberOfEnemies)
+    {
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            bool spawnSucceeded = spawnEnemy(-1);
+            if (spawnSucceeded)
+            {
+                enemyRoom.addEnemyCount();
+            }
+        }
+    }
+
+    public void spawnKillSelectedEnemies(int numberOfEnemies, int enemyToSpawn)
+    {
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            bool spawnSucceeded = spawnEnemy(enemyToSpawn);
+            if (spawnSucceeded)
+            {
+                enemyRoom.addEnemyCount();
+            }
+        }
+    }
 
     public void instantiateRandomEnemies(int numberOfEnemies)
     {
@@ -29,17 +54,18 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void spawnEnemy(int enemyToSpawn)
+    bool spawnEnemy(int enemyToSpawn)
     {
+        bool spawnSucceeded = false;
         if (enemyToSpawn > enemyCollection.Length - 1 || enemyToSpawn < -1)
         {
             print("Int enemyToSpawn is out of bounds of the enemyCollections array.");
-            return;
+            return spawnSucceeded;
         }
         if (randomRangeMin > 0)
         {
             print("Your minimum range is a positive value.");
-            return;
+            return spawnSucceeded;
         }
         int safetyNet = 0;
         bool canSpawnHere = false;
@@ -64,12 +90,26 @@ public class EnemySpawner : MonoBehaviour
                             if (enemyToSpawn == -1)
                             {
                                 int enemy = Random.Range(0, enemyCollection.Length);
-                                GameObject newEnemy = Instantiate(enemyCollection[enemy], spawnPos, Quaternion.identity) as GameObject;
+
+                                GameObject newEnemy = ObjectPooler.SharedInstance.GetPooledObject(enemyCollection[enemy].name + "(Clone)");
+                                if (newEnemy != null)
+                                {
+                                    newEnemy.transform.position = spawnPos;
+                                    newEnemy.transform.rotation = Quaternion.identity;
+                                    newEnemy.SetActive(true);
+                                }
                             }
                             else
                             {
-                                GameObject newEnemy = Instantiate(enemyCollection[enemyToSpawn], spawnPos, Quaternion.identity) as GameObject;
+                                GameObject newEnemy = ObjectPooler.SharedInstance.GetPooledObject(enemyCollection[enemyToSpawn].name + "(Clone)");
+                                if (newEnemy != null)
+                                {
+                                    newEnemy.transform.position = spawnPos;
+                                    newEnemy.transform.rotation = Quaternion.identity;
+                                    newEnemy.SetActive(true);
+                                }
                             }
+                            spawnSucceeded = true;
                             canSpawnHere = true;
                         }
                     }
@@ -77,14 +117,16 @@ public class EnemySpawner : MonoBehaviour
             }
             if (canSpawnHere)
             {
-                break;
+                return spawnSucceeded;
             }
             safetyNet++;
             if (safetyNet > 200)
             {
                 Debug.Log("Too many attempts");
-                break;
+                return spawnSucceeded;
             }
+
         }
+        return spawnSucceeded;
     }
 }

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 309343144516758871}
   - component: {fileID: 309343144516758888}
   - component: {fileID: 309343144516758869}
-  - component: {fileID: 309343144516758870}
   - component: {fileID: 5355450356106762365}
+  - component: {fileID: 7098836933951357972}
   - component: {fileID: 1766093628573099724}
+  - component: {fileID: 6458503803144873166}
   - component: {fileID: 888971287}
   - component: {fileID: 888971288}
   - component: {fileID: 888971289}
@@ -113,25 +114,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1437602, y: 0.14523658}
   m_EdgeRadius: 0
---- !u!114 &309343144516758870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309343144516758889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d656bcb38f8bbe4586ea33330b4fc1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waitBeforeFire: 1
-  firingRange: 5
-  collideDamageToPlayer: 2
-  knockTime: 0.25
-  moveSpeed: 1
-  walking: 1
-  aiPath: {fileID: 888971288}
 --- !u!50 &5355450356106762365
 Rigidbody2D:
   serializedVersion: 4
@@ -153,6 +135,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7098836933951357972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309343144516758889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0cedb7f29d68744c967e7b4e789c1f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  waitBeforeFire: 1
+  firingRange: 5
+  collideDamageToPlayer: 2
+  moveSpeed: 5
+  walking: 1
+  isKnockedBack: 0
+  aiPath: {fileID: 888971288}
 --- !u!114 &1766093628573099724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +177,19 @@ MonoBehaviour:
   maxDropCount: 7
   minDropDist: 2
   maxDropDist: 2
-  health: 4
+--- !u!114 &6458503803144873166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309343144516758889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46e826adeacca2459ecf98513c18386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockTime: 0.25
 --- !u!114 &888971287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,11 +340,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 198921624569747572, guid: 2331c4879d293de45beb2ae621d0a871,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 4940130093002732294, guid: 2331c4879d293de45beb2ae621d0a871,
         type: 3}
       propertyPath: m_Sprite
@@ -341,6 +350,11 @@ PrefabInstance:
         type: 3}
       propertyPath: bulletsPerSecond
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198921624569747572, guid: 2331c4879d293de45beb2ae621d0a871,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2331c4879d293de45beb2ae621d0a871, type: 3}

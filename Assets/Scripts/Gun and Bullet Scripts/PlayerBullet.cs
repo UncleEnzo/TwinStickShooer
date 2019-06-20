@@ -14,13 +14,14 @@ public class PlayerBullet : MonoBehaviour
     private bool bulletBounce;
     private Vector2 bulletTrajectory;
 
-    void Start()
+    void OnRenderObject()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         bulletTrajectory = bulletDirection();
         rigidBody2D.velocity = bulletTrajectory * bulletSpeed;
-        destroySelf();
+        StartCoroutine(SetInactiveSelf());
     }
+
 
     public Vector2 bulletDirection()
     {
@@ -53,14 +54,16 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collisionInfo.gameObject.tag == "Wall" && bulletBounce == false)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
-    private void destroySelf()
+    IEnumerator SetInactiveSelf()
     {
-        Destroy(gameObject, timeBulletSelfDestruct);
+        yield return new WaitForSeconds(timeBulletSelfDestruct);
+        gameObject.SetActive(false);
     }
+
     public float getBulletKnockBack()
     {
         return knockBack;

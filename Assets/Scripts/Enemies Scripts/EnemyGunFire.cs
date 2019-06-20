@@ -55,7 +55,13 @@ public class EnemyGunFire : MonoBehaviour
             lastfired = Time.time;
             foreach (Transform bulletShot in gunProperties.bulletSpawnPoint)
             {
-                Instantiate(bullet, bulletShot.position, bulletShot.rotation);
+                GameObject newBullet = ObjectPooler.SharedInstance.GetPooledObject(bullet.name + "(Clone)");
+                if (newBullet != null)
+                {
+                    newBullet.transform.position = bulletShot.position;
+                    newBullet.transform.rotation = bulletShot.rotation;
+                    newBullet.SetActive(true);
+                }
             }
             currentAmmo--;
         }

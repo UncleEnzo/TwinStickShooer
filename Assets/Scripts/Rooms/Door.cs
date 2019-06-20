@@ -17,6 +17,9 @@ public class Door : Interactable
     //public Inventory playerInventory; NOTE: For Key
     public SpriteRenderer doorSprite;
     public BoxCollider2D physicsCollider;
+    public Sprite openDoor;
+    public Sprite closedEnemyDoor;
+    public Sprite closedKeyDoor;
 
     void Update()
     {
@@ -36,21 +39,23 @@ public class Door : Interactable
             // }
         }
     }
-
-    //need to refine this so it only works when player enters then exits through the other side
-    void OnTriggerExit2D(Collider2D collidingObject)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (collidingObject.gameObject.tag == "Player" && thisDoorType == DoorType.enemy)
+        if (other.CompareTag("Player") && !other.isTrigger && open)
         {
-            Close();
-            //activate enemyspawner
-            //populate enemy room script with enemies
-            //start enemyRoom
+            FindObjectOfType<EnemySpawner>().spawnKillRoomRandomEnemies(5);
         }
     }
     public void Open()
     {
-        doorSprite.enabled = false;
+        if (thisDoorType == DoorType.key)
+        {
+            doorSprite.sprite = closedKeyDoor;
+        }
+        if (thisDoorType == DoorType.enemy)
+        {
+            doorSprite.sprite = closedEnemyDoor;
+        }
         open = true;
         physicsCollider.enabled = false;
     }

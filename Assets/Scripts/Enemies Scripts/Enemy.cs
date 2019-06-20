@@ -7,27 +7,28 @@ using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
+    public float startingHealth = 3f;
+    public float health;
     public float waitBeforeFire = 1f;
     public float firingRange = 5f;
     public float collideDamageToPlayer = 2f;
-    public float knockTime = .25f;
     public float moveSpeed = 5f;
     private Player player;
     public bool walking = true;
     private bool preparingToFire = false;
-    private bool isKnockedBack = false;
+    public bool isKnockedBack = false;
     private Rigidbody2D rb;
     public AIPath aiPath;
     private AIDestinationSetter AIDestinationSetter;
 
-    // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
         aiPath.canMove = false;
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
         AIDestinationSetter.target = player.transform;
+        health = startingHealth;
     }
 
     // Update is called once per frame
@@ -46,25 +47,6 @@ public class Enemy : MonoBehaviour
         {
             isKnockedBack = false;
         }
-    }
-
-    public void OnCollisionEnter2D(Collision2D collidingObject)
-    {
-        if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
-        {
-            isKnockedBack = true;
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            Vector2 difference = collidingObject.gameObject.GetComponent<PlayerBullet>().getBulletTrajectory();
-            difference = difference.normalized * collidingObject.gameObject.GetComponent<PlayerBullet>().getBulletKnockBack();
-            rb.AddForce(difference, ForceMode2D.Impulse);
-            StartCoroutine(knockCo(rb));
-        }
-    }
-
-    private IEnumerator knockCo(Rigidbody2D rb)
-    {
-        yield return new WaitForSeconds(knockTime);
-        rb.velocity = Vector2.zero;
     }
     private void followPlayer(float distFromPlayer)
     {
