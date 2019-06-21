@@ -26,7 +26,7 @@ public class EnemyRoom : MonoBehaviour
         }
     }
 
-    public void GetTileMapData(GameObject tileMap)
+    public void GetRoomData(GameObject room)
     {
         //Cleans out the previous list of doors
         foreach (GameObject door in doors)
@@ -34,7 +34,7 @@ public class EnemyRoom : MonoBehaviour
             doors.Remove(door);
         }
         //creates a new list of doors for the new tilemap
-        foreach (Transform child in tileMap.transform)
+        foreach (Transform child in room.transform)
         {
             if (child.gameObject.layer == LayerMask.NameToLayer("Door"))
             {

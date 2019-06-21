@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -12,13 +15,23 @@ public class EnemySpawner : MonoBehaviour
     public Vector2 spawnPoint;
     public float randomRangeMin; // Make sure this is negative
     public float randomRangeMax;
+    private List<Vector3> tileWorldLocations = new List<Vector3>();
 
-    //NEED TO REVISE THE SPAWNER SO IT WORKS BETTER
-    public void GetTileMapData(GameObject tileMap)
+    public void GetGroundTileMapData(GameObject groundTileMap)
     {
-        //WHEN YOU ENTER THE DOOR, THIS IS HOW YOU WILL RECIEVE THE TILEMAP
-        //USE THIS TO BETTER SPAWN ENEMIES
+        Tilemap groundTileMap2D = groundTileMap.GetComponent<Tilemap>();
+        groundTileMap2D.CompressBounds();
+        foreach (var pos in groundTileMap2D.cellBounds.allPositionsWithin)
+        {
+            Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
+            Vector3 place = groundTileMap2D.CellToWorld(localPlace);
+            if (groundTileMap2D.HasTile(localPlace))
+            {
+                tileWorldLocations.Add(place);
+            }
+        }
     }
+
     public void spawnKillRoomRandomEnemies(int numberOfEnemies)
     {
         for (int i = 0; i < numberOfEnemies; i++)
@@ -68,57 +81,36 @@ public class EnemySpawner : MonoBehaviour
             print("Int enemyToSpawn is out of bounds of the enemyCollections array.");
             return spawnSucceeded;
         }
-        if (randomRangeMin > 0)
-        {
-            print("Your minimum range is a positive value.");
-            return spawnSucceeded;
-        }
         int safetyNet = 0;
         bool canSpawnHere = false;
         while (!canSpawnHere)
         {
-            float spawnPosX = Random.Range(randomRangeMin, randomRangeMax);
-            float spawnPosY = Random.Range(randomRangeMin, randomRangeMax);
-            Vector2 spawnPos = new Vector2(transform.position.x + spawnPosX, transform.position.y + spawnPosY);
-            //NOTE: Ideally you want to make the insides of walls to not have ground on them
-            RaycastHit2D[] rayCastResultRight = Physics2D.CircleCastAll(spawnPos, radiusCast, Vector2.right, 2f);
-            RaycastHit2D[] rayCastResultLeft = Physics2D.CircleCastAll(spawnPos, radiusCast, Vector2.left, 2f);
-            RaycastHit2D[] rayCastResultUp = Physics2D.CircleCastAll(spawnPos, radiusCast, Vector2.up, 2f);
-            RaycastHit2D[] rayCastResultDown = Physics2D.CircleCastAll(spawnPos, radiusCast, Vector2.down, 2f);
-            if (rayCastResultRight.Length == 1 && rayCastResultRight[0].collider.gameObject.tag == "Ground")
+            int randomSpawnPosIndex = Random.Range(0, tileWorldLocations.Count - 1);
+            Vector3 spawnPos = tileWorldLocations[randomSpawnPosIndex];
+            RaycastHit2D[] rayCastCheckResult = Physics2D.CircleCastAll(spawnPos, radiusCast, Vector2.right, 0);
+            if (rayCastCheckResult.Count() == 0)
             {
-                if (rayCastResultLeft.Length == 1 && rayCastResultLeft[0].collider.gameObject.tag == "Ground")
+                if (enemyToSpawn == -1)
                 {
-                    if (rayCastResultUp.Length == 1 && rayCastResultUp[0].collider.gameObject.tag == "Ground")
+                    int enemy = Random.Range(0, enemyCollection.Length);
+                    GameObject newEnemy = ObjectPooler.SharedInstance.GetPooledObject(enemyCollection[enemy].name + "(Clone)");
+                    if (newEnemy != null)
                     {
-                        if (rayCastResultDown.Length == 1 && rayCastResultDown[0].collider.gameObject.tag == "Ground")
-                        {
-                            if (enemyToSpawn == -1)
-                            {
-                                int enemy = Random.Range(0, enemyCollection.Length);
-
-                                GameObject newEnemy = ObjectPooler.SharedInstance.GetPooledObject(enemyCollection[enemy].name + "(Clone)");
-                                if (newEnemy != null)
-                                {
-                                    newEnemy.transform.position = spawnPos;
-                                    newEnemy.transform.rotation = Quaternion.identity;
-                                    newEnemy.SetActive(true);
-                                }
-                            }
-                            else
-                            {
-                                GameObject newEnemy = ObjectPooler.SharedInstance.GetPooledObject(enemyCollection[enemyToSpawn].name + "(Clone)");
-                                if (newEnemy != null)
-                                {
-                                    newEnemy.transform.position = spawnPos;
-                                    newEnemy.transform.rotation = Quaternion.identity;
-                                    newEnemy.SetActive(true);
-                                }
-                            }
-                            spawnSucceeded = true;
-                            canSpawnHere = true;
-                        }
+                        newEnemy.transform.position = spawnPos;
+                        newEnemy.transform.rotation = Quaternion.identity;
+                        newEnemy.SetActive(true);
                     }
+                }
+                else
+                {
+                    GameObject newEnemy = ObjectPooler.SharedInstance.GetPooledObject(enemyCollection[enemyToSpawn].name + "(Clone)");
+                    if (newEnemy != null)
+                    {
+                        newEnemy.transform.position = spawnPos;
+                        newEnemy.transform.rotation = Quaternion.identity;
+                        newEnemy.SetActive(true);
+                    }
+                    canSpawnHere = true;
                 }
             }
             if (canSpawnHere)
@@ -131,7 +123,6 @@ public class EnemySpawner : MonoBehaviour
                 Debug.Log("Too many attempts");
                 return spawnSucceeded;
             }
-
         }
         return spawnSucceeded;
     }

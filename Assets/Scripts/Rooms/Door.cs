@@ -23,20 +23,27 @@ public class Door : Interactable
     public Sprite closedEnemyDoor;
     public Sprite closedKeyDoor;
     public Signal KillDoorTriggered;
-
     private GameObject tileMapGameObject;
+    private GameObject groundGameObject;
 
     void Start()
     {
         tileMapGameObject = this.transform.root.gameObject;
+        foreach (Transform child in tileMapGameObject.transform)
+        {
+            if (child.tag == "Ground")
+            {
+                groundGameObject = child.gameObject;
+            }
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger && open && thisDoorType == DoorType.enemy)
         {
-            FindObjectOfType<EnemyRoom>().SendMessage("GetTileMapData", tileMapGameObject);
-            FindObjectOfType<EnemySpawner>().SendMessage("GetTileMapData", tileMapGameObject);
+            FindObjectOfType<EnemySpawner>().SendMessage("GetGroundTileMapData", groundGameObject);
+            FindObjectOfType<EnemyRoom>().SendMessage("GetRoomData", tileMapGameObject);
             KillDoorTriggered.Raise();
         }
 

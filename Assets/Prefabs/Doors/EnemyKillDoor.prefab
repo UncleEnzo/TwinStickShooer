@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 7009669640155539892}
   - component: {fileID: 7009669640155539893}
   - component: {fileID: 599318390}
+  - component: {fileID: 1670493938569457925}
   m_Layer: 16
   m_Name: Trigger Area
   m_TagString: Interactable
@@ -186,3 +187,24 @@ MonoBehaviour:
   closedEnemyDoor: {fileID: 21300000, guid: d0b780cdfee8bd644b6ce30fc4d6cdac, type: 3}
   closedKeyDoor: {fileID: 21300000, guid: dfce9535ef5792c4b89aac6ab395b0fa, type: 3}
   KillDoorTriggered: {fileID: 11400000, guid: b400e2e000e64f0458e05a0b2bd8ee9d, type: 2}
+--- !u!50 &1670493938569457925
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7009669640155539895}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
