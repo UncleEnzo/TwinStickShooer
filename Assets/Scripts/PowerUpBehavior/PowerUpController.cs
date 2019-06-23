@@ -63,7 +63,6 @@ public class PowerUpController : MonoBehaviour
             powerup.Start();
             powerup.currentStack++;
             activeEffects[powerup] = powerup.duration;
-            print(powerup.currentStack);
         }
         else
         {

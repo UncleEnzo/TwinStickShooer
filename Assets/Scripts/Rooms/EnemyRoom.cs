@@ -6,15 +6,15 @@ using UnityEngine;
 
 public class EnemyRoom : MonoBehaviour
 {
-    private List<GameObject> doors = new List<GameObject>();
+    private List<GameObject> doors;
     public SignalListener killDoorTriggered;
     public SignalListener enemyUpdate;
     public EnemySpawner enemyspawner;
+    public int randomNumEnemiesToSpawnRange = 3;
     private int numOfEnemiesToSpawn;
     public int numRemainingEnemies = 0;
     void Start()
     {
-        numOfEnemiesToSpawn = Random.Range(5, 10);
         //opens all kill doors in the map
         Door[] allDoorsInMap = FindObjectsOfType<Door>();
         foreach (Door door in allDoorsInMap)
@@ -29,10 +29,8 @@ public class EnemyRoom : MonoBehaviour
     public void GetRoomData(GameObject room)
     {
         //Cleans out the previous list of doors
-        foreach (GameObject door in doors)
-        {
-            doors.Remove(door);
-        }
+        doors = new List<GameObject>();
+
         //creates a new list of doors for the new tilemap
         foreach (Transform child in room.transform)
         {
@@ -44,6 +42,8 @@ public class EnemyRoom : MonoBehaviour
     }
     public void killDoorActivate()
     {
+        numOfEnemiesToSpawn = Random.Range(1, randomNumEnemiesToSpawnRange);
+        numRemainingEnemies = numOfEnemiesToSpawn;
         CloseDoors();
         foreach (GameObject door in doors)
         {
@@ -52,7 +52,6 @@ public class EnemyRoom : MonoBehaviour
         FindObjectOfType<PowerUpController>().timerPaused = false;
         FindObjectOfType<PowerUpUIDrawer>().timerPaused = false;
         enemyspawner.spawnKillRoomRandomEnemies(numOfEnemiesToSpawn);
-        numRemainingEnemies = numOfEnemiesToSpawn;
     }
 
     public void enemyKilledCount()

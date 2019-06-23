@@ -12,10 +12,14 @@ public class EnemySpawner : MonoBehaviour
     public GameObject[] enemyCollection;
     public float radiusCast = 3f;
     public Vector2 spawnPoint;
-    private List<Vector3> tileWorldLocations = new List<Vector3>();
+    private List<Vector3> tileWorldLocations;
 
     public void GetGroundTileMapData(GameObject groundTileMap)
     {
+        //cleans out old list
+        tileWorldLocations = new List<Vector3>();
+
+        //collects the ground tiles for spawning
         Tilemap groundTileMap2D = groundTileMap.GetComponent<Tilemap>();
         groundTileMap2D.CompressBounds();
         foreach (var pos in groundTileMap2D.cellBounds.allPositionsWithin)
