@@ -7,14 +7,11 @@ using UnityEngine.Tilemaps;
 
 public class EnemySpawner : MonoBehaviour
 {
-    //Notes: Keep sweep range low and radius low (Consider removing sweep entirely and go for larger radius)
-    //Notes: Avoid putting ground beneath walls if possible, so objects down spawn in that space inside wall colliders where there is ground
-    //Notes: Use larget ranges for min and max range.  The smaller it is, the longer it takes to spawn
+    //Notes: do not put ground beneath walls if possible
+    //Notes: make all walls square
     public GameObject[] enemyCollection;
     public float radiusCast = 3f;
     public Vector2 spawnPoint;
-    public float randomRangeMin; // Make sure this is negative
-    public float randomRangeMax;
     private List<Vector3> tileWorldLocations = new List<Vector3>();
 
     public void GetGroundTileMapData(GameObject groundTileMap)
@@ -110,8 +107,8 @@ public class EnemySpawner : MonoBehaviour
                         newEnemy.transform.rotation = Quaternion.identity;
                         newEnemy.SetActive(true);
                     }
-                    canSpawnHere = true;
                 }
+                canSpawnHere = true;
             }
             if (canSpawnHere)
             {

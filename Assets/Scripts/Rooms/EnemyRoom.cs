@@ -10,7 +10,7 @@ public class EnemyRoom : MonoBehaviour
     public SignalListener killDoorTriggered;
     public SignalListener enemyUpdate;
     public EnemySpawner enemyspawner;
-    public int numOfEnemiesToSpawn = 5;
+    private int numOfEnemiesToSpawn;
     public int numRemainingEnemies = 0;
     void Start()
     {
@@ -52,7 +52,7 @@ public class EnemyRoom : MonoBehaviour
         FindObjectOfType<PowerUpController>().timerPaused = false;
         FindObjectOfType<PowerUpUIDrawer>().timerPaused = false;
         enemyspawner.spawnKillRoomRandomEnemies(numOfEnemiesToSpawn);
-        //numRemainingEnemies = numOfEnemiesToSpawn;
+        numRemainingEnemies = numOfEnemiesToSpawn;
     }
 
     public void enemyKilledCount()
@@ -65,7 +65,6 @@ public class EnemyRoom : MonoBehaviour
             FindObjectOfType<PowerUpUIDrawer>().timerPaused = true;
             numRemainingEnemies = 0;
         }
-        print("ENEMY KILL COUNT GOING DOWN: " + numRemainingEnemies);
     }
 
     private bool checkEnemyCount()
