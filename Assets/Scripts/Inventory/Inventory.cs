@@ -29,7 +29,14 @@ public class Inventory : MonoBehaviour
     public GameObject recipeIcon;
     private List<Item> recipes = new List<Item>();
     public List<GameObject> recipeIcons = new List<GameObject>();
-    public int numOfKeys;
+    private GameObject keyIconPanel;
+    public GameObject keyIcon;
+    private GameObject keyIconCache;
+    private List<Item> keys = new List<Item>();
+    private GameObject moneyIconPanel;
+    public GameObject moneyIcon;
+    private GameObject moneyIconCache;
+    private List<Item> money = new List<Item>();
 
     public void Start()
     {
@@ -43,14 +50,55 @@ public class Inventory : MonoBehaviour
             slot.inventoryId = id;
             id++;
         }
+
         recipeIconPanel = GameObject.Find("Canvas").transform.Find("RecipePanel").gameObject;
+        keyIconPanel = GameObject.Find("Canvas").transform.Find("KeyPanel").gameObject;
+        moneyIconPanel = GameObject.Find("Canvas").transform.Find("MoneyPanel").gameObject;
     }
     private void InventoryScript_ItemAdded(object sender, InventoryEventArgs e)
     {
         //If the item is a key add it to the top left of the screen
         if (e.Item.itemType == ItemType.Key)
         {
-            print("PICKED UP KEY, BUT DIDN'T ADD IT TO INVENTORY OR ANYTHING");
+            if (keys.Count <= 0)
+            {
+                keyIconCache = Instantiate<GameObject>(keyIcon);
+                GameObject keySprite = keyIconCache.transform.GetChild(0).gameObject;
+                Text keyIconText = keyIconCache.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>();
+                keyIconText.text = "";
+                keySprite.GetComponent<Image>().sprite = e.Item.icon;
+                keys.Add(e.Item);
+                keyIconCache.transform.SetParent(keyIconPanel.transform);
+                keyIconCache.SetActive(true);
+            }
+            else
+            {
+                keys.Add(e.Item);
+                Text keyIconText = keyIconCache.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>();
+                keyIconText.text = "x" + keys.Count;
+            }
+        }
+        //If the item is a coin add it to the top left of the screen
+        else if (e.Item.itemType == ItemType.Coin)
+        {
+            if (money.Count <= 0)
+            {
+                moneyIconCache = Instantiate<GameObject>(moneyIcon);
+                GameObject moneySprite = moneyIconCache.transform.GetChild(0).gameObject;
+                Text moneyIconText = moneyIconCache.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>();
+                moneyIconText.text = "";
+                print(moneyIconText.text);
+                moneySprite.GetComponent<Image>().sprite = e.Item.icon;
+                money.Add(e.Item);
+                moneyIconCache.transform.SetParent(moneyIconPanel.transform);
+                moneyIconCache.SetActive(true);
+            }
+            else
+            {
+                money.Add(e.Item);
+                Text moneyIconText = moneyIconCache.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>();
+                moneyIconText.text = "x" + money.Count;
+            }
         }
         //if Item is recipe add to bottom of screen
         else if (e.Item.itemType == ItemType.Recipe)
@@ -148,6 +196,11 @@ public class Inventory : MonoBehaviour
             ItemAdded(this, new InventoryEventArgs(item));
             return true;
         }
+        else if (item.itemType == ItemType.Coin)
+        {
+            ItemAdded(this, new InventoryEventArgs(item));
+            return true;
+        }
         else if (item.itemType == ItemType.Recipe)
         {
             ItemAdded(this, new InventoryEventArgs(item));
@@ -173,17 +226,48 @@ public class Inventory : MonoBehaviour
     }
     public void RemoveItem(Item item)
     {
-        foreach (InventorySlot inventorySlot in inventorySlots)
+        if (item.itemType == ItemType.Key)
         {
-            if (inventorySlot.Remove(item))
+            keys.Remove(item);
+            if (keys.Count > 0)
             {
-                if (ItemRemoved != null)
+                Text keyIconText = keyIconCache.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>();
+                keyIconText.text = "x" + keys.Count;
+            }
+            else
+            {
+                keyIconCache.SetActive(false);
+                Destroy(keyIconCache);
+            }
+        }
+
+        else if (item.itemType == ItemType.Coin)
+        {
+            money.Remove(item);
+            if (money.Count > 0)
+            {
+                Text moneyIconText = moneyIconCache.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>();
+                moneyIconText.text = "x" + money.Count;
+            }
+            else
+            {
+                moneyIconCache.SetActive(false);
+                Destroy(moneyIconCache);
+            }
+        }
+        else
+        {
+            foreach (InventorySlot inventorySlot in inventorySlots)
+            {
+                if (inventorySlot.Remove(item))
                 {
-                    ItemRemoved(this, new InventoryEventArgs(item));
+                    if (ItemRemoved != null)
+                    {
+                        ItemRemoved(this, new InventoryEventArgs(item));
+                    }
+                    break;
                 }
-                break;
             }
         }
     }
-
 }

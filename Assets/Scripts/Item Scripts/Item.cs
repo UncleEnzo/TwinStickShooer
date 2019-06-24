@@ -27,4 +27,4 @@ public class InventoryEventArgs : EventArgs
     }
     public Item Item;
 }
-public enum ItemType { Physical, GunPowder, Explosive, Recipe, Key }
+public enum ItemType { Physical, GunPowder, Explosive, Recipe, Key, Coin }

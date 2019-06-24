@@ -34,6 +34,9 @@ public class TreasureChest : Interactable
     }
     public void OpenChest()
     {
+        //drop items
+        //Recieve a signal that one was picked and send out another one for the other to be turned off
+        isOpen = true;
 
     }
     public void ChestIsAlreadyOpen()

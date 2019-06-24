@@ -61,6 +61,10 @@ MonoBehaviour:
   itemsParent: {fileID: 1388081749793863619}
   recipeIcon: {fileID: 8521165883127184300, guid: 9a54a20be60f40749afe82010f1c18c9,
     type: 3}
+  recipeIcons: []
+  keyIcon: {fileID: 8521165883127184300, guid: bf2980ecef565504c9bf3b32b5c4ca16, type: 3}
+  moneyIcon: {fileID: 8521165883127184300, guid: a316249f9b183f54193e44b80cadee24,
+    type: 3}
 --- !u!1 &1388081749793863618
 GameObject:
   m_ObjectHideFlags: 0
