@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestNPC : MonoBehaviour
+public class TestNPC : Interactable
 {
     public Signal ToolTipOn;
     public Signal ToolTipOff;
-    private Boolean playerInField;
     public Boolean dialogueTriggered = false;
     private float nextDialogue = 1F;
     public float speechRate = 1F;
@@ -19,7 +18,7 @@ public class TestNPC : MonoBehaviour
     }
     void Update()
     {
-        if (playerInField && !dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue)
+        if (playerInRange && !dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue)
         {
             ToolTipOff.Raise();
             nextDialogue = Time.time + speechRate;
@@ -44,7 +43,7 @@ public class TestNPC : MonoBehaviour
     {
         if (collider2D == FindObjectOfType<Player>().GetComponent<Collider2D>())
         {
-            playerInField = true;
+            playerInRange = true;
             ToolTipOn.Raise();
         }
     }
@@ -53,8 +52,8 @@ public class TestNPC : MonoBehaviour
     {
         if (collider2D == FindObjectOfType<Player>().GetComponent<Collider2D>())
         {
+            playerInRange = false;
             ToolTipOff.Raise();
-            playerInField = false;
         }
     }
 }

@@ -7,6 +7,9 @@ using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
+    public float knockTime = .25f;
+    public float knockBack = 5f;
+    public Vector2 enemyTrajectory;
     public float startingHealth = 3f;
     public float health;
     public float waitBeforeFire = 1f;
@@ -35,6 +38,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         checkIfKnockedBack();
+        enemyTrajectory = rb.velocity;
         float distFromPlayer = Vector3.Distance(player.transform.position, transform.position);
         followPlayer(distFromPlayer);
         shootAtPlayer(distFromPlayer);

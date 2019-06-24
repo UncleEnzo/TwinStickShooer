@@ -70,8 +70,10 @@ MonoBehaviour:
   bulletSpeed: 8
   bulletDamage: 1
   timeBulletSelfDestruct: 3
-  knockBack: 300
+  knockBack: 5
+  knockTime: 0.25
   bulletAngle: 0
+  bulletTrajectory: {x: 0, y: 0}
   bulletBounce: 0
 --- !u!58 &7815746468472876935
 CircleCollider2D:

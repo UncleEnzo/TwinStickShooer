@@ -18,7 +18,7 @@ public class GunProperties : MonoBehaviour
     public float bulletSpeed = 15f;
     public float bulletDamage = 1f;
     public float timeBulletSelfDestruct = 3f;
-    public float knockBack = 300f;
+    public float knockBack = 5;
     public float bulletAccuracy = 0f; //0 = perfect accuracy
     public float bulletAngle = 0f;
     public bool bulletBounce = false;

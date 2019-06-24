@@ -8,7 +8,7 @@ public class Item : ScriptableObject
     new public string name = "New Item";
     public Sprite icon = null;
     public InventorySlot inventorySlot { get; set; }
-    public CraftItemType craftItemType;
+    public ItemType itemType;
     public virtual void useItem()
     {
         //Use the item
@@ -27,4 +27,4 @@ public class InventoryEventArgs : EventArgs
     }
     public Item Item;
 }
-public enum CraftItemType { Physical, GunPowder, Explosive, Recipe }
+public enum ItemType { Physical, GunPowder, Explosive, Recipe, Key }

@@ -8,17 +8,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
-    public bool isInteractable = false;
-    public Rigidbody2D keyboardMoveRigidBody2D;
+    public Rigidbody2D myRigidBody;
+    public PlayerAnimController animator;
     Vector3 movement;
-
-    void Update()
-    {
-        if (Input.GetKeyDown("e") && isInteractable == true)
-        {
-            print("Interacting with NPC or object");
-        }
-    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -30,7 +22,7 @@ public class Player : MonoBehaviour
     {
         Vector3 tempVect = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 1);
         tempVect = tempVect.normalized * speed * Time.deltaTime;
-        keyboardMoveRigidBody2D.MovePosition(transform.position + tempVect);
+        myRigidBody.MovePosition(transform.position + tempVect);
     }
 
     public void enablePlayer(Boolean playerUsable)
@@ -45,7 +37,7 @@ public class Player : MonoBehaviour
         currentWeapon.GetComponentInChildren<GunControls>().enabled = playerUsable;
         currentWeapon.GetComponentInChildren<GunProperties>().enabled = playerUsable;
         weaponHolder.GetComponent<WeaponSwitching>().enabled = playerUsable;
-        GetComponentInChildren<PlayerAnimController>().isEnabled = playerUsable;
+        animator.isEnabled = playerUsable;
         this.enabled = playerUsable;
     }
 }

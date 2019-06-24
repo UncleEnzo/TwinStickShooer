@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Health Potion Recipe
   icon: {fileID: 21300000, guid: 9443700744301b940bd2d2cc2917a1ad, type: 3}
-  craftItemType: 3
+  itemType: 3
   powerUp:
     name: Healing Potion
-    duration: 0
+    duration: -10
     spriteNum: 0
     stackCap: 1
     currentStack: 0

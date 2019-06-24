@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    private Interactable interactable;
-
+    protected bool playerInRange = false;
     public virtual void interact()
+    {
+    }
+
+    void Update()
     {
     }
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collider2D.tag == "Player" && gameObject.tag == "Interactable")
+        if (collider2D.tag == "Player" && collider2D.isTrigger && gameObject.tag == "Interactable")
         {
-            collider2D.GetComponent<Player>().isInteractable = true;
+            playerInRange = true;
+            print(playerInRange);
+
             interact();
         }
 
-        if (collider2D.tag == "Player" && gameObject.tag == "PickUp")
+        if (collider2D.tag == "Player" && collider2D.isTrigger && gameObject.tag == "PickUp")
         {
             interact();
         }
@@ -26,9 +31,10 @@ public class Interactable : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collider2D)
     {
-        if (collider2D.tag == "Player")
+        if (collider2D.tag == "Player" && collider2D.isTrigger)
         {
-            collider2D.GetComponent<Player>().isInteractable = false;
+            playerInRange = false;
+            print(playerInRange);
         }
     }
 }

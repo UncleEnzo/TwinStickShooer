@@ -29,6 +29,7 @@ public class Inventory : MonoBehaviour
     public GameObject recipeIcon;
     private List<Item> recipes = new List<Item>();
     public List<GameObject> recipeIcons = new List<GameObject>();
+    public int numOfKeys;
 
     public void Start()
     {
@@ -46,8 +47,13 @@ public class Inventory : MonoBehaviour
     }
     private void InventoryScript_ItemAdded(object sender, InventoryEventArgs e)
     {
+        //If the item is a key add it to the top left of the screen
+        if (e.Item.itemType == ItemType.Key)
+        {
+            print("PICKED UP KEY, BUT DIDN'T ADD IT TO INVENTORY OR ANYTHING");
+        }
         //if Item is recipe add to bottom of screen
-        if ((int)e.Item.craftItemType == 3)
+        else if (e.Item.itemType == ItemType.Recipe)
         {
             if (!recipes.Contains(e.Item))
             {
@@ -137,7 +143,12 @@ public class Inventory : MonoBehaviour
     }
     public bool AddItem(Item item)
     {
-        if ((int)item.craftItemType == 3)
+        if (item.itemType == ItemType.Key)
+        {
+            ItemAdded(this, new InventoryEventArgs(item));
+            return true;
+        }
+        else if (item.itemType == ItemType.Recipe)
         {
             ItemAdded(this, new InventoryEventArgs(item));
             return true;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Speed Up Recipe
   icon: {fileID: 21300000, guid: b8c8fc3e2641d4247adffd2c9b5472a7, type: 3}
-  craftItemType: 3
+  itemType: 3
   powerUp:
     name: Move Speed Up
     duration: 10

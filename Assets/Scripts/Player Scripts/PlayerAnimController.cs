@@ -21,7 +21,6 @@ public class PlayerAnimController : MonoBehaviour
         topAnimator.SetFloat("IdleMousePosVertical", mousePosY);
         bottomAnimator.SetFloat("IdleMousePosHorizontal", mousePosX);
         bottomAnimator.SetFloat("IdleMousePosVertical", mousePosY);
-
         if (isEnabled)
         {
             animationInputs(mousePosX, mousePosY, keyboardMove.x, keyboardMove.y, keyboardMove.magnitude);

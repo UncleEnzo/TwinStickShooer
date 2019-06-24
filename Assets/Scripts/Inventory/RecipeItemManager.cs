@@ -24,7 +24,7 @@ public class RecipeItemManager : MonoBehaviour
                 hasComponent = true;
                 meetsRequiredCount = true;
             }
-            else if (slot.firstItem != null && (int)slot.firstItem.craftItemType == craftItemType)
+            else if (slot.firstItem != null && (int)slot.firstItem.itemType == craftItemType)
             {
                 hasComponent = true;
                 if (slot.Count >= craftItemRequirement)
@@ -51,7 +51,7 @@ public class RecipeItemManager : MonoBehaviour
     }
     private void removeNumOfItems(int craftItemType, int requirement, InventorySlot slot)
     {
-        if (slot.firstItem != null && (int)slot.firstItem.craftItemType == craftItemType)
+        if (slot.firstItem != null && (int)slot.firstItem.itemType == craftItemType)
         {
             if (requirement > 0)
             {

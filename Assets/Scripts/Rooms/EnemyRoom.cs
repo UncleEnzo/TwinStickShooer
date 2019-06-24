@@ -13,8 +13,12 @@ public class EnemyRoom : MonoBehaviour
     public int randomNumEnemiesToSpawnRange = 3;
     private int numOfEnemiesToSpawn;
     public int numRemainingEnemies = 0;
+    private PowerUpController powerUpController;
+    private PowerUpUIDrawer powerUpUIDrawer;
     void Start()
     {
+        powerUpController = FindObjectOfType<PowerUpController>();
+        powerUpUIDrawer = FindObjectOfType<PowerUpUIDrawer>();
         //opens all kill doors in the map
         Door[] allDoorsInMap = FindObjectsOfType<Door>();
         foreach (Door door in allDoorsInMap)
@@ -49,8 +53,10 @@ public class EnemyRoom : MonoBehaviour
         {
             door.GetComponentInChildren<Door>().isTriggerCollider.enabled = false;
         }
-        FindObjectOfType<PowerUpController>().timerPaused = false;
-        FindObjectOfType<PowerUpUIDrawer>().timerPaused = false;
+        powerUpController.timerPaused = false;
+        powerUpController.CleanExpiredTimers();
+        powerUpUIDrawer.timerPaused = false;
+        powerUpUIDrawer.CleanExpiredTimers();
         enemyspawner.spawnKillRoomRandomEnemies(numOfEnemiesToSpawn);
     }
 

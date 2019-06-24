@@ -64,8 +64,17 @@ public class PowerUpUIDrawer : MonoBehaviour
             foreach (PowerUp effect in keys)
             {
                 PowerUpUIInfo powerupInfo = powerUps[effect];
+
+                //prevents one time use items, like health potions from showing up
+                if (powerupInfo.timeLeft == -10)
+                {
+                    RemoveIcon(effect);
+                    changed = true;
+                }
+
                 if (powerupInfo.timeLeft > 0)
                 {
+                    powerupInfo.icon.transform.GetChild(2).GetComponent<Image>().enabled = false;
                     if (timerPaused)
                     {
                         powerupTimerPause.text = "Timers Paused";
@@ -78,8 +87,7 @@ public class PowerUpUIDrawer : MonoBehaviour
                 }
                 else
                 {
-                    changed = true;
-                    RemoveIcon(effect);
+                    powerupInfo.icon.transform.GetChild(2).GetComponent<Image>().enabled = true;
                 }
                 if (powerUps.ContainsKey(effect))
                 {
@@ -88,6 +96,25 @@ public class PowerUpUIDrawer : MonoBehaviour
                 }
             }
         }
+        if (changed)
+        {
+            keys = new List<PowerUp>(powerUps.Keys);
+        }
+    }
+
+    public void CleanExpiredTimers()
+    {
+        bool changed = false;
+        foreach (PowerUp effect in keys)
+        {
+            PowerUpUIInfo powerupInfo = powerUps[effect];
+            if (powerupInfo.timeLeft <= 0)
+            {
+                RemoveIcon(effect);
+                changed = true;
+            }
+        }
+
         if (changed)
         {
             keys = new List<PowerUp>(powerUps.Keys);

@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Chests\TreasureChest.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\AREnemy\AREnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyBullet.cs" />
@@ -76,9 +77,10 @@
      <Compile Include="Assets\Scripts\Inventory\InventoryUI.cs" />
      <Compile Include="Assets\Scripts\Inventory\RecipeItemManager.cs" />
      <Compile Include="Assets\Scripts\Inventory\TriggerRecipe.cs" />
-     <Compile Include="Assets\Scripts\Item Scripts\CraftComponent.cs" />
+     <Compile Include="Assets\Scripts\Item Scripts\CraftComponents\CraftComponent.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\ItemPickup.cs" />
+     <Compile Include="Assets\Scripts\Item Scripts\Keys\Keys.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\RecipeComponent.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Recipes\BulletSpeedRecipe.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Recipes\Follow.cs" />

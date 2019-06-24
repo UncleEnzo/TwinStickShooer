@@ -21,7 +21,6 @@ public class PowerUpController : MonoBehaviour
 
     private void HandleEffects()
     {
-        bool changed = false;
         if (activeEffects.Count > 0)
         {
             foreach (PowerUp powerup in keys)
@@ -33,13 +32,21 @@ public class PowerUpController : MonoBehaviour
                         activeEffects[powerup] -= Time.deltaTime;
                     }
                 }
-                else
-                {
-                    changed = true;
-                    activeEffects.Remove(powerup);
-                    powerup.End();
-                    powerup.currentStack = 0;
-                }
+            }
+        }
+    }
+
+    public void CleanExpiredTimers()
+    {
+        bool changed = false;
+        if (activeEffects.Count <= 0)
+        {
+            foreach (PowerUp powerup in keys)
+            {
+                activeEffects.Remove(powerup);
+                powerup.End();
+                powerup.currentStack = 0;
+                changed = true;
             }
         }
         if (changed)

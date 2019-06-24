@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3085158205632521481}
   - component: {fileID: 3085158205632521480}
   - component: {fileID: 3085158205632521487}
-  - component: {fileID: 3085158205632521486}
   - component: {fileID: 3085158205632521484}
   - component: {fileID: 284093019}
   m_Layer: 0
@@ -96,18 +95,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: ab9ad0c190015d74ea6ccaa3588fddc0, type: 2}
---- !u!114 &3085158205632521486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3085158205632521483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d78683d147994d46bd9ff8326818441, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &3085158205632521484
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -136,7 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30032df84faa14e439d2de08476ae147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   minModifier: 5
   maxModifier: 11
   minWait: 0.3
