@@ -38,6 +38,14 @@ public class Inventory : MonoBehaviour
     private GameObject moneyIconCache;
     private List<Item> money = new List<Item>();
 
+    public int getKeyCount()
+    {
+        return keys.Count();
+    }
+    public int getMoneyCount()
+    {
+        return money.Count();
+    }
     public void Start()
     {
         ItemAdded += InventoryScript_ItemAdded;

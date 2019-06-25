@@ -22,9 +22,12 @@ public class Door : Interactable
     public Sprite openDoor;
     public Sprite closedEnemyDoor;
     public Sprite closedKeyDoor;
+    public Item key;
     public Signal KillDoorTriggered;
     private GameObject tileMapGameObject;
     private GameObject groundGameObject;
+    private bool otherColliderIsTrigger = false;
+    private int remainingNumEnemies;
 
     void Start()
     {
@@ -38,8 +41,29 @@ public class Door : Interactable
         }
     }
 
+    void Update()
+    {
+        if (thisDoorType == DoorType.key && remainingNumEnemies == 0 && otherColliderIsTrigger == true && Input.GetKeyDown("e"))
+        {
+            if (Inventory.instance.getKeyCount() > 0)
+            {
+                // if player has key, then open Insert when you make keys
+                if (!open)
+                {
+                    Open();
+                    Inventory.instance.RemoveItem(key);
+                }
+                else
+                {
+                    Debug.Log("Key door open when it should be closed");
+                }
+            }
+        }
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
+        playerInRange = true;
         if (other.CompareTag("Player") && !other.isTrigger && open && thisDoorType == DoorType.enemy)
         {
             FindObjectOfType<EnemySpawner>().SendMessage("GetGroundTileMapData", groundGameObject);
@@ -47,23 +71,23 @@ public class Door : Interactable
             KillDoorTriggered.Raise();
         }
 
-        //Need to make sure you're not fighting enemies in a kill room also
-        if (other.CompareTag("Player") && !other.isTrigger && Input.GetKeyDown("e") && thisDoorType == DoorType.key)
+        if (!other.isTrigger)
         {
-            // if (playerInventory.numberOfKeys > 0){
-            //if player has key, then open Insert when you make keys
-            //playerInventory.numberOfKeys--;
-            if (!open)
+            otherColliderIsTrigger = true;
+            if (other.CompareTag("Player"))
             {
-                Open();
+                remainingNumEnemies = other.GetComponentInChildren<EnemyRoom>().numRemainingEnemies;
             }
-            else
-            {
-                Close();
-            }
-            // }
         }
     }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        playerInRange = false;
+        otherColliderIsTrigger = true;
+        remainingNumEnemies = 1;
+    }
+
     public void Open()
     {
         if (thisDoorType == DoorType.key)

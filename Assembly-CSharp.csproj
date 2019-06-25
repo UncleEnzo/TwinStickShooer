@@ -65,6 +65,9 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyTakeDamage.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\PistolEnemy\PistolEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\ShotgunEnemy\ShotgunEnemy.cs" />
+     <Compile Include="Assets\Scripts\Global\ObjectPooler.cs" />
+     <Compile Include="Assets\Scripts\Global\Signal.cs" />
+     <Compile Include="Assets\Scripts\Global\SignalListener.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\BulletSpawnController.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EquipToPlayer.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunControls.cs" />
@@ -87,6 +90,7 @@
      <Compile Include="Assets\Scripts\Item Scripts\Recipes\Follow.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Recipes\HealthPotion.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Recipes\SpeedUpRecipe.cs" />
+     <Compile Include="Assets\Scripts\ItemRarities.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\PersistentGameData.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\SceneLoader.cs" />
@@ -94,7 +98,7 @@
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueTrigger.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\TestNPC.cs" />
-     <Compile Include="Assets\Scripts\ObjectPooler.cs" />
+     <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\ToolTip.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Cheats.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\CursorController.cs" />
@@ -112,9 +116,6 @@
      <Compile Include="Assets\Scripts\Rooms\EnemyRoom.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />
-     <Compile Include="Assets\Signal.cs" />
-     <Compile Include="Assets\SignalListener.cs" />
-     <Compile Include="Assets\ToolTip.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

@@ -18,8 +18,6 @@ public class Interactable : MonoBehaviour
         if (collider2D.tag == "Player" && collider2D.isTrigger && gameObject.tag == "Interactable")
         {
             playerInRange = true;
-            print(playerInRange);
-
             interact();
         }
 
@@ -34,7 +32,6 @@ public class Interactable : MonoBehaviour
         if (collider2D.tag == "Player" && collider2D.isTrigger)
         {
             playerInRange = false;
-            print(playerInRange);
         }
     }
 }
