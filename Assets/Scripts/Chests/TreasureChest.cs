@@ -1,12 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System.Linq;
+using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TreasureChest : Interactable
 {
-    public GameObject contents;
     public bool isOpen;
+    public Item key;
     private Animator anim;
 
     // Start is called before the first frame update
@@ -18,18 +19,30 @@ public class TreasureChest : Interactable
     // Update is called once per frame
     void Update()
     {
-        //Need to make sure the player has a key?? SHOULD CHESTS TAKE KEYS????
         if (Input.GetKeyDown("e") && playerInRange)
         {
-            if (!isOpen)
+            if (Inventory.instance.getKeyCount() > 0)
             {
-                //open the chest
-                OpenChest();
-            }
-            else
-            {
-                //Chest is already Open
-                ChestIsAlreadyOpen();
+                if (!isOpen)
+                {
+                    Collider2D[] result = Physics2D.OverlapCircleAll(transform.position, 4f, 3);
+                    if (result.Count() == 2)
+                    {
+                        //open the chest
+                        Inventory.instance.RemoveItem(key);
+                        OpenChest();
+                    }
+                    else
+                    {
+                        print("SOMETHING IS TOO CLOSE TO THE CHEST FOR IT TO OPEN");
+                        print("Result count = " + result.Count());
+                    }
+                }
+                else
+                {
+                    //Chest is already Open
+                    ChestIsAlreadyOpen();
+                }
             }
         }
     }
@@ -38,11 +51,20 @@ public class TreasureChest : Interactable
         isOpen = true;
         //Drop Items >> Instantiate something from the pool of items based on chest rarity
         anim.SetBool("opened", true);
-        Instantiate(contents, new Vector2(transform.position.x, transform.position.y - 3f), Quaternion.identity);
-        //Recieve a signal that one was picked and send out another one for the other to be turned off
+        int chestID = Random.Range(0, 100000);
+        spawnRecipe(LootListType.PhysicalRecipe, -3, -3, chestID);
+        spawnRecipe(LootListType.GunpowderRecipe, 0, 3, chestID);
+        spawnRecipe(LootListType.ExplosiveRecipe, 3, -3, chestID);
     }
     public void ChestIsAlreadyOpen()
     {
-        Debug.Log("Chest is already Open");
+        Debug.Log("Not Enough Keys or Chest is already Open");
+    }
+
+    private void spawnRecipe(LootListType loot, float coordinateX, float coordinateY, int chestID)
+    {
+        GameObject recipe = Instantiate(LootTable.instance.generateRandomLoot(loot), new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
+        recipe.GetComponent<Recipe>().chestID = chestID;
+        recipe.GetComponent<Recipe>().isFromChest = true;
     }
 }

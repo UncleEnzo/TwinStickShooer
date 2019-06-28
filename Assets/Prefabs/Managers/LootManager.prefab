@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &350554470640922617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 850177476199436679}
+  - component: {fileID: 350554470640922618}
+  m_Layer: 0
+  m_Name: LootManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &850177476199436679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350554470640922617}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -87.47828, y: -2.460556, z: -0.16796875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &350554470640922618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350554470640922617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703f3199a3f71fe4085ed7127b6a859f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicalRecipes:
+  - name: SpeedPotion
+    item: {fileID: 3085158205632521483, guid: f722d52a1b4530c459af14d4d4e8f7cc, type: 3}
+    dropRarity: 100
+  gunpowderRecipes:
+  - name: BulletSpeedPotion
+    item: {fileID: 3085158205632521483, guid: 2f38f56b7ec6973408e13411fc0b7404, type: 3}
+    dropRarity: 100
+  explosiveRecipes:
+  - name: Testing
+    item: {fileID: 3085158205632521483, guid: 63e067b73d889a340a26b09e0849c0d2, type: 3}
+    dropRarity: 100

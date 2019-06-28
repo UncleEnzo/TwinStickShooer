@@ -11,11 +11,6 @@ public class Item : ScriptableObject
     public ItemType itemType;
     public virtual void useItem()
     {
-        //Use the item
-        //Something may happen
-        //Use this method to turn craftables into Pots/GunPowder/Explosives
-        //Use this method to use potions/GunPowders/Explosives
-
         Debug.Log("Using " + name);
     }
 }
@@ -28,3 +23,4 @@ public class InventoryEventArgs : EventArgs
     public Item Item;
 }
 public enum ItemType { Physical, GunPowder, Explosive, Recipe, Key, Coin }
+public enum RecipeType { None, PhysicalRecipe, GunPowderRecipe, ExplosiveRecipe }

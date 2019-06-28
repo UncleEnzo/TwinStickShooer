@@ -32,6 +32,7 @@ public class Interactable : MonoBehaviour
         if (collider2D.tag == "Player" && collider2D.isTrigger)
         {
             playerInRange = false;
+            interact();
         }
     }
 }

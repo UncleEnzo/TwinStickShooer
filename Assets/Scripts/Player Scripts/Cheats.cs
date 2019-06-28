@@ -37,11 +37,6 @@ public class Cheats : MonoBehaviour
             GetComponentInChildren<EnemySpawner>().activateRandomEnemies(10);
         }
 
-        if (Input.GetKeyDown("p"))
-        {
-            GetComponentInChildren<EnemySpawner>().activateRandomEnemies(10);
-        }
-
         if (Input.GetKeyDown("u"))
         {
             Inventory.instance.AddItem(money);
