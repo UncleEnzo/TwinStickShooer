@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4665798870796060610}
   - component: {fileID: 7927585529259638701}
   - component: {fileID: 8073517017852275376}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: EPistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,13 +122,13 @@ MonoBehaviour:
   - {fileID: 589898728466012835}
   camShakeMagnitude: 1
   camShakeLength: 0.03
-  bulletsPerSecond: 3
+  bulletsPerSecond: 0.5
   maxAmmo: 7
   reloadTime: 2
-  bulletSpeed: 15
+  bulletSpeed: 0.5
   bulletDamage: 1
   timeBulletSelfDestruct: 3
-  knockBack: 300
+  knockBack: 3
   bulletAccuracy: 0
   bulletAngle: 0
   bulletBounce: 0

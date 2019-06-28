@@ -13,7 +13,8 @@ public class Enemy : MonoBehaviour
     public float startingHealth = 3f;
     public float health;
     public float waitBeforeFire = 1f;
-    public float firingRange = 5f;
+    public float stopAndFireRange = 7f;
+    public float walkAndFireRange = 9f;
     public float collideDamageToPlayer = 2f;
     public float moveSpeed = 5f;
     private Player player;
@@ -56,7 +57,7 @@ public class Enemy : MonoBehaviour
     {
         if (!preparingToFire && !isKnockedBack)
         {
-            if (distFromPlayer <= firingRange)
+            if (distFromPlayer <= stopAndFireRange)
             {
                 aiPath.canMove = false;
             }
@@ -73,7 +74,11 @@ public class Enemy : MonoBehaviour
 
     private void shootAtPlayer(float distFromPlayer)
     {
-        if (!preparingToFire && distFromPlayer <= firingRange)
+        if (!preparingToFire && distFromPlayer <= walkAndFireRange && distFromPlayer > stopAndFireRange)
+        {
+            GetComponentInChildren<EnemyGunFire>().fireEnemyGun();
+        }
+        if (!preparingToFire && distFromPlayer <= stopAndFireRange)
         {
             StartCoroutine(takeAimThenFire());
         }

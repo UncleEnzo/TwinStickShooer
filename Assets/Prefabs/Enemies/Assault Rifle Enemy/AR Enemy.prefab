@@ -147,10 +147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0cedb7f29d68744c967e7b4e789c1f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockTime: 0.25
+  knockBack: 5
+  enemyTrajectory: {x: 0, y: 0}
   startingHealth: 3
   health: 3
   waitBeforeFire: 1
-  firingRange: 5
+  stopAndFireRange: 5
+  walkAndFireRange: 7
   collideDamageToPlayer: 2
   moveSpeed: 5
   walking: 1
@@ -282,11 +286,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy AR
       objectReference: {fileID: 0}
-    - target: {fileID: 11991691623488481, guid: 2331c4879d293de45beb2ae621d0a871,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 1769220241367476178, guid: 2331c4879d293de45beb2ae621d0a871,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -341,22 +340,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4940130093002732294, guid: 2331c4879d293de45beb2ae621d0a871,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 367b6f8541e5bf4439dfe442abb3accc,
-        type: 3}
-    - target: {fileID: 4665798870796060610, guid: 2331c4879d293de45beb2ae621d0a871,
-        type: 3}
-      propertyPath: bulletsPerSecond
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 198921624569747572, guid: 2331c4879d293de45beb2ae621d0a871,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2331c4879d293de45beb2ae621d0a871, type: 3}

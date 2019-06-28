@@ -56,6 +56,7 @@
      <Compile Include="Assets\OutlineEffect\LinkedSet.cs" />
      <Compile Include="Assets\OutlineEffect\Outline.cs" />
      <Compile Include="Assets\OutlineEffect\OutlineEffect.cs" />
+     <Compile Include="Assets\Scripts\AStar\ScanGrid.cs" />
      <Compile Include="Assets\Scripts\Chests\GunChest.cs" />
      <Compile Include="Assets\Scripts\Chests\RecipeChest1.cs" />
      <Compile Include="Assets\Scripts\Chests\TreasureChest.cs" />

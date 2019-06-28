@@ -147,10 +147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4224157f55a8cfd4b9ad3bac7b535ed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockTime: 0.25
+  knockBack: 5
+  enemyTrajectory: {x: 0, y: 0}
   startingHealth: 3
   health: 3
   waitBeforeFire: 1
-  firingRange: 5
+  stopAndFireRange: 5
+  walkAndFireRange: 8
   collideDamageToPlayer: 2
   moveSpeed: 5
   walking: 1
@@ -282,11 +286,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Pistol
       objectReference: {fileID: 0}
-    - target: {fileID: 11991691623488481, guid: f597f036daa41ea42a1a4782a9ea0873,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 1769220241367476178, guid: f597f036daa41ea42a1a4782a9ea0873,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -341,16 +340,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4665798870796060610, guid: f597f036daa41ea42a1a4782a9ea0873,
-        type: 3}
-      propertyPath: bulletsPerSecond
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 198921624569747572, guid: f597f036daa41ea42a1a4782a9ea0873,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f597f036daa41ea42a1a4782a9ea0873, type: 3}

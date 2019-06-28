@@ -147,10 +147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c25abd5b955e884f8770323846d2a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockTime: 0.25
+  knockBack: 5
+  enemyTrajectory: {x: 0, y: 0}
   startingHealth: 3
   health: 3
   waitBeforeFire: 1.5
-  firingRange: 5
+  stopAndFireRange: 5
+  walkAndFireRange: 6
   collideDamageToPlayer: 2
   moveSpeed: 5
   walking: 1
@@ -282,11 +286,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Shotgun
       objectReference: {fileID: 0}
-    - target: {fileID: 7534039688406982307, guid: f89dfe61349d6c4419bfc39a3139aefc,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 8082091212718973584, guid: f89dfe61349d6c4419bfc39a3139aefc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -342,32 +341,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7794645233802336771, guid: f89dfe61349d6c4419bfc39a3139aefc,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159868812259684095, guid: f89dfe61349d6c4419bfc39a3139aefc,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3606549973018059927, guid: f89dfe61349d6c4419bfc39a3139aefc,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697030498282032639, guid: f89dfe61349d6c4419bfc39a3139aefc,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3182370835506476612, guid: f89dfe61349d6c4419bfc39a3139aefc,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a32b0d26ea37eab47b25940ff5581f84,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f89dfe61349d6c4419bfc39a3139aefc, type: 3}
 --- !u!4 &2780792876684832942 stripped

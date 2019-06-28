@@ -31,7 +31,8 @@ public class Door : Interactable
 
     void Start()
     {
-        tileMapGameObject = this.transform.root.gameObject;
+        tileMapGameObject = this.transform.parent.parent.gameObject;
+        print(tileMapGameObject);
         foreach (Transform child in tileMapGameObject.transform)
         {
             if (child.tag == "Ground")

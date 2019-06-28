@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 2910710840829133440}
   - component: {fileID: 857997621478570481}
   - component: {fileID: 433175969634642892}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: EShotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,13 +218,13 @@ MonoBehaviour:
   - {fileID: 8447782534307369106}
   camShakeMagnitude: 2
   camShakeLength: 0.03
-  bulletsPerSecond: 2
+  bulletsPerSecond: 0.2
   maxAmmo: 5
   reloadTime: 3
-  bulletSpeed: 15
+  bulletSpeed: 0.1
   bulletDamage: 1
   timeBulletSelfDestruct: 3
-  knockBack: 300
+  knockBack: 4
   bulletAccuracy: 0
   bulletAngle: 0
   bulletBounce: 0
