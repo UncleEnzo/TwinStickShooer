@@ -144,7 +144,7 @@ MonoBehaviour:
   bulletSpeed: 15
   bulletDamage: 4
   timeBulletSelfDestruct: 3
-  knockBack: 300
+  knockBack: 4
   bulletAccuracy: 0
   bulletAngle: 0
   bulletBounce: 0

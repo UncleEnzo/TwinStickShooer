@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class TreasureChest : Interactable
 {
+    public float health;
     public bool isOpen;
     public Item key;
     public int chestRarityRange;
@@ -23,6 +24,14 @@ public class TreasureChest : Interactable
         //Drop Items >> Add Rarity
         anim.SetBool("opened", true);
         return Random.Range(0, 100000);
+    }
+
+    protected void CheckChestHealth()
+    {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected bool attemptToOpenChest()

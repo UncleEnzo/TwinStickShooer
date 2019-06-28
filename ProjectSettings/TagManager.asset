@@ -38,7 +38,7 @@ TagManager:
   - Door
   - Recipe
   - Chest
-  - 
+  - MiniMap
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: MiniMap
+    uniqueID: 1707095615
+    locked: 0
   - name: Ground
     uniqueID: 3122916195
     locked: 0

@@ -30,6 +30,7 @@ public class EnemyBullet : MonoBehaviour
         }
         if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Door") && bulletBounce == false)
         {
+            collisionInfo.gameObject.GetComponent<TreasureChest>().health--;
             gameObject.SetActive(false);
         }
         if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Chest") && bulletBounce == false)

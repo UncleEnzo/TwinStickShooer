@@ -62,7 +62,7 @@ public class PlayerBullet : MonoBehaviour
         }
         else if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Chest") && bulletBounce == false)
         {
-            //Do Damage
+            collisionInfo.gameObject.GetComponent<TreasureChest>().health--;
             gameObject.SetActive(false);
         }
         else if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Chest") && bulletBounce == true)

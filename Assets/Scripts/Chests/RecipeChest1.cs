@@ -43,6 +43,7 @@ public class RecipeChest1 : TreasureChest
     }
     void Update()
     {
+        CheckChestHealth();
         bool success = attemptToOpenChest();
         if (success)
         {

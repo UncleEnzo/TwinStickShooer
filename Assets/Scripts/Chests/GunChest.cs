@@ -10,6 +10,7 @@ public class GunChest : TreasureChest
     }
     void Update()
     {
+        CheckChestHealth();
         bool success = attemptToOpenChest();
         if (success)
         {
