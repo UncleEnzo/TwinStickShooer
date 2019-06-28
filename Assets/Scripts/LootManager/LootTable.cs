@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +18,14 @@ public class LootTable : MonoBehaviour
         instance = this;
     }
     #endregion
-    // Start is called before the first frame update
 
     //Make List of each type of loot item. Give each a corresponding rarity
     [Header("MAKE SURE DROP RARITY IS FROM HIGHEST TO LOWEST IN EACH LIST OR LOOTTABLE WILL FAIL")]
     public List<Loot> physicalRecipes;
     public List<Loot> gunpowderRecipes;
     public List<Loot> explosiveRecipes;
+    public List<Loot> weapons;
+    private int rareDropChanceIncrease = 30;
     private Dictionary<LootListType, List<Loot>> lootMap;
     private LootListType lootList;
 
@@ -33,13 +35,39 @@ public class LootTable : MonoBehaviour
         lootMap.Add(LootListType.PhysicalRecipe, physicalRecipes);
         lootMap.Add(LootListType.GunpowderRecipe, gunpowderRecipes);
         lootMap.Add(LootListType.ExplosiveRecipe, explosiveRecipes);
+        lootMap.Add(LootListType.Weapon, weapons);
     }
 
-    public GameObject generateRandomLoot(LootListType lootList)
+    public GameObject generateRandomLoot(LootListType lootList, int chestRarityRange)
     {
+        List<Loot> lootListType = new List<Loot>();
+        foreach (Loot loot in lootMap[lootList])
+        {
+            lootListType.Add(new Loot(loot));
+        }
+
+        if (chestRarityRange > 0)
+        {
+            foreach (Loot loot in lootListType)
+            {
+                if (loot.dropRarity <= chestRarityRange)
+                {
+                    loot.dropRarity += rareDropChanceIncrease;
+                }
+            }
+            lootListType = lootListType.OrderByDescending(i => i.dropRarity).ToList();
+            foreach (Loot loot in lootListType)
+            {
+                print(loot.name + " rarity = " + loot.dropRarity);
+            }
+        }
+        else
+        {
+            print("Chest rarity is neutral");
+        }
+
         int total = 0;
         int randomNumber = 0;
-        List<Loot> lootListType = lootMap[lootList];
 
         //tally the total weight
         foreach (Loot loot in lootListType)
@@ -78,12 +106,19 @@ public class LootTable : MonoBehaviour
         return null;
     }
 }
+
 [Serializable]
 public class Loot
 {
+    public Loot(Loot obj)
+    {
+        this.name = obj.name;
+        this.item = obj.item;
+        this.dropRarity = obj.dropRarity;
+    }
     public string name;
     public GameObject item;
     public int dropRarity;
 }
 
-public enum LootListType { PhysicalRecipe, GunpowderRecipe, ExplosiveRecipe }
+public enum LootListType { PhysicalRecipe, GunpowderRecipe, ExplosiveRecipe, Weapon }

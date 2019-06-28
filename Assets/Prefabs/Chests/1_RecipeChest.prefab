@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7716060932861284897}
   - component: {fileID: 7716060932861284896}
-  - component: {fileID: 7716060932861284901}
+  - component: {fileID: 4846575070707373238}
   - component: {fileID: 7716060932861284899}
   - component: {fileID: 7716060932861284900}
   - component: {fileID: 7716060932861284903}
   - component: {fileID: 7716060932861284902}
   m_Layer: 0
-  m_Name: Basic Treasure Chest
+  m_Name: 1_RecipeChest
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7716060932861284901
+--- !u!114 &4846575070707373238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,10 +93,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7716060932861284898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 823cf819a7f527f44b45110e371b3bb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 0826623ca1cc259418eeae91cec2892b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contents: {fileID: 0}
   isOpen: 0
   key: {fileID: 11400000, guid: 4186f3044d3a6704f809f0f9972b47fb, type: 2}
 --- !u!95 &7716060932861284899
