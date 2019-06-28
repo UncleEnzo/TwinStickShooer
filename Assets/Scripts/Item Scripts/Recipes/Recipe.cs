@@ -7,6 +7,8 @@ public class Recipe : Interactable
 {
     public Item item;
     public Signal recipePicked;
+    public string damageDescription;
+    public string effectDescription;
     public bool isFromChest = false;
     public int chestID = -1;
     private int compareChestID = -1;
@@ -23,7 +25,19 @@ public class Recipe : Interactable
             sendDestroyChestSiblingsSignal();
         }
     }
-    private void sendDestroyChestSiblingsSignal()
+
+    public void MakeSelection()
+    {
+        print("BUTTON PRESSED");
+        GameObject RecipeUIPanel = GameObject.Find("Canvas").transform.Find("RecipeSelectMenu").gameObject;
+        RecipeUIPanel.SetActive(false);
+        pickUpItem();
+        sendDestroyChestSiblingsSignal();
+        FindObjectOfType<Player>().enablePlayer(true);
+        Time.timeScale = 1;
+    }
+
+    public void sendDestroyChestSiblingsSignal()
     {
         foreach (Recipe item in FindObjectsOfType<Recipe>())
         {

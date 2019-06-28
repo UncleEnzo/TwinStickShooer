@@ -9,6 +9,7 @@ public class PowerUp
 {
     [SerializeField]
     public string name;
+    [Header("Make duration -10 if you want onetime use powerup")]
     [SerializeField]
     public float duration;
     [SerializeField]

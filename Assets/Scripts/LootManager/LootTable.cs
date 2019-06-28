@@ -20,7 +20,7 @@ public class LootTable : MonoBehaviour
     #endregion
 
     //Make List of each type of loot item. Give each a corresponding rarity
-    [Header("MAKE SURE DROP RARITY IS FROM HIGHEST TO LOWEST IN EACH LIST OR LOOTTABLE WILL FAIL")]
+    [Header("MAKE SURE DROP RARITY ORDERED HIGHEST TO LOWEST IN LISTs OR LOOTTABLE FAILS")]
     public List<Loot> physicalRecipes;
     public List<Loot> gunpowderRecipes;
     public List<Loot> explosiveRecipes;

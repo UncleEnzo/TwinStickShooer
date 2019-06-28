@@ -113,7 +113,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 104375e1e39073a4db9e05ce51bf6333, type: 2}
   recipePicked: {fileID: 11400000, guid: 86f2e6c9f146a2d419d096b8a212f4fe, type: 2}
+  damageDescription: 5% Damage Increase
+  effectDescription: Speeds up movement by 15f
   isFromChest: 1
+  chestID: -1
 --- !u!114 &8033893709892834892
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,9 +52,24 @@ public class PlayerBullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if ((collisionInfo.gameObject.tag == "Wall" || collisionInfo.gameObject.layer == LayerMask.NameToLayer("Door")) && bulletBounce == false)
+        if (collisionInfo.gameObject.tag == "Wall" && bulletBounce == false)
         {
             gameObject.SetActive(false);
+        }
+        else if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Door") && bulletBounce == false)
+        {
+            gameObject.SetActive(false);
+        }
+        else if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Chest") && bulletBounce == false)
+        {
+            //Do Damage
+            gameObject.SetActive(false);
+        }
+        else if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Chest") && bulletBounce == true)
+        {
+            //Do Damage
+            //Bullet should bounce
+            //Need to make a bullet bounce alternative for all collisions
         }
     }
 

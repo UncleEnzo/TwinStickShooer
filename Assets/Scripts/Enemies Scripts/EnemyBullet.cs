@@ -19,17 +19,27 @@ public class EnemyBullet : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
         bulletTrajectory = transform.right;
         rigidBody2D.velocity = bulletTrajectory * bulletSpeed;
-        StartCoroutine(SetInactiveSelf());
+        StartCoroutine(SetSelfInactive());
     }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if ((collisionInfo.gameObject.tag == "Wall" || collisionInfo.gameObject.layer == LayerMask.NameToLayer("Door")) && bulletBounce == false)
+        if (collisionInfo.gameObject.tag == "Wall" && bulletBounce == false)
         {
             gameObject.SetActive(false);
         }
+        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Door") && bulletBounce == false)
+        {
+            gameObject.SetActive(false);
+        }
+        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Chest") && bulletBounce == false)
+        {
+            //Do Damage
+            //Bullet should bounce
+            //Need to make a bullet bounce alternative for all collisions
+        }
     }
-    IEnumerator SetInactiveSelf()
+    IEnumerator SetSelfInactive()
     {
         yield return new WaitForSeconds(timeBulletSelfDestruct);
         gameObject.SetActive(false);

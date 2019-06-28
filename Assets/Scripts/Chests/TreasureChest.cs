@@ -10,11 +10,11 @@ public class TreasureChest : Interactable
     public Item key;
     public int chestRarityRange;
     private Animator anim;
-
-    // Start is called before the first frame update
-    void Start()
+    protected GameObject RecipeUIPanel;
+    void Awake()
     {
         anim = GetComponent<Animator>();
+        RecipeUIPanel = GameObject.Find("Canvas").transform.Find("RecipeSelectMenu").gameObject;
     }
 
     protected virtual int OpenChest()
@@ -34,20 +34,11 @@ public class TreasureChest : Interactable
             {
                 if (!isOpen)
                 {
-                    Collider2D[] result = Physics2D.OverlapCircleAll(transform.position, 4f, 3);
-                    if (result.Count() == 2)
-                    {
-                        //open the chest
-                        Inventory.instance.RemoveItem(key);
-                        success = true;
-                        return success;
-                    }
-                    else
-                    {
-                        print("SOMETHING IS TOO CLOSE TO THE CHEST FOR IT TO OPEN");
-                        print("Result count = " + result.Count());
-                        return success;
-                    }
+
+                    //open the chest
+                    Inventory.instance.RemoveItem(key);
+                    success = true;
+                    return success;
                 }
                 else
                 {
@@ -66,11 +57,12 @@ public class TreasureChest : Interactable
         Debug.Log("Not Enough Keys or Chest is already Open");
     }
 
-    protected void spawnRecipe(LootListType loot, float coordinateX, float coordinateY, int chestID)
+    protected GameObject spawnRecipe(LootListType loot, float coordinateX, float coordinateY, int chestID)
     {
         GameObject recipe = Instantiate(LootTable.instance.generateRandomLoot(loot, chestRarityRange), new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
         recipe.GetComponent<Recipe>().chestID = chestID;
         recipe.GetComponent<Recipe>().isFromChest = true;
+        return recipe;
     }
 
     protected void spawnItem(LootListType loot, float coordinateX, float coordinateY, int chestID)

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GunChest : TreasureChest
 {
+    void Start()
+    {
+        RecipeUIPanel.SetActive(false);
+    }
     void Update()
     {
         bool success = attemptToOpenChest();

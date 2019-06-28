@@ -113,7 +113,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 6b56ba37992ff4d4ea7f1f197d1c2f2f, type: 2}
   recipePicked: {fileID: 11400000, guid: 86f2e6c9f146a2d419d096b8a212f4fe, type: 2}
+  damageDescription: 0 Damage
+  effectDescription: Heals player 1 health
   isFromChest: 1
+  chestID: -1
 --- !u!114 &9157067091277535633
 MonoBehaviour:
   m_ObjectHideFlags: 0
