@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
         Move();
     }
 
+
     public void Move()
     {
         Vector3 tempVect = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 1);

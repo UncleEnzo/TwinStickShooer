@@ -147,7 +147,7 @@ d4c7f745fedd96023305b78e60b93a07 Assembly-CSharp.dll:cakeslice.Outline
 94017dcc9f00fe671ea7dc427b4da011 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 01242eef5bc16065070f036bec2ef527 Assembly-CSharp.dll:.Player
 30f3213a6e218a461fa00e428f22d3eb Assembly-CSharp.dll:.ToolTip
-6dde2caac527c08cf68ef299d814db8b Assembly-CSharp.dll:.ShotgunEnemy
+9177168166bd63470678c04b64006e48 Assembly-CSharp.dll:.ShotgunEnemy
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.PowerUpAction
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.WeaponSwitching
 427e4ae6223362877cde7ac01baa97c3 AstarPathfindingProject.dll:Pathfinding.NodeLink2
@@ -172,8 +172,8 @@ fcb3b60b88cbaf7d6c6c42384c656461 Assembly-CSharp.dll:.Cheats
 3ff7e7527d0dfaf2ce2f34b499bf8f63 Assembly-CSharp.dll:.EnemyManager
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.RecipeItemManager
 599fea973c50078ce6e90b77994c7639 Assembly-CSharp.dll:.Follow
-9868b4e65aad9f6d7da3fd780dbbe7a4 Assembly-CSharp.dll:.TreasureChest
-9868b4e65aad9f6d7da3fd780dbbe7a4 Assembly-CSharp.dll:.GunChest
+364bf7adf457ae212beab7aa981d7dd7 Assembly-CSharp.dll:.TreasureChest
+364bf7adf457ae212beab7aa981d7dd7 Assembly-CSharp.dll:.GunChest
 e2ba8b3a4980fe694e7155d8f2aacf7e Assembly-CSharp.dll:.Item
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -202,6 +202,7 @@ b93fcedb737f5a3c936361c05b93ea6a Assembly-CSharp.dll:.LevelGenerator
 aa82b3ce4c0c9b227036c0337315c5d3 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 e51c09a4cc447f11db225afcd8e3e490 Unity.TextMeshPro.dll:TMPro.TMP_Settings
 c181fc48305e752f3e25e609d7495634 AstarPathfindingProject.dll:Pathfinding.AstarDebugger
+f18892d9a080556ba9a5b19b292f881d Assembly-CSharp.dll:.ScanGrid
 7f4927ae273ef919b3be214e078a5016 Assembly-CSharp.dll:.EnemyKnockback
 9f1eb6f321d18cff833aa9f25063ce94 Assembly-CSharp.dll:.Signal
 cf96e5f7b3d069bab453925bd41be04e UnityEngine.TestRunner.dll:UnityEngine.TestTools.EnumerableSetUpTearDownCommandState
@@ -219,7 +220,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 66c061c17549c495f74c9dcc30aaaab2 AstarPathfindingProject.dll:Pathfinding.Examples.MineBotAI
 8abe5c5970b933d28c84fe29c2232578 AstarPathfindingProject.dll:Pathfinding.RelevantGraphSurface
-6dde2caac527c08cf68ef299d814db8b Assembly-CSharp.dll:.Enemy
+9177168166bd63470678c04b64006e48 Assembly-CSharp.dll:.Enemy
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 71a1235c5f4df56bc376a9a9aafe2418 Assembly-CSharp.dll:.PowerUpUIDrawer
 95ec5ef41811e64837c657c402b6d78f AstarPathfindingProject.dll:Pathfinding.Seeker
@@ -230,7 +231,7 @@ b478fca366fa93f5a93f584cd5ba32cc AstarPathfindingProject.dll:Pathfinding.Example
 e2c52df92f5a11103c324ae820575e40 AstarPathfindingProject.dll:Pathfinding.Examples.TurnBasedAI
 65378e34367335b4bb70c280df26d1e4 Assembly-CSharp.dll:.RecipeComponent
 5fc094978ce3e3591a7500ed380d854a Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
-9868b4e65aad9f6d7da3fd780dbbe7a4 Assembly-CSharp.dll:.RecipeChest1
+364bf7adf457ae212beab7aa981d7dd7 Assembly-CSharp.dll:.RecipeChest1
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.BulletSpawnController
 ff653aebffb231eb559930e8cf311d62 AstarPathfindingProject.dll:Pathfinding.GraphUpdateScene
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
@@ -253,6 +254,7 @@ c0e31dd31c35455f422978da26bb908a AstarPathfindingProject.dll:Pathfinding.Patrol
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 17e54309cf4e59bdfdbbb8d16c59b752 Assembly-CSharp.dll:.ItemPickup
 f992a1316265ae0be6309a363585b781 Assembly-CSharp.dll:.CursorController
-6dde2caac527c08cf68ef299d814db8b Assembly-CSharp.dll:.PistolEnemy
-6dde2caac527c08cf68ef299d814db8b Assembly-CSharp.dll:.AREnemy
+9177168166bd63470678c04b64006e48 Assembly-CSharp.dll:.PistolEnemy
+9177168166bd63470678c04b64006e48 Assembly-CSharp.dll:.AREnemy
 e2ba8b3a4980fe694e7155d8f2aacf7e Assembly-CSharp.dll:.Coins
+c8c5e65e9fb858572516474d6e2102bc Assembly-CSharp.dll:.PauseMenu

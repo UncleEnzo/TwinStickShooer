@@ -6,22 +6,39 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    public static SceneLoader Instance;
+
+    #region Singleton
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+    }
+    #endregion
     public void LoadNextScene()
     {
         print("Going to next level");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextScene = currentSceneIndex + 1;
         int lastScene = SceneManager.sceneCountInBuildSettings - 2;
-        if (FindObjectOfType<PersistentGameData>())
+        if (PersistentGameData.Instance)
         {
-            FindObjectOfType<PersistentGameData>().savePlayerStats();
+            PersistentGameData.Instance.savePlayerStats();
         }
         SceneManager.LoadScene(nextScene);
         if (nextScene == lastScene)
         {
-            if (FindObjectOfType<PersistentGameData>())
+            if (PersistentGameData.Instance)
             {
-                FindObjectOfType<PersistentGameData>().resetPersistentStats();
+                PersistentGameData.Instance.resetPersistentStats();
             }
         }
     }
@@ -29,9 +46,9 @@ public class SceneLoader : MonoBehaviour
     public void LoadStartScene()
     {
         SceneManager.LoadScene(0);
-        if (FindObjectOfType<PersistentGameData>() != null)
+        if (PersistentGameData.Instance != null)
         {
-            FindObjectOfType<PersistentGameData>().resetPersistentStats();
+            PersistentGameData.Instance.resetPersistentStats();
         }
 
     }
@@ -42,9 +59,9 @@ public class SceneLoader : MonoBehaviour
         int devTestScene = SceneManager.sceneCountInBuildSettings - 2;
         print(devTestScene);
         SceneManager.LoadScene(devTestScene);
-        if (FindObjectOfType<PersistentGameData>() != null)
+        if (PersistentGameData.Instance != null)
         {
-            FindObjectOfType<PersistentGameData>().resetPersistentStats();
+            PersistentGameData.Instance.resetPersistentStats();
         }
     }
 
@@ -53,9 +70,9 @@ public class SceneLoader : MonoBehaviour
         print("Going to game over screen");
         int gameOverScene = SceneManager.sceneCountInBuildSettings - 1;
         SceneManager.LoadScene(gameOverScene);
-        if (FindObjectOfType<PersistentGameData>() != null)
+        if (PersistentGameData.Instance != null)
         {
-            FindObjectOfType<PersistentGameData>().resetPersistentStats();
+            PersistentGameData.Instance.resetPersistentStats();
         }
     }
 

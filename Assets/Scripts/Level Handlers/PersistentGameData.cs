@@ -7,7 +7,7 @@ using UnityEngine;
 public class PersistentGameData : MonoBehaviour
 {
     private PlayerSavedData PlayerSavedData = new PlayerSavedData();
-    private static PersistentGameData Instance;
+    public static PersistentGameData Instance;
     public float currentHealth;
     public int currentWeaponCount;
     public List<WeaponType> currentGunTypes;
