@@ -68,4 +68,3 @@ MonoBehaviour:
   - name: MachineGun
     item: {fileID: 11991691623488481, guid: ea5fe9a1959b4e744b690e70a7ac8a1e, type: 3}
     dropRarity: 20
-  rareDropChanceIncrease: 30

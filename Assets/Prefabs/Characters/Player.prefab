@@ -373,11 +373,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 517935590712639829, guid: 3dc5e8aa9f365e7469079708c1abc3a3,
-        type: 3}
-      propertyPath: enemyspawner
-      value: 
-      objectReference: {fileID: 7625524875873787880}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dc5e8aa9f365e7469079708c1abc3a3, type: 3}
 --- !u!4 &1818748491157581273 stripped
@@ -397,11 +392,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MovementAnimation
-      objectReference: {fileID: 0}
-    - target: {fileID: 678311486776552479, guid: 98155aa8be8f85147b939096d24b7606,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 678311486776552476, guid: 98155aa8be8f85147b939096d24b7606,
         type: 3}
@@ -559,18 +549,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7625524876253514345}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7625524875873787880 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 782390657, guid: 086921bec68e98a4abdfd7db39125bc7,
-    type: 3}
-  m_PrefabInstance: {fileID: 7625524876253514345}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbc18d9d7d32a642b32ec1089bed584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8129173309510238207
 PrefabInstance:
   m_ObjectHideFlags: 0

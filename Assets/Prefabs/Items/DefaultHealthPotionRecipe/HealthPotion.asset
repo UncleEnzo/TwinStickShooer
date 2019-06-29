@@ -9,17 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3901eda6a8cca22459ed0f174a27eca5, type: 3}
-  m_Name: Health Potion Recipe
+  m_Script: {fileID: 11500000, guid: 6809590c3ecd3b6418ea7944faa368e5, type: 3}
+  m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  name: Health Potion Recipe
+  name: HealthPotion
   icon: {fileID: 21300000, guid: 9443700744301b940bd2d2cc2917a1ad, type: 3}
   itemType: 3
   powerUp:
-    name: Healing Potion
+    name: HealthPotion
     duration: -10
-    spriteNum: 0
-    stackCap: 1
+    stackCap: 2
     currentStack: 0
     startAction:
       m_PersistentCalls:
@@ -55,6 +54,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  greenRequirement: 1
-  purpleRequirement: 1
-  blackRequirement: 1
+  physicalRequirement: 1
+  gunPowderRequirement: 1
+  explosiveRequirement: 1

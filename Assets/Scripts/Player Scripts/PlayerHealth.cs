@@ -6,7 +6,6 @@ public class PlayerHealth : MonoBehaviour
 {
     public PlayerSavedData localPlayerData = new PlayerSavedData();
     public Player player;
-    private PlayerHUBController playerHUB;
     private float healthDefault = 8f;
 
     [Header("IFrames")]
@@ -22,8 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Start()
     {
-        PersistentGameData persistentGameData = FindObjectOfType<PersistentGameData>();
-        playerHUB = FindObjectOfType<PlayerHUBController>();
+        PersistentGameData persistentGameData = PersistentGameData.Instance;
         if (persistentGameData.currentHealth > 0f)
         {
             localPlayerData.health = persistentGameData.currentHealth;
@@ -32,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
         {
             localPlayerData.health = healthDefault;
         }
-        playerHUB.updateDisplayHubHealth(localPlayerData.health);
+        PlayerHUBController.Instance.updateDisplayHubHealth(localPlayerData.health);
     }
 
     public void OnTriggerEnter2D(Collider2D collidingObject)
@@ -56,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (localPlayerData.health <= 0f)
         {
-            FindObjectOfType<SceneLoader>().loadGameOverScene();
+            SceneLoader.loadGameOverScene();
         }
     }
     private void takeDamage(Collider2D collision)
@@ -64,7 +62,7 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.tag == "EnemyBullet")
         {
             localPlayerData.health -= collision.gameObject.GetComponent<EnemyBullet>().bulletDamage;
-            playerHUB.updateDisplayHubHealth(localPlayerData.health);
+            PlayerHUBController.Instance.updateDisplayHubHealth(localPlayerData.health);
             if (iFramesActive == false)
             {
                 StartCoroutine(KnockCo(collision.gameObject.GetComponent<EnemyBullet>().knockTime, collision.gameObject.GetComponent<EnemyBullet>().knockBack, collision.gameObject.GetComponent<EnemyBullet>().bulletTrajectory));
@@ -74,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             localPlayerData.health -= collision.gameObject.GetComponent<Enemy>().collideDamageToPlayer;
-            playerHUB.updateDisplayHubHealth(localPlayerData.health);
+            PlayerHUBController.Instance.updateDisplayHubHealth(localPlayerData.health);
             if (iFramesActive == false)
             {
                 StartCoroutine(KnockCo(collision.gameObject.GetComponent<Enemy>().knockTime, collision.gameObject.GetComponent<Enemy>().knockBack, collision.gameObject.GetComponent<Enemy>().enemyTrajectory));

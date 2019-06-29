@@ -7,6 +7,22 @@ using UnityEngine.Tilemaps;
 
 public class EnemySpawner : MonoBehaviour
 {
+    #region Singleton
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+    }
+    #endregion
+    public static EnemySpawner Instance;
+
     //Notes: do not put ground beneath walls if possible
     //Notes: make all walls square
     public GameObject[] enemyCollection;
@@ -40,20 +56,7 @@ public class EnemySpawner : MonoBehaviour
             bool spawnSucceeded = spawnEnemy(-1);
             if (spawnSucceeded)
             {
-                EnemyRoom enemyRoom = FindObjectOfType<EnemyRoom>();
-                enemyRoom.numRemainingEnemies = enemyRoom.numRemainingEnemies + 1;
-            }
-        }
-    }
-
-    public void spawnKillSelectedEnemies(int numberOfEnemies, int enemyToSpawn)
-    {
-        for (int i = 0; i < numberOfEnemies; i++)
-        {
-            bool spawnSucceeded = spawnEnemy(enemyToSpawn);
-            if (spawnSucceeded)
-            {
-                //   enemyRoom.addEnemyCount();
+                EnemyRoom.Instance.numRemainingEnemies = EnemyRoom.Instance.numRemainingEnemies + 1;
             }
         }
     }

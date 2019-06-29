@@ -13,8 +13,8 @@ public class PersistWeaponHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PersistentGameData persistentGameData = FindObjectOfType<PersistentGameData>();
-        GameObject weaponHolder = FindObjectOfType<WeaponSwitching>().gameObject;
+        PersistentGameData persistentGameData = PersistentGameData.Instance;
+        GameObject weaponHolder = WeaponSwitching.Instance.gameObject;
 
         if (persistentGameData.currentWeaponCount != weaponHolder.transform.childCount)
         {

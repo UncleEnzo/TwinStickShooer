@@ -1,91 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using cakeslice;
 
-public class Recipe : Interactable
+[CreateAssetMenu(fileName = "Recipe", menuName = "Inventory/Recipe")]
+public class Recipe : Item
 {
-    public Item item;
-    public Signal recipePicked;
-    public string damageDescription;
-    public string effectDescription;
-    public bool isFromChest = false;
-    public int chestID = -1;
-    private int compareChestID = -1;
-
-    void Start()
+    [SerializeField]
+    protected PowerUp powerUp;
+    public int physicalRequirement = 1;
+    public int gunPowderRequirement = 1;
+    public int explosiveRequirement = 1;
+    public override void useItem()
     {
-        GetComponent<Outline>().enabled = false;
+        base.useItem();
+        bool hasEnoughComponents = checkRequirements();
+        usePowerUp(hasEnoughComponents);
     }
-    void Update()
+    private bool checkRequirements()
     {
-        if (Input.GetKeyDown("e") && playerInRange)
+        bool physicalCheck = RecipeItemManager.Instance.checkRequirements(ItemType.Physical, physicalRequirement);
+        bool gunPowderCheck = RecipeItemManager.Instance.checkRequirements(ItemType.GunPowder, gunPowderRequirement);
+        bool explosiveCheck = RecipeItemManager.Instance.checkRequirements(ItemType.Explosive, explosiveRequirement);
+        if (!physicalCheck || !gunPowderCheck || !explosiveCheck)
         {
-            pickUpItem();
-            sendDestroyChestSiblingsSignal();
-        }
-    }
-
-    public void MakeSelection()
-    {
-        print("BUTTON PRESSED");
-        GameObject RecipeUIPanel = GameObject.Find("Canvas").transform.Find("RecipeSelectMenu").gameObject;
-        RecipeUIPanel.SetActive(false);
-        pickUpItem();
-        sendDestroyChestSiblingsSignal();
-        FindObjectOfType<Player>().enablePlayer(true);
-        Time.timeScale = 1;
-    }
-
-    public void sendDestroyChestSiblingsSignal()
-    {
-        foreach (Recipe item in FindObjectsOfType<Recipe>())
-        {
-            item.SendMessage("CompareChestID", chestID);
-        }
-        recipePicked.Raise();
-    }
-
-    public void CompareChestID(int chestID)
-    {
-        compareChestID = chestID;
-    }
-
-    public void RecipePicked()
-    {
-        if (compareChestID != -1 && chestID != -1)
-        {
-            if (isFromChest && compareChestID == chestID)
-            {
-                Destroy(gameObject);
-            }
+            Debug.Log("Not enough components to use recipe.");
+            return false;
         }
         else
         {
-            Debug.Log("Chest ID or Compare ChestID is an invalid value");
-        }
-
-    }
-
-    void pickUpItem()
-    {
-        bool wasPickedUp = Inventory.instance.AddItem(item);
-        if (wasPickedUp)
-        {
-            gameObject.SetActive(false);
+            return true;
         }
     }
 
-    public override void interact()
+    private void usePowerUp(bool hasEnoughComponents)
     {
-        base.interact();
-        if (playerInRange)
+        if (hasEnoughComponents)
         {
-            GetComponent<Outline>().enabled = true;
-        }
-        else
-        {
-            GetComponent<Outline>().enabled = false;
+            RecipeItemManager.Instance.useRecipeComponents(physicalRequirement, gunPowderRequirement, explosiveRequirement);
+            PowerUpController.Instance.ActivatePowerUp(powerUp);
+            PowerUpUIDrawer.Instance.AddIcon(powerUp, this);
         }
     }
 }

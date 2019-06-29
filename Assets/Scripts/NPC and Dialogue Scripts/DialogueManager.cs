@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("isOpen", true);
         nameText.text = dialogue.name;
         sentences.Clear();
-        foreach(string sentence in dialogue.sentences)
+        foreach (string sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
@@ -43,7 +43,7 @@ public class DialogueManager : MonoBehaviour
         return lastSentence;
     }
 
-    IEnumerator TypeSentence (string sentence)
+    IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
@@ -57,6 +57,6 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("isOpen", false);
         FindObjectOfType<TestNPC>().dialogueTriggered = false;
-        FindObjectOfType<Player>().enablePlayer(true);
+        Player.enablePlayer(true);
     }
 }

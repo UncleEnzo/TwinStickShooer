@@ -5,8 +5,22 @@ using UnityEngine.UI;
 
 public class PowerUpUIDrawer : MonoBehaviour
 {
+    #region Singleton
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+    }
+    #endregion
+    public static PowerUpUIDrawer Instance;
     public bool timerPaused = true;
-    public Sprite[] powerupSprites;
     public GameObject powerUpIcon;
     public Text powerupTimerPause;
     private GameObject powerupIconPanel;
@@ -24,14 +38,14 @@ public class PowerUpUIDrawer : MonoBehaviour
         UpdateTimers();
     }
 
-    public void AddIcon(PowerUp powerup)
+    public void AddIcon(PowerUp powerup, Item item)
     {
         if (!powerUps.ContainsKey(powerup))
         {
             powerup.currentStack = 0;
             GameObject icon = Instantiate<GameObject>(powerUpIcon);
             GameObject powerupSprite = icon.transform.GetChild(0).GetChild(1).gameObject;
-            powerupSprite.GetComponent<Image>().sprite = powerupSprites[powerup.spriteNum];
+            powerupSprite.GetComponent<Image>().sprite = item.icon;
             PowerUpUIInfo info = new PowerUpUIInfo(icon, powerup);
             powerUps.Add(powerup, info);
             icon.transform.SetParent(powerupIconPanel.transform);

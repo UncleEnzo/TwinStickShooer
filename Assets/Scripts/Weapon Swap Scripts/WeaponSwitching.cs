@@ -5,17 +5,28 @@ using UnityEngine;
 
 public class WeaponSwitching : MonoBehaviour
 {
+    #region Singleton
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one Instance of Inventory found.");
+        }
+        Instance = this;
+    }
+    #endregion
+
+    public static WeaponSwitching Instance;
+
     private int selectedWeapon = 0;
     private int weaponCount = 0;
     private int previousWeaponCount = 0;
     public PlayerSavedData localWeaponData = new PlayerSavedData();
-    private PlayerHUBController playerHUBController;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        playerHUBController = FindObjectOfType<PlayerHUBController>();
         selectWeapon();
         weaponCount = transform.childCount;
         addWeaponToPersist();
@@ -113,8 +124,8 @@ public class WeaponSwitching : MonoBehaviour
             if (i == selectedWeapon)
             {
                 gunEnabled(weapon, true);
-                playerHUBController.updateDisplayHubGun(weapon.GetComponent<GunProperties>().weaponType);
-                playerHUBController.updateDisplayHubAmmo(weapon.GetComponent<GunFiring>().getCurrentAmmo());
+                PlayerHUBController.Instance.updateDisplayHubGun(weapon.GetComponent<GunProperties>().weaponType);
+                PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<GunFiring>().getCurrentAmmo());
             }
             else
             {

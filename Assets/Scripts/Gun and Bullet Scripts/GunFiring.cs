@@ -5,16 +5,13 @@ using UnityEngine;
 public class GunFiring : MonoBehaviour
 {
     //general variables
-    private CameraController cam;
     private float lastfired;
     private bool isReloading = false;
     private int currentAmmo;
-    private Transform player;
-
+    private GameObject player;
     //Properties for the gun and bullet
     public GameObject bullet;
     private GunProperties gunProperties;
-    private PlayerHUBController playerHUBController;
     private AudioSource gunSounds;
     public AudioClip gunShotSound;
     public AudioClip gunReloadSound;
@@ -26,9 +23,8 @@ public class GunFiring : MonoBehaviour
         gunSounds = GetComponent<AudioSource>();
         gunProperties = GetComponent<GunProperties>();
         currentAmmo = gunProperties.maxAmmo;
-        cam = FindObjectOfType<CameraController>();
-        playerHUBController = FindObjectOfType<PlayerHUBController>();
-        playerHUBController.updateDisplayHubAmmo(currentAmmo);
+        player = FindObjectOfType<Player>().transform.gameObject;
+        PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
     }
 
     void OnEnable()
@@ -44,7 +40,6 @@ public class GunFiring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = FindObjectOfType<Player>().transform;
         firePlayerGun();
     }
 
@@ -56,7 +51,7 @@ public class GunFiring : MonoBehaviour
         yield return new WaitForSeconds(gunProperties.reloadTime);
         //When you have a new gunsound for reload finished, put it here
         currentAmmo = gunProperties.maxAmmo;
-        playerHUBController.updateDisplayHubAmmo(currentAmmo);
+        PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
         isReloading = false;
     }
 
@@ -92,8 +87,8 @@ public class GunFiring : MonoBehaviour
             }
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;
-            playerHUBController.updateDisplayHubAmmo(currentAmmo);
-            cam.Shake((player.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
+            PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
+            CameraController.Instance.Shake((player.transform.position - transform.position).normalized, gunProperties.camShakeMagnitude, gunProperties.camShakeLength);
         }
     }
 

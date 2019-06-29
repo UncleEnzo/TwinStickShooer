@@ -6,19 +6,29 @@ using UnityEngine;
 
 public class EnemyRoom : MonoBehaviour
 {
+    #region Singleton
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+    }
+    #endregion
+    public static EnemyRoom Instance;
     private List<GameObject> doors;
     public SignalListener killDoorTriggered;
     public SignalListener enemyUpdate;
-    public EnemySpawner enemyspawner;
     public int randomNumEnemiesToSpawnRange = 3;
     private int numOfEnemiesToSpawn;
     public int numRemainingEnemies = 0;
-    private PowerUpController powerUpController;
-    private PowerUpUIDrawer powerUpUIDrawer;
     void Start()
     {
-        powerUpController = FindObjectOfType<PowerUpController>();
-        powerUpUIDrawer = FindObjectOfType<PowerUpUIDrawer>();
         //opens all kill doors in the map
         Door[] allDoorsInMap = FindObjectsOfType<Door>();
         foreach (Door door in allDoorsInMap)
@@ -53,11 +63,21 @@ public class EnemyRoom : MonoBehaviour
         {
             door.GetComponentInChildren<Door>().isTriggerCollider.enabled = false;
         }
-        powerUpController.timerPaused = false;
-        powerUpController.CleanExpiredTimers();
-        powerUpUIDrawer.timerPaused = false;
-        powerUpUIDrawer.CleanExpiredTimers();
-        enemyspawner.spawnKillRoomRandomEnemies(numOfEnemiesToSpawn);
+        startTimers();
+        cleanExpiredTimers();
+        EnemySpawner.Instance.spawnKillRoomRandomEnemies(numOfEnemiesToSpawn);
+    }
+
+    private void startTimers()
+    {
+        PowerUpController.Instance.timerPaused = false;
+        PowerUpUIDrawer.Instance.timerPaused = false;
+    }
+
+    private void cleanExpiredTimers()
+    {
+        PowerUpController.Instance.CleanExpiredTimers();
+        PowerUpUIDrawer.Instance.CleanExpiredTimers();
     }
 
     public void enemyKilledCount()
@@ -66,8 +86,8 @@ public class EnemyRoom : MonoBehaviour
         if (numRemainingEnemies <= 0)
         {
             OpenDoors();
-            FindObjectOfType<PowerUpController>().timerPaused = true;
-            FindObjectOfType<PowerUpUIDrawer>().timerPaused = true;
+            PowerUpController.Instance.timerPaused = true;
+            PowerUpUIDrawer.Instance.timerPaused = true;
             numRemainingEnemies = 0;
         }
     }

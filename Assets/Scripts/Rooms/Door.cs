@@ -32,7 +32,6 @@ public class Door : Interactable
     void Start()
     {
         tileMapGameObject = this.transform.parent.parent.gameObject;
-        print(tileMapGameObject);
         foreach (Transform child in tileMapGameObject.transform)
         {
             if (child.tag == "Ground")
@@ -46,13 +45,13 @@ public class Door : Interactable
     {
         if (thisDoorType == DoorType.key && remainingNumEnemies == 0 && otherColliderIsTrigger == true && Input.GetKeyDown("e"))
         {
-            if (Inventory.instance.getKeyCount() > 0)
+            if (Inventory.Instance.getKeyCount() > 0)
             {
                 // if player has key, then open Insert when you make keys
                 if (!open)
                 {
                     Open();
-                    Inventory.instance.RemoveItem(key);
+                    Inventory.Instance.RemoveItem(key);
                 }
                 else
                 {
@@ -67,8 +66,8 @@ public class Door : Interactable
         playerInRange = true;
         if (other.CompareTag("Player") && !other.isTrigger && open && thisDoorType == DoorType.enemy)
         {
-            FindObjectOfType<EnemySpawner>().SendMessage("GetGroundTileMapData", groundGameObject);
-            FindObjectOfType<EnemyRoom>().SendMessage("GetRoomData", tileMapGameObject);
+            EnemySpawner.Instance.GetGroundTileMapData(groundGameObject);
+            EnemyRoom.Instance.GetRoomData(tileMapGameObject);
             KillDoorTriggered.Raise();
         }
 
@@ -77,7 +76,7 @@ public class Door : Interactable
             otherColliderIsTrigger = true;
             if (other.CompareTag("Player"))
             {
-                remainingNumEnemies = other.GetComponentInChildren<EnemyRoom>().numRemainingEnemies;
+                remainingNumEnemies = EnemyRoom.Instance.numRemainingEnemies;
             }
         }
     }

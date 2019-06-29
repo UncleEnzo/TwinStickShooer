@@ -21,12 +21,11 @@ public class TreasureChest : Interactable
     protected virtual int OpenChest()
     {
         isOpen = true;
-        //Drop Items >> Add Rarity
         anim.SetBool("opened", true);
         return Random.Range(0, 100000);
     }
 
-    protected void CheckChestHealth()
+    protected void CheckDestroyChestHealth()
     {
         if (health <= 0)
         {
@@ -39,13 +38,12 @@ public class TreasureChest : Interactable
         bool success = false;
         if (Input.GetKeyDown("e") && playerInRange)
         {
-            if (Inventory.instance.getKeyCount() > 0)
+            if (Inventory.Instance.getKeyCount() > 0)
             {
                 if (!isOpen)
                 {
-
                     //open the chest
-                    Inventory.instance.RemoveItem(key);
+                    Inventory.Instance.RemoveItem(key);
                     success = true;
                     return success;
                 }
@@ -69,8 +67,8 @@ public class TreasureChest : Interactable
     protected GameObject spawnRecipe(LootListType loot, float coordinateX, float coordinateY, int chestID)
     {
         GameObject recipe = Instantiate(LootTable.instance.generateRandomLoot(loot, chestRarityRange), new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
-        recipe.GetComponent<Recipe>().chestID = chestID;
-        recipe.GetComponent<Recipe>().isFromChest = true;
+        recipe.GetComponent<RecipePickUp>().chestID = chestID;
+        recipe.GetComponent<RecipePickUp>().isFromChest = true;
         return recipe;
     }
 

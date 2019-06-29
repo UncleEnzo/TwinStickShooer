@@ -250,6 +250,7 @@ d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 b349b142d600a2478af04cea15b41a0b AstarPathfindingProject.dll:Pathfinding.AnimationLink
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
+c8c5e65e9fb858572516474d6e2102bc Assembly-CSharp.dll:.PauseMenu
 c0e31dd31c35455f422978da26bb908a AstarPathfindingProject.dll:Pathfinding.Patrol
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 17e54309cf4e59bdfdbbb8d16c59b752 Assembly-CSharp.dll:.ItemPickup
@@ -257,4 +258,3 @@ f992a1316265ae0be6309a363585b781 Assembly-CSharp.dll:.CursorController
 9177168166bd63470678c04b64006e48 Assembly-CSharp.dll:.PistolEnemy
 9177168166bd63470678c04b64006e48 Assembly-CSharp.dll:.AREnemy
 e2ba8b3a4980fe694e7155d8f2aacf7e Assembly-CSharp.dll:.Coins
-c8c5e65e9fb858572516474d6e2102bc Assembly-CSharp.dll:.PauseMenu

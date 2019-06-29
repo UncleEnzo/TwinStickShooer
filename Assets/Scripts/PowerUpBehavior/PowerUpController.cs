@@ -7,6 +7,21 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 public class PowerUpController : MonoBehaviour
 {
+    #region Singleton
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+    }
+    #endregion
+    public static PowerUpController Instance;
     public static Dictionary<PowerUp, float> activeEffects = new Dictionary<PowerUp, float>();
 
     public bool timerPaused = true;

@@ -10,12 +10,7 @@ public class TestNPC : Interactable
     public Boolean dialogueTriggered = false;
     private float nextDialogue = 1F;
     public float speechRate = 1F;
-    private EnemySpawner enemySpawner;
 
-    void Start()
-    {
-        enemySpawner = FindObjectOfType<EnemySpawner>();
-    }
     void Update()
     {
         if (playerInRange && !dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue)
@@ -34,7 +29,7 @@ public class TestNPC : Interactable
 
             if (lastSentence)
             {
-                enemySpawner.activateRandomEnemies(6);
+                EnemySpawner.Instance.activateRandomEnemies(6);
             }
         }
     }

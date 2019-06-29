@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
+    #region Singleton
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one Instance of Inventory found.");
+        }
+        Instance = this;
+    }
+    #endregion
+    public static CursorController Instance;
     public Texture2D cursorSprite;
 
     // Start is called before the first frame update

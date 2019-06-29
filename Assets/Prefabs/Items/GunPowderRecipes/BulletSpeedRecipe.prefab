@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3085158205632521481}
   - component: {fileID: 3085158205632521480}
+  - component: {fileID: 6032136423723289318}
   - component: {fileID: 771404328930022359}
-  - component: {fileID: 2491132069312958389}
   - component: {fileID: 4460238832414799434}
   - component: {fileID: 6197828924558486}
   m_Layer: 0
@@ -83,6 +83,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6032136423723289318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3085158205632521483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6a30a53c9b7c64f86fa76ccb810b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: a668830b34cc153438097cbe191129c8, type: 2}
+  recipePicked: {fileID: 11400000, guid: 86f2e6c9f146a2d419d096b8a212f4fe, type: 2}
+  damageDescription: 5% Damage Increase
+  effectDescription: Bullets Shoot 5F faster
+  isFromChest: 0
+  chestID: -1
 --- !u!114 &771404328930022359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,24 +117,6 @@ MonoBehaviour:
   eraseRenderer: 0
   originalLayer: 0
   originalMaterials: []
---- !u!114 &2491132069312958389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3085158205632521483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ebb00083276b140ba13c97983606bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 504a4bb67e489664fbf4aa2ac5569878, type: 2}
-  recipePicked: {fileID: 11400000, guid: 86f2e6c9f146a2d419d096b8a212f4fe, type: 2}
-  damageDescription: 5% Damage Increase
-  effectDescription: Speeds up bullets by 15
-  isFromChest: 1
-  chestID: -1
 --- !u!114 &4460238832414799434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   signalEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2491132069312958389}
+      - m_Target: {fileID: 6032136423723289318}
         m_MethodName: RecipePicked
         m_Mode: 1
         m_Arguments:

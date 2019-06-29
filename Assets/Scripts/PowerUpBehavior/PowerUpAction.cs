@@ -15,7 +15,7 @@ public class PowerUpAction : MonoBehaviour
         Debug.Log("Triggered HP Up");
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
         playerHealth.localPlayerData.health += healingIncrease;
-        FindObjectOfType<PlayerHUBController>().updateDisplayHubHealth(playerHealth.localPlayerData.health);
+        PlayerHUBController.Instance.updateDisplayHubHealth(playerHealth.localPlayerData.health);
     }
     public void HealEndAction()
     {

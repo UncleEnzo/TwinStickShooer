@@ -43,7 +43,7 @@ public class RecipeChest1 : TreasureChest
     }
     void Update()
     {
-        CheckChestHealth();
+        CheckDestroyChestHealth();
         bool success = attemptToOpenChest();
         if (success)
         {
@@ -55,29 +55,30 @@ public class RecipeChest1 : TreasureChest
     {
         int chestID = base.OpenChest();
         GameObject physicalRecipe = spawnRecipe(LootListType.PhysicalRecipe, -3, -3, chestID);
+        print(physicalRecipe);
         GameObject gunPowderRecipe = spawnRecipe(LootListType.GunpowderRecipe, 0, 3, chestID);
         GameObject explosiveRecipe = spawnRecipe(LootListType.ExplosiveRecipe, 3, -3, chestID);
         Time.timeScale = 0;
-        FindObjectOfType<Player>().enablePlayer(false);
+        Player.enablePlayer(false);
 
         //Make this a method at some point
         //physical
-        physicalIcon.sprite = physicalRecipe.GetComponent<Recipe>().item.icon;
-        damageTextPhysical.text = physicalRecipe.GetComponent<Recipe>().damageDescription;
-        physicalEffectText.text = physicalRecipe.GetComponent<Recipe>().effectDescription;
-        physicalButton.onClick.AddListener(() => physicalRecipe.GetComponent<Recipe>().MakeSelection());
+        physicalIcon.sprite = physicalRecipe.GetComponent<RecipePickUp>().item.icon;
+        damageTextPhysical.text = physicalRecipe.GetComponent<RecipePickUp>().damageDescription;
+        physicalEffectText.text = physicalRecipe.GetComponent<RecipePickUp>().effectDescription;
+        physicalButton.onClick.AddListener(() => physicalRecipe.GetComponent<RecipePickUp>().MakeSelection());
 
         //GunPowder
-        gunpowderIcon.sprite = gunPowderRecipe.GetComponent<Recipe>().item.icon;
-        damageTextGunPowder.text = gunPowderRecipe.GetComponent<Recipe>().damageDescription;
-        gunPowderEffectText.text = gunPowderRecipe.GetComponent<Recipe>().effectDescription;
-        gunPowderButton.onClick.AddListener(() => gunPowderRecipe.GetComponent<Recipe>().MakeSelection());
+        gunpowderIcon.sprite = gunPowderRecipe.GetComponent<RecipePickUp>().item.icon;
+        damageTextGunPowder.text = gunPowderRecipe.GetComponent<RecipePickUp>().damageDescription;
+        gunPowderEffectText.text = gunPowderRecipe.GetComponent<RecipePickUp>().effectDescription;
+        gunPowderButton.onClick.AddListener(() => gunPowderRecipe.GetComponent<RecipePickUp>().MakeSelection());
 
         //Explosive
-        explosiveIcon.sprite = explosiveRecipe.GetComponent<Recipe>().item.icon;
-        damageTextExplosive.text = explosiveRecipe.GetComponent<Recipe>().damageDescription;
-        explosiveEffectText.text = explosiveRecipe.GetComponent<Recipe>().effectDescription;
-        explosiveButton.onClick.AddListener(() => explosiveRecipe.GetComponent<Recipe>().MakeSelection());
+        explosiveIcon.sprite = explosiveRecipe.GetComponent<RecipePickUp>().item.icon;
+        damageTextExplosive.text = explosiveRecipe.GetComponent<RecipePickUp>().damageDescription;
+        explosiveEffectText.text = explosiveRecipe.GetComponent<RecipePickUp>().effectDescription;
+        explosiveButton.onClick.AddListener(() => explosiveRecipe.GetComponent<RecipePickUp>().MakeSelection());
 
         RecipeUIPanel.SetActive(true);
         return chestID;

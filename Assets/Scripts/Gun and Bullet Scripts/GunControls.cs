@@ -7,18 +7,10 @@ public class GunControls : MonoBehaviour
 {
     //general variables
     private Transform playerTransform;
-    private CameraController cam;
     private Vector3 pointAtMouse;
     public float playerArmLength = .5f;
     private bool gunFacingRight = true;
 
-    void OnEnable()
-    {
-        if (GetComponentInParent<WeaponSwitching>())
-        {
-            cam = FindObjectOfType<CameraController>();
-        }
-    }
     // Update is called once per frame
     void Update()
     {

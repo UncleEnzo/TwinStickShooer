@@ -10,15 +10,15 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     #region Singleton
-    public static Inventory instance;
+    public static Inventory Instance;
 
     void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Debug.LogWarning("More than one Instance of Inventory found.");
         }
-        instance = this;
+        Instance = this;
     }
     #endregion
     public IList<InventorySlot> inventorySlots = new List<InventorySlot>();

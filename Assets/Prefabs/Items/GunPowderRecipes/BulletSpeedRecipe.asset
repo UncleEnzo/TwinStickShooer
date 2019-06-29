@@ -9,17 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d4b110d1d8ff124392e360d217bd3f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6809590c3ecd3b6418ea7944faa368e5, type: 3}
   m_Name: BulletSpeedRecipe
   m_EditorClassIdentifier: 
-  name: BulletSpeedRecipe
-  icon: {fileID: 21300000, guid: 9754ad4c2f2df9c40a93234ad1593f0f, type: 3}
+  name: BulletSpeedUp
+  icon: {fileID: 21300000, guid: 0abcad6e677a58f46b814aa4f84e147d, type: 3}
   itemType: 3
   powerUp:
-    name: Bullet Speed Up
+    name: BulletSpeedUp
     duration: 10
-    spriteNum: 2
-    stackCap: 4
+    stackCap: 3
     currentStack: 0
     startAction:
       m_PersistentCalls:
@@ -55,6 +54,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  greenRequirement: 0
-  purpleRequirement: 2
-  blackRequirement: 1
+  physicalRequirement: 2
+  gunPowderRequirement: 3
+  explosiveRequirement: 2

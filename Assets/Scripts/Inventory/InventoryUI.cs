@@ -5,19 +5,7 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Player player;
-    Inventory inventory;
-
     private bool UIOpen;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Ensures that the UI is enabled, then deactived on start up, making it usable right away
-        //If it starts deactivated, it will not update until it is opened once
-        player = FindObjectOfType<Player>();
-        inventory = FindObjectOfType<Inventory>();
-    }
 
     void Update()
     {
@@ -33,18 +21,18 @@ public class InventoryUI : MonoBehaviour
             UIOpen = !UIOpen;
             if (UIOpen == true)
             {
-                player.enablePlayer(false);
+                Player.enablePlayer(false);
                 Time.timeScale = .2f;
-                foreach (GameObject recipeIcon in inventory.recipeIcons)
+                foreach (GameObject recipeIcon in Inventory.Instance.recipeIcons)
                 {
                     recipeIcon.transform.GetChild(1).GetComponent<Button>().interactable = true;
                 }
             }
             if (UIOpen == false)
             {
-                player.enablePlayer(true);
+                Player.enablePlayer(true);
                 Time.timeScale = 1f;
-                foreach (GameObject recipeIcon in inventory.recipeIcons)
+                foreach (GameObject recipeIcon in Inventory.Instance.recipeIcons)
                 {
                     recipeIcon.transform.GetChild(1).GetComponent<Button>().interactable = false;
                 }

@@ -63,7 +63,8 @@ public class LootTable : MonoBehaviour
         }
         else
         {
-            print("Chest rarity is neutral");
+            //add this back in for debug if you need it
+            //print("Chest rarity is neutral");
         }
 
         int total = 0;
@@ -77,7 +78,6 @@ public class LootTable : MonoBehaviour
 
         //draw a random number between 0 and the total weight (100)
         randomNumber = UnityEngine.Random.Range(0, total);
-        print("Random number is: " + randomNumber);
 
         for (int i = 0; i < lootListType.Count; i++)
         {

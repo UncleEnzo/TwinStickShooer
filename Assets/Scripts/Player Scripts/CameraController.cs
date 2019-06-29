@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    #region Singleton
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one Instance of Inventory found.");
+        }
+        Instance = this;
+    }
+    #endregion
+    public static CameraController Instance;
     private Transform player;
     Vector3 target, mousePos, refVel, shakeOffset;
     float cameraDist = 3.5f;

@@ -12,9 +12,7 @@ public class PowerUp
     [Header("Make duration -10 if you want onetime use powerup")]
     [SerializeField]
     public float duration;
-    [SerializeField]
-    public int spriteNum;
-
+    [Header("Stack cap is always how many you want plus one.")]
     [SerializeField]
     public int stackCap;
     public int currentStack = 0;

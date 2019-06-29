@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6021263850266684834}
   - component: {fileID: 1622945292431157724}
   m_Layer: 0
-  m_Name: PoweUpTimersPaused
+  m_Name: PowerUpTimersPaused
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

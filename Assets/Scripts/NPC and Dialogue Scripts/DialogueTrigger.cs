@@ -8,7 +8,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void triggerDialogue()
     {
-        FindObjectOfType<Player>().enablePlayer(false);
+        Player.enablePlayer(false);
         FindObjectOfType<DialogueManager>().startDialogue(dialogue);
     }
 }

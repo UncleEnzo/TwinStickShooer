@@ -9,15 +9,19 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public Rigidbody2D myRigidBody;
-    public PlayerAnimController animator;
+    public static PlayerAnimController animator;
     Vector3 movement;
+    private static bool movementEnabled = true;
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
-    }
+        if (movementEnabled)
+        {
+            Move();
+        }
 
+    }
 
     public void Move()
     {
@@ -26,19 +30,16 @@ public class Player : MonoBehaviour
         myRigidBody.MovePosition(transform.position + tempVect);
     }
 
-    public void enablePlayer(Boolean playerUsable)
+    public static void enablePlayer(Boolean playerUsable)
     {
-        GameObject weaponHolder = GameObject.FindWithTag("WeaponHolder");
-        CameraController camControl = FindObjectOfType<CameraController>();
-
-        camControl.enabled = playerUsable;
-        GetComponent<CursorController>().enabled = playerUsable;
-        Transform currentWeapon = weaponHolder.GetComponent<WeaponSwitching>().getSelectedWeapon();
+        CameraController.Instance.enabled = playerUsable;
+        CursorController.Instance.enabled = playerUsable;
+        Transform currentWeapon = WeaponSwitching.Instance.getSelectedWeapon();
         currentWeapon.GetComponentInChildren<GunFiring>().enabled = playerUsable;
         currentWeapon.GetComponentInChildren<GunControls>().enabled = playerUsable;
         currentWeapon.GetComponentInChildren<GunProperties>().enabled = playerUsable;
-        weaponHolder.GetComponent<WeaponSwitching>().enabled = playerUsable;
+        WeaponSwitching.Instance.enabled = playerUsable;
         animator.isEnabled = playerUsable;
-        this.enabled = playerUsable;
+        movementEnabled = playerUsable;
     }
 }

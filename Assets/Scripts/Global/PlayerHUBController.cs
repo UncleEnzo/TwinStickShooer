@@ -4,6 +4,19 @@ using UnityEngine;
 using TMPro;
 public class PlayerHUBController : MonoBehaviour
 {
+    #region Singleton
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one Instance of Inventory found.");
+        }
+        Instance = this;
+    }
+    #endregion
+
+    public static PlayerHUBController Instance;
+
     //Call to update health on UI
     //Ammo for each gun
     //crafing materials

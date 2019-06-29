@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12680446487baa4a87cdd629cad1cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 7625524876518625148, guid: 9d11e43d5466f394880f1484afd1f325, type: 3}
+  currentHealth: 0
+  currentWeaponCount: 0
+  currentGunTypes: 

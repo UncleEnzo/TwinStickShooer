@@ -5,26 +5,34 @@ using UnityEngine;
 public class RecipeItemManager : MonoBehaviour
 {
     #region Singleton
-    public static RecipeItemManager instance;
-
     void Awake()
     {
-        instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
     }
     #endregion
 
-    public bool checkRequirements(int craftItemType, int craftItemRequirement)
+    public static RecipeItemManager Instance;
+
+    public bool checkRequirements(ItemType craftItemType, int craftItemRequirement)
     {
         bool hasComponent = false;
         bool meetsRequiredCount = false;
-        foreach (InventorySlot slot in FindObjectOfType<Inventory>().inventorySlots)
+        foreach (InventorySlot slot in Inventory.Instance.inventorySlots)
         {
             if (craftItemRequirement <= 0)
             {
                 hasComponent = true;
                 meetsRequiredCount = true;
             }
-            else if (slot.firstItem != null && (int)slot.firstItem.itemType == craftItemType)
+            else if (slot.firstItem != null && slot.firstItem.itemType == craftItemType)
             {
                 hasComponent = true;
                 if (slot.Count >= craftItemRequirement)
@@ -42,22 +50,22 @@ public class RecipeItemManager : MonoBehaviour
 
     public void useRecipeComponents(int greenRequirement, int purpleRequirement, int blackRequirement)
     {
-        foreach (InventorySlot slot in FindObjectOfType<Inventory>().inventorySlots)
+        foreach (InventorySlot slot in Inventory.Instance.inventorySlots)
         {
-            removeNumOfItems(0, greenRequirement, slot);
-            removeNumOfItems(1, purpleRequirement, slot);
-            removeNumOfItems(2, blackRequirement, slot);
+            removeNumOfItems(ItemType.Physical, greenRequirement, slot);
+            removeNumOfItems(ItemType.GunPowder, purpleRequirement, slot);
+            removeNumOfItems(ItemType.Explosive, blackRequirement, slot);
         }
     }
-    private void removeNumOfItems(int craftItemType, int requirement, InventorySlot slot)
+    private void removeNumOfItems(ItemType craftItemType, int requirement, InventorySlot slot)
     {
-        if (slot.firstItem != null && (int)slot.firstItem.itemType == craftItemType)
+        if (slot.firstItem != null && slot.firstItem.itemType == craftItemType)
         {
             if (requirement > 0)
             {
                 for (int i = 0; i != requirement; i++)
                 {
-                    FindObjectOfType<Inventory>().RemoveItem(slot.firstItem);
+                    Inventory.Instance.RemoveItem(slot.firstItem);
                 }
             }
         }
