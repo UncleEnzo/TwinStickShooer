@@ -17,11 +17,10 @@ public class Door : Interactable
     public DoorType thisDoorType;
     public bool open = false;
     //public Inventory playerInventory; NOTE: For Key
-    public SpriteRenderer doorSprite;
+    public SpriteRenderer doorSpriteRenderer;
     // public BoxCollider2D physicsCollider;
     public Sprite openDoor;
-    public Sprite closedEnemyDoor;
-    public Sprite closedKeyDoor;
+    public Sprite closedDoor;
     public Item key;
     public Signal KillDoorTriggered;
     private GameObject tileMapGameObject;
@@ -34,7 +33,7 @@ public class Door : Interactable
         tileMapGameObject = this.transform.parent.parent.gameObject;
         foreach (Transform child in tileMapGameObject.transform)
         {
-            if (child.tag == "Ground")
+            if (child.tag == TagsAndLabels.GroundTag)
             {
                 groundGameObject = child.gameObject;
             }
@@ -64,7 +63,7 @@ public class Door : Interactable
     public void OnTriggerEnter2D(Collider2D other)
     {
         playerInRange = true;
-        if (other.CompareTag("Player") && !other.isTrigger && open && thisDoorType == DoorType.enemy)
+        if (other.CompareTag(TagsAndLabels.PlayerTag) && !other.isTrigger && open && thisDoorType == DoorType.enemy)
         {
             EnemySpawner.Instance.GetGroundTileMapData(groundGameObject);
             EnemyRoom.Instance.GetRoomData(tileMapGameObject);
@@ -74,7 +73,7 @@ public class Door : Interactable
         if (!other.isTrigger)
         {
             otherColliderIsTrigger = true;
-            if (other.CompareTag("Player"))
+            if (other.CompareTag(TagsAndLabels.PlayerTag))
             {
                 remainingNumEnemies = EnemyRoom.Instance.numRemainingEnemies;
             }
@@ -90,14 +89,7 @@ public class Door : Interactable
 
     public void Open()
     {
-        if (thisDoorType == DoorType.key)
-        {
-            doorSprite.sprite = openDoor;
-        }
-        if (thisDoorType == DoorType.enemy)
-        {
-            doorSprite.sprite = openDoor;
-        }
+        doorSpriteRenderer.sprite = openDoor;
         open = true;
         doorClosedCollider.enabled = false;
     }
@@ -106,6 +98,6 @@ public class Door : Interactable
     {
         open = false;
         doorClosedCollider.enabled = true;
-        doorSprite.sprite = closedEnemyDoor;
+        doorSpriteRenderer.sprite = closedDoor;
     }
 }

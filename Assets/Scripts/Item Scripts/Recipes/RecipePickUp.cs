@@ -31,17 +31,24 @@ public class RecipePickUp : Interactable
     public void MakeSelection()
     {
         GameObject RecipeUIPanel = GameObject.Find("Canvas").transform.Find("RecipeSelectMenu").gameObject;
-
-        //Testing for bug with NPE when multiple recipe chests...
-        // GameObject physicalPanel = RecipeUIPanel.transform.GetChild(1).gameObject;
-        // Button physicalButton = physicalPanel.transform.GetChild(3).GetComponent<Button>();
-        // physicalButton.onClick.RemoveListener(() => MakeSelection());
-
         RecipeUIPanel.SetActive(false);
         pickUpItem();
         sendDestroyChestSiblingsSignal();
-        Player.enablePlayer(true);
+        Player.Instance.enablePlayer(true);
         Time.timeScale = 1;
+
+        //JANKY REMOVE ALL LISTENERS FROM BUTTON SO YOU CAN OPEN MULTIPLE RECIPE CHESTS
+        GameObject physicalPanel = RecipeUIPanel.transform.GetChild(1).gameObject;
+        Button physicalButton = physicalPanel.transform.GetChild(3).GetComponent<Button>();
+        physicalButton.onClick.RemoveAllListeners();
+
+        GameObject gunPowderPanel = RecipeUIPanel.transform.GetChild(2).gameObject;
+        Button gunPowderButton = gunPowderPanel.transform.GetChild(3).GetComponent<Button>();
+        gunPowderButton.onClick.RemoveAllListeners();
+
+        GameObject explosivePanel = RecipeUIPanel.transform.GetChild(3).gameObject;
+        Button explosiveButton = explosivePanel.transform.GetChild(3).GetComponent<Button>();
+        explosiveButton.onClick.RemoveAllListeners();
     }
 
     private void sendDestroyChestSiblingsSignal()
@@ -68,7 +75,6 @@ public class RecipePickUp : Interactable
         {
             if (isFromChest && compareChestID == chestID)
             {
-                print("Destroying gameobject: " + gameObject.name);
                 Destroy(gameObject);
             }
         }

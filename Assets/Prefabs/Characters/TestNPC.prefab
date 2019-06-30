@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a282ccbcbb9494491631488209f3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 7625524876518625148, guid: 9d11e43d5466f394880f1484afd1f325, type: 3}
   ToolTipOn: {fileID: 11400000, guid: 9cfeb348b0819164e915ea5d90a2cf89, type: 2}
   ToolTipOff: {fileID: 11400000, guid: aae9e5a69e79c4d4fbeaa28ba566cd8a, type: 2}
   dialogueTriggered: 0
@@ -132,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca33c75877e83540be83c826d6b6746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 833112394796888334, guid: fc5aea37364504749bc40f95b697657e, type: 3}
 --- !u!114 &1940034614
 MonoBehaviour:
   m_ObjectHideFlags: 0

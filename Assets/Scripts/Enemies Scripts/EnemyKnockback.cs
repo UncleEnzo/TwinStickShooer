@@ -13,7 +13,7 @@ public class EnemyKnockback : MonoBehaviour
     }
     public void OnCollisionEnter2D(Collision2D collidingObject)
     {
-        if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
+        if (collidingObject.gameObject.tag == TagsAndLabels.PlayerBulletTag && gameObject.tag == TagsAndLabels.EnemyTag)
         {
             if (gameObject.activeInHierarchy == true)
             {

@@ -13,9 +13,8 @@ public class PowerUpAction : MonoBehaviour
     public void HealStartAction()
     {
         Debug.Log("Triggered HP Up");
-        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
-        playerHealth.localPlayerData.health += healingIncrease;
-        PlayerHUBController.Instance.updateDisplayHubHealth(playerHealth.localPlayerData.health);
+        PlayerHealth.localPlayerData.health += healingIncrease;
+        PlayerHUBController.Instance.updateDisplayHubHealth(PlayerHealth.localPlayerData.health);
     }
     public void HealEndAction()
     {
@@ -29,14 +28,14 @@ public class PowerUpAction : MonoBehaviour
     {
         Debug.Log("Triggered HighSpeedRecipe");
         speedUpStackCount += 1;
-        FindObjectOfType<Player>().speed += speedUpIncrease;
+        Player.Instance.speed += speedUpIncrease;
     }
 
     public void HighSpeedEndAction()
     {
         Debug.Log("HighSpeedRecipe Expired");
         float speedReduction = speedUpIncrease * speedUpStackCount;
-        FindObjectOfType<Player>().speed -= speedReduction;
+        Player.Instance.speed -= speedReduction;
         speedUpStackCount = 0;
     }
     float bulletSpeedIncrease = 5f;

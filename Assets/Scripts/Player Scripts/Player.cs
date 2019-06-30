@@ -7,11 +7,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed;
+    #region Singleton
+    public static Player Instance;
+
+    void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogWarning("More than one Instance of Inventory found.");
+        }
+        Instance = this;
+    }
+    #endregion
+    public float speed = 10f;
     public Rigidbody2D myRigidBody;
-    public static PlayerAnimController animator;
-    Vector3 movement;
-    private static bool movementEnabled = true;
+    public PlayerAnimController animator;
+    private bool movementEnabled = true;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -20,7 +31,6 @@ public class Player : MonoBehaviour
         {
             Move();
         }
-
     }
 
     public void Move()
@@ -30,7 +40,7 @@ public class Player : MonoBehaviour
         myRigidBody.MovePosition(transform.position + tempVect);
     }
 
-    public static void enablePlayer(Boolean playerUsable)
+    public void enablePlayer(Boolean playerUsable)
     {
         CameraController.Instance.enabled = playerUsable;
         CursorController.Instance.enabled = playerUsable;
@@ -39,7 +49,7 @@ public class Player : MonoBehaviour
         currentWeapon.GetComponentInChildren<GunControls>().enabled = playerUsable;
         currentWeapon.GetComponentInChildren<GunProperties>().enabled = playerUsable;
         WeaponSwitching.Instance.enabled = playerUsable;
-        animator.isEnabled = playerUsable;
+        animator.enabled = playerUsable;
         movementEnabled = playerUsable;
     }
 }

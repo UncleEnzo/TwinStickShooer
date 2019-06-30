@@ -6,7 +6,6 @@ using UnityEngine;
 //Health, Ammo, Guns, recipies, crafting components, power up effects and timers
 public class PersistentGameData : MonoBehaviour
 {
-    public GameObject player;
     private PlayerSavedData PlayerSavedData = new PlayerSavedData();
     public static PersistentGameData Instance;
     public float currentHealth;
@@ -33,7 +32,7 @@ public class PersistentGameData : MonoBehaviour
 
     public void savePlayerStats()
     {
-        PersistentGameData.Instance.PlayerSavedData.health = player.GetComponent<PlayerHealth>().localPlayerData.health;
+        PersistentGameData.Instance.PlayerSavedData.health = PlayerHealth.localPlayerData.health;
         PersistentGameData.Instance.PlayerSavedData.weaponCount = WeaponSwitching.Instance.gameObject.transform.childCount;
         PersistentGameData.Instance.PlayerSavedData.gunTypes = WeaponSwitching.Instance.localWeaponData.gunTypes;
 

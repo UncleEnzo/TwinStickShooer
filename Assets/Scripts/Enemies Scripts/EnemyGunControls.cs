@@ -15,7 +15,7 @@ public class EnemyGunControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerTransform = FindObjectOfType<Player>().transform;
+        playerTransform = Player.Instance.transform;
         gunControls();
         monitorGunSpriteFlip();
     }

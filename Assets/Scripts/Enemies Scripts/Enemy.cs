@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     public float walkAndFireRange = 9f;
     public float collideDamageToPlayer = 2f;
     public float moveSpeed = 5f;
-    private Player player;
     public bool walking = true;
     private bool preparingToFire = false;
     public bool isKnockedBack = false;
@@ -27,11 +26,10 @@ public class Enemy : MonoBehaviour
 
     void OnEnable()
     {
-        player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
         aiPath.canMove = false;
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
-        AIDestinationSetter.target = player.transform;
+        AIDestinationSetter.target = Player.Instance.transform;
         health = startingHealth;
     }
 
@@ -40,7 +38,7 @@ public class Enemy : MonoBehaviour
     {
         checkIfKnockedBack();
         enemyTrajectory = rb.velocity;
-        float distFromPlayer = Vector3.Distance(player.transform.position, transform.position);
+        float distFromPlayer = Vector3.Distance(Player.Instance.transform.position, transform.position);
         followPlayer(distFromPlayer);
         shootAtPlayer(distFromPlayer);
     }

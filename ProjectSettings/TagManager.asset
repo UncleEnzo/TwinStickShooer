@@ -9,15 +9,12 @@ TagManager:
   - EnemyBullet
   - Interactable
   - PickUp
-  - WeaponHolder
-  - Unbreakable
   - HealthUI
   - AmmoUI
   - GunUI
   - Wall
   - Ground
   - Door
-  - Test
   layers:
   - Default
   - TransparentFX

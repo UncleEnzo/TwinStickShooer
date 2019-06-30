@@ -16,7 +16,7 @@ public class Follow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = FindObjectOfType<Player>().transform;
+        target = Player.Instance.transform;
         StartCoroutine(waitBeforeMagnetizing());
     }
 

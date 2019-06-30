@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1;
-        Player.enablePlayer(true);
+        Player.Instance.enablePlayer(true);
         GameIsPaused = false;
     }
 
@@ -36,7 +36,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0;
-        Player.enablePlayer(false);
+        Player.Instance.enablePlayer(false);
         GameIsPaused = true;
     }
 

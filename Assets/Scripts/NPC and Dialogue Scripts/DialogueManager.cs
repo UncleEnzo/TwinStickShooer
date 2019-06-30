@@ -6,14 +6,20 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public Text nameText;
-    public Text dialogueText;
-    public Animator animator;
+    private GameObject dialogueBox;
+    private Text nameText;
+    private Text dialogueText;
+    private Animator animator;
+    public TestNPC testNPC;
     private Queue<string> sentences;
 
     // Start is called before the first frame update
     void Start()
     {
+        dialogueBox = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+        nameText = dialogueBox.transform.GetChild(0).GetComponent<Text>();
+        dialogueText = dialogueBox.transform.GetChild(1).GetComponent<Text>();
+        animator = dialogueBox.GetComponent<Animator>();
         sentences = new Queue<string>();
     }
 
@@ -56,7 +62,7 @@ public class DialogueManager : MonoBehaviour
     private void endDialogue()
     {
         animator.SetBool("isOpen", false);
-        FindObjectOfType<TestNPC>().dialogueTriggered = false;
-        Player.enablePlayer(true);
+        testNPC.dialogueTriggered = false;
+        Player.Instance.enablePlayer(true);
     }
 }

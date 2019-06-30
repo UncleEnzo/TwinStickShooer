@@ -15,6 +15,7 @@ public class TestNPC : Interactable
     {
         if (playerInRange && !dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue)
         {
+            print("Dialogue Triggered");
             ToolTipOff.Raise();
             nextDialogue = Time.time + speechRate;
             dialogueTriggered = true;
@@ -36,7 +37,7 @@ public class TestNPC : Interactable
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collider2D == FindObjectOfType<Player>().GetComponent<Collider2D>())
+        if (collider2D == Player.Instance.GetComponent<Collider2D>())
         {
             playerInRange = true;
             ToolTipOn.Raise();
@@ -45,7 +46,7 @@ public class TestNPC : Interactable
 
     void OnTriggerExit2D(Collider2D collider2D)
     {
-        if (collider2D == FindObjectOfType<Player>().GetComponent<Collider2D>())
+        if (collider2D == Player.Instance.GetComponent<Collider2D>())
         {
             playerInRange = false;
             ToolTipOff.Raise();

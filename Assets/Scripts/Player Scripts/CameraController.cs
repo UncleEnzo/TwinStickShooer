@@ -23,12 +23,10 @@ public class CameraController : MonoBehaviour
     Vector3 shakeVector;
     bool shaking;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<Player>().transform;
+        player = Player.Instance.transform;
         target = player.position;
         zStart = Camera.main.transform.position.z;
     }

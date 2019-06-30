@@ -9,7 +9,7 @@ public class EquipToPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        weaponHolder = GameObject.Find("WeaponHolder");
+        weaponHolder = WeaponSwitching.Instance.transform.root.gameObject;
 
         if (gameObject.transform.IsChildOf(weaponHolder.transform))
         {
@@ -25,7 +25,7 @@ public class EquipToPlayer : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject.tag == TagsAndLabels.PlayerTag)
         {
             bool playerHasGun = false;
             foreach (Transform weapon in weaponHolder.transform)

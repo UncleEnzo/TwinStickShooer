@@ -24,16 +24,20 @@ public class EnemyBullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if (collisionInfo.gameObject.tag == "Wall" && bulletBounce == false)
+        if (collisionInfo.gameObject.tag == TagsAndLabels.WallTag && bulletBounce == false)
         {
             gameObject.SetActive(false);
         }
-        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Door") && bulletBounce == false)
+        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer(TagsAndLabels.DoorLabel) && bulletBounce == false)
+        {
+            gameObject.SetActive(false);
+        }
+        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer(TagsAndLabels.ChestLabel) && bulletBounce == false)
         {
             collisionInfo.gameObject.GetComponent<TreasureChest>().health--;
             gameObject.SetActive(false);
         }
-        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer("Chest") && bulletBounce == false)
+        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer(TagsAndLabels.ChestLabel) && bulletBounce == false)
         {
             //Do Damage
             //Bullet should bounce

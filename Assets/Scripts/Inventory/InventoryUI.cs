@@ -21,7 +21,7 @@ public class InventoryUI : MonoBehaviour
             UIOpen = !UIOpen;
             if (UIOpen == true)
             {
-                Player.enablePlayer(false);
+                Player.Instance.enablePlayer(false);
                 Time.timeScale = .2f;
                 foreach (GameObject recipeIcon in Inventory.Instance.recipeIcons)
                 {
@@ -30,7 +30,7 @@ public class InventoryUI : MonoBehaviour
             }
             if (UIOpen == false)
             {
-                Player.enablePlayer(true);
+                Player.Instance.enablePlayer(true);
                 Time.timeScale = 1f;
                 foreach (GameObject recipeIcon in Inventory.Instance.recipeIcons)
                 {

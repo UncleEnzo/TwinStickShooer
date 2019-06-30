@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,6 +42,7 @@ public class RecipeChest1 : TreasureChest
         explosiveButton = explosivePanel.transform.GetChild(3).GetComponent<Button>();
         RecipeUIPanel.SetActive(false);
     }
+
     void Update()
     {
         CheckDestroyChestHealth();
@@ -55,39 +57,31 @@ public class RecipeChest1 : TreasureChest
     {
         int chestID = base.OpenChest();
         GameObject physicalRecipe = spawnRecipe(LootListType.PhysicalRecipe, -3, -3, chestID);
-        print(physicalRecipe);
         GameObject gunPowderRecipe = spawnRecipe(LootListType.GunpowderRecipe, 0, 3, chestID);
         GameObject explosiveRecipe = spawnRecipe(LootListType.ExplosiveRecipe, 3, -3, chestID);
         Time.timeScale = 0;
-        Player.enablePlayer(false);
+        Player.Instance.enablePlayer(false);
 
         //Make this a method at some point
         //physical
         physicalIcon.sprite = physicalRecipe.GetComponent<RecipePickUp>().item.icon;
         damageTextPhysical.text = physicalRecipe.GetComponent<RecipePickUp>().damageDescription;
         physicalEffectText.text = physicalRecipe.GetComponent<RecipePickUp>().effectDescription;
-        physicalButton.onClick.AddListener(() => physicalRecipe.GetComponent<RecipePickUp>().MakeSelection());
+        physicalButton.onClick.AddListener(() => { physicalRecipe.GetComponent<RecipePickUp>().MakeSelection(); });
 
         //GunPowder
         gunpowderIcon.sprite = gunPowderRecipe.GetComponent<RecipePickUp>().item.icon;
         damageTextGunPowder.text = gunPowderRecipe.GetComponent<RecipePickUp>().damageDescription;
         gunPowderEffectText.text = gunPowderRecipe.GetComponent<RecipePickUp>().effectDescription;
-        gunPowderButton.onClick.AddListener(() => gunPowderRecipe.GetComponent<RecipePickUp>().MakeSelection());
+        gunPowderButton.onClick.AddListener(() => { gunPowderRecipe.GetComponent<RecipePickUp>().MakeSelection(); });
 
         //Explosive
         explosiveIcon.sprite = explosiveRecipe.GetComponent<RecipePickUp>().item.icon;
         damageTextExplosive.text = explosiveRecipe.GetComponent<RecipePickUp>().damageDescription;
         explosiveEffectText.text = explosiveRecipe.GetComponent<RecipePickUp>().effectDescription;
-        explosiveButton.onClick.AddListener(() => explosiveRecipe.GetComponent<RecipePickUp>().MakeSelection());
+        explosiveButton.onClick.AddListener(() => { explosiveRecipe.GetComponent<RecipePickUp>().MakeSelection(); });
 
         RecipeUIPanel.SetActive(true);
         return chestID;
     }
-
-    //Make popup on UI, And have it enabled when you open this chest(Place method in parent class protected)
-    //Disable player movement and slow down time to zero(Place method in parent class protected)
-    //Center the items you're spawning on it.
-    //Make buttons appear over them
-    //Make them hightlight when cursor over them (Use the image Highlight function, not the shader)
-    //Needs a description on the item to appear below >> HOW???? > But a description string in each recipe class. Have it appear in the text panel when cursor over button
 }

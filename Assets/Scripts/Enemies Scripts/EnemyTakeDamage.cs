@@ -20,7 +20,7 @@ public class EnemyTakeDamage : MonoBehaviour
     }
     public void OnCollisionEnter2D(Collision2D collidingObject)
     {
-        if (collidingObject.gameObject.tag == "PlayerBullet" && gameObject.tag == "Enemy")
+        if (collidingObject.gameObject.tag == TagsAndLabels.PlayerBulletTag && gameObject.tag == TagsAndLabels.EnemyTag)
         {
             collidingObject.gameObject.SetActive(false);
         }
@@ -39,7 +39,7 @@ public class EnemyTakeDamage : MonoBehaviour
     }
     private void takeDamage(Collision2D collision)
     {
-        if (collision.gameObject.tag == "PlayerBullet")
+        if (collision.gameObject.tag == TagsAndLabels.PlayerBulletTag)
         {
             enemy.health -= collision.gameObject.GetComponent<PlayerBullet>().getBulletDamage();
         }

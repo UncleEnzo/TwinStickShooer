@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public PlayerSavedData localPlayerData = new PlayerSavedData();
+    public static PlayerSavedData localPlayerData = new PlayerSavedData();
     public Player player;
     private float healthDefault = 8f;
 
@@ -35,17 +35,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collidingObject)
     {
-        if (collidingObject.gameObject.tag == "EnemyBullet" && gameObject.tag == "Player")
-        {
-            collidingObject.gameObject.SetActive(false);
-        }
         takeDamage(collidingObject);
         die();
     }
 
     public void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if (iFramesActive == true && collisionInfo.gameObject.tag == "EnemyBullet")
+        if (iFramesActive == true && collisionInfo.gameObject.tag == TagsAndLabels.EnemyBulletTag)
         {
             collisionInfo.gameObject.SetActive(false);
         }
@@ -59,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
     }
     private void takeDamage(Collider2D collision)
     {
-        if (collision.gameObject.tag == "EnemyBullet")
+        if (collision.gameObject.tag == TagsAndLabels.EnemyBulletTag)
         {
             localPlayerData.health -= collision.gameObject.GetComponent<EnemyBullet>().bulletDamage;
             PlayerHUBController.Instance.updateDisplayHubHealth(localPlayerData.health);
@@ -69,7 +65,7 @@ public class PlayerHealth : MonoBehaviour
             }
 
         }
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == TagsAndLabels.EnemyTag)
         {
             localPlayerData.health -= collision.gameObject.GetComponent<Enemy>().collideDamageToPlayer;
             PlayerHUBController.Instance.updateDisplayHubHealth(localPlayerData.health);

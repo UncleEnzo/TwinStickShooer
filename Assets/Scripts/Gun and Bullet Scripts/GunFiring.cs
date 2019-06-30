@@ -23,7 +23,7 @@ public class GunFiring : MonoBehaviour
         gunSounds = GetComponent<AudioSource>();
         gunProperties = GetComponent<GunProperties>();
         currentAmmo = gunProperties.maxAmmo;
-        player = FindObjectOfType<Player>().transform.gameObject;
+        player = Player.Instance.transform.gameObject;
         PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
     }
 

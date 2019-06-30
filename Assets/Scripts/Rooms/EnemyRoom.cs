@@ -48,7 +48,7 @@ public class EnemyRoom : MonoBehaviour
         //creates a new list of doors for the new tilemap
         foreach (Transform child in room.transform)
         {
-            if (child.gameObject.layer == LayerMask.NameToLayer("Door"))
+            if (child.gameObject.layer == LayerMask.NameToLayer(TagsAndLabels.DoorLabel))
             {
                 doors.Add(child.gameObject);
             }

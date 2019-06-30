@@ -27,7 +27,7 @@ public class PlayerHUBController : MonoBehaviour
     {
         foreach (TextMeshProUGUI uiElement in GetComponentsInChildren<TextMeshProUGUI>())
         {
-            if (uiElement.tag == "HealthUI")
+            if (uiElement.tag == TagsAndLabels.HealthUITag)
             {
                 uiElement.text = "Health: " + health.ToString();
             }
@@ -37,7 +37,7 @@ public class PlayerHUBController : MonoBehaviour
     {
         foreach (TextMeshProUGUI uiElement in GetComponentsInChildren<TextMeshProUGUI>())
         {
-            if (uiElement.tag == "GunUI")
+            if (uiElement.tag == TagsAndLabels.GunUITag)
             {
                 uiElement.text = "Gun: " + gunName.ToString();
             }
@@ -47,7 +47,7 @@ public class PlayerHUBController : MonoBehaviour
     {
         foreach (TextMeshProUGUI uiElement in GetComponentsInChildren<TextMeshProUGUI>())
         {
-            if (uiElement.tag == "AmmoUI")
+            if (uiElement.tag == TagsAndLabels.AmmoUITag)
             {
                 uiElement.text = "Ammo: " + ammo.ToString();
             }

@@ -86,4 +86,7 @@ MonoBehaviour:
   timerPaused: 1
   powerUpIcon: {fileID: 8521165883127184300, guid: c114cccd96bd585489d82120cc5e8aed,
     type: 3}
-  powerupTimerPause: {fileID: 0}
+  powerupTimerPause: {fileID: 1622945292431157724, guid: 0353090aa0984ae44bc2323672961145,
+    type: 3}
+  powerUpPanel: {fileID: 7906252613936454866, guid: e2e1b3f595bc55640b54d59f5df7e4ef,
+    type: 3}

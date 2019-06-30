@@ -15,13 +15,13 @@ public class Interactable : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (collider2D.tag == "Player" && collider2D.isTrigger && gameObject.tag == "Interactable")
+        if (collider2D.tag == TagsAndLabels.PlayerTag && collider2D.isTrigger && gameObject.tag == TagsAndLabels.InteractableTag)
         {
             playerInRange = true;
             interact();
         }
 
-        if (collider2D.tag == "Player" && collider2D.isTrigger && gameObject.tag == "PickUp")
+        if (collider2D.tag == TagsAndLabels.PlayerTag && collider2D.isTrigger && gameObject.tag == TagsAndLabels.PickUpTag)
         {
             interact();
         }
@@ -29,7 +29,7 @@ public class Interactable : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collider2D)
     {
-        if (collider2D.tag == "Player" && collider2D.isTrigger)
+        if (collider2D.tag == TagsAndLabels.PlayerTag && collider2D.isTrigger)
         {
             playerInRange = false;
             interact();

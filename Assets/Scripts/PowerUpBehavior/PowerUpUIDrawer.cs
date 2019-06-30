@@ -23,14 +23,15 @@ public class PowerUpUIDrawer : MonoBehaviour
     public bool timerPaused = true;
     public GameObject powerUpIcon;
     public Text powerupTimerPause;
-    private GameObject powerupIconPanel;
+    private GameObject powerUpIconPanel;
     private Dictionary<PowerUp, PowerUpUIInfo> powerUps = new Dictionary<PowerUp, PowerUpUIInfo>();
     private List<PowerUp> keys = new List<PowerUp>();
 
     void Start()
     {
+        powerupTimerPause = GameObject.Find("Canvas").transform.Find("PowerUpTimersPaused").GetComponent<Text>();
         powerupTimerPause.text = "";
-        powerupIconPanel = GameObject.Find("Canvas").transform.Find("PowerUpPanel").gameObject;
+        powerUpIconPanel = GameObject.Find("Canvas").transform.Find("PowerUpPanel").gameObject;
     }
 
     void Update()
@@ -48,7 +49,7 @@ public class PowerUpUIDrawer : MonoBehaviour
             powerupSprite.GetComponent<Image>().sprite = item.icon;
             PowerUpUIInfo info = new PowerUpUIInfo(icon, powerup);
             powerUps.Add(powerup, info);
-            icon.transform.SetParent(powerupIconPanel.transform);
+            icon.transform.SetParent(powerUpIconPanel.transform);
             icon.SetActive(true);
 
             //sets the stack counter to false

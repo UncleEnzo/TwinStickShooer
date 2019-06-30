@@ -74,10 +74,9 @@ MonoBehaviour:
   isTriggerCollider: {fileID: 5022937582166857967}
   thisDoorType: 1
   open: 0
-  doorSprite: {fileID: 5022937582210846331}
+  doorSpriteRenderer: {fileID: 5022937582210846331}
   openDoor: {fileID: 21300000, guid: dfce9535ef5792c4b89aac6ab395b0fa, type: 3}
-  closedEnemyDoor: {fileID: 21300000, guid: d0b780cdfee8bd644b6ce30fc4d6cdac, type: 3}
-  closedKeyDoor: {fileID: 21300000, guid: d0b780cdfee8bd644b6ce30fc4d6cdac, type: 3}
+  closedDoor: {fileID: 21300000, guid: d0b780cdfee8bd644b6ce30fc4d6cdac, type: 3}
   key: {fileID: 11400000, guid: 4186f3044d3a6704f809f0f9972b47fb, type: 2}
   KillDoorTriggered: {fileID: 11400000, guid: b400e2e000e64f0458e05a0b2bd8ee9d, type: 2}
 --- !u!1 &5022937582210846330
