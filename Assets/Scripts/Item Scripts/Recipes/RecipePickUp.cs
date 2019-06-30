@@ -37,18 +37,18 @@ public class RecipePickUp : Interactable
         Player.Instance.enablePlayer(true);
         Time.timeScale = 1;
 
-        //JANKY REMOVE ALL LISTENERS FROM BUTTON SO YOU CAN OPEN MULTIPLE RECIPE CHESTS
-        GameObject physicalPanel = RecipeUIPanel.transform.GetChild(1).gameObject;
-        Button physicalButton = physicalPanel.transform.GetChild(3).GetComponent<Button>();
-        physicalButton.onClick.RemoveAllListeners();
+        for (int i = 1; i < 4; i++)
+        {
+            RemoveButtonListeners(RecipeUIPanel, i);
+            print("PENIS");
+        }
+    }
 
-        GameObject gunPowderPanel = RecipeUIPanel.transform.GetChild(2).gameObject;
-        Button gunPowderButton = gunPowderPanel.transform.GetChild(3).GetComponent<Button>();
-        gunPowderButton.onClick.RemoveAllListeners();
-
-        GameObject explosivePanel = RecipeUIPanel.transform.GetChild(3).gameObject;
-        Button explosiveButton = explosivePanel.transform.GetChild(3).GetComponent<Button>();
-        explosiveButton.onClick.RemoveAllListeners();
+    private void RemoveButtonListeners(GameObject RecipeUIPanel, int RecipePanel)
+    {
+        GameObject Panel = RecipeUIPanel.transform.GetChild(RecipePanel).gameObject;
+        Button Button = Panel.transform.GetChild(3).GetComponent<Button>();
+        Button.onClick.RemoveAllListeners();
     }
 
     private void sendDestroyChestSiblingsSignal()
