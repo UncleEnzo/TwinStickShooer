@@ -3,6 +3,8 @@ using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class TreasureChest : Interactable
 {
@@ -12,6 +14,23 @@ public class TreasureChest : Interactable
     public int chestRarityRange;
     private Animator anim;
     protected GameObject RecipeUIPanel;
+
+    [Header("List of Recipe UI Objects that are updated when you open a chest")]
+    protected GameObject physicalPanel;
+    protected Image physicalIcon;
+    protected TextMeshProUGUI damageTextPhysical;
+    protected TextMeshProUGUI physicalEffectText;
+    protected Button physicalButton;
+    protected GameObject gunpowderPanel;
+    protected Image gunpowderIcon;
+    protected TextMeshProUGUI damageTextGunPowder;
+    protected TextMeshProUGUI gunPowderEffectText;
+    protected Button gunPowderButton;
+    protected GameObject explosivePanel;
+    protected Image explosiveIcon;
+    protected TextMeshProUGUI damageTextExplosive;
+    protected TextMeshProUGUI explosiveEffectText;
+    protected Button explosiveButton;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -25,6 +44,33 @@ public class TreasureChest : Interactable
         return Random.Range(0, 100000);
     }
 
+    protected void GetRecipePanelUIButtons()
+    {
+        physicalPanel = RecipeUIPanel.transform.GetChild(1).gameObject;
+        physicalIcon = physicalPanel.transform.GetChild(0).GetComponent<Image>();
+        damageTextPhysical = physicalPanel.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
+        physicalEffectText = physicalPanel.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+        physicalButton = physicalPanel.transform.GetChild(3).GetComponent<Button>();
+        gunpowderPanel = RecipeUIPanel.transform.GetChild(2).gameObject;
+        gunpowderIcon = gunpowderPanel.transform.GetChild(0).GetComponent<Image>();
+        damageTextGunPowder = gunpowderPanel.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
+        gunPowderEffectText = gunpowderPanel.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+        gunPowderButton = gunpowderPanel.transform.GetChild(3).GetComponent<Button>();
+        explosivePanel = RecipeUIPanel.transform.GetChild(3).gameObject;
+        explosiveIcon = explosivePanel.transform.GetChild(0).GetComponent<Image>();
+        damageTextExplosive = explosivePanel.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
+        explosiveEffectText = explosivePanel.transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>();
+        explosiveButton = explosivePanel.transform.GetChild(3).GetComponent<Button>();
+    }
+
+    //Dynamically adds the gameobject to the UI Panel button so you can select it
+    protected void updateRecipeUI(GameObject recipe, Image UISprite, TextMeshProUGUI UIDamage, TextMeshProUGUI UIEffect, Button button)
+    {
+        UISprite.sprite = recipe.GetComponent<RecipePickUp>().item.icon;
+        UIDamage.text = recipe.GetComponent<RecipePickUp>().damageDescription;
+        UIEffect.text = recipe.GetComponent<RecipePickUp>().effectDescription;
+        button.onClick.AddListener(() => { recipe.GetComponent<RecipePickUp>().MakeSelection(); });
+    }
     protected void CheckDestroyChestHealth()
     {
         if (health <= 0)

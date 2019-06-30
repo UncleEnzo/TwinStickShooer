@@ -37,10 +37,10 @@ public class RecipePickUp : Interactable
         Player.Instance.enablePlayer(true);
         Time.timeScale = 1;
 
+        //Removes listeners from the UI
         for (int i = 1; i < 4; i++)
         {
             RemoveButtonListeners(RecipeUIPanel, i);
-            print("PENIS");
         }
     }
 
@@ -82,7 +82,6 @@ public class RecipePickUp : Interactable
         {
             Debug.Log("Chest ID or Compare ChestID is an invalid value");
         }
-
     }
 
     void pickUpItem()
