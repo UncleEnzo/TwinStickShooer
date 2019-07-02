@@ -46,7 +46,10 @@ public class Cheats : MonoBehaviour
 
         if (Input.GetKeyDown("l"))
         {
-            Inventory.Instance.AddItem(key);
+            for (int i = 0; i < 10; i++)
+            {
+                Inventory.Instance.AddItem(key);
+            }
         }
 
         if (Input.GetKeyDown("k"))
@@ -56,17 +59,26 @@ public class Cheats : MonoBehaviour
 
         if (Input.GetKeyDown("1"))
         {
-            Inventory.Instance.AddItem(physical);
+            for (int i = 0; i < 10; i++)
+            {
+                Inventory.Instance.AddItem(physical);
+            }
         }
 
         if (Input.GetKeyDown("2"))
         {
-            Inventory.Instance.AddItem(gunPowder);
+            for (int i = 0; i < 10; i++)
+            {
+                Inventory.Instance.AddItem(gunPowder);
+            }
         }
 
         if (Input.GetKeyDown("3"))
         {
-            Inventory.Instance.AddItem(explosive);
+            for (int i = 0; i < 10; i++)
+            {
+                Inventory.Instance.AddItem(explosive);
+            }
         }
     }
 }

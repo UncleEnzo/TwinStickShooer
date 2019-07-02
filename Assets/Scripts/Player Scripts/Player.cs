@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     public float speed = 10f;
     public Rigidbody2D myRigidBody;
     public PlayerAnimController animator;
-    private bool movementEnabled = true;
+    public bool movementEnabled = true;
 
     // Update is called once per frame
     void FixedUpdate()

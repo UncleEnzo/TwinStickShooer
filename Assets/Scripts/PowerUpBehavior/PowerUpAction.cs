@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class PowerUpAction : MonoBehaviour
 {
+    void Start()
+    {
+        parryScript = Player.Instance.GetComponent<Parry>();
+    }
     //Needs to calculate the amount of times it is called so that when it ends,
     //the end action can cancel the amount of a recipe was used
     //without disabling the effects of other recipes
@@ -38,6 +42,30 @@ public class PowerUpAction : MonoBehaviour
         Player.Instance.speed -= speedReduction;
         speedUpStackCount = 0;
     }
+    float colliderSizeIncrease = .2f;
+    //note, need to move the offset as well or it'll get bulkier both ways
+    float parryCoolDecrease = 1f;
+    int parryStackCount = 0;
+    Parry parryScript;
+
+    public void ParryStartAction()
+    {
+        Debug.Log("Triggered Parry");
+        parryScript.enabled = true;
+        parryStackCount += 1;
+        if (parryStackCount >= 2)
+        {
+            parryScript.colliderSizeX += colliderSizeIncrease;
+            parryScript.coolDownResetValue -= parryCoolDecrease;
+        }
+    }
+
+    public void ParryEndAction()
+    {
+        Debug.Log("Parry Expired");
+        parryStackCount = 0;
+        parryScript.enabled = false;
+    }
     float bulletSpeedIncrease = 5f;
     int bulletSpeedStackCount = 0;
 
@@ -51,7 +79,6 @@ public class PowerUpAction : MonoBehaviour
             gunProperty.bulletSpeed += bulletSpeedIncrease;
         }
     }
-
     public void BulletSpeedEndAction()
     {
         Debug.Log("Bullet Speed Recipe Expired");
@@ -62,6 +89,14 @@ public class PowerUpAction : MonoBehaviour
             gunProperty.bulletSpeed -= bulletSpeedReduction;
         }
         bulletSpeedStackCount = 0;
+    }
+    public void StarShatterStartAction()
+    {
+        Debug.Log("Triggered Star Shatter Recipe");
+    }
+    public void StarShatterEndAction()
+    {
+        Debug.Log("Star Shatter added to Weapon Holder");
     }
 
 }

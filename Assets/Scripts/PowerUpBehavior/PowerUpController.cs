@@ -72,21 +72,17 @@ public class PowerUpController : MonoBehaviour
 
     public void ActivatePowerUp(PowerUp powerup)
     {
-        if ((!activeEffects.ContainsKey(powerup)) && (powerup.currentStack < powerup.stackCap))
+        if ((!activeEffects.ContainsKey(powerup)))
         {
             powerup.Start();
-            powerup.currentStack = 1;
-            powerup.currentStack++;
             activeEffects.Add(powerup, powerup.duration);
-            print(powerup.currentStack);
         }
         else if (activeEffects.ContainsKey(powerup) && (powerup.currentStack < powerup.stackCap))
         {
             powerup.Start();
-            powerup.currentStack++;
             activeEffects[powerup] = powerup.duration;
         }
-        else
+        else if (activeEffects.ContainsKey(powerup) && (powerup.currentStack >= powerup.stackCap))
         {
             print("You have reached the maximum stack. The effect will not stack any more, although the timer will reset");
             print(powerup.currentStack);

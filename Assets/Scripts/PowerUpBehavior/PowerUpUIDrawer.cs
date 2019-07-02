@@ -43,7 +43,8 @@ public class PowerUpUIDrawer : MonoBehaviour
     {
         if (!powerUps.ContainsKey(powerup))
         {
-            powerup.currentStack = 0;
+            powerup.currentStack = 0; //Resets it DO NOT REMOVE THIS
+            powerup.currentStack++;
             GameObject icon = Instantiate<GameObject>(powerUpIcon);
             GameObject powerupSprite = icon.transform.GetChild(0).GetChild(1).gameObject;
             powerupSprite.GetComponent<Image>().sprite = item.icon;
@@ -58,6 +59,10 @@ public class PowerUpUIDrawer : MonoBehaviour
         }
         else
         {
+            if (powerup.currentStack < powerup.stackCap)
+            {
+                powerup.currentStack++;//add an if to compare limits so that it's gets to max
+            }
             powerUps[powerup].maxDuration = powerup.duration;
             powerUps[powerup].timeLeft = powerup.duration;
             stackCounter(powerUps[powerup].icon, powerup);
@@ -140,6 +145,6 @@ public class PowerUpUIDrawer : MonoBehaviour
     {
         icon.transform.GetChild(1).GetChild(0).gameObject.SetActive(true);
         icon.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);
-        icon.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = "x" + (powerup.currentStack + 1);
+        icon.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = "x" + (powerup.currentStack);
     }
 }

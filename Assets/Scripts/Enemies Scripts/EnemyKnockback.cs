@@ -6,7 +6,6 @@ public class EnemyKnockback : MonoBehaviour
 {
     private Enemy enemy;
     public float knockTime = .25f;
-
     void Start()
     {
         enemy = GetComponent<Enemy>();

@@ -10,6 +10,7 @@ public class PlayerBullet : MonoBehaviour
     private float timeBulletSelfDestruct;
     private float knockBack;
     private float bulletAccuracy;
+
     private float bulletAngle;
     private bool bulletBounce;
     private Vector2 bulletTrajectory;

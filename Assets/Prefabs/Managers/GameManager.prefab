@@ -114,6 +114,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: physicalRecipes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: physicalRecipes.Array.data[1].name
+      value: ParryPotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: physicalRecipes.Array.data[1].item
+      value: 
+      objectReference: {fileID: 3085158205632521483, guid: b231c602963e8fb41a31885440989614,
+        type: 3}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: physicalRecipes.Array.data[1].dropRarity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: explosiveRecipes.Array.data[0].name
+      value: Star Shatter
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: explosiveRecipes.Array.data[0].item
+      value: 
+      objectReference: {fileID: 3085158205632521483, guid: b6299be53aad37546bc0a10ac88e8a84,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c65a36ab1689845b16f4511f9b83f3, type: 3}
 --- !u!4 &2763808524692670906 stripped

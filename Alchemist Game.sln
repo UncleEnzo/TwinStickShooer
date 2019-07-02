@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstarPathfindingProjectEdit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageToolsEditor", "PackageToolsEditor.csproj", "{64846053-456D-04FA-F330-2A122DD97B6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{39431FBB-25B3-8715-BD07-C7BE4339BE33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{64846053-456D-04FA-F330-2A122DD97B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64846053-456D-04FA-F330-2A122DD97B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64846053-456D-04FA-F330-2A122DD97B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39431FBB-25B3-8715-BD07-C7BE4339BE33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39431FBB-25B3-8715-BD07-C7BE4339BE33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39431FBB-25B3-8715-BD07-C7BE4339BE33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39431FBB-25B3-8715-BD07-C7BE4339BE33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,7 +9,7 @@ public class EnemyBullet : MonoBehaviour
     public float timeBulletSelfDestruct = 3f;
     public float knockBack = 5f;
     public float knockTime = .25f;
-    Rigidbody2D rigidBody2D;
+    public Rigidbody2D rigidBody2D;
     public float bulletAngle = 0f;
     public Vector2 bulletTrajectory;
 

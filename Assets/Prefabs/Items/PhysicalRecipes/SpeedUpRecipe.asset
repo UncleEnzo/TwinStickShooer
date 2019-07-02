@@ -18,9 +18,8 @@ MonoBehaviour:
   powerUp:
     name: SpeedUpRecipe
     duration: 10
-    spriteNum: 0
     stackCap: 2
-    currentStack: 0
+    currentStack: 2
     startAction:
       m_PersistentCalls:
         m_Calls:
