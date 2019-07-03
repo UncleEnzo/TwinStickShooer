@@ -56,7 +56,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
   myRigidBody: {fileID: 7625524876518625121}
   animator: {fileID: 7625524876516204061}
   movementEnabled: 1
+  playerUsable: 1
 --- !u!114 &7625524876518625122
 MonoBehaviour:
   m_ObjectHideFlags: 0

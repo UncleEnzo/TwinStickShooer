@@ -30,14 +30,11 @@ public class EquipToPlayer : MonoBehaviour
             {
                 if (weapon.GetComponent<Weapon>().GunProperties.weaponType == GetComponent<Weapon>().GunProperties.weaponType)
                 {
+                    Destroy(gameObject);
                     playerHasGun = true;
                 }
             }
-            if (playerHasGun == true)
-            {
-                Destroy(gameObject);
-            }
-            else
+            if (!playerHasGun)
             {
                 transform.SetParent(weaponHolder.transform);
                 GetComponent<Weapon>().enabled = true;

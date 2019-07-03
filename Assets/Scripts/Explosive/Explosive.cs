@@ -9,9 +9,8 @@ public class Explosive : MonoBehaviour
     float countdown;
     private bool hasExploded = false;
     public GameObject explosionEffect;
-
     public float radius = 5f;
-    public float force = 3f;
+    private float force = 25f;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +44,6 @@ public class Explosive : MonoBehaviour
                 if (rb.GetComponent<Player>())
                 {
                     Player.Instance.movementEnabled = false;
-                    StartCoroutine(knockBack(rb));
                 }
                 //Note: Do not have a point of reference for where the weapon is.CameraController.Instance.Shake((Player.Instance.transform.position - transform.position).normalized, 1f, .03f);
                 rb.AddForce(difference, ForceMode2D.Impulse);
@@ -54,14 +52,9 @@ public class Explosive : MonoBehaviour
                 //EXPERIMENT WITH JUST INCREASING LINEAR DRAG AND REENABLING WHEN VECTOR SET TO ZERO INSTEAD O USING A TIMER
             }
         }
-        //Apply Damage to Targets
+        //Todo Apply Damage to Targets > Derive from GunProperties
+
         Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
-        print("Explosion particles destroyed");
         Destroy(gameObject);
-    }
-    private IEnumerator knockBack(Rigidbody2D rb)
-    {
-        yield return new WaitForSeconds(1f);
-        Player.Instance.movementEnabled = true;
     }
 }

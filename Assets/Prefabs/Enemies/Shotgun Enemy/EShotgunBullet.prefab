@@ -72,6 +72,7 @@ MonoBehaviour:
   timeBulletSelfDestruct: 3
   knockBack: 5
   knockTime: 0.25
+  rigidBody2D: {fileID: 5850502352277750028}
   bulletAngle: 0
   bulletTrajectory: {x: 0, y: 0}
   bulletBounce: 0

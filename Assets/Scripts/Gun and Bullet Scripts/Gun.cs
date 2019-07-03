@@ -75,7 +75,7 @@ public class Gun : Weapon
                     newBullet.transform.rotation = bulletShot.rotation;
                     newBullet.SetActive(true);
                 }
-                newBullet.GetComponent<PlayerBullet>().setPlayerBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce);
+                newBullet.GetComponent<PlayerBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce);
             }
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;
@@ -98,6 +98,7 @@ public class Gun : Weapon
                     newBullet.transform.rotation = bulletShot.rotation;
                     newBullet.SetActive(true);
                 }
+                newBullet.GetComponent<EnemyBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce);
             }
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;

@@ -12,8 +12,6 @@ public class InventoryUI : MonoBehaviour
         openOrCloseInventory();
     }
 
-    //Needs rework, The actual inventory ui should always be open.
-    //What whould change is that when you press tab, time slows and recipies become clickable
     private void openOrCloseInventory()
     {
         if (Input.GetButtonDown("Inventory"))

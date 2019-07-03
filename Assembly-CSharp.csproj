@@ -70,7 +70,6 @@
      <Compile Include="Assets\Scripts\Chests\TreasureChest.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\AREnemy\AREnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
-     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyKnockback.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemySpawner.cs" />
@@ -85,7 +84,9 @@
      <Compile Include="Assets\Scripts\Global\Signal.cs" />
      <Compile Include="Assets\Scripts\Global\SignalListener.cs" />
      <Compile Include="Assets\Scripts\Global\TagsAndLabels.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\BulletSpawnController.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EnemyGun.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EquipToPlayer.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Gun.cs" />

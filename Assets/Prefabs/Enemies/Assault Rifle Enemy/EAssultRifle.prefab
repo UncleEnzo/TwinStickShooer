@@ -100,10 +100,10 @@ MonoBehaviour:
     - {fileID: 590765980109680243}
     camShakeMagnitude: 1.5
     camShakeLength: 0.05
-    bulletsPerSecond: 2
+    bulletsPerSecond: 4
     maxAmmo: 10
     reloadTime: 2
-    bulletSpeed: 0.3
+    bulletSpeed: 6
     bulletDamage: 1
     timeBulletSelfDestruct: 3
     knockBack: 5

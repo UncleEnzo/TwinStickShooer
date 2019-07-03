@@ -99,30 +99,32 @@ public class PowerUpAction : MonoBehaviour
     public void StarShatterStartAction()
     {
         Debug.Log("Triggered Star Shatter Recipe");
-        bool playerHasExplosive = false;
-        GameObject StarShatter = Instantiate(starShatter, transform.position, transform.rotation);
-        foreach (Transform weapon in FindObjectOfType<SetGunPosition>().transform)
-        {
-            if (weapon.GetComponent<Weapon>().GunProperties.weaponType == StarShatter.GetComponent<Weapon>().GunProperties.weaponType)
-            {
-                playerHasExplosive = true;
-            }
-            if (playerHasExplosive == true)
-            {
-                weapon.GetComponent<ThrowExplosive>().currentAmmo++;
-            }
-        }
-        if (playerHasExplosive == false)
-        {
-            transform.SetParent(FindObjectOfType<SetGunPosition>().transform);
-            StarShatter.GetComponent<Weapon>().enabled = true;
-            StarShatter.GetComponent<Collider2D>().enabled = false;
-            print("New Gun added to WeaponHolster");
-        }
+        AddOrStackExplosive(starShatter);
     }
     public void StarShatterEndAction()
     {
         Debug.Log("Star Shatter added to Weapon Holder");
     }
-
+    private void AddOrStackExplosive(GameObject explosivePrefab)
+    {
+        bool playerHasExplosive = false;
+        foreach (Transform weapon in FindObjectOfType<SetGunPosition>().transform)
+        {
+            if (weapon.GetComponent<Weapon>().GunProperties.weaponType == explosivePrefab.GetComponent<Weapon>().GunProperties.weaponType)
+            {
+                playerHasExplosive = true;
+                weapon.GetComponent<ThrowExplosive>().currentAmmo++;
+            }
+        }
+        if (playerHasExplosive == false)
+        {
+            GameObject Explosive = Instantiate(explosivePrefab, FindObjectOfType<SetGunPosition>().transform.position, FindObjectOfType<SetGunPosition>().transform.rotation);
+            Explosive.transform.SetParent(FindObjectOfType<SetGunPosition>().transform);
+            WeaponSwitching.Instance.weaponCount = WeaponSwitching.Instance.transform.childCount;
+            WeaponSwitching.Instance.autoSelectNewWeaponInHolster();
+            Explosive.GetComponent<EquipToPlayer>().enabled = false;
+            Explosive.GetComponent<Weapon>().enabled = false; // so that it's unusable until the player turns off tab
+            Explosive.GetComponent<Collider2D>().enabled = false;
+        }
+    }
 }

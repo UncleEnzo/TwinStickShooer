@@ -61,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
             PlayerHUBController.Instance.updateDisplayHubHealth(localPlayerData.health);
             if (iFramesActive == false)
             {
-                StartCoroutine(KnockCo(collision.gameObject.GetComponent<EnemyBullet>().knockTime, collision.gameObject.GetComponent<EnemyBullet>().knockBack, collision.gameObject.GetComponent<EnemyBullet>().bulletTrajectory));
+                StartCoroutine(KnockCo(1f, collision.gameObject.GetComponent<EnemyBullet>().knockBack, collision.gameObject.GetComponent<EnemyBullet>().bulletTrajectory));
             }
 
         }

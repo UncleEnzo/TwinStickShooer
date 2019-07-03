@@ -19,7 +19,7 @@ public class WeaponSwitching : MonoBehaviour
     public static WeaponSwitching Instance;
 
     private int selectedWeapon = 0;
-    private int weaponCount = 0;
+    public int weaponCount = 0;
     private int previousWeaponCount = 0;
     public PlayerSavedData localWeaponData = new PlayerSavedData();
 
@@ -38,19 +38,21 @@ public class WeaponSwitching : MonoBehaviour
     {
         //Calls select weapon if scroll wheel is used
         int previousSelectedWeapon = selectedWeapon;
-        weaponSwitchScrollWheel();
-        if (previousSelectedWeapon != selectedWeapon)
+        if (Player.Instance.playerUsable)
         {
-            selectWeapon();
+            weaponSwitchScrollWheel();
+            if (previousSelectedWeapon != selectedWeapon)
+            {
+                selectWeapon();
+            }
+            //Calls select weapon if new weapon is added
+            weaponCount = transform.childCount;
+            autoSelectNewWeaponInHolster();
+            previousWeaponCount = weaponCount;
         }
-
-        //Calls select weapon if new weapon is added
-        weaponCount = transform.childCount;
-        autoSelectNewWeaponInHolster();
-        previousWeaponCount = weaponCount;
     }
 
-    private void autoSelectNewWeaponInHolster()
+    public void autoSelectNewWeaponInHolster()
     {
         if (previousWeaponCount != weaponCount)
         {
@@ -129,7 +131,7 @@ public class WeaponSwitching : MonoBehaviour
                 {
                     PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<Gun>().getCurrentAmmo());
                 }
-                if (weapon.GetComponent<Explosive>())
+                if (weapon.GetComponent<ThrowExplosive>())
                 {
                     PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<ThrowExplosive>().currentAmmo);
                 }

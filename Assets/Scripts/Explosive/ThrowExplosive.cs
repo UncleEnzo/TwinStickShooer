@@ -21,6 +21,10 @@ public class ThrowExplosive : Weapon
     // Update is called once per frame
     void Update()
     {
+        Vector3 mousePosTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Transform playerTransform = Player.Instance.transform;
+        Aim(mousePosTarget, playerTransform.position);
+        SpriteFlip(playerTransform, mousePosTarget);
         if (currentAmmo <= 0)
         {
             Destroy(gameObject);
@@ -33,9 +37,9 @@ public class ThrowExplosive : Weapon
         if (Input.GetMouseButton(0) && (Time.time - lastThrown) > (1 / GunProperties.bulletsPerSecond))
         {
             lastThrown = Time.time;
-            foreach (Transform bulletShot in GunProperties.bulletSpawnPoint)
+            foreach (Transform thrownExplosive in GunProperties.bulletSpawnPoint)
             {
-                GameObject newExplosive = Instantiate(bullet, bulletShot.position, bulletShot.rotation);
+                GameObject newExplosive = Instantiate(bullet, thrownExplosive.position, thrownExplosive.rotation);
                 Rigidbody2D rb = newExplosive.GetComponent<Rigidbody2D>();
                 rb.velocity = (transform.right * throwForce);
             }
