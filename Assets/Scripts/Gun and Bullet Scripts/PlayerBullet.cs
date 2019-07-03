@@ -15,8 +15,7 @@ public class PlayerBullet : Bullet
     {
         if (collisionInfo.gameObject.tag == TagsAndLabels.EnemyTag)
         {
-            //damage ENEMY by calling hit.
-            print("DAMAGING ENEMY");
+            collisionInfo.gameObject.GetComponent<Enemy>().hit(bulletDamage, knockBack, bulletTrajectory);
         }
         resetBulletTagPlayer();
         base.OnCollisionEnter2D(collisionInfo);

@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 {
     public float knockTime = .25f;
     public float knockBack = 5f;
+
     public Vector2 enemyTrajectory;
     public float startingHealth = 3f;
     public float health;
@@ -24,6 +25,15 @@ public class Enemy : MonoBehaviour
     public AIPath aiPath;
     private AIDestinationSetter AIDestinationSetter;
 
+    //take damage variables
+    public Signal enemyKilled;
+    public GameObject greenCraftComponent;
+    public GameObject purpleCraftComponent;
+    public GameObject blackCraftComponent;
+    public int minDropCount = 0;
+    public int maxDropCount = 7;
+    public float minDropDist = 2f;
+    public float maxDropDist = 2f;
     void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,6 +41,86 @@ public class Enemy : MonoBehaviour
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
         AIDestinationSetter.target = Player.Instance.transform;
         health = startingHealth;
+    }
+
+    void OnCollisionEnter2D(Collision2D collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == TagsAndLabels.PlayerTag)
+        {
+            collisionInfo.gameObject.GetComponent<Player>().hit(collideDamageToPlayer, knockBack, enemyTrajectory);
+        }
+    }
+    public void hit(float Damage, float knockBack, Vector2 knockBackTrajectory)
+    {
+        health -= Damage;
+        if (gameObject.activeInHierarchy == true)
+        {
+            isKnockedBack = true;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Vector2 difference = knockBackTrajectory;
+            difference = difference.normalized * knockBack;
+            rb.AddForce(difference, ForceMode2D.Impulse);
+            StartCoroutine(knockCo(rb));
+        }
+        // StartCoroutine(knockCo(1f, knockBack, knockBackTrajectory));
+        if (health <= 0f)
+        {
+            die();
+        }
+    }
+    private void die()
+    {
+        if (health <= 0f)
+        {
+            //Play some animation, particles, and sounds
+            dropCraftComponents();
+            enemyKilled.Raise();
+            gameObject.SetActive(false);
+        }
+    }
+    private IEnumerator knockCo(Rigidbody2D rb)
+    {
+        yield return new WaitForSeconds(knockTime);
+        rb.velocity = Vector2.zero;
+    }
+
+    private void dropCraftComponents()
+    {
+        for (int i = 0; i < Random.Range(minDropCount, maxDropCount); i++)
+        {
+            GameObject newComponent = ObjectPooler.SharedInstance.GetPooledObject(greenCraftComponent.name + "(Clone)");
+            if (newComponent != null)
+            {
+                newComponent.transform.position = new Vector2(randomDistFromEnemy(transform.position.x), randomDistFromEnemy(transform.position.y));
+                newComponent.transform.rotation = this.transform.rotation;
+                newComponent.SetActive(true);
+            }
+        }
+        for (int i = 0; i < Random.Range(minDropCount, maxDropCount); i++)
+        {
+            GameObject newComponent = ObjectPooler.SharedInstance.GetPooledObject(purpleCraftComponent.name + "(Clone)");
+            if (newComponent != null)
+            {
+                newComponent.transform.position = new Vector2(randomDistFromEnemy(transform.position.x), randomDistFromEnemy(transform.position.y));
+                newComponent.transform.rotation = this.transform.rotation;
+                newComponent.SetActive(true);
+            }
+        }
+        for (int i = 0; i < Random.Range(minDropCount, maxDropCount); i++)
+        {
+            GameObject newComponent = ObjectPooler.SharedInstance.GetPooledObject(blackCraftComponent.name + "(Clone)");
+            if (newComponent != null)
+            {
+                newComponent.transform.position = new Vector2(randomDistFromEnemy(transform.position.x), randomDistFromEnemy(transform.position.y));
+                newComponent.transform.rotation = this.transform.rotation;
+                newComponent.SetActive(true);
+            }
+        }
+    }
+
+    private float randomDistFromEnemy(float pos)
+    {
+        return Random.Range(pos - minDropDist, pos + maxDropDist);
     }
 
     // Update is called once per frame

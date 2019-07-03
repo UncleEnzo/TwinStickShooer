@@ -199,7 +199,7 @@ MonoBehaviour:
     bulletsPerSecond: 0.2
     maxAmmo: 10
     reloadTime: 2
-    bulletSpeed: 1
+    bulletSpeed: 3
     bulletDamage: 1
     timeBulletSelfDestruct: 3
     knockBack: 5

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4518107801132208177}
   - component: {fileID: 6972054770439239144}
   - component: {fileID: 7625524876518625123}
-  - component: {fileID: 7625524876518625122}
   - component: {fileID: 8371123350020898761}
   - component: {fileID: 7625524876518625149}
   - component: {fileID: 6740302762168332287}
@@ -182,27 +181,13 @@ MonoBehaviour:
   animator: {fileID: 7625524876516204061}
   movementEnabled: 1
   playerUsable: 1
---- !u!114 &7625524876518625122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7625524876518625148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc717717cc1617b4b8b1be5ad027a24d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 7625524876518625123}
-  myRigidBody: {fileID: 7625524876518625121}
-  triggerCollider: {fileID: 6972054770439239144}
+  triggerCollider: {fileID: 4518107801132208177}
   movementAnimation: {fileID: 7625524876516204063}
   mySprite: {fileID: 2652696027989464139}
-  flashColor: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 0.23921569}
-  regularColor: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
+  flashColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 0.24313726}
+  regularColor: {r: 0.9811321, g: 0.93948025, b: 0.93948025, a: 1}
   flashDuration: 0.07
-  numberOfFlashes: 4
+  numberOfFlashes: 5
   iFramesActive: 0
 --- !u!114 &8371123350020898761
 MonoBehaviour:

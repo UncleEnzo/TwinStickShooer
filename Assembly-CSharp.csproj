@@ -70,10 +70,8 @@
      <Compile Include="Assets\Scripts\Chests\TreasureChest.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\AREnemy\AREnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
-     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyKnockback.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemySpawner.cs" />
-     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyTakeDamage.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\PistolEnemy\PistolEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\ShotgunEnemy\ShotgunEnemy.cs" />
      <Compile Include="Assets\Scripts\Explosive\Explosive.cs" />
@@ -121,7 +119,6 @@
      <Compile Include="Assets\Scripts\Player Scripts\CursorController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerAnimController.cs" />
-     <Compile Include="Assets\Scripts\Player Scripts\PlayerHealth.cs" />
      <Compile Include="Assets\Scripts\PlayerSavedData.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\Parry.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUp.cs" />

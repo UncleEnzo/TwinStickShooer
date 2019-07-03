@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 309343144516758869}
   - component: {fileID: 5355450356106762365}
   - component: {fileID: 568024790320454258}
-  - component: {fileID: 6874688601417952761}
-  - component: {fileID: 3272199657489908062}
   - component: {fileID: 518032821}
   - component: {fileID: 518032822}
   - component: {fileID: 518032826}
@@ -160,18 +158,6 @@ MonoBehaviour:
   walking: 1
   isKnockedBack: 0
   aiPath: {fileID: 518032821}
---- !u!114 &6874688601417952761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309343144516758889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bc27f733fcdfa84fb7fcb6e91cf1b05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
     type: 3}
@@ -183,19 +169,6 @@ MonoBehaviour:
   maxDropCount: 7
   minDropDist: 2
   maxDropDist: 2
---- !u!114 &3272199657489908062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309343144516758889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e46e826adeacca2459ecf98513c18386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockTime: 0.25
 --- !u!114 &518032821
 MonoBehaviour:
   m_ObjectHideFlags: 0

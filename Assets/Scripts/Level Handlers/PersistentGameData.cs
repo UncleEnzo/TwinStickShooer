@@ -32,7 +32,7 @@ public class PersistentGameData : MonoBehaviour
 
     public void savePlayerStats()
     {
-        PersistentGameData.Instance.PlayerSavedData.health = PlayerHealth.localPlayerData.health;
+        PersistentGameData.Instance.PlayerSavedData.health = Player.localPlayerData.health;
         PersistentGameData.Instance.PlayerSavedData.weaponCount = WeaponSwitching.Instance.gameObject.transform.childCount;
         PersistentGameData.Instance.PlayerSavedData.gunTypes = WeaponSwitching.Instance.localWeaponData.gunTypes;
 
