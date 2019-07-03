@@ -10,11 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1769220241367476178}
   - component: {fileID: 4940130093002732294}
-  - component: {fileID: 4440272899492755963}
-  - component: {fileID: 5106151370106326939}
-  - component: {fileID: 4665798870796060610}
-  - component: {fileID: 2687971488367456846}
   - component: {fileID: 2968811773879384823}
+  - component: {fileID: 2323924747218591217}
   - component: {fileID: 3279655025178572123}
   - component: {fileID: 3283961327183792413}
   m_Layer: 0
@@ -87,82 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &4440272899492755963
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11991691623488481}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 4
-  m_AngularDrag: 4
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &5106151370106326939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11991691623488481}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8c052a89e5e71469be5173f511cc21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerArmLength: 0.5
---- !u!114 &4665798870796060610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11991691623488481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc53a4f9262a3964680b112fbd8972d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponType: 3
-  bulletSpawnPoint:
-  - {fileID: 5511127001117850795}
-  camShakeMagnitude: 1.3
-  camShakeLength: 0.03
-  bulletsPerSecond: 1
-  maxAmmo: 3
-  reloadTime: 1
-  bulletSpeed: 15
-  bulletDamage: 4
-  timeBulletSelfDestruct: 3
-  knockBack: 4
-  bulletAccuracy: 0
-  bulletAngle: 0
-  bulletBounce: 0
---- !u!114 &2687971488367456846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11991691623488481}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a94364d95c73b874eb7b5f0ff93f41ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 7991890147027848265, guid: 53d29cab04a179942b6a41cf43d8ff31, type: 3}
-  gunShotSound: {fileID: 8300000, guid: 5f65f7a864d7742fda4f10edfde922d2, type: 3}
-  gunReloadSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
 --- !u!114 &2968811773879384823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +96,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000ecc139252df540b60aa50346d2df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2323924747218591217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11991691623488481}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2b57724a954f84a9a6ba554ff99600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GunProperties:
+    weaponType: 3
+    bulletSpawnPoint:
+    - {fileID: 5511127001117850795}
+    camShakeMagnitude: 1.5
+    camShakeLength: 0.05
+    bulletsPerSecond: 1
+    maxAmmo: 10
+    reloadTime: 2
+    bulletSpeed: 15
+    bulletDamage: 1
+    timeBulletSelfDestruct: 3
+    knockBack: 5
+    bulletAccuracy: 0
+    bulletAngle: 0
+    bulletBounce: 0
+  armLength: 0.5
+  bullet: {fileID: 7991890147027848265, guid: 53d29cab04a179942b6a41cf43d8ff31, type: 3}
+  gunShotSound: {fileID: 8300000, guid: 5f65f7a864d7742fda4f10edfde922d2, type: 3}
+  gunReloadSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
 --- !u!58 &3279655025178572123
 CircleCollider2D:
   m_ObjectHideFlags: 0

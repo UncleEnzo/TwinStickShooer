@@ -10,11 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8082091212718973584}
   - component: {fileID: 3182370835506476612}
-  - component: {fileID: 6141739880369568953}
-  - component: {fileID: 3348534979864283865}
-  - component: {fileID: 2910710840829133440}
-  - component: {fileID: 8697919473634725285}
   - component: {fileID: 4389983807092418843}
+  - component: {fileID: 3861060769789230687}
   - component: {fileID: 8873224801973045640}
   - component: {fileID: 6067286278377457143}
   m_Layer: 0
@@ -90,85 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &6141739880369568953
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7534039688406982307}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 4
-  m_AngularDrag: 4
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &3348534979864283865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7534039688406982307}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8c052a89e5e71469be5173f511cc21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerArmLength: 0.5
---- !u!114 &2910710840829133440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7534039688406982307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc53a4f9262a3964680b112fbd8972d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponType: 1
-  bulletSpawnPoint:
-  - {fileID: 5885299457432008958}
-  - {fileID: 5991850787643617207}
-  - {fileID: 6542283925746343489}
-  - {fileID: 3397848722534583723}
-  camShakeMagnitude: 2
-  camShakeLength: 0.03
-  bulletsPerSecond: 2
-  maxAmmo: 5
-  reloadTime: 2
-  bulletSpeed: 15
-  bulletDamage: 1
-  timeBulletSelfDestruct: 3
-  knockBack: 3
-  bulletAccuracy: 0
-  bulletAngle: 0
-  bulletBounce: 0
---- !u!114 &8697919473634725285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7534039688406982307}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a94364d95c73b874eb7b5f0ff93f41ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 5850502352277750034, guid: 78ef0501a91265d42bf456ecf68532e8, type: 3}
-  gunShotSound: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
-  gunReloadSound: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
 --- !u!114 &4389983807092418843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +99,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000ecc139252df540b60aa50346d2df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3861060769789230687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7534039688406982307}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2b57724a954f84a9a6ba554ff99600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GunProperties:
+    weaponType: 1
+    bulletSpawnPoint:
+    - {fileID: 5885299457432008958}
+    - {fileID: 5991850787643617207}
+    - {fileID: 6542283925746343489}
+    - {fileID: 3397848722534583723}
+    camShakeMagnitude: 1.5
+    camShakeLength: 0.05
+    bulletsPerSecond: 2
+    maxAmmo: 10
+    reloadTime: 2
+    bulletSpeed: 15
+    bulletDamage: 1
+    timeBulletSelfDestruct: 3
+    knockBack: 5
+    bulletAccuracy: 0
+    bulletAngle: 0
+    bulletBounce: 0
+  armLength: 0.5
+  bullet: {fileID: 5850502352277750034, guid: 78ef0501a91265d42bf456ecf68532e8, type: 3}
+  gunShotSound: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
+  gunReloadSound: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
 --- !u!58 &8873224801973045640
 CircleCollider2D:
   m_ObjectHideFlags: 0

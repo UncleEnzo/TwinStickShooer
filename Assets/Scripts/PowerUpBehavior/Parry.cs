@@ -5,22 +5,23 @@ using UnityEngine;
 public class Parry : MonoBehaviour
 {
     BoxCollider2D boxCollider;
+    private GameObject weaponHolder;
     private float coolDownOnParry;
     private float defaultCoolDownOnParry;
     public float coolDownResetValue;
-    private bool readyToSwipe;
+    private bool readyToSwipe = true;
     private Sprite colliderSizeFromStack;
     private Animation parrySwipe;
     public float colliderSizeX;
-    private float defaultcolliderSizeX = .2f;
-    private float defaultcolliderSizeY = .5f;
+    private float defaultcolliderSizeX = 1f;
+    private float defaultcolliderSizeY = 2.5f;
     private List<Collider2D> bulletsInCollider = new List<Collider2D>();
 
     void OnEnable()
     {
+        weaponHolder = FindObjectOfType<SetGunPosition>().gameObject;
         //Returns object that you can cast to BoxCollider
-        boxCollider = gameObject.AddComponent<BoxCollider2D>(); // SET IT SOMEWHERE THAT IT FOLLOWS THE GUN
-
+        boxCollider = weaponHolder.AddComponent<BoxCollider2D>();
 
         //Make it a trigger collider
         boxCollider.isTrigger = true;
@@ -44,6 +45,7 @@ public class Parry : MonoBehaviour
         if (!readyToSwipe)
         {
             coolDownOnParry -= Time.deltaTime;
+            print("Cooling down");
             if (coolDownOnParry <= 0)
             {
                 readyToSwipe = true;
@@ -53,6 +55,8 @@ public class Parry : MonoBehaviour
         //Parry Mechanic Trigger
         if (readyToSwipe && Input.GetKeyDown("e"))
         {
+            print("Parrying");
+            print(readyToSwipe);
             //Perform the parry
             foreach (Collider2D collider in bulletsInCollider)
             {

@@ -25,7 +25,6 @@ public class Explosive : MonoBehaviour
         countdown -= Time.deltaTime;
         if (countdown <= 0f && !hasExploded)
         {
-            print("Calling explode");
             Explode();
             hasExploded = true;
         }
@@ -35,15 +34,11 @@ public class Explosive : MonoBehaviour
         //create explosion
         GameObject explosion = Instantiate(explosionEffect, transform.position, transform.rotation);
         explosion.GetComponent<ParticleSystem>().Play();
-
-        //add force to targets NOTE: THIS IS CURRENTLY NOT WORKING!!!!!!!!! THE FUCK
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
         foreach (Collider2D nearbyObject in colliders)
         {
-            if (!nearbyObject.isTrigger)
+            if (!nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())
             {
-                print(nearbyObject.transform.gameObject.name);
-
                 Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
                 Vector2 difference = rb.transform.position - transform.position;
                 difference = difference * force;
@@ -61,6 +56,7 @@ public class Explosive : MonoBehaviour
         }
         //Apply Damage to Targets
         Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
+        print("Explosion particles destroyed");
         Destroy(gameObject);
     }
     private IEnumerator knockBack(Rigidbody2D rb)

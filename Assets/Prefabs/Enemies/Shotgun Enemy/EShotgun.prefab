@@ -100,10 +100,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8082091212718973584}
   - component: {fileID: 3182370835506476612}
-  - component: {fileID: 6141739880369568953}
-  - component: {fileID: 2910710840829133440}
-  - component: {fileID: 857997621478570481}
-  - component: {fileID: 433175969634642892}
+  - component: {fileID: 1674083111039623448}
+  - component: {fileID: 3825102426289167200}
   m_Layer: 0
   m_Name: EShotgun
   m_TagString: Untagged
@@ -177,28 +175,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &6141739880369568953
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7534039688406982307}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &2910710840829133440
+--- !u!114 &1674083111039623448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,53 +184,128 @@ MonoBehaviour:
   m_GameObject: {fileID: 7534039688406982307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc53a4f9262a3964680b112fbd8972d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 5825f0f6a5e1d7a4d961049074d32b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 1
-  bulletSpawnPoint:
-  - {fileID: 5885299457432008958}
-  - {fileID: 7934973120251037231}
-  - {fileID: 4546463749371558830}
-  - {fileID: 8447782534307369106}
-  camShakeMagnitude: 2
-  camShakeLength: 0.03
-  bulletsPerSecond: 0.2
-  maxAmmo: 5
-  reloadTime: 3
-  bulletSpeed: 0.1
-  bulletDamage: 1
-  timeBulletSelfDestruct: 3
-  knockBack: 4
-  bulletAccuracy: 0
-  bulletAngle: 0
-  bulletBounce: 0
---- !u!114 &857997621478570481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7534039688406982307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 609449a9767fac9478d329801efac53e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyArmLength: 0.5
---- !u!114 &433175969634642892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7534039688406982307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eba062839b6c7304a9d19bdf5b2f874e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  GunProperties:
+    weaponType: 1
+    bulletSpawnPoint:
+    - {fileID: 5885299457432008958}
+    - {fileID: 7934973120251037231}
+    - {fileID: 4546463749371558830}
+    - {fileID: 8447782534307369106}
+    camShakeMagnitude: 1.5
+    camShakeLength: 0.05
+    bulletsPerSecond: 0.2
+    maxAmmo: 10
+    reloadTime: 2
+    bulletSpeed: 0.5
+    bulletDamage: 1
+    timeBulletSelfDestruct: 3
+    knockBack: 5
+    bulletAccuracy: 0
+    bulletAngle: 0
+    bulletBounce: 0
+  armLength: 0.5
   bullet: {fileID: 5850502352277750034, guid: 9a5c342daf2f69a4384e7788c9407e86, type: 3}
+  gunShotSound: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
+  gunReloadSound: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
+--- !u!82 &3825102426289167200
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7534039688406982307}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7794645233802336771
 GameObject:
   m_ObjectHideFlags: 0

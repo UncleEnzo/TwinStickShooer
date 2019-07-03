@@ -22,7 +22,7 @@ public class PersistWeaponHolder : MonoBehaviour
             List<WeaponType> weaponsInHolder = new List<WeaponType>();
             foreach (Transform weapon in weaponHolder.transform)
             {
-                weaponsInHolder.Add(weapon.GetComponentInChildren<GunProperties>().weaponType);
+                weaponsInHolder.Add(weapon.GetComponentInChildren<Weapon>().GunProperties.weaponType);
             }
 
             //Compare weapons in weaponholder to weapons in persisted weapons and add missing ones

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3053726900855198473}
+  - component: {fileID: 1764885599289453886}
   - component: {fileID: 3053726900855198474}
   - component: {fileID: 1379561464547814290}
   m_Layer: 0
@@ -29,10 +30,22 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
-  - {fileID: 1769220241919444916}
+  - {fileID: 4638683277587302390}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1764885599289453886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053726900855198472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cbe03364750d55478ae39ae491710a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3053726900855198474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +78,8 @@ MonoBehaviour:
   - {fileID: 11991691623488481, guid: 605944dbd8c944f44847776aecb7cf16, type: 3}
   - {fileID: 11991691623488481, guid: 2a51bf93dd7f5ed4cafddf8e2546dc7e, type: 3}
   - {fileID: 11991691623488481, guid: ea5fe9a1959b4e744b690e70a7ac8a1e, type: 3}
---- !u!1001 &556376166
+  - {fileID: 4691556387122246817, guid: b633d3c961ba14846ac7e71ed0aae07b, type: 3}
+--- !u!1001 &6400285440431185956
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -132,16 +146,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4665798870796060610, guid: a2655f28b64c3014583ab2cedf6543f3,
-        type: 3}
-      propertyPath: knockBack
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2655f28b64c3014583ab2cedf6543f3, type: 3}
---- !u!4 &1769220241919444916 stripped
+--- !u!4 &4638683277587302390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1769220241367476178, guid: a2655f28b64c3014583ab2cedf6543f3,
     type: 3}
-  m_PrefabInstance: {fileID: 556376166}
+  m_PrefabInstance: {fileID: 6400285440431185956}
   m_PrefabAsset: {fileID: 0}

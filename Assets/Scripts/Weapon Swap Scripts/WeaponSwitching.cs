@@ -68,9 +68,9 @@ public class WeaponSwitching : MonoBehaviour
         //add to weapontype array
         foreach (Transform weapon in transform)
         {
-            if (!localWeaponData.gunTypes.Contains(weapon.GetComponent<GunProperties>().weaponType))
+            if (!localWeaponData.gunTypes.Contains(weapon.GetComponent<Weapon>().GunProperties.weaponType))
             {
-                localWeaponData.gunTypes.Add(weapon.GetComponent<GunProperties>().weaponType);
+                localWeaponData.gunTypes.Add(weapon.GetComponent<Weapon>().GunProperties.weaponType);
             }
         }
     }
@@ -124,8 +124,16 @@ public class WeaponSwitching : MonoBehaviour
             if (i == selectedWeapon)
             {
                 gunEnabled(weapon, true);
-                PlayerHUBController.Instance.updateDisplayHubGun(weapon.GetComponent<GunProperties>().weaponType);
-                PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<GunFiring>().getCurrentAmmo());
+                PlayerHUBController.Instance.updateDisplayHubGun(weapon.GetComponent<Weapon>().GunProperties.weaponType);
+                if (weapon.GetComponent<Gun>())
+                {
+                    PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<Gun>().getCurrentAmmo());
+                }
+                if (weapon.GetComponent<Explosive>())
+                {
+                    PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<ThrowExplosive>().currentAmmo);
+                }
+
             }
             else
             {
@@ -137,8 +145,7 @@ public class WeaponSwitching : MonoBehaviour
 
     private void gunEnabled(Transform weapon, bool gunEnabled)
     {
-        weapon.GetComponent<GunFiring>().enabled = gunEnabled; //Stops reload coroutine so it doesn't jam up
+        weapon.GetComponent<Weapon>().enabled = gunEnabled; //Stops reload coroutine so it doesn't jam up
         weapon.GetComponent<SpriteRenderer>().enabled = gunEnabled;
-        weapon.GetComponent<GunProperties>().enabled = gunEnabled;
     }
 }

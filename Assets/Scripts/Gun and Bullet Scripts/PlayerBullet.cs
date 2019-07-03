@@ -51,6 +51,18 @@ public class PlayerBullet : MonoBehaviour
         this.bulletBounce = bulletBounce;
     }
 
+    private void resetBulletProperties()
+    {
+        float bulletSpeed;
+        float bulletDamage;
+        float timeBulletSelfDestruct;
+        float knockBack;
+        float bulletAccuracy;
+
+        float bulletAngle;
+        bool bulletBounce;
+        Vector2 bulletTrajectory;
+    }
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if (collisionInfo.gameObject.tag == TagsAndLabels.WallTag && bulletBounce == false)

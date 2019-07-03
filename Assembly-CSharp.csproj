@@ -71,8 +71,6 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\AREnemy\AREnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyBullet.cs" />
-     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunControls.cs" />
-     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyGunFire.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyKnockback.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemySpawner.cs" />
@@ -80,7 +78,7 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\PistolEnemy\PistolEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\ShotgunEnemy\ShotgunEnemy.cs" />
      <Compile Include="Assets\Scripts\Explosive\Explosive.cs" />
-     <Compile Include="Assets\Scripts\Explosive\ExplosiveThrower.cs" />
+     <Compile Include="Assets\Scripts\Explosive\ThrowExplosive.cs" />
      <Compile Include="Assets\Scripts\Global\ObjectPooler.cs" />
      <Compile Include="Assets\Scripts\Global\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Global\PlayerHUBController.cs" />
@@ -88,11 +86,12 @@
      <Compile Include="Assets\Scripts\Global\SignalListener.cs" />
      <Compile Include="Assets\Scripts\Global\TagsAndLabels.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\BulletSpawnController.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EnemyGun.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EquipToPlayer.cs" />
-     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunControls.cs" />
-     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunFiring.cs" />
-     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\GunProperties.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Gun.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\PlayerBullet.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\PlayerGun.cs" />
+     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Weapon.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventorySlot.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryUI.cs" />
@@ -134,6 +133,7 @@
      <Compile Include="Assets\Scripts\Rooms\EnemyRoom.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />
+     <Compile Include="Assets\SetGunPosition.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />

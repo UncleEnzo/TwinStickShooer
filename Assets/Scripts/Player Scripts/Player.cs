@@ -45,9 +45,7 @@ public class Player : MonoBehaviour
         CameraController.Instance.enabled = playerUsable;
         CursorController.Instance.enabled = playerUsable;
         Transform currentWeapon = WeaponSwitching.Instance.getSelectedWeapon();
-        currentWeapon.GetComponentInChildren<GunFiring>().enabled = playerUsable;
-        currentWeapon.GetComponentInChildren<GunControls>().enabled = playerUsable;
-        currentWeapon.GetComponentInChildren<GunProperties>().enabled = playerUsable;
+        currentWeapon.GetComponentInChildren<PlayerGun>().enabled = playerUsable;
         WeaponSwitching.Instance.enabled = playerUsable;
         animator.enabled = playerUsable;
         movementEnabled = playerUsable;

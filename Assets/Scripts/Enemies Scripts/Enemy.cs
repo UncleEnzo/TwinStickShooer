@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
     {
         if (!preparingToFire && distFromPlayer <= walkAndFireRange && distFromPlayer > stopAndFireRange)
         {
-            GetComponentInChildren<EnemyGunFire>().fireEnemyGun();
+            GetComponentInChildren<EnemyGun>().EnemyFireGun();
         }
         if (!preparingToFire && distFromPlayer <= stopAndFireRange)
         {
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
     {
         preparingToFire = true;
         yield return new WaitForSeconds(waitBeforeFire);
-        GetComponentInChildren<EnemyGunFire>().fireEnemyGun();
+        GetComponentInChildren<EnemyGun>().EnemyFireGun();
         preparingToFire = false;
     }
 }

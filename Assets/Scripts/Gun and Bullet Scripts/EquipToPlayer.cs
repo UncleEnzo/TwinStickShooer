@@ -13,9 +13,7 @@ public class EquipToPlayer : MonoBehaviour
 
         if (gameObject.transform.IsChildOf(weaponHolder.transform))
         {
-            GetComponent<GunControls>().enabled = true;
-            GetComponent<GunFiring>().enabled = true;
-            GetComponent<GunProperties>().enabled = true;
+            GetComponent<Weapon>().enabled = true;
         }
         else
         {
@@ -30,7 +28,7 @@ public class EquipToPlayer : MonoBehaviour
             bool playerHasGun = false;
             foreach (Transform weapon in weaponHolder.transform)
             {
-                if (weapon.GetComponent<GunProperties>().weaponType == GetComponent<GunProperties>().weaponType)
+                if (weapon.GetComponent<Weapon>().GunProperties.weaponType == GetComponent<Weapon>().GunProperties.weaponType)
                 {
                     playerHasGun = true;
                 }
@@ -42,9 +40,7 @@ public class EquipToPlayer : MonoBehaviour
             else
             {
                 transform.SetParent(weaponHolder.transform);
-                GetComponent<GunControls>().enabled = true;
-                GetComponent<GunFiring>().enabled = true;
-                GetComponent<GunProperties>().enabled = true;
+                GetComponent<Weapon>().enabled = true;
                 GetComponent<Collider2D>().enabled = false;
                 print("New Gun added to WeaponHolster");
             }
