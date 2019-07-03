@@ -15,7 +15,15 @@ public class PlayerBullet : Bullet
     {
         if (collisionInfo.gameObject.tag == TagsAndLabels.EnemyTag)
         {
-            collisionInfo.gameObject.GetComponent<Enemy>().hit(bulletDamage, knockBack, bulletTrajectory);
+            if (!isExplosive)
+            {
+                collisionInfo.gameObject.GetComponent<Enemy>().enemyTrajectory = Vector2.zero;
+                collisionInfo.gameObject.GetComponent<Enemy>().hit(bulletDamage, knockBack, bulletTrajectory);
+            }
+            if (isExplosive)
+            {
+                explosiveBullet();
+            }
         }
         resetBulletTagPlayer();
         base.OnCollisionEnter2D(collisionInfo);

@@ -121,6 +121,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
+      propertyPath: gunpowderRecipes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
       propertyPath: physicalRecipes.Array.data[1].name
       value: ParryPotion
       objectReference: {fileID: 0}
@@ -133,6 +138,22 @@ PrefabInstance:
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
       propertyPath: physicalRecipes.Array.data[1].dropRarity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: gunpowderRecipes.Array.data[1].name
+      value: ExplosiveRounds
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: gunpowderRecipes.Array.data[1].item
+      value: 
+      objectReference: {fileID: 3085158205632521483, guid: 0160095499d5c2248b7fccf0b185576d,
+        type: 3}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: gunpowderRecipes.Array.data[1].dropRarity
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,

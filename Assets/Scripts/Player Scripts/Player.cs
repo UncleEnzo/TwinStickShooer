@@ -22,8 +22,9 @@ public class Player : MonoBehaviour
     public float speed = 10f;
     public Rigidbody2D myRigidBody;
     public PlayerAnimController animator;
-    public bool movementEnabled = true;
-    private float coolDownOnMovement = 1f;
+    public bool canMove = true;
+    private float coolDownOnMovementTimer = 1f;
+    private float movementCoolDownReset = 1f;
     public bool playerUsable = true;
     public static PlayerSavedData localPlayerData = new PlayerSavedData();
     private float healthDefault = 8f;
@@ -55,17 +56,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //CoolDown for parry
-        if (!movementEnabled)
+        //CoolDown for Movement after being knocked back
+        if (!canMove)
         {
-            coolDownOnMovement -= Time.deltaTime;
-            print("Cooling down");
-            if (coolDownOnMovement <= 0)
+            coolDownOnMovementTimer -= Time.deltaTime;
+            if (coolDownOnMovementTimer <= 0)
             {
-                movementEnabled = true;
+                canMove = true;
+                coolDownOnMovementTimer = movementCoolDownReset;
             }
         }
-        if (movementEnabled)
+        if (canMove)
         {
             Move();
         }
@@ -86,15 +87,30 @@ public class Player : MonoBehaviour
         Transform currentWeapon = WeaponSwitching.Instance.getSelectedWeapon();
         currentWeapon.GetComponentInChildren<Weapon>().enabled = playerUsable;
         animator.enabled = playerUsable;
-        movementEnabled = playerUsable;
+        canMove = playerUsable;
     }
-    public void hit(float Damage, float knockBack, Vector2 knockBackTrajectory)
+    public void hit(float Damage)
     {
+        hit(Damage, 0, new Vector2(0, 0));
+    }
+    public void hit(float Damage, float knockbackForce, Vector2 knockBackTrajectory)
+    {
+        if (knockbackForce != 0)
+        {
+            canMove = false;
+        }
         localPlayerData.health -= Damage;
         PlayerHUBController.Instance.updateDisplayHubHealth(localPlayerData.health);
         if (iFramesActive == false)
         {
-            StartCoroutine(KnockCo(1f, knockBack, knockBackTrajectory));
+            if (knockbackForce != 0)
+            {
+                StartCoroutine(KnockCo(1f, knockbackForce, knockBackTrajectory));
+            }
+            if (knockbackForce == 0)
+            {
+                StartCoroutine(FlashCo());
+            }
         }
         if (localPlayerData.health <= 0f)
         {
@@ -105,7 +121,6 @@ public class Player : MonoBehaviour
     {
         SceneLoader.loadGameOverScene();
     }
-
     private IEnumerator KnockCo(float knockTime, float knockBack, Vector2 trajectory)
     {
         if (myRigidBody != null)
@@ -119,7 +134,6 @@ public class Player : MonoBehaviour
             myRigidBody.velocity = Vector2.zero;
         }
     }
-
     private IEnumerator FlashCo()
     {
         iFramesActive = true;

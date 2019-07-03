@@ -21,7 +21,17 @@ public class Bullet : MonoBehaviour
     [System.NonSerialized]
     public bool bulletBounce;
     [System.NonSerialized]
+    public bool isExplosive;
+    [System.NonSerialized]
+    public float explosionDamage;
+    [System.NonSerialized]
+    public float explosiveForce;
+    [System.NonSerialized]
+    public float explosiveRadius;
+    [System.NonSerialized]
     public Vector2 bulletTrajectory;
+    [System.NonSerialized]
+    public GameObject explosionEffect;
     protected void OnRenderObject()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
@@ -33,6 +43,50 @@ public class Bullet : MonoBehaviour
         {
             collisionInfo.gameObject.GetComponent<TreasureChest>().health--;
         }
+        if (isExplosive)
+        {
+            explosiveBullet();
+        }
+        gameObject.SetActive(false);
+    }
+    protected void explosiveBullet()
+    {
+        //create explosion
+        GameObject explosion = Instantiate(explosionEffect, transform.position, transform.rotation);
+        explosion.GetComponent<ParticleSystem>().Play();
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosiveRadius);
+        foreach (Collider2D nearbyObject in colliders)
+        {
+            //Note: only reinstate this if you will be only using player explosive bullets
+            // //Destroys enemy bullets caught in the explosion
+            // if (!nearbyObject.isTrigger && nearbyObject.GetComponent<EnemyBullet>())
+            // {
+            //     nearbyObject.gameObject.SetActive(false);
+            // }
+
+            //Applies knockback
+            if (!nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())
+            {
+                Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
+                Vector2 difference = rb.transform.position - transform.position;
+                difference = difference * explosiveForce;
+                if (rb.GetComponent<Player>())
+                {
+                    rb.GetComponent<Player>().hit(0, explosiveForce, difference);
+                }
+                //Applies explosive damage to the enemy
+                if (rb.GetComponent<Enemy>())
+                {
+                    rb.GetComponent<Enemy>().enemyTrajectory = Vector2.zero;
+                    rb.GetComponent<Enemy>().hit(explosionDamage, explosiveForce, difference);
+                }
+                else
+                {
+                    rb.AddForce(difference, ForceMode2D.Impulse);
+                }
+            }
+        }
+        Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
         gameObject.SetActive(false);
     }
     protected Vector2 bulletDirection()
@@ -51,7 +105,7 @@ public class Bullet : MonoBehaviour
         return new Vector2(Mathf.Cos(rotateAngle * Mathf.Deg2Rad), Mathf.Sin(rotateAngle * Mathf.Deg2Rad)).normalized;
     }
     //Note: Do not need to reset, because now that Player and Enemy set bullet properties, they will reset when shot again
-    public void setBulletProperties(float bulletSpeed, float bulletDamage, float timeBulletSelfDestruct, float knockBack, float bulletAccuracy, float bulletAngle, bool bulletBounce)
+    public void setBulletProperties(float bulletSpeed, float bulletDamage, float timeBulletSelfDestruct, float knockBack, float bulletAccuracy, float bulletAngle, bool bulletBounce, bool isExplosive, float explosionDamage, float explosiveForce, float explosiveRadius, GameObject explosionEffect)
     {
         this.bulletSpeed = bulletSpeed;
         this.bulletDamage = bulletDamage;
@@ -60,8 +114,12 @@ public class Bullet : MonoBehaviour
         this.bulletAccuracy = bulletAccuracy;
         this.bulletAngle = bulletAngle;
         this.bulletBounce = bulletBounce;
+        this.isExplosive = isExplosive;
+        this.explosionDamage = explosionDamage;
+        this.explosiveForce = explosiveForce;
+        this.explosiveRadius = explosiveRadius;
+        this.explosionEffect = explosionEffect;
     }
-
     protected IEnumerator SetInactiveSelf()
     {
         yield return new WaitForSeconds(timeBulletSelfDestruct);

@@ -42,6 +42,7 @@ public class ThrowExplosive : Weapon
                 GameObject newExplosive = Instantiate(bullet, thrownExplosive.position, thrownExplosive.rotation);
                 Rigidbody2D rb = newExplosive.GetComponent<Rigidbody2D>();
                 rb.velocity = (transform.right * throwForce);
+                newExplosive.GetComponent<Explosive>().SetExplosiveProperties(GunProperties.explosionDamage, GunProperties.explosiveRadius, GunProperties.explosiveForce);
             }
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;

@@ -9,8 +9,9 @@ public class Explosive : MonoBehaviour
     float countdown;
     private bool hasExploded = false;
     public GameObject explosionEffect;
-    public float radius = 5f;
-    private float force = 25f;
+    public float explosiveRadius;
+    private float explosiveForce;
+    private float explosionDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,12 @@ public class Explosive : MonoBehaviour
         countdown = delay;
     }
 
+    public void SetExplosiveProperties(float explosionDamage, float explosiveRadius, float explosiveForce)
+    {
+        this.explosionDamage = explosionDamage;
+        this.explosiveRadius = explosiveRadius;
+        this.explosiveForce = explosiveForce;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -28,32 +35,50 @@ public class Explosive : MonoBehaviour
             hasExploded = true;
         }
     }
+    void OnCollisionEnter2D(Collision2D collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == TagsAndLabels.EnemyTag)
+        {
+            Explode();
+        }
+    }
     void Explode()
     {
         //create explosion
         GameObject explosion = Instantiate(explosionEffect, transform.position, transform.rotation);
         explosion.GetComponent<ParticleSystem>().Play();
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosiveRadius);
+        CameraController.Instance.Shake((Player.Instance.transform.position - transform.position).normalized, 1f, .03f);
         foreach (Collider2D nearbyObject in colliders)
         {
+            //Destroys enemy bullets caught in the explosion
+            if (!nearbyObject.isTrigger && nearbyObject.GetComponent<EnemyBullet>())
+            {
+                nearbyObject.gameObject.SetActive(false);
+            }
+
+            //Applies knockback
             if (!nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())
             {
                 Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
                 Vector2 difference = rb.transform.position - transform.position;
-                difference = difference * force;
+                difference = difference * explosiveForce;
                 if (rb.GetComponent<Player>())
                 {
-                    Player.Instance.movementEnabled = false;
+                    rb.GetComponent<Player>().hit(0, explosiveForce, difference);
                 }
-                //Note: Do not have a point of reference for where the weapon is.CameraController.Instance.Shake((Player.Instance.transform.position - transform.position).normalized, 1f, .03f);
-                rb.AddForce(difference, ForceMode2D.Impulse);
-                //CURRENT BUG IS THAT THE EXPLOSIVE SCRIPT GETS DESTROYED BEFORE IT CAN FINISH THE ENUMERATOR!!!!!!!!!!!!!!!!!!!!!!!
-                //Error is that the player movement overwrites add force, disable movement while he be bouncing.
-                //EXPERIMENT WITH JUST INCREASING LINEAR DRAG AND REENABLING WHEN VECTOR SET TO ZERO INSTEAD O USING A TIMER
+                //Applies explosive damage to the enemy
+                if (rb.GetComponent<Enemy>())
+                {
+                    rb.GetComponent<Enemy>().enemyTrajectory = Vector2.zero;
+                    rb.GetComponent<Enemy>().hit(explosionDamage, explosiveForce, difference);
+                }
+                else
+                {
+                    rb.AddForce(difference, ForceMode2D.Impulse);
+                }
             }
         }
-        //Todo Apply Damage to Targets > Derive from GunProperties
-
         Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
         Destroy(gameObject);
     }

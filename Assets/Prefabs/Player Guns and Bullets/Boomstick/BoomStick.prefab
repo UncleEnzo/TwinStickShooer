@@ -130,6 +130,12 @@ MonoBehaviour:
     bulletAccuracy: 0
     bulletAngle: 0
     bulletBounce: 0
+    isExplosive: 0
+    explosionDamage: 3
+    explosiveForce: 4
+    explosiveRadius: 3
+    explosionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+      type: 3}
   armLength: 0.5
   bullet: {fileID: 5850502352277750034, guid: 78ef0501a91265d42bf456ecf68532e8, type: 3}
   gunShotSound: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}

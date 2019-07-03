@@ -95,6 +95,64 @@ public class PowerUpAction : MonoBehaviour
         }
         bulletSpeedStackCount = 0;
     }
+    float ExplosiveDamageIncrease = 1f;
+    float ExplosiveRadiusIncrease = 1f;
+    float ExplosiveForceIncrease = 1f;
+    int ExplosiveBulletStackCount = 0;
+    public void ExplosiveBulletStartAction()
+    {
+        Debug.Log("Triggered Bullet Explosion Recipe");
+        if (ExplosiveBulletStackCount == 0)
+        {
+            PlayerGun[] playerGuns = FindObjectsOfType<PlayerGun>();
+            List<GunProperties> gunProperties = new List<GunProperties>();
+            foreach (PlayerGun gun in playerGuns)
+            {
+                gunProperties.Add(gun.GunProperties);
+            }
+            foreach (GunProperties gunProperty in gunProperties)
+            {
+                gunProperty.isExplosive = true;
+            }
+        }
+        else
+        {
+            PlayerGun[] playerGuns = FindObjectsOfType<PlayerGun>();
+            List<GunProperties> gunProperties = new List<GunProperties>();
+            foreach (PlayerGun gun in playerGuns)
+            {
+                gunProperties.Add(gun.GunProperties);
+            }
+            foreach (GunProperties gunProperty in gunProperties)
+            {
+                gunProperty.explosionDamage += ExplosiveDamageIncrease;
+                gunProperty.explosiveRadius += ExplosiveRadiusIncrease;
+                gunProperty.explosiveForce += ExplosiveForceIncrease;
+            }
+        }
+        ExplosiveBulletStackCount += 1;
+    }
+    public void ExplosiveBulletEndAction()
+    {
+        Debug.Log("Bullet Explosion Recipe Expired");
+        float ExplosiveDamageReduction = ExplosiveDamageIncrease * ExplosiveBulletStackCount;
+        float ExplosiveRadiusReduction = ExplosiveRadiusIncrease * ExplosiveBulletStackCount;
+        float ExplosiveForceReduction = ExplosiveForceIncrease * ExplosiveBulletStackCount;
+        PlayerGun[] playerGuns = FindObjectsOfType<PlayerGun>();
+        List<GunProperties> gunProperties = new List<GunProperties>();
+        foreach (PlayerGun gun in playerGuns)
+        {
+            gunProperties.Add(gun.GunProperties);
+        }
+        foreach (GunProperties gunProperty in gunProperties)
+        {
+            gunProperty.isExplosive = false;
+            gunProperty.explosionDamage -= ExplosiveDamageReduction;
+            gunProperty.explosiveRadius -= ExplosiveRadiusReduction;
+            gunProperty.explosiveForce -= ExplosiveForceReduction;
+        }
+        ExplosiveBulletStackCount = 0;
+    }
     public GameObject starShatter;
     public void StarShatterStartAction()
     {

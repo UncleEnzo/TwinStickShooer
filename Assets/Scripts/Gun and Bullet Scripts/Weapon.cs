@@ -39,6 +39,16 @@ public class GunProperties
     public float bulletAngle = 0f;
     [SerializeField]
     public bool bulletBounce = false;
+    [SerializeField]
+    public bool isExplosive = false;
+    [SerializeField]
+    public float explosionDamage = 3f;
+    [SerializeField]
+    public float explosiveForce = 4f;
+    [SerializeField]
+    public float explosiveRadius = 3f;
+    [SerializeField]
+    public GameObject explosionEffect;
 }
 public class Weapon : MonoBehaviour
 {

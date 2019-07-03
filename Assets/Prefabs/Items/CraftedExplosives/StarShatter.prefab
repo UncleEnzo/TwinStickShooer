@@ -125,7 +125,7 @@ MonoBehaviour:
     bulletAngle: 0
     bulletBounce: 0
   armLength: 0.5
-  throwForce: 5
+  throwForce: 15
   currentAmmo: 1
   bullet: {fileID: 5850502352277750034, guid: eec51f404e489a146b94add9f72061c1, type: 3}
   gunShotSound: {fileID: 0}

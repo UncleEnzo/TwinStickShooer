@@ -7,9 +7,7 @@ using Pathfinding;
 
 public class Enemy : MonoBehaviour
 {
-    public float knockTime = .25f;
     public float knockBack = 5f;
-
     public Vector2 enemyTrajectory;
     public float startingHealth = 3f;
     public float health;
@@ -20,7 +18,6 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 5f;
     public bool walking = true;
     private bool preparingToFire = false;
-    public bool isKnockedBack = false;
     private Rigidbody2D rb;
     public AIPath aiPath;
     private AIDestinationSetter AIDestinationSetter;
@@ -34,6 +31,8 @@ public class Enemy : MonoBehaviour
     public int maxDropCount = 7;
     public float minDropDist = 2f;
     public float maxDropDist = 2f;
+    private float coolDownOnMovementTimer = .5f;
+    private float movementCoolDownReset = .5f;
     void OnEnable()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -42,48 +41,100 @@ public class Enemy : MonoBehaviour
         AIDestinationSetter.target = Player.Instance.transform;
         health = startingHealth;
     }
-
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if (collisionInfo.gameObject.tag == TagsAndLabels.PlayerTag)
         {
-            collisionInfo.gameObject.GetComponent<Player>().hit(collideDamageToPlayer, knockBack, enemyTrajectory);
+            collisionInfo.gameObject.GetComponent<Player>().hit(collideDamageToPlayer);
         }
     }
-    public void hit(float Damage, float knockBack, Vector2 knockBackTrajectory)
+    public void hit(float Damage, float knockBackForce, Vector2 knockBackTrajectory)
     {
         health -= Damage;
         if (gameObject.activeInHierarchy == true)
         {
-            isKnockedBack = true;
+            aiPath.canMove = false;
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
             Vector2 difference = knockBackTrajectory;
-            difference = difference.normalized * knockBack;
+            difference = difference.normalized * knockBackForce;
             rb.AddForce(difference, ForceMode2D.Impulse);
-            StartCoroutine(knockCo(rb));
         }
-        // StartCoroutine(knockCo(1f, knockBack, knockBackTrajectory));
         if (health <= 0f)
         {
             die();
         }
     }
-    private void die()
+
+    void Update()
     {
-        if (health <= 0f)
+        //CoolDown for Movement after being knocked back
+        if (!aiPath.canMove)
         {
-            //Play some animation, particles, and sounds
-            dropCraftComponents();
-            enemyKilled.Raise();
-            gameObject.SetActive(false);
+            coolDownOnMovementTimer -= Time.deltaTime;
+            if (coolDownOnMovementTimer <= 0)
+            {
+                aiPath.canMove = true;
+                coolDownOnMovementTimer = movementCoolDownReset;
+            }
         }
     }
-    private IEnumerator knockCo(Rigidbody2D rb)
-    {
-        yield return new WaitForSeconds(knockTime);
-        rb.velocity = Vector2.zero;
-    }
 
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (aiPath.canMove == true)
+        {
+            enemyTrajectory = rb.velocity;
+            float distFromPlayer = Vector3.Distance(Player.Instance.transform.position, transform.position);
+            followPlayer(distFromPlayer);
+            shootAtPlayer(distFromPlayer);
+        }
+    }
+    private void followPlayer(float distFromPlayer)
+    {
+        if (!preparingToFire)
+        {
+            if (distFromPlayer <= stopAndFireRange)
+            {
+                aiPath.canMove = false;
+            }
+            else
+            {
+                aiPath.canMove = true;
+            }
+        }
+        else
+        {
+            aiPath.canMove = false;
+        }
+    }
+    private void shootAtPlayer(float distFromPlayer)
+    {
+        if (!preparingToFire && distFromPlayer <= walkAndFireRange && distFromPlayer > stopAndFireRange)
+        {
+            GetComponentInChildren<EnemyGun>().EnemyFireGun();
+        }
+        if (!preparingToFire && distFromPlayer <= stopAndFireRange)
+        {
+            StartCoroutine(takeAimThenFire());
+        }
+    }
+    IEnumerator takeAimThenFire()
+    {
+        preparingToFire = true;
+        yield return new WaitForSeconds(waitBeforeFire);
+        GetComponentInChildren<EnemyGun>().EnemyFireGun();
+        preparingToFire = false;
+    }
+    private void die()
+    {
+        //Play some animation, particles, and sounds
+        dropCraftComponents();
+        enemyKilled.Raise();
+        gameObject.SetActive(false);
+
+    }
     private void dropCraftComponents()
     {
         for (int i = 0; i < Random.Range(minDropCount, maxDropCount); i++)
@@ -117,66 +168,8 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
     private float randomDistFromEnemy(float pos)
     {
         return Random.Range(pos - minDropDist, pos + maxDropDist);
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        checkIfKnockedBack();
-        enemyTrajectory = rb.velocity;
-        float distFromPlayer = Vector3.Distance(Player.Instance.transform.position, transform.position);
-        followPlayer(distFromPlayer);
-        shootAtPlayer(distFromPlayer);
-    }
-
-    private void checkIfKnockedBack()
-    {
-        Vector2 canMove = new Vector2(0f, 0f);
-        if (GetComponent<Rigidbody2D>().velocity == canMove)
-        {
-            isKnockedBack = false;
-        }
-    }
-    private void followPlayer(float distFromPlayer)
-    {
-        if (!preparingToFire && !isKnockedBack)
-        {
-            if (distFromPlayer <= stopAndFireRange)
-            {
-                aiPath.canMove = false;
-            }
-            else
-            {
-                aiPath.canMove = true;
-            }
-        }
-        else
-        {
-            aiPath.canMove = false;
-        }
-    }
-
-    private void shootAtPlayer(float distFromPlayer)
-    {
-        if (!preparingToFire && distFromPlayer <= walkAndFireRange && distFromPlayer > stopAndFireRange)
-        {
-            GetComponentInChildren<EnemyGun>().EnemyFireGun();
-        }
-        if (!preparingToFire && distFromPlayer <= stopAndFireRange)
-        {
-            StartCoroutine(takeAimThenFire());
-        }
-    }
-
-    IEnumerator takeAimThenFire()
-    {
-        preparingToFire = true;
-        yield return new WaitForSeconds(waitBeforeFire);
-        GetComponentInChildren<EnemyGun>().EnemyFireGun();
-        preparingToFire = false;
     }
 }
