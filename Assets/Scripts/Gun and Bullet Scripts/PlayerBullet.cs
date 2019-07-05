@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerBullet : Bullet
 {
-    new void OnRenderObject()
+    new void OnEnable()
     {
-        base.OnRenderObject();
+        base.OnEnable();
         bulletTrajectory = bulletDirection();
         rigidBody2D.velocity = bulletTrajectory * bulletSpeed;
     }
@@ -25,7 +25,6 @@ public class PlayerBullet : Bullet
                 explosiveBullet();
             }
         }
-        resetBulletTagPlayer();
         base.OnCollisionEnter2D(collisionInfo);
     }
 

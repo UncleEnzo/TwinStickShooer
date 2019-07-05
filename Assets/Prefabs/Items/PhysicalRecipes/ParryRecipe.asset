@@ -18,7 +18,7 @@ MonoBehaviour:
   powerUp:
     name: ParryRecipe
     duration: 10
-    stackCap: 2
+    stackCap: 4
     currentStack: 2
     startAction:
       m_PersistentCalls:

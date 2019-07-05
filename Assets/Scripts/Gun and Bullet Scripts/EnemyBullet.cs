@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemyBullet : Bullet
 {
-    new void OnRenderObject()
+    new void OnEnable()
     {
-        base.OnRenderObject();
+        base.OnEnable();
         bulletTrajectory = transform.right;
         rigidBody2D.velocity = bulletTrajectory * bulletSpeed;
     }
@@ -16,7 +16,6 @@ public class EnemyBullet : Bullet
         {
             collisionInfo.gameObject.GetComponent<Player>().hit(bulletDamage);
         }
-        resetBulletTagEnemy();
         base.OnCollisionEnter2D(collisionInfo);
     }
     //This prevents parrying from screwing up which bullets are which in the pooler

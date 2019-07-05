@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1764885599289453886}
   - component: {fileID: 3053726900855198474}
   - component: {fileID: 1379561464547814290}
+  - component: {fileID: 1446541510}
+  - component: {fileID: 1654699373523785515}
   m_Layer: 0
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -58,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4ce3f59998b2c44bceba9494a502b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponCount: 0
 --- !u!114 &1379561464547814290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +82,48 @@ MonoBehaviour:
   - {fileID: 11991691623488481, guid: 2a51bf93dd7f5ed4cafddf8e2546dc7e, type: 3}
   - {fileID: 11991691623488481, guid: ea5fe9a1959b4e744b690e70a7ac8a1e, type: 3}
   - {fileID: 4691556387122246817, guid: b633d3c961ba14846ac7e71ed0aae07b, type: 3}
+--- !u!114 &1446541510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053726900855198472}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f540800cf1eb4fb47b1f866bda21f872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDownResetValue: 3
+  colliderSizeX: 1
+  defaultColliderOffSetX: 0.5
+  bullet: {fileID: 7991890147027848265, guid: 27d7034641cfc714d96d226274344496, type: 3}
+--- !u!61 &1654699373523785515
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053726900855198472}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &6400285440431185956
 PrefabInstance:
   m_ObjectHideFlags: 0

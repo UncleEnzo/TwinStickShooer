@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4518107801132208177}
   - component: {fileID: 6972054770439239144}
   - component: {fileID: 7625524876518625123}
-  - component: {fileID: 8371123350020898761}
   - component: {fileID: 7625524876518625149}
   - component: {fileID: 6740302762168332287}
   m_Layer: 10
@@ -179,7 +178,7 @@ MonoBehaviour:
   speed: 10
   myRigidBody: {fileID: 7625524876518625121}
   animator: {fileID: 7625524876516204061}
-  movementEnabled: 1
+  canMove: 1
   playerUsable: 1
   triggerCollider: {fileID: 4518107801132208177}
   movementAnimation: {fileID: 7625524876516204063}
@@ -189,20 +188,6 @@ MonoBehaviour:
   flashDuration: 0.07
   numberOfFlashes: 5
   iFramesActive: 0
---- !u!114 &8371123350020898761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7625524876518625148}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f540800cf1eb4fb47b1f866bda21f872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coolDownResetValue: 0
-  colliderSizeX: 0
 --- !u!114 &7625524876518625149
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,8 +32,13 @@ public class Bullet : MonoBehaviour
     public Vector2 bulletTrajectory;
     [System.NonSerialized]
     public GameObject explosionEffect;
-    protected void OnRenderObject()
+
+    [Header("Serialized bullet values. NOT Derived from Gun Properties")]
+    public Sprite bulletSprite;
+
+    protected void OnEnable()
     {
+        bulletSprite = GetComponent<SpriteRenderer>().sprite;
         rigidBody2D = GetComponent<Rigidbody2D>();
         StartCoroutine(SetInactiveSelf());
     }
@@ -64,7 +69,7 @@ public class Bullet : MonoBehaviour
             //     nearbyObject.gameObject.SetActive(false);
             // }
 
-            //Applies knockback
+            //Applies explosion
             if (!nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())
             {
                 Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
@@ -124,10 +129,6 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBulletSelfDestruct);
         gameObject.SetActive(false);
-    }
-    public float getBulletKnockBack()
-    {
-        return knockBack;
     }
     public float getBulletDamage()
     {

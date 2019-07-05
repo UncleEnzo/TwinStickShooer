@@ -9,6 +9,26 @@ public class PowerUpAction : MonoBehaviour
     //the end action can cancel the amount of a recipe was used
     //without disabling the effects of other recipes
     float healingIncrease = 1f;
+    float speedUpIncrease = 5f;
+    int speedUpStackCount;
+    private float colliderSizeIncrease = 1f;
+    private float parryCoolDecrease = .5f;
+    private int parryStackCount;
+    float bulletSpeedIncrease = 5f;
+    int bulletSpeedStackCount;
+    float ExplosiveDamageIncrease = 1f;
+    float ExplosiveRadiusIncrease = 1f;
+    float ExplosiveForceIncrease = 1f;
+    int ExplosiveBulletStackCount;
+
+    public void Start()
+    {
+        //resets stack counts
+        speedUpStackCount = 0;
+        parryStackCount = 0;
+        bulletSpeedStackCount = 0;
+        ExplosiveBulletStackCount = 0;
+    }
 
     public void HealStartAction()
     {
@@ -20,9 +40,6 @@ public class PowerUpAction : MonoBehaviour
     {
         Debug.Log("End HP Up. Decriment stack count");
     }
-
-    float speedUpIncrease = 5f;
-    int speedUpStackCount = 0;
 
     public void HighSpeedStartAction()
     {
@@ -38,20 +55,18 @@ public class PowerUpAction : MonoBehaviour
         Player.Instance.speed -= speedReduction;
         speedUpStackCount = 0;
     }
-    float colliderSizeIncrease = .2f;
-    //note, need to move the offset as well or it'll get bulkier both ways
-    float parryCoolDecrease = 1f;
-    int parryStackCount = 0;
-
     public void ParryStartAction()
     {
         Debug.Log("Triggered Parry");
-        FindObjectOfType<Player>().GetComponent<Parry>().enabled = true;
+        Parry parry = WeaponSwitching.Instance.GetComponent<Parry>();
+        WeaponSwitching.Instance.GetComponent<Parry>().enabled = true;
         parryStackCount += 1;
+        print("STACK COUNT = " + parryStackCount);
         if (parryStackCount >= 2)
         {
-            FindObjectOfType<Player>().GetComponent<Parry>().colliderSizeX += colliderSizeIncrease;
-            FindObjectOfType<Player>().GetComponent<Parry>().coolDownResetValue -= parryCoolDecrease;
+            parry.colliderSizeX += colliderSizeIncrease;
+            parry.coolDownResetValue -= parryCoolDecrease;
+            parry.updateBoxCollider();
         }
     }
 
@@ -59,10 +74,9 @@ public class PowerUpAction : MonoBehaviour
     {
         Debug.Log("Parry Expired");
         parryStackCount = 0;
-        FindObjectOfType<Player>().GetComponent<Parry>().enabled = false;
+        print(parryStackCount);
+        WeaponSwitching.Instance.GetComponent<Parry>().enabled = false;
     }
-    float bulletSpeedIncrease = 5f;
-    int bulletSpeedStackCount = 0;
 
     public void BulletSpeedStartAction()
     {
@@ -95,10 +109,6 @@ public class PowerUpAction : MonoBehaviour
         }
         bulletSpeedStackCount = 0;
     }
-    float ExplosiveDamageIncrease = 1f;
-    float ExplosiveRadiusIncrease = 1f;
-    float ExplosiveForceIncrease = 1f;
-    int ExplosiveBulletStackCount = 0;
     public void ExplosiveBulletStartAction()
     {
         Debug.Log("Triggered Bullet Explosion Recipe");
