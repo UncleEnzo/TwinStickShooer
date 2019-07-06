@@ -22,11 +22,11 @@ public class PowerUpController : MonoBehaviour
     }
     #endregion
     public static PowerUpController Instance;
-    public static Dictionary<PowerUp, float> activeEffects = new Dictionary<PowerUp, float>();
+    public Dictionary<PowerUp, float> activeEffects = new Dictionary<PowerUp, float>();
 
     public bool timerPaused = true;
 
-    private static List<PowerUp> keys = new List<PowerUp>();
+    private List<PowerUp> keys = new List<PowerUp>();
 
     // Update is called once per frame
     void Update()
@@ -54,9 +54,9 @@ public class PowerUpController : MonoBehaviour
     public void CleanExpiredTimers()
     {
         bool changed = false;
-        if (activeEffects.Count <= 0)
+        foreach (PowerUp powerup in keys)
         {
-            foreach (PowerUp powerup in keys)
+            if (activeEffects[powerup] <= 0)
             {
                 activeEffects.Remove(powerup);
                 powerup.End();

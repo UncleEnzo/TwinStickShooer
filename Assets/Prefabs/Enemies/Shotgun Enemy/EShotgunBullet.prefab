@@ -67,15 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce45f113f3f6a94584d35798bb26ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 8
-  bulletDamage: 1
-  timeBulletSelfDestruct: 3
-  knockBack: 5
-  knockTime: 0.25
   rigidBody2D: {fileID: 5850502352277750028}
-  bulletAngle: 0
-  bulletTrajectory: {x: 0, y: 0}
-  bulletBounce: 0
+  bulletSprite: {fileID: 0}
 --- !u!58 &7815746468472876935
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -85,7 +78,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 5850502352277750034}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b448c8600deeadd489ff2519b24915f7, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

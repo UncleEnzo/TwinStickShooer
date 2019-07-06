@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
     }
     public void hit(float Damage, float knockBackForce, Vector2 knockBackTrajectory)
     {
+        FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
         health -= Damage;
         if (gameObject.activeInHierarchy == true)
         {

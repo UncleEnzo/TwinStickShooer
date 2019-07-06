@@ -10,16 +10,17 @@ public class PowerUpAction : MonoBehaviour
     //without disabling the effects of other recipes
     float healingIncrease = 1f;
     float speedUpIncrease = 5f;
-    int speedUpStackCount;
-    private float colliderSizeIncrease = 1f;
+    private static int speedUpStackCount;
+    private float colliderSizeIncrease = .3f;
     private float parryCoolDecrease = .5f;
-    private int parryStackCount;
+    private static int parryStackCount;
     float bulletSpeedIncrease = 5f;
-    int bulletSpeedStackCount;
+    private static int bulletSpeedStackCount;
+    int bulletBounceIncrease = 2;
     float ExplosiveDamageIncrease = 1f;
     float ExplosiveRadiusIncrease = 1f;
     float ExplosiveForceIncrease = 1f;
-    int ExplosiveBulletStackCount;
+    private static int ExplosiveBulletStackCount;
 
     public void Start()
     {
@@ -45,6 +46,7 @@ public class PowerUpAction : MonoBehaviour
     {
         Debug.Log("Triggered HighSpeedRecipe");
         speedUpStackCount += 1;
+        print(speedUpStackCount);
         Player.Instance.speed += speedUpIncrease;
     }
 
@@ -61,7 +63,6 @@ public class PowerUpAction : MonoBehaviour
         Parry parry = WeaponSwitching.Instance.GetComponent<Parry>();
         WeaponSwitching.Instance.GetComponent<Parry>().enabled = true;
         parryStackCount += 1;
-        print("STACK COUNT = " + parryStackCount);
         if (parryStackCount >= 2)
         {
             parry.colliderSizeX += colliderSizeIncrease;
@@ -108,6 +109,37 @@ public class PowerUpAction : MonoBehaviour
             gunProperty.bulletSpeed -= bulletSpeedReduction;
         }
         bulletSpeedStackCount = 0;
+    }
+
+    public void BulletBounceStartAction()
+    {
+        Debug.Log("Triggered Bouncy Bullet Recipe");
+        PlayerGun[] playerGuns = FindObjectsOfType<PlayerGun>();
+        List<GunProperties> gunProperties = new List<GunProperties>();
+        foreach (PlayerGun gun in playerGuns)
+        {
+            gunProperties.Add(gun.GunProperties);
+        }
+        foreach (GunProperties gunProperty in gunProperties)
+        {
+            gunProperty.bulletBounce = true;
+            gunProperty.bulletBounceMaxNum += bulletBounceIncrease;
+        }
+    }
+    public void BulletBounceEndAction()
+    {
+        Debug.Log("Bouncy Bullet Recipe Expired");
+        PlayerGun[] playerGuns = FindObjectsOfType<PlayerGun>();
+        List<GunProperties> gunProperties = new List<GunProperties>();
+        foreach (PlayerGun gun in playerGuns)
+        {
+            gunProperties.Add(gun.GunProperties);
+        }
+        foreach (GunProperties gunProperty in gunProperties)
+        {
+            gunProperty.bulletBounceMaxNum = 0;
+            gunProperty.bulletBounce = false;
+        }
     }
     public void ExplosiveBulletStartAction()
     {

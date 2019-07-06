@@ -39,6 +39,7 @@ public class GunProperties
     public float bulletAngle = 0f;
     [SerializeField]
     public bool bulletBounce = false;
+    public int bulletBounceMaxNum = 0;
     [SerializeField]
     public bool isExplosive = false;
     [SerializeField]

@@ -122,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
       propertyPath: gunpowderRecipes.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
@@ -154,6 +154,22 @@ PrefabInstance:
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
       propertyPath: gunpowderRecipes.Array.data[1].dropRarity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: gunpowderRecipes.Array.data[2].name
+      value: BouncyBullets
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: gunpowderRecipes.Array.data[2].item
+      value: 
+      objectReference: {fileID: 3085158205632521483, guid: e5d405e3876740045ba88d8bfc1db357,
+        type: 3}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: gunpowderRecipes.Array.data[2].dropRarity
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,

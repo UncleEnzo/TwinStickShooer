@@ -61,6 +61,7 @@
      <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleExamples.cs" />
      <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
      <Compile Include="Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
+     <Compile Include="Assets\Initialize.cs" />
      <Compile Include="Assets\OutlineEffect\LinkedSet.cs" />
      <Compile Include="Assets\OutlineEffect\Outline.cs" />
      <Compile Include="Assets\OutlineEffect\OutlineEffect.cs" />
@@ -68,6 +69,7 @@
      <Compile Include="Assets\Scripts\Chests\GunChest.cs" />
      <Compile Include="Assets\Scripts\Chests\RecipeChest1.cs" />
      <Compile Include="Assets\Scripts\Chests\TreasureChest.cs" />
+     <Compile Include="Assets\Scripts\DamageText.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\AREnemy\AREnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
@@ -76,6 +78,7 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\ShotgunEnemy\ShotgunEnemy.cs" />
      <Compile Include="Assets\Scripts\Explosive\Explosive.cs" />
      <Compile Include="Assets\Scripts\Explosive\ThrowExplosive.cs" />
+     <Compile Include="Assets\Scripts\FloatingTextController.cs" />
      <Compile Include="Assets\Scripts\Global\ObjectPooler.cs" />
      <Compile Include="Assets\Scripts\Global\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Global\PlayerHUBController.cs" />

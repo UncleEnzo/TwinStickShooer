@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6809590c3ecd3b6418ea7944faa368e5, type: 3}
-  m_Name: ExplosiveBullet
+  m_Name: BulletBounce
   m_EditorClassIdentifier: 
-  name: BulletSpeedUp
+  name: Bouncy Bullet
   icon: {fileID: 21300000, guid: e3d23a190e9ac714f8ded1821e65328d, type: 3}
   itemType: 3
   powerUp:
-    name: ExplosiveBullet
+    name: Bouncy Bullet
     duration: 10
-    stackCap: 2
+    stackCap: 3
     currentStack: 0
     startAction:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4693464106337697609, guid: 52b0f5ad5f0d2cf409889754ecc59481,
             type: 3}
-          m_MethodName: ExplosiveBulletStartAction
+          m_MethodName: BulletBounceStartAction
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 4693464106337697609, guid: 52b0f5ad5f0d2cf409889754ecc59481,
             type: 3}
-          m_MethodName: ExplosiveBulletEndAction
+          m_MethodName: BulletBounceEndAction
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -54,6 +54,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  physicalRequirement: 0
+  physicalRequirement: 2
   gunPowderRequirement: 3
-  explosiveRequirement: 3
+  explosiveRequirement: 1

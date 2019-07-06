@@ -35,16 +35,19 @@ public class Bullet : MonoBehaviour
 
     [Header("Serialized bullet values. NOT Derived from Gun Properties")]
     public Sprite bulletSprite;
+    private int bounces = 0;
+    public int bulletBounceMaxNum;
 
     protected void OnEnable()
     {
+        bounces = 0;
         bulletSprite = GetComponent<SpriteRenderer>().sprite;
         rigidBody2D = GetComponent<Rigidbody2D>();
         StartCoroutine(SetInactiveSelf());
     }
     protected void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer(TagsAndLabels.ChestLabel) && bulletBounce == false)
+        if (collisionInfo.gameObject.layer == LayerMask.NameToLayer(TagsAndLabels.ChestLabel))
         {
             collisionInfo.gameObject.GetComponent<TreasureChest>().health--;
         }
@@ -52,7 +55,18 @@ public class Bullet : MonoBehaviour
         {
             explosiveBullet();
         }
-        gameObject.SetActive(false);
+        if (bulletBounce)
+        {
+            bounces++;
+            if (bounces >= bulletBounceMaxNum)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        if (!bulletBounce)
+        {
+            gameObject.SetActive(false);
+        }
     }
     protected void explosiveBullet()
     {
@@ -70,7 +84,7 @@ public class Bullet : MonoBehaviour
             // }
 
             //Applies explosion
-            if (!nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())
+            if (nearbyObject.tag != TagsAndLabels.PlayerBulletTag && !nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())
             {
                 Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
                 Vector2 difference = rb.transform.position - transform.position;
@@ -92,7 +106,6 @@ public class Bullet : MonoBehaviour
             }
         }
         Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
-        gameObject.SetActive(false);
     }
     protected Vector2 bulletDirection()
     {
@@ -110,7 +123,7 @@ public class Bullet : MonoBehaviour
         return new Vector2(Mathf.Cos(rotateAngle * Mathf.Deg2Rad), Mathf.Sin(rotateAngle * Mathf.Deg2Rad)).normalized;
     }
     //Note: Do not need to reset, because now that Player and Enemy set bullet properties, they will reset when shot again
-    public void setBulletProperties(float bulletSpeed, float bulletDamage, float timeBulletSelfDestruct, float knockBack, float bulletAccuracy, float bulletAngle, bool bulletBounce, bool isExplosive, float explosionDamage, float explosiveForce, float explosiveRadius, GameObject explosionEffect)
+    public void setBulletProperties(float bulletSpeed, float bulletDamage, float timeBulletSelfDestruct, float knockBack, float bulletAccuracy, float bulletAngle, bool bulletBounce, int bulletBounceMaxNum, bool isExplosive, float explosionDamage, float explosiveForce, float explosiveRadius, GameObject explosionEffect)
     {
         this.bulletSpeed = bulletSpeed;
         this.bulletDamage = bulletDamage;
@@ -119,6 +132,7 @@ public class Bullet : MonoBehaviour
         this.bulletAccuracy = bulletAccuracy;
         this.bulletAngle = bulletAngle;
         this.bulletBounce = bulletBounce;
+        this.bulletBounceMaxNum = bulletBounceMaxNum;
         this.isExplosive = isExplosive;
         this.explosionDamage = explosionDamage;
         this.explosiveForce = explosiveForce;

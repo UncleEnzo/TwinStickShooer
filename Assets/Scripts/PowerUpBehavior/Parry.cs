@@ -32,7 +32,6 @@ public class Parry : MonoBehaviour
 
     void OnDisable()
     {
-        print("CALLED");
         boxCollider.enabled = false;
         colliderSizeX = defaultcolliderSizeX;
         coolDownResetValue = defaultCoolDownOnParry;
@@ -62,35 +61,52 @@ public class Parry : MonoBehaviour
         //Parry Mechanic Trigger
         if (readyToSwipe && Input.GetKeyDown(KeyCode.E))
         {
-            print("Parrying");
-            //Perform the parry
-            foreach (Collider2D collider in bulletsInCollider)
-            {
-                collider.gameObject.tag = TagsAndLabels.PlayerBulletTag;
-                EnemyBullet enemyBullet = collider.gameObject.GetComponent<EnemyBullet>();
-                Vector3 enemyBulletPos = enemyBullet.transform.position;
-                Quaternion enemyBulletRotation = enemyBullet.transform.rotation;
-                float reflectBulletSpeed = 1f;
-                Vector2 trajectory = new Vector2(-enemyBullet.rigidBody2D.velocity.x, -enemyBullet.rigidBody2D.velocity.y);
-                enemyBullet.gameObject.SetActive(false);
-                GameObject playerBullet = ObjectPooler.SharedInstance.GetPooledObject(bullet.name + "(Clone)");
-                if (playerBullet != null)
-                {
-                    playerBullet.transform.position = enemyBulletPos;
-                    playerBullet.transform.rotation = enemyBulletRotation;
-                    playerBullet.GetComponent<PlayerBullet>().setBulletProperties(enemyBullet.bulletSpeed, enemyBullet.bulletDamage, enemyBullet.timeBulletSelfDestruct, enemyBullet.knockBack, enemyBullet.bulletAccuracy, enemyBullet.bulletAngle, enemyBullet.bulletBounce, enemyBullet.isExplosive, enemyBullet.explosionDamage, enemyBullet.explosiveForce, enemyBullet.explosiveRadius, enemyBullet.explosionEffect);
-                    playerBullet.SetActive(true);
-                    playerBullet.GetComponent<SpriteRenderer>().sprite = playerBullet.GetComponent<SpriteRenderer>().sprite;
-                    playerBullet.GetComponent<PlayerBullet>().bulletTrajectory = trajectory * reflectBulletSpeed;
-                    playerBullet.GetComponent<Rigidbody2D>().velocity = playerBullet.GetComponent<PlayerBullet>().bulletTrajectory;
-                }
-            }
-            readyToSwipe = false;
+            parry();
         }
         else if (!readyToSwipe && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Parry on cooldown");
         }
+    }
+
+    void parry()
+    {
+        // print("Parrying");
+        List<Collider2D> colliderBulletsToRemove = new List<Collider2D>();
+
+        //Perform the parry
+        foreach (Collider2D collider in bulletsInCollider)
+        {
+            colliderBulletsToRemove.Add(collider);
+            EnemyBullet enemyBullet = collider.gameObject.GetComponent<EnemyBullet>();
+            Vector3 enemyBulletPos = enemyBullet.transform.position;
+            Quaternion enemyBulletRotation = enemyBullet.transform.rotation;
+            float reflectBulletSpeed = 1f;
+            Vector2 trajectory = new Vector2(-enemyBullet.rigidBody2D.velocity.x, -enemyBullet.rigidBody2D.velocity.y);
+            enemyBullet.gameObject.SetActive(false);
+            GameObject playerBullet = ObjectPooler.SharedInstance.GetPooledObject(bullet.name + "(Clone)");
+            if (playerBullet != null)
+            {
+                playerBullet.transform.position = enemyBulletPos;
+                playerBullet.transform.rotation = enemyBulletRotation;
+                playerBullet.GetComponent<PlayerBullet>().setBulletProperties(enemyBullet.bulletSpeed, enemyBullet.bulletDamage, enemyBullet.timeBulletSelfDestruct, enemyBullet.knockBack, enemyBullet.bulletAccuracy, enemyBullet.bulletAngle, enemyBullet.bulletBounce, enemyBullet.bulletBounceMaxNum, enemyBullet.isExplosive, enemyBullet.explosionDamage, enemyBullet.explosiveForce, enemyBullet.explosiveRadius, enemyBullet.explosionEffect);
+                playerBullet.SetActive(true);
+                playerBullet.GetComponent<SpriteRenderer>().sprite = playerBullet.GetComponent<SpriteRenderer>().sprite;
+                playerBullet.GetComponent<PlayerBullet>().bulletTrajectory = trajectory * reflectBulletSpeed;
+                playerBullet.GetComponent<Rigidbody2D>().velocity = playerBullet.GetComponent<PlayerBullet>().bulletTrajectory;
+            }
+        }
+
+        //removes parried bullets from list because otherwise they never exit collider
+        foreach (Collider2D collider in colliderBulletsToRemove)
+        {
+            if (bulletsInCollider.Contains(collider) && !collider.gameObject.activeInHierarchy)
+            {
+                //remove it from the list
+                bulletsInCollider.Remove(collider);
+            }
+        }
+        readyToSwipe = false;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -107,7 +123,7 @@ public class Parry : MonoBehaviour
     void OnTriggerExit2D(Collider2D collider)
     {
         //if the object is in the list
-        if (bulletsInCollider.Contains(collider))
+        if (bulletsInCollider.Contains(collider) && collider.gameObject.activeInHierarchy)
         {
             //remove it from the list
             bulletsInCollider.Remove(collider);

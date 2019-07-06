@@ -73,7 +73,7 @@ public class Gun : Weapon
                 {
                     newBullet.transform.position = bulletShot.position;
                     newBullet.transform.rotation = bulletShot.rotation;
-                    newBullet.GetComponent<PlayerBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce, GunProperties.isExplosive, GunProperties.explosionDamage, GunProperties.explosiveForce, GunProperties.explosiveRadius, GunProperties.explosionEffect);
+                    newBullet.GetComponent<PlayerBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce, GunProperties.bulletBounceMaxNum, GunProperties.isExplosive, GunProperties.explosionDamage, GunProperties.explosiveForce, GunProperties.explosiveRadius, GunProperties.explosionEffect);
                     newBullet.SetActive(true);
                 }
             }
@@ -96,7 +96,7 @@ public class Gun : Weapon
                 {
                     newBullet.transform.position = bulletShot.position;
                     newBullet.transform.rotation = bulletShot.rotation;
-                    newBullet.GetComponent<EnemyBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce, GunProperties.isExplosive, GunProperties.explosionDamage, GunProperties.explosiveForce, GunProperties.explosiveRadius, GunProperties.explosionEffect);
+                    newBullet.GetComponent<EnemyBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce, GunProperties.bulletBounceMaxNum, GunProperties.isExplosive, GunProperties.explosionDamage, GunProperties.explosiveForce, GunProperties.explosiveRadius, GunProperties.explosionEffect);
                     newBullet.SetActive(true);
                 }
             }
