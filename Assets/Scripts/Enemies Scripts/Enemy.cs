@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Pathfinding;
 
 public class Enemy : MonoBehaviour
@@ -33,13 +34,21 @@ public class Enemy : MonoBehaviour
     public float maxDropDist = 2f;
     private float coolDownOnMovementTimer = .5f;
     private float movementCoolDownReset = .5f;
+    private List<FloatingText> floatingText;
+
     void OnEnable()
     {
+        floatingText = new List<FloatingText>();
         rb = GetComponent<Rigidbody2D>();
         aiPath.canMove = false;
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
         AIDestinationSetter.target = Player.Instance.transform;
         health = startingHealth;
+    }
+
+    void OnDisable()
+    {
+        TrackFloatingTextPos();
     }
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
@@ -50,7 +59,8 @@ public class Enemy : MonoBehaviour
     }
     public void hit(float Damage, float knockBackForce, Vector2 knockBackTrajectory)
     {
-        FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
+        FloatingText floatingDamageText = FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
+        floatingText.Add(floatingDamageText);
         health -= Damage;
         if (gameObject.activeInHierarchy == true)
         {
@@ -69,6 +79,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        //Tracks floating text number locations relative to the enemy
+        TrackFloatingTextPos();
+
         //CoolDown for Movement after being knocked back
         if (!aiPath.canMove)
         {
@@ -172,5 +185,27 @@ public class Enemy : MonoBehaviour
     private float randomDistFromEnemy(float pos)
     {
         return Random.Range(pos - minDropDist, pos + maxDropDist);
+    }
+    private void TrackFloatingTextPos()
+    {
+        List<FloatingText> removeText = new List<FloatingText>();
+        foreach (FloatingText floatingText in floatingText)
+        {
+            if (floatingText != null)
+            {
+                FloatingTextController.SetFloatingTextLocation(floatingText, transform);
+            }
+            else
+            {
+                removeText.Add(floatingText);
+            }
+        }
+        foreach (FloatingText removableText in removeText)
+        {
+            if (floatingText.Contains(removableText))
+            {
+                floatingText.Remove(removableText);
+            }
+        }
     }
 }
