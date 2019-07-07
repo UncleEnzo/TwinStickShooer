@@ -360,6 +360,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 517935590712639829, guid: 3dc5e8aa9f365e7469079708c1abc3a3,
+        type: 3}
+      propertyPath: randomNumEnemiesToSpawnRange
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dc5e8aa9f365e7469079708c1abc3a3, type: 3}
 --- !u!4 &1818748491157581273 stripped

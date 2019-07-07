@@ -62,8 +62,9 @@
      <Compile Include="Assets\EffectExamples\Shared\Scripts\ParticleMenu.cs" />
      <Compile Include="Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
      <Compile Include="Assets\Scripts\AStar\ScanGrid.cs" />
-     <Compile Include="Assets\Scripts\Chests\GunChest.cs" />
-     <Compile Include="Assets\Scripts\Chests\RecipeChest1.cs" />
+     <Compile Include="Assets\Scripts\Chests\CraftComponentChest\CraftComponentChest.cs" />
+     <Compile Include="Assets\Scripts\Chests\GunChest\GunChest.cs" />
+     <Compile Include="Assets\Scripts\Chests\RecipeChest\RecipeChest.cs" />
      <Compile Include="Assets\Scripts\Chests\TreasureChest.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\AREnemy\AREnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />

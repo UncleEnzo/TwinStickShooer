@@ -25,6 +25,7 @@ public class LootTable : MonoBehaviour
     public List<Loot> gunpowderRecipes;
     public List<Loot> explosiveRecipes;
     public List<Loot> weapons;
+    public List<Loot> CraftComponents;
     private int rareDropChanceIncrease = 30;
     private Dictionary<LootListType, List<Loot>> lootMap;
     private LootListType lootList;
@@ -36,6 +37,7 @@ public class LootTable : MonoBehaviour
         lootMap.Add(LootListType.GunpowderRecipe, gunpowderRecipes);
         lootMap.Add(LootListType.ExplosiveRecipe, explosiveRecipes);
         lootMap.Add(LootListType.Weapon, weapons);
+        lootMap.Add(LootListType.CraftComponents, CraftComponents);
     }
 
     public GameObject generateRandomLoot(LootListType lootList, int chestRarityRange)
@@ -121,4 +123,4 @@ public class Loot
     public int dropRarity;
 }
 
-public enum LootListType { PhysicalRecipe, GunpowderRecipe, ExplosiveRecipe, Weapon }
+public enum LootListType { PhysicalRecipe, GunpowderRecipe, ExplosiveRecipe, Weapon, CraftComponents }

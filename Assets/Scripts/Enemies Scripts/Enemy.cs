@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     public GameObject greenCraftComponent;
     public GameObject purpleCraftComponent;
     public GameObject blackCraftComponent;
+    public GameObject key;
     public int minDropCount = 0;
     public int maxDropCount = 7;
     public float minDropDist = 2f;
@@ -145,6 +146,7 @@ public class Enemy : MonoBehaviour
     {
         //Play some animation, particles, and sounds
         dropCraftComponents();
+        dropKey();
         enemyKilled.Raise();
         gameObject.SetActive(false);
 
@@ -180,6 +182,14 @@ public class Enemy : MonoBehaviour
                 newComponent.transform.rotation = this.transform.rotation;
                 newComponent.SetActive(true);
             }
+        }
+    }
+    private void dropKey()
+    {
+        int keyDropCheck = Random.Range(0, 10);
+        if (keyDropCheck == 1)
+        {
+            Instantiate(key, new Vector2(randomDistFromEnemy(transform.position.x), randomDistFromEnemy(transform.position.y)), this.transform.rotation);
         }
     }
     private float randomDistFromEnemy(float pos)
