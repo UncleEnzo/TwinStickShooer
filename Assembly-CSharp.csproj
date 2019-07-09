@@ -72,6 +72,10 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\PistolEnemy\PistolEnemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\ShotgunEnemy\ShotgunEnemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StateDie.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StateMachine.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StateMoveShoot.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StatePlayerFollow.cs" />
      <Compile Include="Assets\Scripts\Explosive\Explosive.cs" />
      <Compile Include="Assets\Scripts\Explosive\ThrowExplosive.cs" />
      <Compile Include="Assets\Scripts\FloatingDamageText\FloatingText.cs" />
