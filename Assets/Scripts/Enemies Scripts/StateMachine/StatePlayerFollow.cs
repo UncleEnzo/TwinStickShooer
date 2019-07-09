@@ -29,40 +29,24 @@ public class StatePlayerFollow : State<Enemy>
     #endregion
 
 
-    public override void EnterState(Enemy _owner)
+    public override void EnterState(Enemy owner)
     {
-        Debug.Log("Entering Follow Player State");
+        //animations
+        followPlayer(owner);
     }
 
-    public override void ExitState(Enemy _owner)
+    public override void ExitState(Enemy owner)
     {
-        Debug.Log("Exiting Follow Player State");
 
     }
 
     public override void UpdateState(Enemy owner)
     {
-        owner.enemyTrajectory = owner.rb.velocity;
-        float distFromPlayer = Vector3.Distance(Player.Instance.transform.position, owner.transform.position);
-        followPlayer(distFromPlayer, owner);
+
     }
 
-    private void followPlayer(float distFromPlayer, Enemy owner)
+    private void followPlayer(Enemy owner)
     {
-        if (!owner.preparingToFire)
-        {
-            if (distFromPlayer <= owner.stopAndFireRange)
-            {
-                owner.aiPath.canMove = false;
-            }
-            else
-            {
-                owner.aiPath.canMove = true;
-            }
-        }
-        else
-        {
-            owner.aiPath.canMove = false;
-        }
+        owner.aiPath.canMove = true;
     }
 }

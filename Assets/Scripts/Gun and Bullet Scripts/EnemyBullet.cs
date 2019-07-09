@@ -18,9 +18,4 @@ public class EnemyBullet : Bullet
         }
         base.OnCollisionEnter2D(collisionInfo);
     }
-    //This prevents parrying from screwing up which bullets are which in the pooler
-    protected void resetBulletTagEnemy()
-    {
-        this.gameObject.tag = TagsAndLabels.EnemyBulletTag;
-    }
 }

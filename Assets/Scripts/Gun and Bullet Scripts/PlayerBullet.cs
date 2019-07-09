@@ -23,10 +23,4 @@ public class PlayerBullet : Bullet
         }
         base.OnCollisionEnter2D(collisionInfo);
     }
-
-    //This prevents parrying from screwing up which bullets are which in the pooler
-    private void resetBulletTagPlayer()
-    {
-        this.gameObject.tag = TagsAndLabels.PlayerBulletTag;
-    }
 }

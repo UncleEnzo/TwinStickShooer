@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 309343144516758888}
   - component: {fileID: 309343144516758869}
   - component: {fileID: 5355450356106762365}
-  - component: {fileID: 7098836933951357972}
+  - component: {fileID: 8688774021229299352}
   - component: {fileID: 888971287}
   - component: {fileID: 888971288}
   - component: {fileID: 888971289}
@@ -133,7 +133,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7098836933951357972
+--- !u!114 &8688774021229299352
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 309343144516758889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0cedb7f29d68744c967e7b4e789c1f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 863462df38b6225449e9659674736b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   knockBack: 5
@@ -154,7 +154,7 @@ MonoBehaviour:
   walkAndFireRange: 7
   collideDamageToPlayer: 2
   moveSpeed: 5
-  walking: 1
+  preparingToFire: 0
   aiPath: {fileID: 888971288}
   enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
@@ -168,6 +168,9 @@ MonoBehaviour:
   maxDropCount: 7
   minDropDist: 2
   maxDropDist: 2
+  coolDownOnMovementTimer: 0.5
+  movementCoolDownReset: 0.5
+  floatingText: []
 --- !u!114 &888971287
 MonoBehaviour:
   m_ObjectHideFlags: 0

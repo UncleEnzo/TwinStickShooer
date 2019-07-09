@@ -7,6 +7,13 @@ using UnityEngine.UI;
 using Pathfinding;
 using StateMachine;
 
+public enum EnemyStates
+{
+    FollowPlayer,
+    MoveShoot,
+    StopShoot,
+    Die
+}
 public class Enemy : MonoBehaviour
 {
     public float knockBack = 5f;
@@ -18,11 +25,11 @@ public class Enemy : MonoBehaviour
     public float walkAndFireRange = 9f;
     public float collideDamageToPlayer = 2f;
     public float moveSpeed = 5f;
-    public bool walking = true;
     public bool preparingToFire = false;
-
+    [System.NonSerialized]
     public Rigidbody2D rb;
     public AIPath aiPath;
+    [System.NonSerialized]
     public AIDestinationSetter AIDestinationSetter;
 
     //take damage variables
@@ -39,21 +46,16 @@ public class Enemy : MonoBehaviour
     public float movementCoolDownReset = .5f;
     public List<FloatingText> floatingText;
     public StateMachine<Enemy> stateMachine { get; set; }
-    public bool switchState = false;
-
-    //Note: Experimental call so that enemies can be dragged in from prefabs as well as Enabled > If it works, make it a private method that's called from both
+    public EnemyStates enemyStates;
+    public float distFromPlayer;
     protected void Start()
     {
         StartOrEnableEnemy();
-        stateMachine = new StateMachine<Enemy>(this);
-        stateMachine.ChangeState(StatePlayerFollow.Instance);
     }
 
     protected void OnEnable()
     {
         StartOrEnableEnemy();
-        stateMachine = new StateMachine<Enemy>(this);
-        stateMachine.ChangeState(StatePlayerFollow.Instance);
     }
 
     private void StartOrEnableEnemy()
@@ -74,38 +76,15 @@ public class Enemy : MonoBehaviour
     {
         //Tracks floating text number locations relative to the enemy
         TrackFloatingTextPos();
-
-        //CoolDown for Movement after being knocked back
-        if (!aiPath.canMove)
-        {
-            coolDownOnMovementTimer -= Time.deltaTime;
-            if (coolDownOnMovementTimer <= 0)
-            {
-                aiPath.canMove = true;
-                coolDownOnMovementTimer = movementCoolDownReset;
-            }
-        }
     }
 
     // Update is called once per frame
     protected void FixedUpdate()
     {
-
-        if (aiPath.canMove == true)
-        {
-            enemyTrajectory = rb.velocity;
-
-            //FOLLOW PLAYER STATE
-            stateMachine.ChangeState(StatePlayerFollow.Instance);
-            stateMachine.Update();
-
-            //SHOOT AT PLAYER STATE
-            stateMachine.ChangeState(StateMoveShoot.Instance);
-            stateMachine.Update();
-
-        }
+        enemyTrajectory = rb.velocity;
         stateMachine.Update();
     }
+
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if (collisionInfo.gameObject.tag == TagsAndLabels.PlayerTag)
@@ -120,9 +99,7 @@ public class Enemy : MonoBehaviour
         health -= Damage;
         if (gameObject.activeInHierarchy == true)
         {
-            //ENTER KNOCKBACK STATE, DON"T JUST CALL IT
             aiPath.canMove = false;
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
             Vector2 difference = knockBackTrajectory;
             difference = difference.normalized * knockBackForce;
@@ -156,5 +133,4 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
 }

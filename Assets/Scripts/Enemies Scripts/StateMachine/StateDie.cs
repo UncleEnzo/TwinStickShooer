@@ -31,7 +31,6 @@ public class StateDie : State<Enemy>
     #endregion
     public override void EnterState(Enemy owner)
     {
-        Debug.Log("Entering Die State");
         //Play some animation, particles, and sounds
         dropCraftComponents(owner);
         dropKey(owner);
@@ -39,7 +38,6 @@ public class StateDie : State<Enemy>
     }
     public override void ExitState(Enemy owner)
     {
-        Debug.Log("Exiting Die State");
     }
     public override void UpdateState(Enemy owner)
     {

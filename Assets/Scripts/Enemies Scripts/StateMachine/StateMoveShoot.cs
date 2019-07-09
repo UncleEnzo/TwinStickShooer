@@ -34,32 +34,15 @@ public class StateMoveShoot : State<Enemy>
     #endregion
     public override void EnterState(Enemy owner)
     {
-        Debug.Log("Entering Second State");
+        //animations
     }
 
     public override void ExitState(Enemy owner)
     {
-        Debug.Log("Exiting Second State");
     }
 
     public override void UpdateState(Enemy owner)
     {
-        float distFromPlayer = Vector3.Distance(Player.Instance.transform.position, owner.transform.position);
-        if (!owner.preparingToFire && distFromPlayer <= owner.walkAndFireRange && distFromPlayer > owner.stopAndFireRange)
-        {
-            owner.GetComponentInChildren<EnemyGun>().EnemyFireGun();
-        }
-        if (!owner.preparingToFire && distFromPlayer <= owner.stopAndFireRange)
-        {
-            owner.StartCoroutine(takeAimThenFire(owner));
-        }
-    }
-
-    IEnumerator takeAimThenFire(Enemy owner)
-    {
-        owner.preparingToFire = true;
-        yield return new WaitForSeconds(owner.waitBeforeFire);
         owner.GetComponentInChildren<EnemyGun>().EnemyFireGun();
-        owner.preparingToFire = false;
     }
 }
