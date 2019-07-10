@@ -21,7 +21,7 @@ public class WeaponSwitching : MonoBehaviour
     private int selectedWeapon = 0;
     public int weaponCount = 0;
     private int previousWeaponCount = 0;
-    public PlayerSavedData localWeaponData = new PlayerSavedData();
+    public LevelPersistData localWeaponData = new LevelPersistData();
 
 
     // Start is called before the first frame update

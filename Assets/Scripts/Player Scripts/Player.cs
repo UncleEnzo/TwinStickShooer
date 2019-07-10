@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     private float coolDownOnMovementTimer = 1f;
     private float movementCoolDownReset = 1f;
     public bool playerUsable = true;
-    public static PlayerSavedData localPlayerData = new PlayerSavedData();
+    public static LevelPersistData localPlayerData = new LevelPersistData();
     private float healthDefault = 8f;
 
     [Header("IFrames")]
@@ -42,10 +42,9 @@ public class Player : MonoBehaviour
     #endregion
     public void Start()
     {
-        PersistentGameData persistentGameData = PersistentGameData.Instance;
-        if (persistentGameData.currentHealth > 0f)
+        if (PersistentGameData.Instance.currentHealth > 0f)
         {
-            localPlayerData.health = persistentGameData.currentHealth;
+            localPlayerData.health = PersistentGameData.Instance.currentHealth;
         }
         else
         {

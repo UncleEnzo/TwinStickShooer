@@ -23,11 +23,6 @@ public class Cheats : MonoBehaviour
         {
             SceneLoader.loadGameOverScene();
         }
-        //Cheat to load Dev Testing Scene
-        if (Input.GetKeyDown("t"))
-        {
-            SceneLoader.loadDevTestScene();
-        }
 
         if (Input.GetKeyDown("p"))
         {

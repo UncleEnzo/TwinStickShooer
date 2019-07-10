@@ -126,7 +126,6 @@
      <Compile Include="Assets\Scripts\Player Scripts\CursorController.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Player Scripts\PlayerAnimController.cs" />
-     <Compile Include="Assets\Scripts\PlayerSavedData.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\Parry.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUp.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpAction.cs" />
@@ -135,6 +134,9 @@
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpUIInfo.cs" />
      <Compile Include="Assets\Scripts\Rooms\Door.cs" />
      <Compile Include="Assets\Scripts\Rooms\EnemyRoom.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\LevelPersistData.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveData.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveSystem.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\SetGunPosition.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />

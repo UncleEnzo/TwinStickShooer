@@ -6,56 +6,48 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    private static int hubWorldIndex = 1;
     //Methods for buttons (Does not allow static method calls to be assigned to buttons)
-    public void ButtonLoadNextScene()
+    public void ButtonLoadSavedGame()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextScene = currentSceneIndex + 1;
-        int lastScene = SceneManager.sceneCountInBuildSettings - 2;
-        if (PersistentGameData.Instance)
-        {
-            PersistentGameData.Instance.savePlayerStats();
-        }
-        SceneManager.LoadScene(nextScene);
-        if (nextScene == lastScene)
+        SaveData SaveData = SaveSystem.LoadASave();
+        SceneManager.LoadScene(SaveData.currentLevel);
+        if (SaveData.currentLevel == hubWorldIndex)
         {
             if (PersistentGameData.Instance)
             {
-                PersistentGameData.Instance.resetPersistentStats();
+                PersistentGameData.Instance.resetPersistentGameData();
             }
         }
     }
 
-    public void ButtonLoadStartScene()
+    public void ButtonStartNewGame()
+    {
+        SceneManager.LoadScene(hubWorldIndex);
+        if (PersistentGameData.Instance != null)
+        {
+            PersistentGameData.Instance.resetPersistentGameData();
+        }
+        //add logic to overwrite save file stuff or create a new one
+    }
+
+    public void ButtonLoadStartScreen()
     {
         SceneManager.LoadScene(0);
         if (PersistentGameData.Instance != null)
         {
-            PersistentGameData.Instance.resetPersistentStats();
+            PersistentGameData.Instance.resetPersistentGameData();
         }
 
     }
 
-    public void ButtonLoadDevTestScene()
+    public void ButtonLoadHubWorld()
     {
-        print("Going to dev test level");
-        int devTestScene = SceneManager.sceneCountInBuildSettings - 2;
-        print(devTestScene);
-        SceneManager.LoadScene(devTestScene);
+        //Todo: add save coins and loot table logic
+        SceneManager.LoadScene(hubWorldIndex);
         if (PersistentGameData.Instance != null)
         {
-            PersistentGameData.Instance.resetPersistentStats();
-        }
-    }
-
-    public void ButtonGameOverScene()
-    {
-        print("Going to game over screen");
-        int gameOverScene = SceneManager.sceneCountInBuildSettings - 1;
-        SceneManager.LoadScene(gameOverScene);
-        if (PersistentGameData.Instance != null)
-        {
-            PersistentGameData.Instance.resetPersistentStats();
+            PersistentGameData.Instance.resetPersistentGameData();
         }
     }
 
@@ -68,54 +60,54 @@ public class SceneLoader : MonoBehaviour
     //In game methods
     public static void LoadNextScene()
     {
-        //print("Going to next level");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextScene = currentSceneIndex + 1;
         int lastScene = SceneManager.sceneCountInBuildSettings - 2;
         if (PersistentGameData.Instance)
         {
-            PersistentGameData.Instance.savePlayerStats();
+            PersistentGameData.Instance.persistGameData();
+            SaveSystem.SavePersistentData(PersistentGameData.Instance);
         }
         SceneManager.LoadScene(nextScene);
         if (nextScene == lastScene)
         {
             if (PersistentGameData.Instance)
             {
-                PersistentGameData.Instance.resetPersistentStats();
+                PersistentGameData.Instance.resetPersistentGameData();
             }
         }
     }
 
     public static void LoadStartScene()
     {
+        PersistentGameData.Instance.persistGameData();
+        SaveSystem.SavePersistentData(PersistentGameData.Instance);
         SceneManager.LoadScene(0);
         if (PersistentGameData.Instance != null)
         {
-            PersistentGameData.Instance.resetPersistentStats();
+            PersistentGameData.Instance.resetPersistentGameData();
         }
 
     }
 
-    public static void loadDevTestScene()
+    public static void LoadHubWorld()
     {
-        print("Going to dev test level");
-        int devTestScene = SceneManager.sceneCountInBuildSettings - 2;
-        print(devTestScene);
-        SceneManager.LoadScene(devTestScene);
+        SceneManager.LoadScene(hubWorldIndex);
         if (PersistentGameData.Instance != null)
         {
-            PersistentGameData.Instance.resetPersistentStats();
+            PersistentGameData.Instance.resetPersistentGameData();
         }
     }
 
     public static void loadGameOverScene()
     {
         print("Going to game over screen");
+        //Todo: Add save global data 
         int gameOverScene = SceneManager.sceneCountInBuildSettings - 1;
         SceneManager.LoadScene(gameOverScene);
         if (PersistentGameData.Instance != null)
         {
-            PersistentGameData.Instance.resetPersistentStats();
+            PersistentGameData.Instance.resetPersistentGameData();
         }
     }
 

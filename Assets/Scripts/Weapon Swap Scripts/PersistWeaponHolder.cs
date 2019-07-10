@@ -13,10 +13,9 @@ public class PersistWeaponHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PersistentGameData persistentGameData = PersistentGameData.Instance;
         GameObject weaponHolder = WeaponSwitching.Instance.gameObject;
 
-        if (persistentGameData.currentWeaponCount != weaponHolder.transform.childCount)
+        if (PersistentGameData.Instance.currentWeaponCount != weaponHolder.transform.childCount)
         {
             //get all weaponTypes in the newly instantiated weaponholder
             List<WeaponType> weaponsInHolder = new List<WeaponType>();
@@ -26,12 +25,11 @@ public class PersistWeaponHolder : MonoBehaviour
             }
 
             //Compare weapons in weaponholder to weapons in persisted weapons and add missing ones
-            foreach (WeaponType weaponType in persistentGameData.currentGunTypes)
+            foreach (WeaponType weaponType in PersistentGameData.Instance.currentGunTypes)
             {
                 if (!weaponsInHolder.Contains(weaponType))
                 {
                     int weaponIndexValue = (int)weaponType;
-                    print(weaponIndexValue);
                     Instantiate(weaponsToInstantiate[weaponIndexValue], weaponHolder.transform);
                 }
             }

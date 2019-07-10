@@ -40,15 +40,18 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
-    public void LoadMenu()
+    public void AbandonRun()
     {
         Time.timeScale = 1;
-        SceneLoader.LoadStartScene();
+        SceneLoader.LoadHubWorld();
     }
 
-    public void QuitGame()
+    //Todo: Settings
+
+    public void ReturnToStartScreen()
     {
-        Debug.Log("Quitting game");
-        SceneLoader.QuitGame();
+        Debug.Log("Returning to start screen");
+        Time.timeScale = 1f;
+        SceneLoader.LoadStartScene();
     }
 }
