@@ -57,6 +57,8 @@ public class Bullet : MonoBehaviour
         }
         if (bulletBounce)
         {
+            //Recalculating bullet trajectory for next hit :)
+            bulletTrajectory = (rigidBody2D.velocity / bulletSpeed);
             bounces++;
             if (bounces >= bulletBounceMaxNum)
             {

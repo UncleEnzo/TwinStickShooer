@@ -17,12 +17,10 @@ public class WeaponSwitching : MonoBehaviour
     #endregion
 
     public static WeaponSwitching Instance;
-
     private int selectedWeapon = 0;
     public int weaponCount = 0;
     private int previousWeaponCount = 0;
-    public LevelPersistData localWeaponData = new LevelPersistData();
-
+    public List<WeaponType> gunTypes;
 
     // Start is called before the first frame update
     void Start()
@@ -65,14 +63,14 @@ public class WeaponSwitching : MonoBehaviour
     private void addWeaponToPersist()
     {
         //Update childcount
-        localWeaponData.weaponCount = transform.childCount;
+        weaponCount = transform.childCount;
 
         //add to weapontype array
         foreach (Transform weapon in transform)
         {
-            if (!localWeaponData.gunTypes.Contains(weapon.GetComponent<Weapon>().GunProperties.weaponType))
+            if (!gunTypes.Contains(weapon.GetComponent<Weapon>().GunProperties.weaponType))
             {
-                localWeaponData.gunTypes.Add(weapon.GetComponent<Weapon>().GunProperties.weaponType);
+                gunTypes.Add(weapon.GetComponent<Weapon>().GunProperties.weaponType);
             }
         }
     }

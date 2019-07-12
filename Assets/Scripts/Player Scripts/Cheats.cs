@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Cheats : MonoBehaviour
 {
-    public Item key;
-    public Item money;
-    public Item physical;
-    public Item gunPowder;
-    public Item explosive;
-
     // Update is called once per frame
     void Update()
     {
@@ -31,32 +25,32 @@ public class Cheats : MonoBehaviour
 
         if (Input.GetKeyDown("u"))
         {
-            Inventory.Instance.AddItem(money);
+            Inventory.Instance.AddItem(Inventory.Instance.moneyCoin);
         }
 
         if (Input.GetKeyDown("y"))
         {
-            Inventory.Instance.RemoveItem(money);
+            Inventory.Instance.RemoveItem(Inventory.Instance.moneyCoin);
         }
 
         if (Input.GetKeyDown("l"))
         {
             for (int i = 0; i < 10; i++)
             {
-                Inventory.Instance.AddItem(key);
+                Inventory.Instance.AddItem(Inventory.Instance.key);
             }
         }
 
         if (Input.GetKeyDown("k"))
         {
-            Inventory.Instance.RemoveItem(key);
+            Inventory.Instance.RemoveItem(Inventory.Instance.key);
         }
 
         if (Input.GetKeyDown("1"))
         {
             for (int i = 0; i < 10; i++)
             {
-                Inventory.Instance.AddItem(physical);
+                Inventory.Instance.AddItem(Inventory.Instance.physicalComponent);
             }
         }
 
@@ -64,7 +58,7 @@ public class Cheats : MonoBehaviour
         {
             for (int i = 0; i < 10; i++)
             {
-                Inventory.Instance.AddItem(gunPowder);
+                Inventory.Instance.AddItem(Inventory.Instance.gunpowderCompontent);
             }
         }
 
@@ -72,7 +66,30 @@ public class Cheats : MonoBehaviour
         {
             for (int i = 0; i < 10; i++)
             {
-                Inventory.Instance.AddItem(explosive);
+                Inventory.Instance.AddItem(Inventory.Instance.explosiveComponent);
+            }
+        }
+        if (Input.GetKeyDown("4"))
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Inventory.Instance.AddItem(Inventory.Instance.physicalComponent);
+            }
+        }
+
+        if (Input.GetKeyDown("5"))
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Inventory.Instance.AddItem(Inventory.Instance.gunpowderCompontent);
+            }
+        }
+
+        if (Input.GetKeyDown("6"))
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Inventory.Instance.AddItem(Inventory.Instance.explosiveComponent);
             }
         }
     }

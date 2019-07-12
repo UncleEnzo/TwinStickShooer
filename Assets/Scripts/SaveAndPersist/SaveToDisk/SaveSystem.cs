@@ -5,29 +5,56 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-    private static string path = Application.persistentDataPath + "/savedata.mbepus";
+    private static string savePersistentDataPath = Application.persistentDataPath + "/savepersistentdata.mbepus";
+    private static string saveGlobalMoneyDataPath = Application.persistentDataPath + "/saveglobalmoneydata.mbepus";
     public static void SavePersistentData(PersistentGameData PersistentGameData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(path, FileMode.Create);
-        SaveData data = new SaveData(PersistentGameData);
+        FileStream stream = new FileStream(savePersistentDataPath, FileMode.Create);
+        SavePersistentData data = new SavePersistentData(PersistentGameData);
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static SaveData LoadASave()
+    public static void SaveGlobalMoneyData(PersistentGameData PersistentGameData)
     {
-        if (File.Exists(path))
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(saveGlobalMoneyDataPath, FileMode.Create);
+        SaveGlobalMoney data = new SaveGlobalMoney(PersistentGameData);
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static SavePersistentData LoadPersistentData()
+    {
+        if (File.Exists(savePersistentDataPath))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-            SaveData data = formatter.Deserialize(stream) as SaveData;
+            FileStream stream = new FileStream(savePersistentDataPath, FileMode.Open);
+            SavePersistentData data = formatter.Deserialize(stream) as SavePersistentData;
             stream.Close();
             return data;
         }
         else
         {
-            Debug.Log("Save File Not Found in " + path);
+            Debug.Log("Save File Not Found in " + savePersistentDataPath);
+            return null;
+        }
+    }
+
+    public static SaveGlobalMoney LoadMoneyData()
+    {
+        if (File.Exists(saveGlobalMoneyDataPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(saveGlobalMoneyDataPath, FileMode.Open);
+            SaveGlobalMoney data = formatter.Deserialize(stream) as SaveGlobalMoney;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.Log("Save File Not Found in " + saveGlobalMoneyDataPath);
             return null;
         }
     }

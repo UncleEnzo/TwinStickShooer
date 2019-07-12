@@ -26,8 +26,7 @@ public class Player : MonoBehaviour
     private float coolDownOnMovementTimer = 1f;
     private float movementCoolDownReset = 1f;
     public bool playerUsable = true;
-    public static LevelPersistData localPlayerData = new LevelPersistData();
-    private float healthDefault = 8f;
+    public float health = 8f;
 
     [Header("IFrames")]
     #region IFrames
@@ -42,15 +41,9 @@ public class Player : MonoBehaviour
     #endregion
     public void Start()
     {
-        if (PersistentGameData.Instance.currentHealth > 0f)
-        {
-            localPlayerData.health = PersistentGameData.Instance.currentHealth;
-        }
-        else
-        {
-            localPlayerData.health = healthDefault;
-        }
-        PlayerHUBController.Instance.updateDisplayHubHealth(localPlayerData.health);
+        SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
+        health = SavePersistentData.health;
+        PlayerHUBController.Instance.updateDisplayHubHealth(health);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -98,9 +91,12 @@ public class Player : MonoBehaviour
         {
             canMove = false;
         }
-        localPlayerData.health -= Damage;
-        PlayerHUBController.Instance.updateDisplayHubHealth(localPlayerData.health);
-        if (iFramesActive == false)
+        if (!iFramesActive)
+        {
+            health -= Damage;
+        }
+        PlayerHUBController.Instance.updateDisplayHubHealth(health);
+        if (!iFramesActive)
         {
             if (knockbackForce != 0)
             {
@@ -111,7 +107,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(FlashCo());
             }
         }
-        if (localPlayerData.health <= 0f)
+        if (health <= 0f)
         {
             die();
         }

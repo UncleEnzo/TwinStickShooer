@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12680446487baa4a87cdd629cad1cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7625524876518625148, guid: 9d11e43d5466f394880f1484afd1f325, type: 3}
+  currentLevel: 0
   currentHealth: 0
   currentWeaponCount: 0
   currentGunTypes: 
+  currentKeys: 0
+  key: {fileID: 11400000, guid: 4186f3044d3a6704f809f0f9972b47fb, type: 2}

@@ -13,10 +13,7 @@ public class ItemPickup : Interactable
 
     void itemPickUp()
     {
-        bool wasPickedUp = Inventory.Instance.AddItem(item);
-        if (wasPickedUp)
-        {
-            gameObject.SetActive(false);
-        }
+        Inventory.Instance.AddItem(item);
+        gameObject.SetActive(false);
     }
 }

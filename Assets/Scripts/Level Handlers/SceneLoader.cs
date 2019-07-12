@@ -10,9 +10,9 @@ public class SceneLoader : MonoBehaviour
     //Methods for buttons (Does not allow static method calls to be assigned to buttons)
     public void ButtonLoadSavedGame()
     {
-        SaveData SaveData = SaveSystem.LoadASave();
-        SceneManager.LoadScene(SaveData.currentLevel);
-        if (SaveData.currentLevel == hubWorldIndex)
+        SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
+        SceneManager.LoadScene(SavePersistentData.level);
+        if (SavePersistentData.level == hubWorldIndex)
         {
             if (PersistentGameData.Instance)
             {
@@ -65,8 +65,7 @@ public class SceneLoader : MonoBehaviour
         int lastScene = SceneManager.sceneCountInBuildSettings - 2;
         if (PersistentGameData.Instance)
         {
-            PersistentGameData.Instance.persistGameData();
-            SaveSystem.SavePersistentData(PersistentGameData.Instance);
+            PersistentGameData.Instance.saveAndPersistGameData();
         }
         SceneManager.LoadScene(nextScene);
         if (nextScene == lastScene)
@@ -80,8 +79,7 @@ public class SceneLoader : MonoBehaviour
 
     public static void LoadStartScene()
     {
-        PersistentGameData.Instance.persistGameData();
-        SaveSystem.SavePersistentData(PersistentGameData.Instance);
+        PersistentGameData.Instance.saveAndPersistGameData();
         SceneManager.LoadScene(0);
         if (PersistentGameData.Instance != null)
         {

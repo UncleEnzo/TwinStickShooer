@@ -8,14 +8,18 @@ using UnityEngine.SceneManagement;
 //Health, Ammo, Guns, recipies, crafting components, power up effects and timers
 public class PersistentGameData : MonoBehaviour
 {
-    private LevelPersistData LevelPersistData = new LevelPersistData();
     public static PersistentGameData Instance;
     public int currentLevel;
     public float currentHealth;
-
     public int currentWeaponCount;
     public List<WeaponType> currentGunTypes;
 
+    //Testing
+    public int currentKeys;
+    public int currentMoney;
+    public int currentPhysicalCraftComponents;
+    public int currentGunPowderCraftComponents;
+    public int currentExplosiveCraftComponents;
 
     //On scene start, checks that there is only one of this script and deletes any duplicates
     #region Singleton
@@ -28,46 +32,46 @@ public class PersistentGameData : MonoBehaviour
         }
         else if (Instance != this)
         {
-            print("Triggered AWAKE DESTROY");
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }
     #endregion
 
-    public void LoadGame()
-    {
-        SaveData SaveData = SaveSystem.LoadASave();
-        currentHealth = SaveData.health;
-        currentGunTypes = SaveData.currentGunTypes;
-        currentWeaponCount = SaveData.currentWeaponCount;
-    }
-
     void Start()
     {
+        // Note: Just call the method to load wherever it fucking works, there's no reason to it.
+        //Guns work here for some reason
+        //inventory only works in fucking inventory.instance for some reason
         LoadGame();
     }
 
+    private void LoadGame()
+    {
+        SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
+        currentGunTypes = SavePersistentData.gunTypes;
+        currentWeaponCount = SavePersistentData.weaponCount;
+    }
+
     //THINGS TO NOT PUT IN THIS METHOD BUT TO LOAD AND SAVE DIRECTLY
-    //     Global coins > that should always be what it is in save
     //     Loottable list items you unlocked from vendors
     //     List of remaining vedor items
-    public void persistGameData()
+    public void saveAndPersistGameData()
     {
-        PersistentGameData.Instance.LevelPersistData.health = Player.localPlayerData.health;
-        PersistentGameData.Instance.LevelPersistData.weaponCount = WeaponSwitching.Instance.gameObject.transform.childCount;
-        PersistentGameData.Instance.LevelPersistData.gunTypes = WeaponSwitching.Instance.localWeaponData.gunTypes;
-
-        currentHealth = PersistentGameData.Instance.LevelPersistData.health;
-        currentWeaponCount = PersistentGameData.Instance.LevelPersistData.weaponCount;
-        currentGunTypes = PersistentGameData.Instance.LevelPersistData.gunTypes;
-
+        currentHealth = Player.Instance.health;
+        currentWeaponCount = WeaponSwitching.Instance.gameObject.transform.childCount;
+        currentGunTypes = WeaponSwitching.Instance.gunTypes;
+        currentKeys = Inventory.Instance.getKeyCount();
+        currentMoney = Inventory.Instance.getMoneyCount();
+        currentPhysicalCraftComponents = Inventory.Instance.getPhysicalCount();
+        currentGunPowderCraftComponents = Inventory.Instance.getGunpowderCount();
+        currentExplosiveCraftComponents = Inventory.Instance.getExplosiveCount();
         currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-        //crafting material count
         //recipies you have for the run
         //Things in loottable you have already acquired, that shouldn't appear in chests again
-
+        SaveSystem.SaveGlobalMoneyData(this);
+        SaveSystem.SavePersistentData(this);
     }
 
     public void resetPersistentGameData()

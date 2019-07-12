@@ -18,9 +18,9 @@ public class Recipe : Item
     }
     private bool checkRequirements()
     {
-        bool physicalCheck = RecipeItemManager.Instance.checkRequirements(ItemType.Physical, physicalRequirement);
-        bool gunPowderCheck = RecipeItemManager.Instance.checkRequirements(ItemType.GunPowder, gunPowderRequirement);
-        bool explosiveCheck = RecipeItemManager.Instance.checkRequirements(ItemType.Explosive, explosiveRequirement);
+        bool physicalCheck = RecipeItemManager.Instance.checkRequirements(Inventory.Instance.physicalCraftComponents, physicalRequirement);
+        bool gunPowderCheck = RecipeItemManager.Instance.checkRequirements(Inventory.Instance.gunpowderCraftComponents, gunPowderRequirement);
+        bool explosiveCheck = RecipeItemManager.Instance.checkRequirements(Inventory.Instance.explosiveCraftComponents, explosiveRequirement);
         if (!physicalCheck || !gunPowderCheck || !explosiveCheck)
         {
             Debug.Log("Not enough components to use recipe.");

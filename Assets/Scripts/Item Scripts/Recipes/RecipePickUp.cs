@@ -86,11 +86,8 @@ public class RecipePickUp : Interactable
 
     void pickUpItem()
     {
-        bool wasPickedUp = Inventory.Instance.AddItem(item);
-        if (wasPickedUp)
-        {
-            gameObject.SetActive(false);
-        }
+        Inventory.Instance.AddItem(item);
+        gameObject.SetActive(false);
     }
 
     public override void interact()

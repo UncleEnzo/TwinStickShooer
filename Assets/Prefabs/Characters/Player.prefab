@@ -180,7 +180,7 @@ MonoBehaviour:
   animator: {fileID: 7625524876516204061}
   canMove: 1
   playerUsable: 1
-  triggerCollider: {fileID: 4518107801132208177}
+  triggerCollider: {fileID: 6972054770439239144}
   movementAnimation: {fileID: 7625524876516204063}
   mySprite: {fileID: 2652696027989464139}
   flashColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 0.24313726}

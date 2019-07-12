@@ -110,7 +110,6 @@
      <Compile Include="Assets\Scripts\Item Scripts\Recipes\Recipe.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Recipes\RecipePickUp.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\LevelGenerator.cs" />
-     <Compile Include="Assets\Scripts\Level Handlers\PersistentGameData.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\LootManager\LootTable.cs" />
      <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\Dialogue.cs" />
@@ -134,8 +133,9 @@
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpUIInfo.cs" />
      <Compile Include="Assets\Scripts\Rooms\Door.cs" />
      <Compile Include="Assets\Scripts\Rooms\EnemyRoom.cs" />
-     <Compile Include="Assets\Scripts\SaveAndPersist\LevelPersistData.cs" />
-     <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveData.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\PersistLayer\PersistentGameData.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveGlobalMoney.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SavePersistentData.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveSystem.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\SetGunPosition.cs" />
