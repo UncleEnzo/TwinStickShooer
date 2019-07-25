@@ -24,7 +24,7 @@ public class SceneLoader : MonoBehaviour
     public void ButtonStartNewGame()
     {
         SaveSystem.ResetGlobalMoneyData();
-        SaveSystem.ResetPlayerLootPoolData(GetComponent<NewGameData>());
+        SaveSystem.ResetPlayerLootPoolData(GetComponent<LootLedger>());
         SceneManager.LoadScene(hubWorldIndex);
         if (PersistentGameData.Instance != null)
         {

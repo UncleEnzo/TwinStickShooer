@@ -99,11 +99,11 @@ public static class SaveSystem
         stream.Close();
     }
 
-    public static void ResetPlayerLootPoolData(NewGameData NewGameData)
+    public static void ResetPlayerLootPoolData(LootLedger LootLedger)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(savePlayerLootPoolDataPath, FileMode.Create);
-        SavePlayerLootPool data = new SavePlayerLootPool(NewGameData);
+        SavePlayerLootPool data = new SavePlayerLootPool(LootLedger);
         formatter.Serialize(stream, data);
         stream.Close();
     }

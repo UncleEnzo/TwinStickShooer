@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2670674275880398235}
   - component: {fileID: 2670674275880398234}
-  - component: {fileID: 934141830198701579}
+  - component: {fileID: 1872448250018180470}
   m_Layer: 0
   m_Name: Scene Loader
   m_TagString: Untagged
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b27b1005bffb484e9e5644f8ee78758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &934141830198701579
+--- !u!114 &1872448250018180470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,19 +58,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealingPotion: {fileID: 3085158205632521483, guid: 63e067b73d889a340a26b09e0849c0d2,
     type: 3}
-  StartingPhysicalRecipes:
-  - item: {fileID: 3085158205632521483, guid: b231c602963e8fb41a31885440989614, type: 3}
-    weight: 0
+  PhysicalRecipes:
   - item: {fileID: 3085158205632521483, guid: f722d52a1b4530c459af14d4d4e8f7cc, type: 3}
     weight: 0
-  StartingGunpowderRecipes:
+  - item: {fileID: 3085158205632521483, guid: b231c602963e8fb41a31885440989614, type: 3}
+    weight: 0
+  GunpowderRecipes:
   - item: {fileID: 3085158205632521483, guid: e5d405e3876740045ba88d8bfc1db357, type: 3}
     weight: 0
   - item: {fileID: 3085158205632521483, guid: 2f38f56b7ec6973408e13411fc0b7404, type: 3}
     weight: 0
   - item: {fileID: 3085158205632521483, guid: 0160095499d5c2248b7fccf0b185576d, type: 3}
     weight: 0
-  StartingExplosiveRecipes:
+  ExplosiveRecipes:
+  - item: {fileID: 3085158205632521483, guid: b6299be53aad37546bc0a10ac88e8a84, type: 3}
+    weight: 0
+  Weapons:
+  - item: {fileID: 11991691623488481, guid: a2655f28b64c3014583ab2cedf6543f3, type: 3}
+    weight: 0
+  - item: {fileID: 7534039688406982307, guid: 9a0e8cacde3b6604089bf2900194860f, type: 3}
+    weight: 0
+  - item: {fileID: 11991691623488481, guid: 2a51bf93dd7f5ed4cafddf8e2546dc7e, type: 3}
+    weight: 0
+  - item: {fileID: 11991691623488481, guid: ea5fe9a1959b4e744b690e70a7ac8a1e, type: 3}
+    weight: 0
+  - item: {fileID: 11991691623488481, guid: 605944dbd8c944f44847776aecb7cf16, type: 3}
+    weight: 0
+  StartingPhysicalRecipes:
+  - item: {fileID: 3085158205632521483, guid: f722d52a1b4530c459af14d4d4e8f7cc, type: 3}
+    weight: 0
+  StartingGunpowderRecipes:
+  - item: {fileID: 3085158205632521483, guid: 2f38f56b7ec6973408e13411fc0b7404, type: 3}
+    weight: 0
+  StaringExplosiveRecipes:
   - item: {fileID: 3085158205632521483, guid: b6299be53aad37546bc0a10ac88e8a84, type: 3}
     weight: 0
   StartingWeapons:

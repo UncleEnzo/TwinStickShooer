@@ -53,18 +53,14 @@ public class LootTable : MonoBehaviour
         }
         else
         {
-            //Note: This where you load new lists from playerLootPools to the deductables
+            // //Note: This where you load new lists from playerLootPools to the deductables
             SavePlayerLootPool SavePlayerLootPool = SaveSystem.LoadPlayerLootPoolData();
-            DeductablePhysicalRecipes.Clear();
-            DeductablePhysicalRecipes = new List<Loot>(SavePlayerLootPool.PhysicalRecipeLootPool);
-            DeductableGunpowderRecipes.Clear();
-            DeductableGunpowderRecipes = new List<Loot>(SavePlayerLootPool.GunPowderRecipeLootPool);
-            DeductableExplosiveRecipes.Clear();
-            DeductableExplosiveRecipes = new List<Loot>(SavePlayerLootPool.ExplosiveRecipeLootPool);
-            DeductableWeapons.Clear();
-            DeductableWeapons = new List<Loot>(SavePlayerLootPool.WeaponLootPool);
+            ResetDeductableList(DeductablePhysicalRecipes, SavePlayerLootPool.PhysicalRecipeLootPool);
+            ResetDeductableList(DeductableGunpowderRecipes, SavePlayerLootPool.GunPowderRecipeLootPool);
+            ResetDeductableList(DeductableExplosiveRecipes, SavePlayerLootPool.ExplosiveRecipeLootPool);
+            ResetDeductableList(DeductableWeapons, SavePlayerLootPool.WeaponLootPool);
 
-            //After you figure that out, then do this next bit so you have a persistent map
+            // //After you figure that out, then do this next bit so you have a persistent map
             deductableLootMap.Add(LootListType.PhysicalRecipe, DeductablePhysicalRecipes);
             deductableLootMap.Add(LootListType.GunpowderRecipe, DeductableGunpowderRecipes);
             deductableLootMap.Add(LootListType.ExplosiveRecipe, DeductableExplosiveRecipes);
@@ -76,6 +72,15 @@ public class LootTable : MonoBehaviour
         foreach (KeyValuePair<LootListType, List<Loot>> entry in deductableLootMap)
         {
             sortListByWeight(entry.Value);
+        }
+    }
+
+    private void ResetDeductableList(List<Loot> DeductableList, List<string> LoadList)
+    {
+        DeductableList.Clear();
+        foreach (string entry in LoadList)
+        {
+            DeductableList.Add(LootLedger.LootLedgerDict[entry]);
         }
     }
 
