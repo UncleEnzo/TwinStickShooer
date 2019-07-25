@@ -100,7 +100,7 @@ MonoBehaviour:
   health: 5
   isOpen: 0
   key: {fileID: 11400000, guid: 4186f3044d3a6704f809f0f9972b47fb, type: 2}
-  chestRarityRange: 3
+  chestRarityRange: 20
 --- !u!95 &4296619524666826317
 Animator:
   serializedVersion: 3

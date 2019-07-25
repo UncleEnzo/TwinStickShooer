@@ -51,11 +51,19 @@ public class Enemy : MonoBehaviour
     protected void Start()
     {
         StartOrEnableEnemy();
+        activateStateMachine();
     }
 
     protected void OnEnable()
     {
         StartOrEnableEnemy();
+        activateStateMachine();
+    }
+
+    protected void activateStateMachine()
+    {
+        stateMachine = new StateMachine<Enemy>(this);
+        stateMachine.ChangeState(StatePlayerFollow.Instance);
     }
 
     private void StartOrEnableEnemy()

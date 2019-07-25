@@ -11,6 +11,7 @@ public class TreasureChest : Interactable
     public float health;
     public bool isOpen;
     public Item key;
+    [Header("Lower rarity range means rarer items become more ")]
     public int chestRarityRange;
     private Animator anim;
     protected GameObject RecipeUIPanel;
@@ -66,10 +67,19 @@ public class TreasureChest : Interactable
     //Dynamically adds the gameobject to the UI Panel button so you can select it
     protected void updateRecipeUI(GameObject recipe, Image UISprite, TextMeshProUGUI UIDamage, TextMeshProUGUI UIEffect, Button button)
     {
-        UISprite.sprite = recipe.GetComponent<RecipePickUp>().item.icon;
-        UIDamage.text = recipe.GetComponent<RecipePickUp>().damageDescription;
-        UIEffect.text = recipe.GetComponent<RecipePickUp>().effectDescription;
-        button.onClick.AddListener(() => { recipe.GetComponent<RecipePickUp>().MakeSelection(); });
+        if (recipe == null)
+        {
+            UISprite.sprite = null;
+            UIDamage.text = "Place Holder";
+            UIEffect.text = "Place Holder. If null, should offer player health and gundamage for reaching end of list";
+        }
+        else
+        {
+            UISprite.sprite = recipe.GetComponent<RecipePickUp>().item.icon;
+            UIDamage.text = recipe.GetComponent<RecipePickUp>().DamageDescription;
+            UIEffect.text = recipe.GetComponent<RecipePickUp>().EffectDescription;
+            button.onClick.AddListener(() => { recipe.GetComponent<RecipePickUp>().MakeSelection(); });
+        }
     }
     protected void CheckDestroyChestHealth()
     {
@@ -112,10 +122,19 @@ public class TreasureChest : Interactable
 
     protected GameObject spawnRecipe(LootListType loot, float coordinateX, float coordinateY, int chestID)
     {
-        GameObject recipe = Instantiate(LootTable.instance.generateRandomLoot(loot, chestRarityRange), new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
-        recipe.GetComponent<RecipePickUp>().chestID = chestID;
-        recipe.GetComponent<RecipePickUp>().isFromChest = true;
-        return recipe;
+        GameObject item = LootTable.instance.generateRandomLoot(loot, chestRarityRange);
+        if (item != null)
+        {
+            GameObject recipe = Instantiate(LootTable.instance.generateRandomLoot(loot, chestRarityRange), new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
+            recipe.GetComponent<RecipePickUp>().chestID = chestID;
+            recipe.GetComponent<RecipePickUp>().isFromChest = true;
+            return recipe;
+        }
+        else
+        {
+            return item;
+        }
+
     }
 
     protected void spawnItem(LootListType loot, float coordinateX, float coordinateY, int chestID)

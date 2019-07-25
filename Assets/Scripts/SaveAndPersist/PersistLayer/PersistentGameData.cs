@@ -13,13 +13,12 @@ public class PersistentGameData : MonoBehaviour
     public float currentHealth;
     public int currentWeaponCount;
     public List<WeaponType> currentGunTypes;
-
-    //Testing
     public int currentKeys;
     public int currentMoney;
     public int currentPhysicalCraftComponents;
     public int currentGunPowderCraftComponents;
     public int currentExplosiveCraftComponents;
+    public Dictionary<LootListType, List<Loot>> currentDeductableLootMap;
 
     //On scene start, checks that there is only one of this script and deletes any duplicates
     #region Singleton
@@ -54,8 +53,8 @@ public class PersistentGameData : MonoBehaviour
     }
 
     //THINGS TO NOT PUT IN THIS METHOD BUT TO LOAD AND SAVE DIRECTLY
-    //     Loottable list items you unlocked from vendors
-    //     List of remaining vedor items
+    //     List of remaining vendor items
+    //     Need to persist recipes you have in your Recipe panel :P
     public void saveAndPersistGameData()
     {
         currentHealth = Player.Instance.health;
@@ -68,7 +67,17 @@ public class PersistentGameData : MonoBehaviour
         currentExplosiveCraftComponents = Inventory.Instance.getExplosiveCount();
         currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-        //recipies you have for the run
+        //NOTE: DO NOT ADD THE TOTAL POOL TO PERSISTENT
+        if (currentDeductableLootMap == null)
+        {
+            currentDeductableLootMap = new Dictionary<LootListType, List<Loot>>();
+        }
+        currentDeductableLootMap.Clear();
+        foreach (KeyValuePair<LootListType, List<Loot>> entry in LootTable.instance.deductableLootMap)
+        {
+            currentDeductableLootMap.Add(entry.Key, entry.Value);
+        }
+
         //Things in loottable you have already acquired, that shouldn't appear in chests again
         SaveSystem.SaveGlobalMoneyData(this);
         SaveSystem.SavePersistentData(this);

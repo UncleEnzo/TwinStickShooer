@@ -7,6 +7,11 @@ public class SaveGlobalMoney
 {
     public int money;
 
+    public SaveGlobalMoney()
+    {
+        money = 0;
+    }
+
     public SaveGlobalMoney(PersistentGameData PersistentGameData)
     {
         money = PersistentGameData.currentMoney;

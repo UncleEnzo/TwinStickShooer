@@ -10,6 +10,7 @@ public class Recipe : Item
     public int physicalRequirement = 1;
     public int gunPowderRequirement = 1;
     public int explosiveRequirement = 1;
+
     public override void useItem()
     {
         base.useItem();

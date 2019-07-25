@@ -9,8 +9,8 @@ public class RecipePickUp : Interactable
 {
     public Item item;
     public Signal recipePicked;
-    public string damageDescription;
-    public string effectDescription;
+    public string DamageDescription = "5% damage increase";
+    public string EffectDescription = "Does stuff";
     public bool isFromChest = false;
     public int chestID = -1;
     private int compareChestID = -1;
@@ -35,6 +35,7 @@ public class RecipePickUp : Interactable
         pickUpItem();
         sendDestroyChestSiblingsSignal();
         Player.Instance.enablePlayer(true);
+        LootTable.instance.RemoveItemFromPool(gameObject);
         Time.timeScale = 1;
 
         //Removes listeners from the UI

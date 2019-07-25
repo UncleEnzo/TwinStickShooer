@@ -23,12 +23,13 @@ public class SceneLoader : MonoBehaviour
 
     public void ButtonStartNewGame()
     {
+        SaveSystem.ResetGlobalMoneyData();
+        SaveSystem.ResetPlayerLootPoolData(GetComponent<NewGameData>());
         SceneManager.LoadScene(hubWorldIndex);
         if (PersistentGameData.Instance != null)
         {
             PersistentGameData.Instance.resetPersistentGameData();
         }
-        //add logic to overwrite save file stuff or create a new one
     }
 
     public void ButtonLoadStartScreen()

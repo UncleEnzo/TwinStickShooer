@@ -5,23 +5,6 @@ using StateMachine;
 
 public class EnemyWithGun : Enemy
 {
-    protected new void Start()
-    {
-        base.Start();
-        activateStateMachine();
-    }
-
-    protected new void OnEnable()
-    {
-        base.OnEnable();
-        activateStateMachine();
-    }
-
-    private void activateStateMachine()
-    {
-        stateMachine = new StateMachine<Enemy>(this);
-        stateMachine.ChangeState(StatePlayerFollow.Instance);
-    }
     protected new void Update()
     {
         base.Update();

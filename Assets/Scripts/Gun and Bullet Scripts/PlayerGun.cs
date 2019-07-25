@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerGun : Gun
 {
-    // Note: Use this base trick to have start in an inheritance setup
+    public int Cost = 0;
+
     new void Start()
     {
         base.Start();

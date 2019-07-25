@@ -103,7 +103,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11991691623488481}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee2b57724a954f84a9a6ba554ff99600, type: 3}
   m_Name: 
@@ -124,6 +124,7 @@ MonoBehaviour:
     bulletAccuracy: 0
     bulletAngle: 0
     bulletBounce: 0
+    bulletBounceMaxNum: 0
     isExplosive: 0
     explosionDamage: 3
     explosiveForce: 4
@@ -134,6 +135,8 @@ MonoBehaviour:
   bullet: {fileID: 7991890147027848265, guid: 6d734a164baec2f409af91447160d03a, type: 3}
   gunShotSound: {fileID: 8300000, guid: 611f65b2aba4a4af7b4ab3d6ddb5b546, type: 3}
   gunReloadSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
+  Cost: 0
+  Weight: 100
 --- !u!58 &3279655025178572123
 CircleCollider2D:
   m_ObjectHideFlags: 0

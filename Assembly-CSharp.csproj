@@ -133,9 +133,11 @@
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpUIInfo.cs" />
      <Compile Include="Assets\Scripts\Rooms\Door.cs" />
      <Compile Include="Assets\Scripts\Rooms\EnemyRoom.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\NewGameData\NewGameData.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\PersistLayer\PersistentGameData.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveGlobalMoney.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SavePersistentData.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SavePlayerLootPool.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveSystem.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\SetGunPosition.cs" />

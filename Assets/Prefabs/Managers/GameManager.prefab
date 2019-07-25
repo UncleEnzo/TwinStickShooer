@@ -142,13 +142,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: physicalRecipes.Array.size
-      value: 2
+      propertyPath: DeductablePhysicalRecipes.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: gunpowderRecipes.Array.size
-      value: 3
+      propertyPath: DeductableGunpowderRecipes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: DeductableExplosiveRecipes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
+        type: 3}
+      propertyPath: DeductableWeapons.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
@@ -157,67 +167,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: physicalRecipes.Array.data[1].name
-      value: ParryPotion
-      objectReference: {fileID: 0}
-    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
-        type: 3}
-      propertyPath: physicalRecipes.Array.data[1].item
+      propertyPath: DeductablePhysicalRecipes.Array.data[0].item
       value: 
-      objectReference: {fileID: 3085158205632521483, guid: b231c602963e8fb41a31885440989614,
+      objectReference: {fileID: 3085158205632521483, guid: 2f38f56b7ec6973408e13411fc0b7404,
         type: 3}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: physicalRecipes.Array.data[1].dropRarity
-      value: 100
+      propertyPath: DeductablePhysicalRecipes.Array.data[0].weight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: gunpowderRecipes.Array.data[1].name
-      value: ExplosiveRounds
-      objectReference: {fileID: 0}
-    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
-        type: 3}
-      propertyPath: gunpowderRecipes.Array.data[1].item
+      propertyPath: DeductableGunpowderRecipes.Array.data[0].item
       value: 
       objectReference: {fileID: 3085158205632521483, guid: 0160095499d5c2248b7fccf0b185576d,
         type: 3}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: gunpowderRecipes.Array.data[1].dropRarity
-      value: 100
+      propertyPath: DeductableGunpowderRecipes.Array.data[0].weight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: gunpowderRecipes.Array.data[2].name
-      value: BouncyBullets
-      objectReference: {fileID: 0}
-    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
-        type: 3}
-      propertyPath: gunpowderRecipes.Array.data[2].item
+      propertyPath: DeductableExplosiveRecipes.Array.data[0].item
       value: 
-      objectReference: {fileID: 3085158205632521483, guid: e5d405e3876740045ba88d8bfc1db357,
+      objectReference: {fileID: 3085158205632521483, guid: 63e067b73d889a340a26b09e0849c0d2,
         type: 3}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: gunpowderRecipes.Array.data[2].dropRarity
-      value: 100
+      propertyPath: DeductableExplosiveRecipes.Array.data[0].weight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: explosiveRecipes.Array.data[0].name
-      value: Star Shatter
-      objectReference: {fileID: 0}
-    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
-        type: 3}
-      propertyPath: explosiveRecipes.Array.data[0].item
+      propertyPath: DeductableWeapons.Array.data[0].item
       value: 
-      objectReference: {fileID: 3085158205632521483, guid: b6299be53aad37546bc0a10ac88e8a84,
+      objectReference: {fileID: 11991691623488481, guid: ea5fe9a1959b4e744b690e70a7ac8a1e,
         type: 3}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: CraftComponents.Array.data[0].name
-      value: Physical Component
+      propertyPath: DeductableWeapons.Array.data[0].weight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
@@ -227,41 +217,16 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: CraftComponents.Array.data[0].dropRarity
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
-        type: 3}
-      propertyPath: CraftComponents.Array.data[1].name
-      value: GunPowder Component
-      objectReference: {fileID: 0}
-    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
-        type: 3}
       propertyPath: CraftComponents.Array.data[1].item
       value: 
       objectReference: {fileID: 5643607579732925551, guid: c2c8ffbfb808e1e419e25b22850099ff,
         type: 3}
     - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
         type: 3}
-      propertyPath: CraftComponents.Array.data[1].dropRarity
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
-        type: 3}
-      propertyPath: CraftComponents.Array.data[2].name
-      value: Explosive Component
-      objectReference: {fileID: 0}
-    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
-        type: 3}
       propertyPath: CraftComponents.Array.data[2].item
       value: 
       objectReference: {fileID: 3085158205632521483, guid: 7c730ae6c09ae754e95abae41b190de9,
         type: 3}
-    - target: {fileID: 350554470640922618, guid: e8c65a36ab1689845b16f4511f9b83f3,
-        type: 3}
-      propertyPath: CraftComponents.Array.data[2].dropRarity
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c65a36ab1689845b16f4511f9b83f3, type: 3}
 --- !u!4 &2763808524692670906 stripped

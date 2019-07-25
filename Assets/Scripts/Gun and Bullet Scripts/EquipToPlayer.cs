@@ -30,6 +30,7 @@ public class EquipToPlayer : MonoBehaviour
             {
                 if (weapon.GetComponent<Weapon>().GunProperties.weaponType == GetComponent<Weapon>().GunProperties.weaponType)
                 {
+                    LootTable.instance.RemoveItemFromPool(gameObject);
                     Destroy(gameObject);
                     playerHasGun = true;
                 }
@@ -39,6 +40,7 @@ public class EquipToPlayer : MonoBehaviour
                 transform.SetParent(weaponHolder.transform);
                 GetComponent<Weapon>().enabled = true;
                 GetComponent<Collider2D>().enabled = false;
+                LootTable.instance.RemoveItemFromPool(gameObject);
                 print("New Gun added to WeaponHolster");
             }
         }
