@@ -7,10 +7,9 @@ public static class SaveSystem
 {
     private static string savePersistentDataPath = Application.persistentDataPath + "/savepersistentdata.mbepus";
     private static string saveGlobalMoneyDataPath = Application.persistentDataPath + "/saveglobalmoneydata.mbepus";
-
     private static string savePlayerLootPoolDataPath = Application.persistentDataPath + "/saveplayerlootpooldata.mbepus";
+    private static string saveVendorLootPoolDataPath = Application.persistentDataPath + "/savevendorlootpooldata.mbepus";
 
-    //Note: HAVE THESE PATH BE CREATED AUTOMATICALLY WHEN STARTING A NEW GAME
 
     public static void SavePersistentData(PersistentGameData PersistentGameData)
     {
@@ -35,6 +34,15 @@ public static class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(savePlayerLootPoolDataPath, FileMode.Create);
         SavePlayerLootPool data = new SavePlayerLootPool(PersistentGameData);
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static void SaveVendorLootPoolData(PersistentGameData PersistentGameData)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(saveVendorLootPoolDataPath, FileMode.Create);
+        SaveVendorLootPool data = new SaveVendorLootPool(PersistentGameData);
         formatter.Serialize(stream, data);
         stream.Close();
     }
@@ -90,6 +98,23 @@ public static class SaveSystem
         }
     }
 
+    public static SaveVendorLootPool LoadVendorLootPoolData()
+    {
+        if (File.Exists(saveVendorLootPoolDataPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(saveVendorLootPoolDataPath, FileMode.Open);
+            SaveVendorLootPool data = formatter.Deserialize(stream) as SaveVendorLootPool;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.Log("Save File Not Found in " + saveVendorLootPoolDataPath);
+            return null;
+        }
+    }
+
     public static void ResetGlobalMoneyData()
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -104,6 +129,15 @@ public static class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(savePlayerLootPoolDataPath, FileMode.Create);
         SavePlayerLootPool data = new SavePlayerLootPool(LootLedger);
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static void ResetVendorLootPoolData(LootLedger LootLedger)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(saveVendorLootPoolDataPath, FileMode.Create);
+        SaveVendorLootPool data = new SaveVendorLootPool(LootLedger);
         formatter.Serialize(stream, data);
         stream.Close();
     }

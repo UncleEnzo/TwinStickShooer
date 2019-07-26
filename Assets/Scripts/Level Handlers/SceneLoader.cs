@@ -23,13 +23,15 @@ public class SceneLoader : MonoBehaviour
 
     public void ButtonStartNewGame()
     {
-        SaveSystem.ResetGlobalMoneyData();
-        SaveSystem.ResetPlayerLootPoolData(GetComponent<LootLedger>());
-        SceneManager.LoadScene(hubWorldIndex);
+        print("STARTING NEW GAME");
         if (PersistentGameData.Instance != null)
         {
             PersistentGameData.Instance.resetPersistentGameData();
         }
+        SaveSystem.ResetGlobalMoneyData();
+        SaveSystem.ResetPlayerLootPoolData(GetComponent<LootLedger>());
+        SaveSystem.ResetVendorLootPoolData(GetComponent<LootLedger>());
+        SceneManager.LoadScene(hubWorldIndex);
     }
 
     public void ButtonLoadStartScreen()
@@ -39,7 +41,6 @@ public class SceneLoader : MonoBehaviour
         {
             PersistentGameData.Instance.resetPersistentGameData();
         }
-
     }
 
     public void ButtonLoadHubWorld()

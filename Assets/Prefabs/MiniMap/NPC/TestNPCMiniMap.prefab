@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8233597629643784136}
   - component: {fileID: 3927288342185369597}
   m_Layer: 19
-  m_Name: NPCMiniMap
+  m_Name: TestNPCMiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e2cfefa3c32f33a469d977fef424e081, type: 3}
-  m_Color: {r: 0.0764062, g: 0.9528302, b: 0.122009546, a: 1}
+  m_Color: {r: 0.29748133, g: 0.3301887, b: 0.2992335, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

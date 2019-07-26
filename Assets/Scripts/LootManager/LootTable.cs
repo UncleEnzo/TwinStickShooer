@@ -20,7 +20,7 @@ public class LootTable : MonoBehaviour
     #endregion
 
     //Make List of each type of loot item. Give each a corresponding rarity
-    [Header("MAKE SURE DROP RARITY ORDERED HIGHEST TO LOWEST IN LISTs OR LOOTTABLE FAILS")]
+    [Header("Drop rarity needs to be ordered highest to lowest or loot table fails")]
     public List<Loot> DeductablePhysicalRecipes;
     public List<Loot> DeductableGunpowderRecipes;
     public List<Loot> DeductableExplosiveRecipes;
@@ -32,8 +32,6 @@ public class LootTable : MonoBehaviour
 
     void Start()
     {
-        //TODO: If player leaves hubworld, deductable loot pools from Total
-        //NOTE: This function will be removed when you start having an actual loot pool??
         deductableLootMap = new Dictionary<LootListType, List<Loot>>();
         if (PersistentGameData.Instance.currentDeductableLootMap != null)
         {
@@ -42,25 +40,21 @@ public class LootTable : MonoBehaviour
                 //Leave this for each loop to load in components and other values to loot table that are not deductable
                 deductableLootMap.Add(entry.Key, entry.Value);
             }
-            DeductablePhysicalRecipes.Clear();
-            DeductablePhysicalRecipes = deductableLootMap[LootListType.PhysicalRecipe];
-            DeductableGunpowderRecipes.Clear();
-            DeductableGunpowderRecipes = deductableLootMap[LootListType.GunpowderRecipe];
-            DeductableExplosiveRecipes.Clear();
-            DeductableExplosiveRecipes = deductableLootMap[LootListType.ExplosiveRecipe];
-            DeductableWeapons.Clear();
-            DeductableWeapons = deductableLootMap[LootListType.Weapon];
+            PersistDeductableList(DeductablePhysicalRecipes, LootListType.PhysicalRecipe);
+            PersistDeductableList(DeductableGunpowderRecipes, LootListType.GunpowderRecipe);
+            PersistDeductableList(DeductableExplosiveRecipes, LootListType.ExplosiveRecipe);
+            PersistDeductableList(DeductableWeapons, LootListType.Weapon);
         }
         else
         {
-            // //Note: This where you load new lists from playerLootPools to the deductables
+            //Note: This where you load new lists from playerLootPools to the deductables
             SavePlayerLootPool SavePlayerLootPool = SaveSystem.LoadPlayerLootPoolData();
             ResetDeductableList(DeductablePhysicalRecipes, SavePlayerLootPool.PhysicalRecipeLootPool);
             ResetDeductableList(DeductableGunpowderRecipes, SavePlayerLootPool.GunPowderRecipeLootPool);
             ResetDeductableList(DeductableExplosiveRecipes, SavePlayerLootPool.ExplosiveRecipeLootPool);
             ResetDeductableList(DeductableWeapons, SavePlayerLootPool.WeaponLootPool);
 
-            // //After you figure that out, then do this next bit so you have a persistent map
+            //After you figure that out, then do this next bit so you have a persistent map
             deductableLootMap.Add(LootListType.PhysicalRecipe, DeductablePhysicalRecipes);
             deductableLootMap.Add(LootListType.GunpowderRecipe, DeductableGunpowderRecipes);
             deductableLootMap.Add(LootListType.ExplosiveRecipe, DeductableExplosiveRecipes);
@@ -73,6 +67,12 @@ public class LootTable : MonoBehaviour
         {
             sortListByWeight(entry.Value);
         }
+    }
+
+    private void PersistDeductableList(List<Loot> DeductableList, LootListType PersistLootType)
+    {
+        DeductableList.Clear();
+        DeductableList = deductableLootMap[PersistLootType];
     }
 
     private void ResetDeductableList(List<Loot> DeductableList, List<string> LoadList)

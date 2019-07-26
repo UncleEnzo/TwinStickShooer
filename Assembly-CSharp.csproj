@@ -112,11 +112,6 @@
      <Compile Include="Assets\Scripts\Level Handlers\LevelGenerator.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\LootManager\LootTable.cs" />
-     <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\Dialogue.cs" />
-     <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueManager.cs" />
-     <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\DialogueTrigger.cs" />
-     <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\TestNPC.cs" />
-     <Compile Include="Assets\Scripts\NPC and Dialogue Scripts\ToolTip.cs" />
      <Compile Include="Assets\Scripts\OutlineEffect\LinkedSet.cs" />
      <Compile Include="Assets\Scripts\OutlineEffect\Outline.cs" />
      <Compile Include="Assets\Scripts\OutlineEffect\OutlineEffect.cs" />
@@ -139,6 +134,13 @@
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SavePersistentData.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SavePlayerLootPool.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveSystem.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveVendorLootPool.cs" />
+     <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\Dialogue.cs" />
+     <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\DialogueManager.cs" />
+     <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\DialogueTrigger.cs" />
+     <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\TestNPC.cs" />
+     <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\ToolTip.cs" />
+     <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\VendorInventory.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\SetGunPosition.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />

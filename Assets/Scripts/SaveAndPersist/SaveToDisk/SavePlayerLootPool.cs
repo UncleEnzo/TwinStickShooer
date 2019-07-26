@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SavePlayerLootPool
 {
-    //Note: Needs to be strings with the names of items, Unity doesn't serialize GameObjects :(
+    //Note: Unity doesn't serialize GameObjects :(
     public List<string> PhysicalRecipeLootPool = new List<string>();
     public List<string> GunPowderRecipeLootPool = new List<string>();
     public List<string> ExplosiveRecipeLootPool = new List<string>();
@@ -15,8 +15,8 @@ public class SavePlayerLootPool
     public SavePlayerLootPool(LootLedger LootLedger)
     {
         UpdateList(PhysicalRecipeLootPool, LootLedger.StartingPhysicalRecipes);
-        UpdateList(GunPowderRecipeLootPool, LootLedger.GunpowderRecipes);
-        UpdateList(ExplosiveRecipeLootPool, LootLedger.ExplosiveRecipes);
+        UpdateList(GunPowderRecipeLootPool, LootLedger.StartingGunpowderRecipes);
+        UpdateList(ExplosiveRecipeLootPool, LootLedger.StartingExplosiveRecipes);
         UpdateList(WeaponLootPool, LootLedger.StartingWeapons);
     }
 
@@ -27,12 +27,12 @@ public class SavePlayerLootPool
         // PlayerLootPool = ;
     }
 
-    private void UpdateList(List<string> SavedList, List<Loot> lootList)
+    private void UpdateList(List<string> SavedList, List<GameObject> lootList)
     {
         SavedList.Clear();
-        foreach (Loot loot in lootList)
+        foreach (GameObject loot in lootList)
         {
-            SavedList.Add(loot.item.name);
+            SavedList.Add(loot.name);
         }
     }
 }

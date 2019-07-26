@@ -17,6 +17,12 @@ public class TagsAndLabels : MonoBehaviour
     public const string GunUITag = "GunUI";
     public const string AmmoUITag = "AmmoUI";
 
+    [Header("Vendor name string. (Not tags or labels)")]
+    public const string PhysicalVendor = "PhysicalVendor";
+    public const string GunpowderVendor = "GunpowderVendor";
+    public const string ExplosiveVendor = "ExplosiveVendor";
+    public const string WeaponsVendor = "WeaponsVendor";
+
     [Header("Labels")]
     public const string DoorLabel = "Door";
     public const string ChestLabel = "Chest";

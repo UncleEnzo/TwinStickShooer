@@ -13,18 +13,32 @@ public class LootLedger : MonoBehaviour
     public static Dictionary<string, Loot> LootLedgerDict = new Dictionary<string, Loot>();
 
     [Header("New Game Data")]
-    public List<Loot> StartingPhysicalRecipes;
-    public List<Loot> StartingGunpowderRecipes;
-    public List<Loot> StaringExplosiveRecipes;
-    public List<Loot> StartingWeapons;
+    public List<GameObject> StartingPhysicalRecipes;
+    public List<GameObject> StartingGunpowderRecipes;
+    public List<GameObject> StartingExplosiveRecipes;
+    public List<GameObject> StartingWeapons;
+    //new game vendor loot pools
+    public List<GameObject> PhysicalVendor;
+    public List<GameObject> GunpowderVendor;
+    public List<GameObject> ExplosiveVendor;
+    public List<GameObject> WeaponVendor;
+    public Dictionary<string, List<string>> NewGameVendorItemPool = new Dictionary<string, List<string>>();
+
 
     //On awake, this creates a dictionary of everything item in the lists
     void Awake()
     {
+        //Creates the static game object dictionary for global use
         SaveToLootLedgerDict(PhysicalRecipes);
         SaveToLootLedgerDict(GunpowderRecipes);
         SaveToLootLedgerDict(ExplosiveRecipes);
         SaveToLootLedgerDict(Weapons);
+
+        //Creates the new game vendor dictionary
+        SaveToNewGameVendorDict(TagsAndLabels.PhysicalVendor, PhysicalVendor);
+        SaveToNewGameVendorDict(TagsAndLabels.GunpowderVendor, GunpowderVendor);
+        SaveToNewGameVendorDict(TagsAndLabels.ExplosiveVendor, ExplosiveVendor);
+        SaveToNewGameVendorDict(TagsAndLabels.WeaponsVendor, WeaponVendor);
     }
 
     private void SaveToLootLedgerDict(List<Loot> itemList)
@@ -36,5 +50,15 @@ public class LootLedger : MonoBehaviour
                 LootLedgerDict.Add(loot.item.name, loot);
             }
         }
+    }
+
+    private void SaveToNewGameVendorDict(string vendorName, List<GameObject> itemList)
+    {
+        List<string> itemListToSave = new List<string>();
+        foreach (GameObject item in itemList)
+        {
+            itemListToSave.Add(item.name);
+        }
+        NewGameVendorItemPool.Add(vendorName, itemListToSave);
     }
 }
