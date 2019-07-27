@@ -84,6 +84,13 @@ MonoBehaviour:
     weight: 0
   - item: {fileID: 11991691623488481, guid: 605944dbd8c944f44847776aecb7cf16, type: 3}
     weight: 0
+  CraftComponents:
+  - item: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1, type: 3}
+    weight: 0
+  - item: {fileID: 5643607579732925551, guid: c2c8ffbfb808e1e419e25b22850099ff, type: 3}
+    weight: 0
+  - item: {fileID: 3085158205632521483, guid: 7c730ae6c09ae754e95abae41b190de9, type: 3}
+    weight: 0
   StartingPhysicalRecipes:
   - {fileID: 3085158205632521483, guid: f722d52a1b4530c459af14d4d4e8f7cc, type: 3}
   StartingGunpowderRecipes:

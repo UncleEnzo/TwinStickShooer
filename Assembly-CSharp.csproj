@@ -110,6 +110,7 @@
      <Compile Include="Assets\Scripts\Item Scripts\Recipes\Recipe.cs" />
      <Compile Include="Assets\Scripts\Item Scripts\Recipes\RecipePickUp.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\LevelGenerator.cs" />
+     <Compile Include="Assets\Scripts\Level Handlers\NextLevel.cs" />
      <Compile Include="Assets\Scripts\Level Handlers\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\LootManager\LootTable.cs" />
      <Compile Include="Assets\Scripts\OutlineEffect\LinkedSet.cs" />

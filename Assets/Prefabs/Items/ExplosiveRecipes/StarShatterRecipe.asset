@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6809590c3ecd3b6418ea7944faa368e5, type: 3}
   m_Name: StarShatterRecipe
   m_EditorClassIdentifier: 
-  name: Star Shatter
+  name: StarShatterRecipe
   icon: {fileID: 21300000, guid: 9754ad4c2f2df9c40a93234ad1593f0f, type: 3}
   itemType: 3
   Cost: 0

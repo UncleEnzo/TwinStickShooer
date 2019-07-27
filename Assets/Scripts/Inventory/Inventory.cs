@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Inventory : MonoBehaviour
@@ -68,6 +69,10 @@ public class Inventory : MonoBehaviour
     {
         return money.Count();
     }
+    public List<Item> getRecipes()
+    {
+        return recipes;
+    }
     public void Start()
     {
         recipeIconPanel = GameObject.Find("Canvas").transform.Find("RecipePanel").gameObject;
@@ -90,28 +95,38 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        //populate inventory with save data
-        SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
-        if (keys.Count() != SavePersistentData.keys)
+        if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
         {
-            LoadInventory(SavePersistentData.keys, key);
-        }
-        if (physicalCraftComponents.Count() != SavePersistentData.physicalCraftComponents)
-        {
-            LoadInventory(SavePersistentData.physicalCraftComponents, physicalComponent);
-        }
-        if (gunpowderCraftComponents.Count() != SavePersistentData.gunpowderCraftComponents)
-        {
-            LoadInventory(SavePersistentData.gunpowderCraftComponents, gunpowderCompontent);
-        }
-        if (explosiveCraftComponents.Count() != SavePersistentData.explosiveCraftComponents)
-        {
-            LoadInventory(SavePersistentData.explosiveCraftComponents, explosiveComponent);
-        }
-        SaveGlobalMoney SaveGlobalMoney = SaveSystem.LoadMoneyData();
-        if (money.Count() != SaveGlobalMoney.money)
-        {
-            LoadInventory(SaveGlobalMoney.money, moneyCoin);
+            //Load inventory from save data
+            SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
+            if (keys.Count() != SavePersistentData.keys)
+            {
+                LoadInventory(SavePersistentData.keys, key);
+            }
+            if (physicalCraftComponents.Count() != SavePersistentData.physicalCraftComponents)
+            {
+                LoadInventory(SavePersistentData.physicalCraftComponents, physicalComponent);
+            }
+            if (gunpowderCraftComponents.Count() != SavePersistentData.gunpowderCraftComponents)
+            {
+                LoadInventory(SavePersistentData.gunpowderCraftComponents, gunpowderCompontent);
+            }
+            if (explosiveCraftComponents.Count() != SavePersistentData.explosiveCraftComponents)
+            {
+                LoadInventory(SavePersistentData.explosiveCraftComponents, explosiveComponent);
+            }
+            if (recipes.Count() != SavePersistentData.acquiredRecipes.Count)
+            {
+                foreach (string item in SavePersistentData.acquiredRecipes)
+                {
+                    AddItem(LootLedger.LootLedgerDict[item].item.GetComponent<RecipePickUp>().item);
+                }
+            }
+            SaveGlobalMoney SaveGlobalMoney = SaveSystem.LoadMoneyData();
+            if (money.Count() != SaveGlobalMoney.money)
+            {
+                LoadInventory(SaveGlobalMoney.money, moneyCoin);
+            }
         }
     }
 

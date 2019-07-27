@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    private static int hubWorldIndex = 1;
+    public static int hubWorldIndex = 1;
     //Methods for buttons (Does not allow static method calls to be assigned to buttons)
     public void ButtonLoadSavedGame()
     {
@@ -14,24 +14,21 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(SavePersistentData.level);
         if (SavePersistentData.level == hubWorldIndex)
         {
-            if (PersistentGameData.Instance)
-            {
-                PersistentGameData.Instance.resetPersistentGameData();
-            }
+            PersistentGameData.Instance.resetPersistentGameData();
         }
     }
 
     public void ButtonStartNewGame()
     {
         print("STARTING NEW GAME");
-        if (PersistentGameData.Instance != null)
-        {
-            PersistentGameData.Instance.resetPersistentGameData();
-        }
         SaveSystem.ResetGlobalMoneyData();
         SaveSystem.ResetPlayerLootPoolData(GetComponent<LootLedger>());
         SaveSystem.ResetVendorLootPoolData(GetComponent<LootLedger>());
         SceneManager.LoadScene(hubWorldIndex);
+        if (PersistentGameData.Instance != null)
+        {
+            PersistentGameData.Instance.resetPersistentGameData();
+        }
     }
 
     public void ButtonLoadStartScreen()

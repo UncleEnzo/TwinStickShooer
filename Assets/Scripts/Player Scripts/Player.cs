@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -37,13 +38,17 @@ public class Player : MonoBehaviour
     public Color regularColor;
     public float flashDuration;
     public int numberOfFlashes;
+
     public bool iFramesActive = false;
     #endregion
     public void Start()
     {
-        SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
-        health = SavePersistentData.health;
-        PlayerHUBController.Instance.updateDisplayHubHealth(health);
+        if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
+        {
+            SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
+            health = SavePersistentData.health;
+            PlayerHUBController.Instance.updateDisplayHubHealth(health);
+        }
     }
     // Update is called once per frame
     void FixedUpdate()

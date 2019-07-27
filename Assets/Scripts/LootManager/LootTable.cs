@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LootTable : MonoBehaviour
 {
@@ -33,13 +34,44 @@ public class LootTable : MonoBehaviour
     void Start()
     {
         deductableLootMap = new Dictionary<LootListType, List<Loot>>();
-        if (PersistentGameData.Instance.currentDeductableLootMap != null)
+
+        //When leaving hub world, resets all deductables from the player total loot pools
+        if (SceneManager.GetActiveScene().buildIndex == SceneLoader.hubWorldIndex + 1)
         {
-            foreach (KeyValuePair<LootListType, List<Loot>> entry in PersistentGameData.Instance.currentDeductableLootMap)
+            print("Leaving Hub World. Resetting Deductables from player loot pool.");
+            //step one > Loads the player loot pools and creates deductables out of them
+            SavePlayerLootPool SavePlayerLootPool = SaveSystem.LoadPlayerLootPoolData();
+            ResetDeductableList(DeductablePhysicalRecipes, SavePlayerLootPool.PhysicalRecipeLootPool);
+            ResetDeductableList(DeductableGunpowderRecipes, SavePlayerLootPool.GunPowderRecipeLootPool);
+            ResetDeductableList(DeductableExplosiveRecipes, SavePlayerLootPool.ExplosiveRecipeLootPool);
+            ResetDeductableList(DeductableWeapons, SavePlayerLootPool.WeaponLootPool);
+
+            //Step two > makes a deductable map
+            deductableLootMap.Add(LootListType.PhysicalRecipe, DeductablePhysicalRecipes);
+            deductableLootMap.Add(LootListType.GunpowderRecipe, DeductableGunpowderRecipes);
+            deductableLootMap.Add(LootListType.ExplosiveRecipe, DeductableExplosiveRecipes);
+            deductableLootMap.Add(LootListType.Weapon, DeductableWeapons);
+            deductableLootMap.Add(LootListType.CraftComponents, CraftComponents);
+        }
+        //This will also happen if you load into hub world, which we don't want
+        else if (PersistentGameData.Instance.currentDeductableLootMap != null && SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
+        {
+            print("Entering next level. Retrieving saved Deductable lists");
+            SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
+
+            //Step 1 > Takes Entries from the persistent map, and adds them to the deductable map
+            foreach (KeyValuePair<LootListType, List<string>> entry in SavePersistentData.DeductableLootDict)
             {
+                List<Loot> entryValues = new List<Loot>();
+                foreach (string listLoot in entry.Value)
+                {
+                    entryValues.Add(LootLedger.LootLedgerDict[listLoot]);
+                }
                 //Leave this for each loop to load in components and other values to loot table that are not deductable
-                deductableLootMap.Add(entry.Key, entry.Value);
+                deductableLootMap.Add(entry.Key, entryValues);
             }
+
+            //Step 2 > Takes Entries from the Deductable loot map in this class and adds them to the deductable lists
             PersistDeductableList(DeductablePhysicalRecipes, LootListType.PhysicalRecipe);
             PersistDeductableList(DeductableGunpowderRecipes, LootListType.GunpowderRecipe);
             PersistDeductableList(DeductableExplosiveRecipes, LootListType.ExplosiveRecipe);
@@ -47,19 +79,7 @@ public class LootTable : MonoBehaviour
         }
         else
         {
-            //Note: This where you load new lists from playerLootPools to the deductables
-            SavePlayerLootPool SavePlayerLootPool = SaveSystem.LoadPlayerLootPoolData();
-            ResetDeductableList(DeductablePhysicalRecipes, SavePlayerLootPool.PhysicalRecipeLootPool);
-            ResetDeductableList(DeductableGunpowderRecipes, SavePlayerLootPool.GunPowderRecipeLootPool);
-            ResetDeductableList(DeductableExplosiveRecipes, SavePlayerLootPool.ExplosiveRecipeLootPool);
-            ResetDeductableList(DeductableWeapons, SavePlayerLootPool.WeaponLootPool);
-
-            //After you figure that out, then do this next bit so you have a persistent map
-            deductableLootMap.Add(LootListType.PhysicalRecipe, DeductablePhysicalRecipes);
-            deductableLootMap.Add(LootListType.GunpowderRecipe, DeductableGunpowderRecipes);
-            deductableLootMap.Add(LootListType.ExplosiveRecipe, DeductableExplosiveRecipes);
-            deductableLootMap.Add(LootListType.Weapon, DeductableWeapons);
-            deductableLootMap.Add(LootListType.CraftComponents, CraftComponents);
+            Debug.Log("Loading into hub world, taking no action");
         }
 
         //On start sorts all lists in descending order to make sure loot table is in the correct order

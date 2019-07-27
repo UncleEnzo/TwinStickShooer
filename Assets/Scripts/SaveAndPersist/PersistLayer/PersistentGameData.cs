@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class PersistentGameData : MonoBehaviour
 {
     public static PersistentGameData Instance;
+
     public int currentLevel;
     public float currentHealth;
     public int currentWeaponCount;
@@ -18,7 +19,8 @@ public class PersistentGameData : MonoBehaviour
     public int currentPhysicalCraftComponents;
     public int currentGunPowderCraftComponents;
     public int currentExplosiveCraftComponents;
-    public Dictionary<LootListType, List<Loot>> currentDeductableLootMap;
+    public List<Item> currentRecipes = new List<Item>();
+    public Dictionary<LootListType, List<Loot>> currentDeductableLootMap = new Dictionary<LootListType, List<Loot>>();
 
     //On scene start, checks that there is only one of this script and deletes any duplicates
     #region Singleton
@@ -42,19 +44,21 @@ public class PersistentGameData : MonoBehaviour
         // Note: Just call the method to load wherever it fucking works, there's no reason to it.
         //Guns work here for some reason
         //inventory only works in fucking inventory.instance for some reason
-        LoadGame();
+        LoadWeapons();
     }
 
-    private void LoadGame()
+    private void LoadWeapons()
     {
-        SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
-        currentGunTypes = SavePersistentData.gunTypes;
-        currentWeaponCount = SavePersistentData.weaponCount;
+        if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
+        {
+            SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
+            currentGunTypes = SavePersistentData.gunTypes;
+            currentWeaponCount = SavePersistentData.weaponCount;
+        }
     }
 
     //THINGS TO NOT PUT IN THIS METHOD BUT TO LOAD AND SAVE DIRECTLY
     //     List of remaining vendor items
-    //     Need to persist recipes you have in your Recipe panel :P
     public void saveAndPersistGameData()
     {
         currentHealth = Player.Instance.health;
@@ -67,24 +71,29 @@ public class PersistentGameData : MonoBehaviour
         currentExplosiveCraftComponents = Inventory.Instance.getExplosiveCount();
         currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-        //NOTE: DO NOT ADD THE TOTAL POOL TO PERSISTENT
-        if (currentDeductableLootMap == null)
+        //Persists the recipes the player acquired on the run
+        currentRecipes.Clear();
+        foreach (Item item in Inventory.Instance.getRecipes())
         {
-            currentDeductableLootMap = new Dictionary<LootListType, List<Loot>>();
+            currentRecipes.Add(item);
         }
+        // todo: Persist and save in persistent save file recipes you have in your Recipe panel :P
+        // Todo: Save in persistent save file deductable lists
+
+        //NOTE: Takes the deductable loot map and persists it
         currentDeductableLootMap.Clear();
         foreach (KeyValuePair<LootListType, List<Loot>> entry in LootTable.instance.deductableLootMap)
         {
             currentDeductableLootMap.Add(entry.Key, entry.Value);
         }
 
-        //Things in loottable you have already acquired, that shouldn't appear in chests again
         SaveSystem.SaveGlobalMoneyData(this);
         SaveSystem.SavePersistentData(this);
     }
 
     public void resetPersistentGameData()
     {
+        SaveSystem.DeletePersistenSaveDataPath();
         Destroy(gameObject);
     }
 }

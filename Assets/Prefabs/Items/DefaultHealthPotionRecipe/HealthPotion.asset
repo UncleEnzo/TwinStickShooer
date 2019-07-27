@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6809590c3ecd3b6418ea7944faa368e5, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  name: HealthPotion
+  name: HealthPotionRecipe
   icon: {fileID: 21300000, guid: 9443700744301b940bd2d2cc2917a1ad, type: 3}
   itemType: 3
+  Cost: 0
   powerUp:
     name: HealthPotion
     duration: -10

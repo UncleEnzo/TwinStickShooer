@@ -8,10 +8,11 @@ public class Cheats : MonoBehaviour
     void Update()
     {
         //Cheat to autoswitch to next scene
-        if (Input.GetKeyDown("n"))
-        {
-            SceneLoader.LoadNextScene();
-        }
+        //Note: You will forget, I'm taking this out because loading from hub world and loading next level are now different
+        // if (Input.GetKeyDown("n"))
+        // {
+        //     SceneLoader.LoadNextScene();
+        // }
         //Cheat to load gameover screen
         if (Input.GetKeyDown("g"))
         {

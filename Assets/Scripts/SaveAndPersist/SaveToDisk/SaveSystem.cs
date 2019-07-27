@@ -141,4 +141,12 @@ public static class SaveSystem
         formatter.Serialize(stream, data);
         stream.Close();
     }
+
+    public static void DeletePersistenSaveDataPath()
+    {
+        if (File.Exists(savePersistentDataPath))
+        {
+            File.Delete(savePersistentDataPath);
+        }
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Item : ScriptableObject
 {
+    [Header("Name must be EXACTLY what the GameObject name is")]
     new public string name = "New Item";
     public Sprite icon = null;
     public ItemType itemType;

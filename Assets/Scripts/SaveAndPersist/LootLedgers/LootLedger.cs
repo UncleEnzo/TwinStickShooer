@@ -10,6 +10,7 @@ public class LootLedger : MonoBehaviour
     public List<Loot> GunpowderRecipes;
     public List<Loot> ExplosiveRecipes;
     public List<Loot> Weapons;
+    public List<Loot> CraftComponents;
     public static Dictionary<string, Loot> LootLedgerDict = new Dictionary<string, Loot>();
 
     [Header("New Game Data")]
@@ -33,6 +34,7 @@ public class LootLedger : MonoBehaviour
         SaveToLootLedgerDict(GunpowderRecipes);
         SaveToLootLedgerDict(ExplosiveRecipes);
         SaveToLootLedgerDict(Weapons);
+        SaveToLootLedgerDict(CraftComponents);
 
         //Creates the new game vendor dictionary
         SaveToNewGameVendorDict(TagsAndLabels.PhysicalVendor, PhysicalVendor);
