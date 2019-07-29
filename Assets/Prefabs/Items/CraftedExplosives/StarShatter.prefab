@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunProperties:
-    weaponType: 8
+    weaponType: 5
     bulletSpawnPoint:
     - {fileID: 7913903683361232995}
     camShakeMagnitude: 0.1
@@ -124,6 +124,12 @@ MonoBehaviour:
     bulletAccuracy: 0
     bulletAngle: 0
     bulletBounce: 0
+    bulletBounceMaxNum: 0
+    isExplosive: 0
+    explosionDamage: 3
+    explosiveForce: 4
+    explosiveRadius: 3
+    explosionEffect: {fileID: 0}
   armLength: 0.5
   throwForce: 15
   currentAmmo: 1

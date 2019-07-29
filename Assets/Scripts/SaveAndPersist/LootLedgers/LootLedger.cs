@@ -5,7 +5,6 @@ using UnityEngine;
 public class LootLedger : MonoBehaviour
 {
     [Header("Loot Ledger")]
-    public GameObject HealingPotion;
     public List<Loot> PhysicalRecipes;
     public List<Loot> GunpowderRecipes;
     public List<Loot> ExplosiveRecipes;

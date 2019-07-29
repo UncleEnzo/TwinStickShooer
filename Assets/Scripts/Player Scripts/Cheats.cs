@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Cheats : MonoBehaviour
 {
+
     // Update is called once per frame
     void Update()
     {
@@ -13,6 +14,7 @@ public class Cheats : MonoBehaviour
         // {
         //     SceneLoader.LoadNextScene();
         // }
+
         //Cheat to load gameover screen
         if (Input.GetKeyDown("g"))
         {

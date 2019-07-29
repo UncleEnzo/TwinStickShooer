@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType { Pistol, Shotgun, AssaultRifle, SniperRifle, MachineGun, RocketLaucher, RailGun, Knife, StarShatter }
+public enum WeaponType { Pistol, Shotgun, AssaultRifle, SniperRifle, MachineGun, StarShatter }
 
 [Serializable]
 public class GunProperties

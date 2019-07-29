@@ -62,6 +62,7 @@ MonoBehaviour:
   recipeIcon: {fileID: 8521165883127184300, guid: 9a54a20be60f40749afe82010f1c18c9,
     type: 3}
   recipeIcons: []
+  healingPotion: {fileID: 11400000, guid: 8a62c92883bd7054f843370488d77e77, type: 2}
   keyIcon: {fileID: 8521165883127184300, guid: bf2980ecef565504c9bf3b32b5c4ca16, type: 3}
   key: {fileID: 11400000, guid: 4186f3044d3a6704f809f0f9972b47fb, type: 2}
   physicalComponent: {fileID: 11400000, guid: 1c2977adb0d030647a3918136365491e, type: 2}

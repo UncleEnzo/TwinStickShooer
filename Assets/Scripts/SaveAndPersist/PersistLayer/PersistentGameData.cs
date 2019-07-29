@@ -21,6 +21,7 @@ public class PersistentGameData : MonoBehaviour
     public int currentExplosiveCraftComponents;
     public List<Item> currentRecipes = new List<Item>();
     public Dictionary<LootListType, List<Loot>> currentDeductableLootMap = new Dictionary<LootListType, List<Loot>>();
+    public Dictionary<WeaponType, int> currentExplosiveAmmo = new Dictionary<WeaponType, int>();
 
     //On scene start, checks that there is only one of this script and deletes any duplicates
     #region Singleton
@@ -54,6 +55,11 @@ public class PersistentGameData : MonoBehaviour
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
             currentGunTypes = SavePersistentData.gunTypes;
             currentWeaponCount = SavePersistentData.weaponCount;
+            foreach (KeyValuePair<WeaponType, int> entry in SavePersistentData.ExplosiveAmmo)
+            {
+                currentExplosiveAmmo.Clear();
+                currentExplosiveAmmo.Add(entry.Key, entry.Value);
+            }
         }
     }
 
@@ -64,6 +70,11 @@ public class PersistentGameData : MonoBehaviour
         currentHealth = Player.Instance.health;
         currentWeaponCount = WeaponSwitching.Instance.gameObject.transform.childCount;
         currentGunTypes = WeaponSwitching.Instance.gunTypes;
+        currentExplosiveAmmo.Clear();
+        foreach (ThrowExplosive entry in WeaponSwitching.Instance.GetComponentsInChildren<ThrowExplosive>())
+        {
+            currentExplosiveAmmo.Add(entry.GunProperties.weaponType, entry.currentAmmo);
+        }
         currentKeys = Inventory.Instance.getKeyCount();
         currentMoney = Inventory.Instance.getMoneyCount();
         currentPhysicalCraftComponents = Inventory.Instance.getPhysicalCount();
@@ -94,6 +105,10 @@ public class PersistentGameData : MonoBehaviour
     public void resetPersistentGameData()
     {
         SaveSystem.DeletePersistenSaveDataPath();
+        Destroy(gameObject);
+    }
+    public void resetPersistentGameDataRetainSave()
+    {
         Destroy(gameObject);
     }
 }

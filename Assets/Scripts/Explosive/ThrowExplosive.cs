@@ -30,6 +30,8 @@ public class ThrowExplosive : Weapon
             Destroy(gameObject);
         }
         Throw(isPlayer);
+        //Moving this outside of throw so that it is updated during timescale 0 as well
+        PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
     }
 
     protected void Throw(bool isPlayer)
@@ -46,7 +48,6 @@ public class ThrowExplosive : Weapon
             }
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;
-            PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
         }
     }
 }

@@ -214,6 +214,7 @@ public class PowerUpAction : MonoBehaviour
             {
                 playerHasExplosive = true;
                 weapon.GetComponent<ThrowExplosive>().currentAmmo++;
+                PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<ThrowExplosive>().currentAmmo);
             }
         }
         if (playerHasExplosive == false)

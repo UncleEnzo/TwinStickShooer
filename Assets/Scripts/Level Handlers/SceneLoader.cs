@@ -7,6 +7,25 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public static int hubWorldIndex = 1;
+
+    //note: This will only be called when you make transactions, or some story element happens
+    //Note 2: This cannot be a static due to coroutine. So need to call only in here, when transaction is made
+    public void displaySaveIcon()
+    {
+        GameObject saveIcon = GameObject.Find("Canvas").transform.Find("SaveIcon").gameObject;
+        if (!saveIcon.activeInHierarchy)
+        {
+            saveIcon.SetActive(true);
+        }
+        StartCoroutine(LateCall(saveIcon));
+    }
+
+    private IEnumerator LateCall(GameObject saveIcon)
+    {
+        yield return new WaitForSeconds(2f);
+        saveIcon.SetActive(false);
+    }
+
     //Methods for buttons (Does not allow static method calls to be assigned to buttons)
     public void ButtonLoadSavedGame()
     {
@@ -14,7 +33,10 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(SavePersistentData.level);
         if (SavePersistentData.level == hubWorldIndex)
         {
-            PersistentGameData.Instance.resetPersistentGameData();
+            if (PersistentGameData.Instance)
+            {
+                PersistentGameData.Instance.resetPersistentGameData();
+            }
         }
     }
 
@@ -82,9 +104,8 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(0);
         if (PersistentGameData.Instance != null)
         {
-            PersistentGameData.Instance.resetPersistentGameData();
+            PersistentGameData.Instance.resetPersistentGameDataRetainSave();
         }
-
     }
 
     public static void LoadHubWorld()

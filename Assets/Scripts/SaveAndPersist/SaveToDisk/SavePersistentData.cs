@@ -22,8 +22,7 @@ public class SavePersistentData
     public int explosiveCraftComponents;
     public List<string> acquiredRecipes = new List<string>();
     public Dictionary<LootListType, List<string>> DeductableLootDict = new Dictionary<LootListType, List<string>>();
-
-    //Todo >> Persist the number of explosives you've crafted...
+    public Dictionary<WeaponType, int> ExplosiveAmmo = new Dictionary<WeaponType, int>();
 
     public SavePersistentData(PersistentGameData PersistentGameData)
     {
@@ -49,6 +48,11 @@ public class SavePersistentData
                 entryValues.Add(listLoot.item.name);
             }
             DeductableLootDict.Add(entry.Key, entryValues);
+        }
+        ExplosiveAmmo.Clear();
+        foreach (KeyValuePair<WeaponType, int> entry in PersistentGameData.currentExplosiveAmmo)
+        {
+            ExplosiveAmmo.Add(entry.Key, entry.Value);
         }
     }
 }

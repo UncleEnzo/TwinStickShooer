@@ -33,6 +33,17 @@ public class PersistWeaponHolder : MonoBehaviour
                     Instantiate(weaponsToInstantiate[weaponIndexValue], weaponHolder.transform);
                 }
             }
+            //For each explosive weapon in weapon holder, updates its current ammo
+            foreach (KeyValuePair<WeaponType, int> entry in PersistentGameData.Instance.currentExplosiveAmmo)
+            {
+                foreach (ThrowExplosive explosive in weaponHolder.GetComponentsInChildren<ThrowExplosive>())
+                {
+                    if (explosive.GunProperties.weaponType == entry.Key)
+                    {
+                        explosive.currentAmmo = entry.Value;
+                    }
+                }
+            }
         }
     }
 }

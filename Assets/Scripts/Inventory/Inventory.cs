@@ -27,6 +27,7 @@ public class Inventory : MonoBehaviour
     public GameObject recipeIcon;
     private List<Item> recipes = new List<Item>();
     public List<GameObject> recipeIcons = new List<GameObject>();
+    public Item healingPotion;
     private GameObject keyIconPanel;
     public GameObject keyIcon;
     private GameObject keyIconCache;
@@ -41,6 +42,7 @@ public class Inventory : MonoBehaviour
     [System.NonSerialized]
     public List<Item> gunpowderCraftComponents = new List<Item>();
     private GameObject explosiveSlot;
+
     public Item explosiveComponent;
     [System.NonSerialized]
     public List<Item> explosiveCraftComponents = new List<Item>();
@@ -97,6 +99,9 @@ public class Inventory : MonoBehaviour
 
         if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
         {
+            //Load in Health Recipe immediately 
+            AddItem(healingPotion);
+
             //Load inventory from save data
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
             if (keys.Count() != SavePersistentData.keys)
