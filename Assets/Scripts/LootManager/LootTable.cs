@@ -92,7 +92,10 @@ public class LootTable : MonoBehaviour
     private void PersistDeductableList(List<Loot> DeductableList, LootListType PersistLootType)
     {
         DeductableList.Clear();
-        DeductableList = deductableLootMap[PersistLootType];
+        foreach (Loot entry in deductableLootMap[PersistLootType])
+        {
+            DeductableList.Add(entry);
+        }
     }
 
     private void ResetDeductableList(List<Loot> DeductableList, List<string> LoadList)

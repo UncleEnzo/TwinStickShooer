@@ -119,7 +119,8 @@ public class Inventory : MonoBehaviour
             {
                 LoadInventory(SavePersistentData.explosiveCraftComponents, explosiveComponent);
             }
-            if (recipes.Count() != SavePersistentData.acquiredRecipes.Count)
+            //Plus one to recipes.count because we automatically get the healing pot
+            if ((recipes.Count() + 1) != SavePersistentData.acquiredRecipes.Count)
             {
                 foreach (string item in SavePersistentData.acquiredRecipes)
                 {

@@ -20,6 +20,10 @@ public class SavePlayerLootPool
 
     public SavePlayerLootPool(Dictionary<LootListType, List<string>> SaveData)
     {
-
+        PlayerLootPoolDict.Clear();
+        foreach (KeyValuePair<LootListType, List<string>> entry in SaveData)
+        {
+            PlayerLootPoolDict.Add(entry.Key, entry.Value);
+        }
     }
 }

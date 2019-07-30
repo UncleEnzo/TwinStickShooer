@@ -28,12 +28,18 @@ public class Cheats : MonoBehaviour
 
         if (Input.GetKeyDown("u"))
         {
-            Inventory.Instance.AddItem(Inventory.Instance.moneyCoin);
+            for (int i = 0; i < 10; i++)
+            {
+                Inventory.Instance.AddItem(Inventory.Instance.moneyCoin);
+            }
         }
 
         if (Input.GetKeyDown("y"))
         {
-            Inventory.Instance.RemoveItem(Inventory.Instance.moneyCoin);
+            for (int i = 0; i < 10; i++)
+            {
+                Inventory.Instance.RemoveItem(Inventory.Instance.moneyCoin);
+            }
         }
 
         if (Input.GetKeyDown("l"))

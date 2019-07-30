@@ -8,24 +8,6 @@ public class SceneLoader : MonoBehaviour
 {
     public static int hubWorldIndex = 1;
 
-    //note: This will only be called when you make transactions, or some story element happens
-    //Note 2: This cannot be a static due to coroutine. So need to call only in here, when transaction is made
-    public void displaySaveIcon()
-    {
-        GameObject saveIcon = GameObject.Find("Canvas").transform.Find("SaveIcon").gameObject;
-        if (!saveIcon.activeInHierarchy)
-        {
-            saveIcon.SetActive(true);
-        }
-        StartCoroutine(LateCall(saveIcon));
-    }
-
-    private IEnumerator LateCall(GameObject saveIcon)
-    {
-        yield return new WaitForSeconds(2f);
-        saveIcon.SetActive(false);
-    }
-
     //Methods for buttons (Does not allow static method calls to be assigned to buttons)
     public void ButtonLoadSavedGame()
     {
@@ -89,6 +71,8 @@ public class SceneLoader : MonoBehaviour
             PersistentGameData.Instance.saveAndPersistGameData();
         }
         SceneManager.LoadScene(nextScene);
+
+        //resets game data if you reach the win screen
         if (nextScene == lastScene)
         {
             if (PersistentGameData.Instance)

@@ -135,7 +135,7 @@ public class VendorInventory : MonoBehaviour
         Player.Instance.enablePlayer(true);
         Time.timeScale = 1;
 
-        //TODO: DISPLAY SAVE ICON
+        displaySaveIcon();
 
         //Save Money
         for (int i = 0; i < ItemCost; i++)
@@ -195,7 +195,6 @@ public class VendorInventory : MonoBehaviour
             }
         }
         SaveSystem.SavePlayerLootPoolData(savePlayerLootPool.PlayerLootPoolDict);
-
         RemoveAllListeners();
     }
 
@@ -211,6 +210,22 @@ public class VendorInventory : MonoBehaviour
     {
         ItemBuyButton.onClick.RemoveAllListeners();
         ItemExitButton.onClick.RemoveAllListeners();
+    }
+
+    private void displaySaveIcon()
+    {
+        GameObject saveIcon = GameObject.Find("Canvas").transform.Find("SaveIcon").gameObject;
+        if (!saveIcon.activeInHierarchy)
+        {
+            saveIcon.SetActive(true);
+        }
+        StartCoroutine(LateCall(saveIcon));
+    }
+
+    private IEnumerator LateCall(GameObject saveIcon)
+    {
+        yield return new WaitForSeconds(2f);
+        saveIcon.SetActive(false);
     }
 
     //Note: This is just a basic way to select the item. Later this method needs to be revised

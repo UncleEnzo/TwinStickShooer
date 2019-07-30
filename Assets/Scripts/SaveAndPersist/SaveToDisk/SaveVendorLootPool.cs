@@ -19,6 +19,10 @@ public class SaveVendorLootPool
 
     public SaveVendorLootPool(Dictionary<VendorType, List<string>> SaveData)
     {
-
+        VendorLootPool.Clear();
+        foreach (KeyValuePair<VendorType, List<string>> entry in SaveData)
+        {
+            VendorLootPool.Add(entry.Key, entry.Value);
+        }
     }
 }

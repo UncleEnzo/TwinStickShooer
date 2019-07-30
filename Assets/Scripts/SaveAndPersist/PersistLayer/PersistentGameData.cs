@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 public class PersistentGameData : MonoBehaviour
 {
     public static PersistentGameData Instance;
-
     public int currentLevel;
     public float currentHealth;
     public int currentWeaponCount;
@@ -81,10 +80,15 @@ public class PersistentGameData : MonoBehaviour
         currentLevel = SceneManager.GetActiveScene().buildIndex;
 
         //Persists the recipes the player acquired on the run
+        //and removing healing potion from list because it's added every time automatically
         currentRecipes.Clear();
         foreach (Item item in Inventory.Instance.getRecipes())
         {
             currentRecipes.Add(item);
+        }
+        if (currentRecipes.Contains(Inventory.Instance.healingPotion))
+        {
+            currentRecipes.Remove(Inventory.Instance.healingPotion);
         }
 
         //NOTE: Takes the deductable loot map and persists it

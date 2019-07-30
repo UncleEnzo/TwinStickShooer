@@ -7,11 +7,6 @@ public class SavePersistentData
 {
     //Note: Saves only at start of levels, not during runs (lose everything you get in the level if you don't get to next one)
     //This prevents farming a level for keys etc to get ahead
-
-    //Save and load values only
-    //Todo: Need to save Available LootTable pool (objects bought from vendors.)
-
-    //PersistentGameData
     public int level;
     public float health;
     public int weaponCount;
