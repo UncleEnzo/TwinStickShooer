@@ -15,6 +15,7 @@ MonoBehaviour:
   name: SpeedUpRecipe
   icon: {fileID: 21300000, guid: b8c8fc3e2641d4247adffd2c9b5472a7, type: 3}
   itemType: 3
+  Cost: 2
   powerUp:
     name: SpeedUpRecipe
     duration: 10

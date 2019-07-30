@@ -63,8 +63,6 @@ public class PersistentGameData : MonoBehaviour
         }
     }
 
-    //THINGS TO NOT PUT IN THIS METHOD BUT TO LOAD AND SAVE DIRECTLY
-    //     List of remaining vendor items
     public void saveAndPersistGameData()
     {
         currentHealth = Player.Instance.health;
@@ -88,8 +86,6 @@ public class PersistentGameData : MonoBehaviour
         {
             currentRecipes.Add(item);
         }
-        // todo: Persist and save in persistent save file recipes you have in your Recipe panel :P
-        // Todo: Save in persistent save file deductable lists
 
         //NOTE: Takes the deductable loot map and persists it
         currentDeductableLootMap.Clear();
@@ -98,7 +94,7 @@ public class PersistentGameData : MonoBehaviour
             currentDeductableLootMap.Add(entry.Key, entry.Value);
         }
 
-        SaveSystem.SaveGlobalMoneyData(this);
+        SaveSystem.SaveGlobalMoneyData(currentMoney);
         SaveSystem.SavePersistentData(this);
     }
 

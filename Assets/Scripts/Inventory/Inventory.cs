@@ -42,7 +42,6 @@ public class Inventory : MonoBehaviour
     [System.NonSerialized]
     public List<Item> gunpowderCraftComponents = new List<Item>();
     private GameObject explosiveSlot;
-
     public Item explosiveComponent;
     [System.NonSerialized]
     public List<Item> explosiveCraftComponents = new List<Item>();
@@ -127,11 +126,11 @@ public class Inventory : MonoBehaviour
                     AddItem(LootLedger.LootLedgerDict[item].item.GetComponent<RecipePickUp>().item);
                 }
             }
-            SaveGlobalMoney SaveGlobalMoney = SaveSystem.LoadMoneyData();
-            if (money.Count() != SaveGlobalMoney.money)
-            {
-                LoadInventory(SaveGlobalMoney.money, moneyCoin);
-            }
+        }
+        SaveGlobalMoney SaveGlobalMoney = SaveSystem.LoadMoneyData();
+        if (money.Count() != SaveGlobalMoney.money)
+        {
+            LoadInventory(SaveGlobalMoney.money, moneyCoin);
         }
     }
 

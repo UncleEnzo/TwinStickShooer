@@ -12,8 +12,8 @@ public class SaveGlobalMoney
         money = 0;
     }
 
-    public SaveGlobalMoney(PersistentGameData PersistentGameData)
+    public SaveGlobalMoney(int currentmoney)
     {
-        money = PersistentGameData.currentMoney;
+        money = currentmoney;
     }
 }

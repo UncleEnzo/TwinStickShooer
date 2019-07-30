@@ -15,7 +15,7 @@ MonoBehaviour:
   name: BulletSpeedRecipe
   icon: {fileID: 21300000, guid: 0abcad6e677a58f46b814aa4f84e147d, type: 3}
   itemType: 3
-  Cost: 0
+  Cost: 2
   powerUp:
     name: BulletSpeedUp
     duration: 10

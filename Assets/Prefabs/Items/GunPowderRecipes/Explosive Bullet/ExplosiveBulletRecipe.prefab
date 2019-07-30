@@ -96,9 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 58e939da912839a439ac9ff4b946f55b, type: 2}
+  recipeType: 1
   recipePicked: {fileID: 11400000, guid: 86f2e6c9f146a2d419d096b8a212f4fe, type: 2}
-  damageDescription: Damage is Explosive
-  effectDescription: Shoot Explosive Rounds
+  DamageDescription: 5% damage increase
+  EffectDescription: Does stuff
   isFromChest: 0
   chestID: -1
 --- !u!114 &771404328930022359

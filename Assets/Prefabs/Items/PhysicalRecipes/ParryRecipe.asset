@@ -15,6 +15,7 @@ MonoBehaviour:
   name: ParryRecipe
   icon: {fileID: 21300000, guid: f8461f5690e38ef42beef5bf4f8a3dab, type: 3}
   itemType: 3
+  Cost: 15
   powerUp:
     name: ParryRecipe
     duration: 10

@@ -6,33 +6,20 @@ using UnityEngine;
 public class SavePlayerLootPool
 {
     //Note: Unity doesn't serialize GameObjects :(
-    public List<string> PhysicalRecipeLootPool = new List<string>();
-    public List<string> GunPowderRecipeLootPool = new List<string>();
-    public List<string> ExplosiveRecipeLootPool = new List<string>();
-    public List<string> WeaponLootPool = new List<string>();
+    public Dictionary<LootListType, List<string>> PlayerLootPoolDict = new Dictionary<LootListType, List<string>>();
 
     //New Game method constructor, Overwrites all save game data
     public SavePlayerLootPool(LootLedger LootLedger)
     {
-        UpdateList(PhysicalRecipeLootPool, LootLedger.StartingPhysicalRecipes);
-        UpdateList(GunPowderRecipeLootPool, LootLedger.StartingGunpowderRecipes);
-        UpdateList(ExplosiveRecipeLootPool, LootLedger.StartingExplosiveRecipes);
-        UpdateList(WeaponLootPool, LootLedger.StartingWeapons);
-    }
-
-    //Should be saving this THROUGH PersistentGameData whenever you make a transaction with Vendor
-    public SavePlayerLootPool(PersistentGameData PersistentGameData)
-    {
-        //perform an add if any object is missing in the persistent version
-        // PlayerLootPool = ;
-    }
-
-    private void UpdateList(List<string> SavedList, List<GameObject> lootList)
-    {
-        SavedList.Clear();
-        foreach (GameObject loot in lootList)
+        PlayerLootPoolDict.Clear();
+        foreach (KeyValuePair<LootListType, List<string>> entry in LootLedger.NewGamePlayerItemPool)
         {
-            SavedList.Add(loot.name);
+            PlayerLootPoolDict.Add(entry.Key, entry.Value);
         }
+    }
+
+    public SavePlayerLootPool(Dictionary<LootListType, List<string>> SaveData)
+    {
+
     }
 }

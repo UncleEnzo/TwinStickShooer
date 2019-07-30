@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270f89ada42f06a45861b42a6b0233d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VendorName: ExplosiveVendor
+  vendorType: 2
   Inventory: []
   weeklyItemPopup: {fileID: 4097178967355884708}
 --- !u!61 &5659833329574306359

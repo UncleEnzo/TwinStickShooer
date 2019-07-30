@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class RecipePickUp : Interactable
 {
     public Item item;
+    public RecipeType recipeType;
     public Signal recipePicked;
     public string DamageDescription = "5% damage increase";
     public string EffectDescription = "Does stuff";
@@ -104,3 +105,4 @@ public class RecipePickUp : Interactable
         }
     }
 }
+public enum RecipeType { PhysicalRecipe, GunPowderRecipe, ExplosiveRecipe }

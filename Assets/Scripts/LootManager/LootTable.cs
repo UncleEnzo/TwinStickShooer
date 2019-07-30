@@ -41,10 +41,10 @@ public class LootTable : MonoBehaviour
             print("Leaving Hub World. Resetting Deductables from player loot pool.");
             //step one > Loads the player loot pools and creates deductables out of them
             SavePlayerLootPool SavePlayerLootPool = SaveSystem.LoadPlayerLootPoolData();
-            ResetDeductableList(DeductablePhysicalRecipes, SavePlayerLootPool.PhysicalRecipeLootPool);
-            ResetDeductableList(DeductableGunpowderRecipes, SavePlayerLootPool.GunPowderRecipeLootPool);
-            ResetDeductableList(DeductableExplosiveRecipes, SavePlayerLootPool.ExplosiveRecipeLootPool);
-            ResetDeductableList(DeductableWeapons, SavePlayerLootPool.WeaponLootPool);
+            ResetDeductableList(DeductablePhysicalRecipes, SavePlayerLootPool.PlayerLootPoolDict[LootListType.PhysicalRecipe]);
+            ResetDeductableList(DeductableGunpowderRecipes, SavePlayerLootPool.PlayerLootPoolDict[LootListType.GunpowderRecipe]);
+            ResetDeductableList(DeductableExplosiveRecipes, SavePlayerLootPool.PlayerLootPoolDict[LootListType.ExplosiveRecipe]);
+            ResetDeductableList(DeductableWeapons, SavePlayerLootPool.PlayerLootPoolDict[LootListType.Weapon]);
 
             //Step two > makes a deductable map
             deductableLootMap.Add(LootListType.PhysicalRecipe, DeductablePhysicalRecipes);

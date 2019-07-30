@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using System.IO;
+using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -10,7 +11,6 @@ public static class SaveSystem
     private static string savePlayerLootPoolDataPath = Application.persistentDataPath + "/saveplayerlootpooldata.mbepus";
     private static string saveVendorLootPoolDataPath = Application.persistentDataPath + "/savevendorlootpooldata.mbepus";
 
-
     public static void SavePersistentData(PersistentGameData PersistentGameData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -20,29 +20,29 @@ public static class SaveSystem
         stream.Close();
     }
 
-    public static void SaveGlobalMoneyData(PersistentGameData PersistentGameData)
+    public static void SaveGlobalMoneyData(int currentMoney)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(saveGlobalMoneyDataPath, FileMode.Create);
-        SaveGlobalMoney data = new SaveGlobalMoney(PersistentGameData);
+        SaveGlobalMoney data = new SaveGlobalMoney(currentMoney);
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static void SavePlayerLootPoolData(PersistentGameData PersistentGameData)
+    public static void SavePlayerLootPoolData(Dictionary<LootListType, List<string>> SaveData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(savePlayerLootPoolDataPath, FileMode.Create);
-        SavePlayerLootPool data = new SavePlayerLootPool(PersistentGameData);
+        SavePlayerLootPool data = new SavePlayerLootPool(SaveData);
         formatter.Serialize(stream, data);
         stream.Close();
     }
 
-    public static void SaveVendorLootPoolData(PersistentGameData PersistentGameData)
+    public static void SaveVendorLootPoolData(Dictionary<VendorType, List<string>> SaveData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(saveVendorLootPoolDataPath, FileMode.Create);
-        SaveVendorLootPool data = new SaveVendorLootPool(PersistentGameData);
+        SaveVendorLootPool data = new SaveVendorLootPool(SaveData);
         formatter.Serialize(stream, data);
         stream.Close();
     }

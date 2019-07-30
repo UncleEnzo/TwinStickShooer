@@ -112,7 +112,7 @@ public class WeaponSwitching : MonoBehaviour
             }
             i++;
         }
-        print("COULD NOT GET SELECTED WEAPON. RETURNING NULL.");
+        print("Player does not have a currently equipped weapon.");
         return null;
     }
 

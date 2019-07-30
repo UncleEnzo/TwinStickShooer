@@ -38,7 +38,6 @@ public class Player : MonoBehaviour
     public Color regularColor;
     public float flashDuration;
     public int numberOfFlashes;
-
     public bool iFramesActive = false;
     #endregion
     public void Start()
@@ -82,7 +81,10 @@ public class Player : MonoBehaviour
         CursorController.Instance.enabled = playerUsable;
         WeaponSwitching.Instance.GetComponent<SetGunPosition>().enabled = playerUsable;
         Transform currentWeapon = WeaponSwitching.Instance.getSelectedWeapon();
-        currentWeapon.GetComponentInChildren<Weapon>().enabled = playerUsable;
+        if (currentWeapon)
+        {
+            currentWeapon.GetComponentInChildren<Weapon>().enabled = playerUsable;
+        }
         animator.enabled = playerUsable;
         canMove = playerUsable;
     }

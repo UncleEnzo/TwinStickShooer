@@ -124,6 +124,7 @@ MonoBehaviour:
     bulletAccuracy: 0
     bulletAngle: 0
     bulletBounce: 0
+    bulletBounceMaxNum: 0
     isExplosive: 0
     explosionDamage: 3
     explosiveForce: 4
@@ -134,6 +135,7 @@ MonoBehaviour:
   bullet: {fileID: 7991890147027848265, guid: 53d29cab04a179942b6a41cf43d8ff31, type: 3}
   gunShotSound: {fileID: 8300000, guid: 5f65f7a864d7742fda4f10edfde922d2, type: 3}
   gunReloadSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
+  Cost: 45
 --- !u!58 &3279655025178572123
 CircleCollider2D:
   m_ObjectHideFlags: 0
