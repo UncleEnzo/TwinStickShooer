@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7625524876518625126}
   - component: {fileID: 7625524876518625121}
   - component: {fileID: 2652696027989464139}
-  - component: {fileID: 4518107801132208177}
+  - component: {fileID: 7698001536843669298}
   - component: {fileID: 6972054770439239144}
   - component: {fileID: 7625524876518625123}
   - component: {fileID: 7625524876518625149}
@@ -111,8 +111,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4518107801132208177
-BoxCollider2D:
+--- !u!70 &7698001536843669298
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -124,19 +124,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 0.32, y: 0.32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.1263119, y: 0.1944161}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.0012356043, y: 0}
+  m_Size: {x: 0.12230337, y: 0.19891089}
+  m_Direction: 0
 --- !u!61 &6972054770439239144
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180,6 +170,7 @@ MonoBehaviour:
   animator: {fileID: 7625524876516204061}
   canMove: 1
   playerUsable: 1
+  health: 8
   triggerCollider: {fileID: 6972054770439239144}
   movementAnimation: {fileID: 7625524876516204063}
   mySprite: {fileID: 2652696027989464139}
@@ -213,11 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109b0c58426ad874594d4975f6f3bef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: {fileID: 11400000, guid: 4186f3044d3a6704f809f0f9972b47fb, type: 2}
-  money: {fileID: 11400000, guid: 69a805a34b2b7524798ad251ffddea9b, type: 2}
-  physical: {fileID: 11400000, guid: 1c2977adb0d030647a3918136365491e, type: 2}
-  gunPowder: {fileID: 11400000, guid: 0b438dc8698e3db4f8a0e8a5aa0cdb77, type: 2}
-  explosive: {fileID: 11400000, guid: ab9ad0c190015d74ea6ccaa3588fddc0, type: 2}
 --- !u!1001 &1569467838573930607
 PrefabInstance:
   m_ObjectHideFlags: 0

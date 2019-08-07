@@ -16,9 +16,7 @@ public class Door : Interactable
     public BoxCollider2D isTriggerCollider;
     public DoorType thisDoorType;
     public bool open = false;
-    //public Inventory playerInventory; NOTE: For Key
     public SpriteRenderer doorSpriteRenderer;
-    // public BoxCollider2D physicsCollider;
     public Sprite openDoor;
     public Sprite closedDoor;
     public Item key;

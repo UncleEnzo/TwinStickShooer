@@ -116,8 +116,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1378014781839158569, guid: b22e2bc0dbc29f74db19f827bf58ea27,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: AbandonRun
         m_Mode: 1
         m_Arguments:
@@ -531,9 +530,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9098530705281806983, guid: b22e2bc0dbc29f74db19f827bf58ea27,
-          type: 3}
-        m_MethodName: 
+      - m_Target: {fileID: 0}
+        m_MethodName: OpenSettingsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -661,8 +659,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1378014781839158569, guid: b22e2bc0dbc29f74db19f827bf58ea27,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: ReturnToStartScreen
         m_Mode: 1
         m_Arguments:
@@ -791,8 +788,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1378014781839158569, guid: b22e2bc0dbc29f74db19f827bf58ea27,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:

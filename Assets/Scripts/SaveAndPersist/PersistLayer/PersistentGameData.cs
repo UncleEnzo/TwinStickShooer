@@ -52,12 +52,15 @@ public class PersistentGameData : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
         {
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
-            currentGunTypes = SavePersistentData.gunTypes;
-            currentWeaponCount = SavePersistentData.weaponCount;
-            foreach (KeyValuePair<WeaponType, int> entry in SavePersistentData.ExplosiveAmmo)
+            if (SavePersistentData != null)
             {
-                currentExplosiveAmmo.Clear();
-                currentExplosiveAmmo.Add(entry.Key, entry.Value);
+                currentGunTypes = SavePersistentData.gunTypes;
+                currentWeaponCount = SavePersistentData.weaponCount;
+                foreach (KeyValuePair<WeaponType, int> entry in SavePersistentData.ExplosiveAmmo)
+                {
+                    currentExplosiveAmmo.Clear();
+                    currentExplosiveAmmo.Add(entry.Key, entry.Value);
+                }
             }
         }
     }

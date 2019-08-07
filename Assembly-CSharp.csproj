@@ -83,6 +83,7 @@
      <Compile Include="Assets\Scripts\Global\ObjectPooler.cs" />
      <Compile Include="Assets\Scripts\Global\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\Global\PlayerHUBController.cs" />
+     <Compile Include="Assets\Scripts\Global\SettingsMenu.cs" />
      <Compile Include="Assets\Scripts\Global\Signal.cs" />
      <Compile Include="Assets\Scripts\Global\SignalListener.cs" />
      <Compile Include="Assets\Scripts\Global\TagsAndLabels.cs" />
@@ -134,6 +135,7 @@
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveGlobalMoney.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SavePersistentData.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SavePlayerLootPool.cs" />
+     <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveSettingData.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveSystem.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveVendorLootPool.cs" />
      <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\Dialogue.cs" />

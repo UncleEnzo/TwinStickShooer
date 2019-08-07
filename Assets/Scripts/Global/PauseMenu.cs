@@ -6,20 +6,24 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+    public static bool SettingsMenuOpen = false;
     public GameObject pauseMenuUI;
+    public GameObject SettingsMenuUI;
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!SettingsMenuOpen)
         {
-            if (GameIsPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Resume();
-            }
-            else
-            {
-                Pause();
+                if (GameIsPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
         }
     }
@@ -46,7 +50,17 @@ public class PauseMenu : MonoBehaviour
         SceneLoader.LoadHubWorld();
     }
 
-    //Todo: Settings
+    public void OpenSettingsMenu()
+    {
+        SettingsMenuOpen = true;
+        SettingsMenu settingsMenu = GetComponent<SettingsMenu>();
+        settingsMenu.preservedIsFullScreen = settingsMenu.currentIsFullScreen;
+        settingsMenu.preservedQualityIndex = settingsMenu.currentQualityIndex;
+        settingsMenu.preservedResolutionIndex = settingsMenu.currentResolutionIndex;
+        settingsMenu.preservedVolume = settingsMenu.currentVolume;
+        pauseMenuUI.SetActive(false);
+        SettingsMenuUI.SetActive(true);
+    }
 
     public void ReturnToStartScreen()
     {

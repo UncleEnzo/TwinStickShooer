@@ -21,6 +21,7 @@ public class VendorInventory : MonoBehaviour
     private Image ItemColor;
     private TextMeshProUGUI ItemDamageText;
     private TextMeshProUGUI ItemEffectText;
+    private bool itemPurchased = false;
 
     void Start()
     {
@@ -49,13 +50,14 @@ public class VendorInventory : MonoBehaviour
     void Update()
     {
         //Note: If player buys the item for sale, need to add logic that makes selects a new item
-        if (itemForSale == null)
+        if (itemPurchased == true)
         {
+            print("Selecting new item");
             selectItemForSale(); // I think this is a janky solution because if you run out of items, this will constantly call null
+            itemPurchased = false;
         }
         if (playerInRange && Input.GetKeyDown("e"))
         {
-            print("Activating panel");
             Time.timeScale = 0;
             Player.Instance.enablePlayer(false);
             weeklyItemPopup.SetActive(false);
@@ -80,10 +82,14 @@ public class VendorInventory : MonoBehaviour
     protected void updateVendorTradeUI()
     {
         int ItemCost = -1;
-        if (itemForSale.item == null)
+        if (itemForSale == null)
         {
-            ItemCost = -1;
-            Debug.Log("You have purchased everything from this vendor.");
+            ItemNameText.text = "No Items Left To Sell";
+            ItemCostText.text = "Cost: ";
+            ItemIcon.sprite = null;
+            ItemColor.color = new Color32(0, 0, 0, 0);
+            ItemDamageText.text = "This Vendor is Itemless";
+            ItemEffectText.text = "You bought all the vendor's items";
         }
         else if (itemForSale.item.GetComponent<RecipePickUp>())
         {
@@ -116,7 +122,6 @@ public class VendorInventory : MonoBehaviour
             ItemDamageText.text = itemForSale.item.GetComponent<PlayerGun>().DamageDescription;
             ItemEffectText.text = itemForSale.item.GetComponent<PlayerGun>().EffectDescription;
         }
-
         if (ItemCost >= 0 && ItemCost <= Inventory.Instance.getMoneyCount())
         {
             ItemBuyButton.enabled = true;
@@ -163,39 +168,40 @@ public class VendorInventory : MonoBehaviour
 
         //Save New Player Loot Pool
         SavePlayerLootPool savePlayerLootPool = SaveSystem.LoadPlayerLootPoolData();
+        UpdatePlayerSavePool(savePlayerLootPool);
+        SaveSystem.SavePlayerLootPoolData(savePlayerLootPool.PlayerLootPoolDict);
+        itemPurchased = true;
+        RemoveAllListeners();
+    }
+
+    private void UpdatePlayerSavePool(SavePlayerLootPool savePlayerLootPool)
+    {
         if (itemForSale.item.GetComponent<RecipePickUp>())
         {
-            if (itemForSale.item.GetComponent<RecipePickUp>().recipeType == RecipeType.PhysicalRecipe)
-            {
-                if (!savePlayerLootPool.PlayerLootPoolDict[LootListType.PhysicalRecipe].Contains(itemForSale.item.name))
-                {
-                    savePlayerLootPool.PlayerLootPoolDict[LootListType.PhysicalRecipe].Add(itemForSale.item.name);
-                }
-            }
-            if (itemForSale.item.GetComponent<RecipePickUp>().recipeType == RecipeType.GunPowderRecipe)
-            {
-                if (!savePlayerLootPool.PlayerLootPoolDict[LootListType.GunpowderRecipe].Contains(itemForSale.item.name))
-                {
-                    savePlayerLootPool.PlayerLootPoolDict[LootListType.GunpowderRecipe].Add(itemForSale.item.name);
-                }
-            }
-            if (itemForSale.item.GetComponent<RecipePickUp>().recipeType == RecipeType.ExplosiveRecipe)
-            {
-                if (!savePlayerLootPool.PlayerLootPoolDict[LootListType.ExplosiveRecipe].Contains(itemForSale.item.name))
-                {
-                    savePlayerLootPool.PlayerLootPoolDict[LootListType.ExplosiveRecipe].Add(itemForSale.item.name);
-                }
-            }
+            DetemineRecipeType(RecipeType.PhysicalRecipe, LootListType.PhysicalRecipe, savePlayerLootPool);
+            DetemineRecipeType(RecipeType.GunPowderRecipe, LootListType.GunpowderRecipe, savePlayerLootPool);
+            DetemineRecipeType(RecipeType.ExplosiveRecipe, LootListType.ExplosiveRecipe, savePlayerLootPool);
         }
-        if (itemForSale.item.GetComponent<PlayerGun>())
+        else
         {
-            if (!savePlayerLootPool.PlayerLootPoolDict[LootListType.Weapon].Contains(itemForSale.item.name))
-            {
-                savePlayerLootPool.PlayerLootPoolDict[LootListType.Weapon].Add(itemForSale.item.name);
-            }
+            addToList(LootListType.Weapon, savePlayerLootPool);
         }
-        SaveSystem.SavePlayerLootPoolData(savePlayerLootPool.PlayerLootPoolDict);
-        RemoveAllListeners();
+    }
+
+    private void DetemineRecipeType(RecipeType recipe, LootListType lootList, SavePlayerLootPool savePlayerLootPool)
+    {
+        if (itemForSale.item.GetComponent<RecipePickUp>().recipeType == recipe)
+        {
+            addToList(lootList, savePlayerLootPool);
+        }
+    }
+
+    private void addToList(LootListType lootListType, SavePlayerLootPool savePlayerLootPool)
+    {
+        if (!savePlayerLootPool.PlayerLootPoolDict[lootListType].Contains(itemForSale.item.name))
+        {
+            savePlayerLootPool.PlayerLootPoolDict[lootListType].Add(itemForSale.item.name);
+        }
     }
 
     public void ExitButton()
@@ -228,28 +234,29 @@ public class VendorInventory : MonoBehaviour
         saveIcon.SetActive(false);
     }
 
-    //Note: This is just a basic way to select the item. Later this method needs to be revised
     private void selectItemForSale()
     {
-        itemForSale = vendorInventory[0];
+        itemForSale = LootTable.instance.generateRandomLoot(vendorInventory);
     }
-
-    //when player is in range, have him show the item he's holding this week
-    //if player buys it, need to offer another item
-    //need to wait for interation
-    //Need to offer player the item that he's selling to examine
-    //Need to have a transaction working
 
     void OnTriggerEnter2D(Collider2D collider2D)
     {
         //Vendor raises signal showing what Item he is carrying
         if (collider2D == Player.Instance.GetComponent<Collider2D>())
         {
-            //This is still buggy, needs work. Item icon needs to be smaller too and have set dimensions. 
-            //Should also be the recipe icon, not the sprite of the scroll
-            //Weapon icon should be flipped in the correct direction
-            weeklyItemPopup.GetComponentInChildren<SpriteRenderer>().sprite = itemForSale.item.GetComponent<SpriteRenderer>().sprite;
-            weeklyItemPopup.SetActive(true);
+            if (itemForSale != null)
+            {
+                if (itemForSale.item.GetComponent<RecipePickUp>())
+                {
+                    weeklyItemPopup.GetComponentsInChildren<SpriteRenderer>()[1].sprite = itemForSale.item.GetComponent<RecipePickUp>().item.icon;
+                    weeklyItemPopup.SetActive(true);
+                }
+                else
+                {
+                    weeklyItemPopup.GetComponentsInChildren<SpriteRenderer>()[1].sprite = itemForSale.item.GetComponent<SpriteRenderer>().sprite;
+                    weeklyItemPopup.SetActive(true);
+                }
+            }
             playerInRange = true;
         }
     }

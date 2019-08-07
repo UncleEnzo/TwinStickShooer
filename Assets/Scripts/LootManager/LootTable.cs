@@ -140,7 +140,7 @@ public class LootTable : MonoBehaviour
         }
     }
 
-    public GameObject generateRandomLoot(LootListType lootList, int chestRarityRange)
+    public Loot generateRandomLootFromDeductable(LootListType lootList, int chestRarityRange)
     {
         List<Loot> lootListType = new List<Loot>();
         foreach (Loot loot in deductableLootMap[lootList])
@@ -165,11 +165,16 @@ public class LootTable : MonoBehaviour
             //print("Chest rarity is neutral");
         }
 
+        return generateRandomLoot(lootListType);
+    }
+
+    public Loot generateRandomLoot(List<Loot> lootList)
+    {
         int total = 0;
         int randomNumber = 0;
 
         //tally the total weight
-        foreach (Loot loot in lootListType)
+        foreach (Loot loot in lootList)
         {
             total += loot.weight;
         }
@@ -177,19 +182,19 @@ public class LootTable : MonoBehaviour
         //draw a random number between 0 and the total weight (100)
         randomNumber = UnityEngine.Random.Range(0, total);
 
-        for (int i = 0; i < lootListType.Count; i++)
+        for (int i = 0; i < lootList.Count; i++)
         {
-            if (randomNumber <= lootListType[i].weight)
+            if (randomNumber <= lootList[i].weight)
             {
-                return lootListType[i].item;
+                return lootList[i];
             }
             else
             {
-                randomNumber -= lootListType[i].weight;
+                randomNumber -= lootList[i].weight;
             }
         }
 
-        foreach (Loot loot in lootListType)
+        foreach (Loot loot in lootList)
         {
             int lootWeight = loot.weight;
             if (randomNumber <= lootWeight)

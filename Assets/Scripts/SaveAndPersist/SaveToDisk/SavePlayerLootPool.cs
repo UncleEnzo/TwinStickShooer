@@ -5,7 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class SavePlayerLootPool
 {
-    //Note: Unity doesn't serialize GameObjects :(
     public Dictionary<LootListType, List<string>> PlayerLootPoolDict = new Dictionary<LootListType, List<string>>();
 
     //New Game method constructor, Overwrites all save game data

@@ -122,10 +122,10 @@ public class TreasureChest : Interactable
 
     protected GameObject spawnRecipe(LootListType loot, float coordinateX, float coordinateY, int chestID)
     {
-        GameObject item = LootTable.instance.generateRandomLoot(loot, chestRarityRange);
+        GameObject item = LootTable.instance.generateRandomLootFromDeductable(loot, chestRarityRange).item;
         if (item != null)
         {
-            GameObject recipe = Instantiate(LootTable.instance.generateRandomLoot(loot, chestRarityRange), new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
+            GameObject recipe = Instantiate(LootTable.instance.generateRandomLootFromDeductable(loot, chestRarityRange).item, new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
             recipe.GetComponent<RecipePickUp>().chestID = chestID;
             recipe.GetComponent<RecipePickUp>().isFromChest = true;
             return recipe;
@@ -139,6 +139,6 @@ public class TreasureChest : Interactable
 
     protected void spawnItem(LootListType loot, float coordinateX, float coordinateY, int chestID)
     {
-        GameObject item = Instantiate(LootTable.instance.generateRandomLoot(loot, chestRarityRange), new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
+        GameObject item = Instantiate(LootTable.instance.generateRandomLootFromDeductable(loot, chestRarityRange).item, new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
     }
 }

@@ -10,6 +10,7 @@ public static class SaveSystem
     private static string saveGlobalMoneyDataPath = Application.persistentDataPath + "/saveglobalmoneydata.mbepus";
     private static string savePlayerLootPoolDataPath = Application.persistentDataPath + "/saveplayerlootpooldata.mbepus";
     private static string saveVendorLootPoolDataPath = Application.persistentDataPath + "/savevendorlootpooldata.mbepus";
+    private static string saveSettingsDataPath = Application.persistentDataPath + "/savesettingsdata.mbepus";
 
     public static void SavePersistentData(PersistentGameData PersistentGameData)
     {
@@ -45,6 +46,32 @@ public static class SaveSystem
         SaveVendorLootPool data = new SaveVendorLootPool(SaveData);
         formatter.Serialize(stream, data);
         stream.Close();
+    }
+
+    public static void SaveSettingsData(SettingsMenu settingsMenu)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(saveSettingsDataPath, FileMode.Create);
+        SaveSettingData data = new SaveSettingData(settingsMenu);
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static SaveSettingData LoadSettingsData()
+    {
+        if (File.Exists(saveSettingsDataPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(saveSettingsDataPath, FileMode.Open);
+            SaveSettingData data = formatter.Deserialize(stream) as SaveSettingData;
+            stream.Close();
+            return data;
+        }
+        else
+        {
+            Debug.Log("Save File Not Found " + savePersistentDataPath + " setting to default");
+            return null;
+        }
     }
 
     public static SavePersistentData LoadPersistentData()
