@@ -10,6 +10,8 @@ public class SettingsMenu : MonoBehaviour
     public Dropdown resolutionDropdown;
     public Slider volumeSlider;
     public Dropdown qualityDropdown;
+    public Dropdown antiAliasingDropdown;
+    public Dropdown vSyncDropdown;
     public Toggle fullScreenToggle;
     Resolution[] resolutions;
     public GameObject pauseMenuUI;
@@ -18,6 +20,10 @@ public class SettingsMenu : MonoBehaviour
     public float currentVolume = 0;
     public int currentQualityIndex = 0;
     public bool currentIsFullScreen = true;
+    public int currentVSync = 0;
+    public int currentAntiAliasing = 0;
+    public int preservedVSync = 0;
+    public int preservedAntialiasing = 0;
     public int preservedResolutionIndex = 0;
     public float preservedVolume = 0;
     public int preservedQualityIndex = 0;
@@ -44,23 +50,63 @@ public class SettingsMenu : MonoBehaviour
         SaveSettingData saveSettingData = SaveSystem.LoadSettingsData();
         if (saveSettingData != null)
         {
-            SetSettings(saveSettingData.isFullScreen, saveSettingData.ResolutionIndex, saveSettingData.QualityIndex, saveSettingData.Volume);
+            SetSettings(saveSettingData);
+        }
+        else
+        {
+            SystemDefaultSettings();
         }
     }
 
-    private void SetSettings(bool isFullScreen, int ResolutionIndex, int QualityIndex, float Volume)
+    private void SystemDefaultSettings()
+    {
+        //load up values from system default (Resolution is already done)
+        currentIsFullScreen = Screen.fullScreen;
+        currentQualityIndex = QualitySettings.GetQualityLevel();
+        audioMixer.GetFloat("volume", out currentVolume);
+        if (currentVolume != 0)
+        {
+            audioMixer.SetFloat("volume", 0);
+            currentVolume = 0;
+        }
+        currentAntiAliasing = QualitySettings.antiAliasing;
+        currentVSync = QualitySettings.vSyncCount;
+
+        //Set the values in the system
+        SetFullscreen(currentIsFullScreen);
+        SetQuality(currentQualityIndex);
+        SetVolume(currentVolume);
+        SetVSync(currentVSync);
+        SetAntiAliasing(currentAntiAliasing);
+
+        //Adjust the UI elements
+        fullScreenToggle.isOn = currentIsFullScreen;
+        qualityDropdown.value = currentQualityIndex;
+        qualityDropdown.RefreshShownValue();
+        volumeSlider.value = currentVolume;
+        antiAliasingDropdown.value = currentAntiAliasing;
+        antiAliasingDropdown.RefreshShownValue();
+        vSyncDropdown.value = currentVSync;
+        vSyncDropdown.RefreshShownValue();
+    }
+
+    private void SetSettings(SaveSettingData saveSettingData)
     {
         //load up the correct values
-        currentIsFullScreen = isFullScreen;
-        currentResolutionIndex = ResolutionIndex;
-        currentQualityIndex = QualityIndex;
-        currentVolume = Volume;
+        currentIsFullScreen = saveSettingData.isFullScreen;
+        currentResolutionIndex = saveSettingData.ResolutionIndex;
+        currentQualityIndex = saveSettingData.QualityIndex;
+        currentVolume = saveSettingData.Volume;
+        currentAntiAliasing = saveSettingData.AntiAliasing;
+        currentVSync = saveSettingData.VSync;
 
         //Set the values in the system
         SetFullscreen(currentIsFullScreen);
         SetResolution(currentResolutionIndex);
         SetQuality(currentQualityIndex);
         SetVolume(currentVolume);
+        SetVSync(currentVSync);
+        SetAntiAliasing(currentAntiAliasing);
 
         //Adjust the UI elements
         fullScreenToggle.isOn = currentIsFullScreen;
@@ -69,8 +115,11 @@ public class SettingsMenu : MonoBehaviour
         qualityDropdown.value = currentQualityIndex;
         qualityDropdown.RefreshShownValue();
         volumeSlider.value = currentVolume;
+        antiAliasingDropdown.value = currentAntiAliasing;
+        antiAliasingDropdown.RefreshShownValue();
+        vSyncDropdown.value = currentVSync;
+        vSyncDropdown.RefreshShownValue();
     }
-
 
     private void ResetSettings()
     {
@@ -79,12 +128,16 @@ public class SettingsMenu : MonoBehaviour
         currentResolutionIndex = preservedResolutionIndex;
         currentQualityIndex = preservedQualityIndex;
         currentVolume = preservedVolume;
+        currentAntiAliasing = preservedAntialiasing;
+        currentVSync = preservedVSync;
 
         //Set the values in the system
         SetFullscreen(preservedIsFullScreen);
         SetResolution(preservedResolutionIndex);
         SetQuality(preservedQualityIndex);
         SetVolume(preservedVolume);
+        SetVSync(preservedVSync);
+        SetAntiAliasing(preservedVSync);
 
         //Adjust the UI elements
         fullScreenToggle.isOn = preservedIsFullScreen;
@@ -93,6 +146,21 @@ public class SettingsMenu : MonoBehaviour
         qualityDropdown.value = preservedQualityIndex;
         qualityDropdown.RefreshShownValue();
         volumeSlider.value = preservedVolume;
+        antiAliasingDropdown.value = currentAntiAliasing;
+        antiAliasingDropdown.RefreshShownValue();
+        vSyncDropdown.value = currentVSync;
+        vSyncDropdown.RefreshShownValue();
+    }
+
+    public void SetVSync(int vSync)
+    {
+        QualitySettings.vSyncCount = vSync;
+        currentVSync = vSync;
+    }
+    public void SetAntiAliasing(int antiAliasing)
+    {
+        QualitySettings.antiAliasing = (int)Mathf.Pow(2f, antiAliasing);
+        currentAntiAliasing = antiAliasing;
     }
 
     public void SetResolution(int resolutionIndex)

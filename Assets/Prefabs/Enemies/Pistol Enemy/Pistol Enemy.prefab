@@ -171,6 +171,8 @@ MonoBehaviour:
   coolDownOnMovementTimer: 0.5
   movementCoolDownReset: 0.5
   floatingText: []
+  enemyStates: 0
+  distFromPlayer: 0
 --- !u!114 &518032821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +251,103 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+--- !u!114 &1123252856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3397800862951781704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f0f29fa90c15e4ca1c2e77ce62f18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_axisMove: 0
+  m_inheritAngle: 0
+  m_startOnAwake: 0
+  m_startOnAwakeDelay: 0
+  m_startOnEnable: 0
+  m_startOnEnableDelay: 1
+  m_loop: 0
+  m_atRandom: 0
+  m_shotList:
+  - m_shotObj: {fileID: 553872490}
+    m_afterDelay: 0
+  m_shotRoutineFinishedCallbackEvents:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!1001 &565092138
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3999332736515656059}
+    m_Modifications:
+    - target: {fileID: 100000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_Name
+      value: PistolLinearLockOnShot 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d1226e5d2795ebb468e44709f52c90bf, type: 3}
+--- !u!114 &553872490 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11400000, guid: d1226e5d2795ebb468e44709f52c90bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 565092138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cf8ed6458b22394b87b4d9583c1c642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3390633828425461417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -316,8 +415,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4905674349864378061, guid: f597f036daa41ea42a1a4782a9ea0873,
+        type: 3}
+      propertyPath: GunProperties.bulletSpawnPoint.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905674349864378061, guid: f597f036daa41ea42a1a4782a9ea0873,
+        type: 3}
+      propertyPath: armLength
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f597f036daa41ea42a1a4782a9ea0873, type: 3}
+--- !u!1 &3397800862951781704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 11991691623488481, guid: f597f036daa41ea42a1a4782a9ea0873,
+    type: 3}
+  m_PrefabInstance: {fileID: 3390633828425461417}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3999332736515656059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1769220241367476178, guid: f597f036daa41ea42a1a4782a9ea0873,

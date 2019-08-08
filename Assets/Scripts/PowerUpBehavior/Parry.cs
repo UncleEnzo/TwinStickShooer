@@ -89,7 +89,7 @@ public class Parry : MonoBehaviour
             {
                 playerBullet.transform.position = enemyBulletPos;
                 playerBullet.transform.rotation = enemyBulletRotation;
-                playerBullet.GetComponent<PlayerBullet>().setBulletProperties(enemyBullet.bulletSpeed, enemyBullet.bulletDamage, enemyBullet.timeBulletSelfDestruct, enemyBullet.knockBack, enemyBullet.bulletAccuracy, enemyBullet.bulletAngle, enemyBullet.bulletBounce, enemyBullet.bulletBounceMaxNum, enemyBullet.isExplosive, enemyBullet.explosionDamage, enemyBullet.explosiveForce, enemyBullet.explosiveRadius, enemyBullet.explosionEffect);
+                playerBullet.GetComponent<PlayerBullet>().setBulletProperties(enemyBullet.bulletSpeed, enemyBullet.bulletDamage, enemyBullet.timeBulletSelfDestruct, 3f, 0, 0, enemyBullet.bulletBounce, enemyBullet.bulletBounceMaxNum, enemyBullet.isExplosive, enemyBullet.explosionDamage, enemyBullet.explosiveForce, enemyBullet.explosiveRadius, enemyBullet.explosionEffect);
                 playerBullet.SetActive(true);
                 playerBullet.GetComponent<SpriteRenderer>().sprite = playerBullet.GetComponent<SpriteRenderer>().sprite;
                 playerBullet.GetComponent<PlayerBullet>().bulletTrajectory = trajectory * reflectBulletSpeed;

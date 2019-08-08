@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_3_8;UNITY_2018_3;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_3_8;UNITY_2018_3;UNITY_2018;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_WIN;PLATFORM_STANDALONE;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_EVENT_QUEUE;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_AR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyTypes\EnemyRadialFire.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyTypes\EnemyWithGun.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StateDie.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StateMachine.cs" />
@@ -147,18 +148,79 @@
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\SetGunPosition.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Attribute\UbhConditionalHideAttribute.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Bullet\UbhBullet.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Bullet\UbhBulletSimpleModel3d.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Bullet\UbhBulletSimpleSprite2d.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Bullet\UbhTentacleBullet.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Controller\UbhShotCtrl.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhBaseShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhCircleShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhHoleCircleLockOnShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhHoleCircleShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhHomingShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhLinearLockOnShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhLinearShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhNwayLockOnShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhNwayShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhOverTakeNwayLockOnShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhOverTakeNwayShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhPaintLockOnShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhPaintShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhRandomLockOnShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhRandomShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhRandomSpiralMultiShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhRandomSpiralShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhSinWaveBulletNwayLockOnShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhSinWaveBulletNwayShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhSpiralMultiNwayShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhSpiralMultiShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhSpiralNwayShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhSpiralShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhSpreadNwayLockOnShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhSpreadNwayShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhWavingNwayLockOnShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhWavingNwayShot.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Singleton\UbhBulletManager.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Singleton\UbhObjectPool.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Singleton\UbhShotManager.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Singleton\UbhSingletonMonoBehavior.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Singleton\UbhTimer.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Utility\UbhMonoBehaviour.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Utility\UbhTransformExtention.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Utility\UbhUtil.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhAutoDespawnParticle.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhAutoScaleGUIText.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhBackground.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhDebugInfo.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhDestroyArea.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhEmitter.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhEnemy.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhExplosion.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhGameManager.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhPlayer.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhPlayerBullet.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhScore.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhSetting.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhShowcaseCtrl.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhSpaceship.cs" />
+     <Compile Include="Assets\UniBulletHell\ShowPatterns\Script\UbhTitle.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\EffectExamples\Shared\Shaders\SurfaceShader_VC.shader" />
      <None Include="Assets\Scripts\OutlineEffect\Resources\OutlineShader.shader" />
+     <None Include="Assets\UniBulletHell\ShowPatterns\PaintShotData\paint_shot_data_0001.txt" />
+     <None Include="Assets\UniBulletHell\license.txt" />
      <None Include="Assets\Scripts\OutlineEffect\Resources\OutlineBufferShader.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\Shaders\Sprites-Outline.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\UniBulletHell\readme.txt" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+     <None Include="Assets\UniBulletHell\ShowPatterns\PaintShotData\paint_shot_data_0002.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

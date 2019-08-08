@@ -4,33 +4,21 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [Header("Not serializing bullet values. Should be derived from GunProperties")]
+    [Header("Set these values manually if does not belong to a gun")]
+    [Header("If it belongs to an enemyGun, configure these values and Uni Properities")]
     public Rigidbody2D rigidBody2D;
-    [System.NonSerialized]
-    public float bulletSpeed;
-    [System.NonSerialized]
     public float bulletDamage;
-    [System.NonSerialized]
-    public float timeBulletSelfDestruct;
-    [System.NonSerialized]
+    public float bulletSpeed;
     public float knockBack;
-    [System.NonSerialized]
     public float bulletAccuracy;
-    [System.NonSerialized]
     public float bulletAngle;
-    [System.NonSerialized]
+    public float timeBulletSelfDestruct;
     public bool bulletBounce;
-    [System.NonSerialized]
     public bool isExplosive;
-    [System.NonSerialized]
     public float explosionDamage;
-    [System.NonSerialized]
     public float explosiveForce;
-    [System.NonSerialized]
     public float explosiveRadius;
-    [System.NonSerialized]
     public Vector2 bulletTrajectory;
-    [System.NonSerialized]
     public GameObject explosionEffect;
 
     [Header("Serialized bullet values. NOT Derived from Gun Properties")]
@@ -43,7 +31,6 @@ public class Bullet : MonoBehaviour
         bounces = 0;
         bulletSprite = GetComponent<SpriteRenderer>().sprite;
         rigidBody2D = GetComponent<Rigidbody2D>();
-        StartCoroutine(SetInactiveSelf());
     }
     protected void OnCollisionEnter2D(Collision2D collisionInfo)
     {
@@ -109,22 +96,8 @@ public class Bullet : MonoBehaviour
         }
         Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
     }
-    protected Vector2 bulletDirection()
-    {
-        // Randomize angle variation between bullets
-        float spreadAngle = Random.Range(-bulletAccuracy, bulletAccuracy);
 
-        // Take the random angle variation and add it to the initial
-        // desiredDirection (which we convert into another angle), which in this case is the players aiming direction
-        var x = transform.right.x;
-        var y = transform.right.y;
-        float rotateAngle = spreadAngle + (Mathf.Atan2(y, x) * Mathf.Rad2Deg);
-
-        // Calculate the new direction we will move in which takes into account 
-        // the random angle generated
-        return new Vector2(Mathf.Cos(rotateAngle * Mathf.Deg2Rad), Mathf.Sin(rotateAngle * Mathf.Deg2Rad)).normalized;
-    }
-    //Note: Do not need to reset, because now that Player and Enemy set bullet properties, they will reset when shot again
+    //Note: Do not need to reset properties, because now that Player and Enemy set bullet properties, they will reset when shot again
     public void setBulletProperties(float bulletSpeed, float bulletDamage, float timeBulletSelfDestruct, float knockBack, float bulletAccuracy, float bulletAngle, bool bulletBounce, int bulletBounceMaxNum, bool isExplosive, float explosionDamage, float explosiveForce, float explosiveRadius, GameObject explosionEffect)
     {
         this.bulletSpeed = bulletSpeed;
@@ -140,18 +113,5 @@ public class Bullet : MonoBehaviour
         this.explosiveForce = explosiveForce;
         this.explosiveRadius = explosiveRadius;
         this.explosionEffect = explosionEffect;
-    }
-    protected IEnumerator SetInactiveSelf()
-    {
-        yield return new WaitForSeconds(timeBulletSelfDestruct);
-        gameObject.SetActive(false);
-    }
-    public float getBulletDamage()
-    {
-        return bulletDamage;
-    }
-    public Vector2 getBulletTrajectory()
-    {
-        return bulletTrajectory;
     }
 }

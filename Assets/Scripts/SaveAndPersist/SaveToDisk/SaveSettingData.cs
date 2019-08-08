@@ -9,6 +9,8 @@ public class SaveSettingData
     public bool isFullScreen;
     public int QualityIndex;
     public int ResolutionIndex;
+    public int VSync;
+    public int AntiAliasing;
 
     public SaveSettingData(SettingsMenu SettingsMenu)
     {
@@ -16,6 +18,8 @@ public class SaveSettingData
         isFullScreen = SettingsMenu.currentIsFullScreen;
         QualityIndex = SettingsMenu.currentQualityIndex;
         ResolutionIndex = SettingsMenu.currentResolutionIndex;
+        VSync = SettingsMenu.currentVSync;
+        AntiAliasing = SettingsMenu.currentAntiAliasing;
     }
 }
 

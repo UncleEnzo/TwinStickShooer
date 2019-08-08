@@ -84,25 +84,37 @@ public class Gun : Weapon
         }
     }
 
+    //testing UBHFireGun
     private void FireEnemyGun()
     {
         if ((Time.time - lastfired) > (1 / GunProperties.bulletsPerSecond))
         {
             lastfired = Time.time;
-            foreach (Transform bulletShot in GunProperties.bulletSpawnPoint)
-            {
-                GameObject newBullet = ObjectPooler.SharedInstance.GetPooledObject(bullet.name + "(Clone)");
-                if (newBullet != null)
-                {
-                    newBullet.transform.position = bulletShot.position;
-                    newBullet.transform.rotation = bulletShot.rotation;
-                    newBullet.GetComponent<EnemyBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce, GunProperties.bulletBounceMaxNum, GunProperties.isExplosive, GunProperties.explosionDamage, GunProperties.explosiveForce, GunProperties.explosiveRadius, GunProperties.explosionEffect);
-                    newBullet.SetActive(true);
-                }
-            }
+            UbhShotCtrl shotController = GetComponentInChildren<UbhShotCtrl>();
+            shotController.StartShotRoutine();
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;
         }
+
+        // private void FireEnemyGun()
+        // {
+        //     if ((Time.time - lastfired) > (1 / GunProperties.bulletsPerSecond))
+        //     {
+        //         lastfired = Time.time;
+        //         foreach (Transform bulletShot in GunProperties.bulletSpawnPoint)
+        //         {
+        //             GameObject newBullet = ObjectPooler.SharedInstance.GetPooledObject(bullet.name + "(Clone)");
+        //             if (newBullet != null)
+        //             {
+        //                 newBullet.transform.position = bulletShot.position;
+        //                 newBullet.transform.rotation = bulletShot.rotation;
+        //                 newBullet.GetComponent<EnemyBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce, GunProperties.bulletBounceMaxNum, GunProperties.isExplosive, GunProperties.explosionDamage, GunProperties.explosiveForce, GunProperties.explosiveRadius, GunProperties.explosionEffect);
+        //                 newBullet.SetActive(true);
+        //             }
+        //         }
+        //         gunSounds.PlayOneShot(gunShotSound);
+        //         currentAmmo--;
+        //     }
     }
 
     IEnumerator reload()
