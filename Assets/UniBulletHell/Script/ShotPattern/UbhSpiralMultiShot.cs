@@ -12,9 +12,6 @@ public class UbhSpiralMultiShot : UbhBaseShot
     // "Set a number of shot spiral way."
     [FormerlySerializedAs("_SpiralWayNum")]
     public int m_spiralWayNum = 4;
-    // "Set a starting angle of shot. (0 to 360)"
-    [Range(0f, 360f), FormerlySerializedAs("_StartAngle")]
-    public float m_startAngle = 180f;
     // "Set a shift angle of spiral. (-360 to 360)"
     [Range(-360f, 360f), FormerlySerializedAs("_ShiftAngle")]
     public float m_shiftAngle = 5f;
@@ -68,7 +65,7 @@ public class UbhSpiralMultiShot : UbhBaseShot
                 break;
             }
 
-            float angle = m_startAngle + (spiralWayShiftAngle * i) + (m_shiftAngle * Mathf.Floor(m_nowIndex / m_spiralWayNum));
+            float angle = m_angle + (spiralWayShiftAngle * i) + (m_shiftAngle * Mathf.Floor(m_nowIndex / m_spiralWayNum));
 
             ShotBullet(bullet, m_bulletSpeed, angle);
 

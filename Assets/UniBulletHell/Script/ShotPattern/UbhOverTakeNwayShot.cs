@@ -12,9 +12,6 @@ public class UbhOverTakeNwayShot : UbhBaseShot
     // "Set a number of shot way."
     [FormerlySerializedAs("_WayNum")]
     public int m_wayNum = 8;
-    // "Set a center angle of shot. (0 to 360)"
-    [Range(0f, 360f), FormerlySerializedAs("_CenterAngle")]
-    public float m_centerAngle = 180f;
     // "Set a angle between bullet and next bullet. (0 to 360)"
     [Range(0f, 360f), FormerlySerializedAs("_BetweenAngle")]
     public float m_betweenAngle = 10f;
@@ -79,7 +76,7 @@ public class UbhOverTakeNwayShot : UbhBaseShot
                 break;
             }
 
-            float baseAngle = m_wayNum % 2 == 0 ? m_centerAngle - (m_betweenAngle / 2f) : m_centerAngle;
+            float baseAngle = m_wayNum % 2 == 0 ? m_angle - (m_betweenAngle / 2f) : m_angle;
 
             float angle = UbhUtil.GetShiftedAngle(i, baseAngle, m_betweenAngle) + m_nowShiftAngle;
 

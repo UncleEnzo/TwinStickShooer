@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Gun : Weapon
 {
     protected bool isPlayer;
@@ -10,13 +11,19 @@ public class Gun : Weapon
     protected int currentAmmo;
     protected GameObject player;
     //Properties for the gun and bullet
+
     public GameObject bullet;
     protected AudioSource gunSounds;
     public AudioClip gunShotSound;
     public AudioClip gunReloadSound;
+    private UbhShowcaseCtrl shotControllerShowCase;
+    protected Vector3 mousePosTarget;
+    protected Transform playerTransform;
+
     protected void Start()
     {
         gunSounds = GetComponent<AudioSource>();
+        shotControllerShowCase = GetComponent<UbhShowcaseCtrl>();
         currentAmmo = GunProperties.maxAmmo;
         player = Player.Instance.transform.gameObject;
         PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
@@ -66,17 +73,10 @@ public class Gun : Weapon
         if (Input.GetMouseButton(0) && (Time.time - lastfired) > (1 / GunProperties.bulletsPerSecond))
         {
             lastfired = Time.time;
-            foreach (Transform bulletShot in GunProperties.bulletSpawnPoint)
-            {
-                GameObject newBullet = ObjectPooler.SharedInstance.GetPooledObject(bullet.name + "(Clone)");
-                if (newBullet != null)
-                {
-                    newBullet.transform.position = bulletShot.position;
-                    newBullet.transform.rotation = bulletShot.rotation;
-                    newBullet.GetComponent<PlayerBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce, GunProperties.bulletBounceMaxNum, GunProperties.isExplosive, GunProperties.explosionDamage, GunProperties.explosiveForce, GunProperties.explosiveRadius, GunProperties.explosionEffect);
-                    newBullet.SetActive(true);
-                }
-            }
+            // foreach (Transform bulletShot in GunProperties.bulletSpawnPoint)
+            // {
+            shotControllerShowCase.activeShotCtrl.StartShotRoutine();
+            // }
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;
             PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
@@ -84,37 +84,47 @@ public class Gun : Weapon
         }
     }
 
-    //testing UBHFireGun
+    protected void Update()
+    {
+        mousePosTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        playerTransform = Player.Instance.transform;
+        float angle = lookAtPoint(mousePosTarget, playerTransform.position);
+        angle -= 90;
+
+        //Player weapon auto updates angle for any bulletPattern script
+        if (gameObject.transform.IsChildOf(WeaponSwitching.Instance.gameObject.transform))
+        {
+            foreach (var shotInfo in shotControllerShowCase.activeShotCtrl.m_shotList)
+            {
+                shotInfo.m_shotObj.GetComponent<UbhBaseShot>().m_angle = angle;
+            }
+        }
+
+        //  MOVE TO CHEATS, USE LATER FOR RECIPES THAT CHANGE UP FIRE PATTERNS :D
+        //Next Shot
+        if (Input.GetKeyDown("9"))
+        {
+            shotControllerShowCase.ChangeShot(true);
+        }
+        //previous shot
+        if (Input.GetKeyDown("0"))
+        {
+            shotControllerShowCase.ChangeShot(false);
+        }
+
+    }
+
     private void FireEnemyGun()
     {
         if ((Time.time - lastfired) > (1 / GunProperties.bulletsPerSecond))
         {
             lastfired = Time.time;
-            UbhShotCtrl shotController = GetComponentInChildren<UbhShotCtrl>();
-            shotController.StartShotRoutine();
+            //note: does not need bullet angle because it always has lock-on set to player
+            //Note: There may be some enemies that fire weird patterns that require manual aim
+            shotControllerShowCase.activeShotCtrl.StartShotRoutine();
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;
         }
-
-        // private void FireEnemyGun()
-        // {
-        //     if ((Time.time - lastfired) > (1 / GunProperties.bulletsPerSecond))
-        //     {
-        //         lastfired = Time.time;
-        //         foreach (Transform bulletShot in GunProperties.bulletSpawnPoint)
-        //         {
-        //             GameObject newBullet = ObjectPooler.SharedInstance.GetPooledObject(bullet.name + "(Clone)");
-        //             if (newBullet != null)
-        //             {
-        //                 newBullet.transform.position = bulletShot.position;
-        //                 newBullet.transform.rotation = bulletShot.rotation;
-        //                 newBullet.GetComponent<EnemyBullet>().setBulletProperties(GunProperties.bulletSpeed, GunProperties.bulletDamage, GunProperties.timeBulletSelfDestruct, GunProperties.knockBack, GunProperties.bulletAccuracy, GunProperties.bulletAngle, GunProperties.bulletBounce, GunProperties.bulletBounceMaxNum, GunProperties.isExplosive, GunProperties.explosionDamage, GunProperties.explosiveForce, GunProperties.explosiveRadius, GunProperties.explosionEffect);
-        //                 newBullet.SetActive(true);
-        //             }
-        //         }
-        //         gunSounds.PlayOneShot(gunShotSound);
-        //         currentAmmo--;
-        //     }
     }
 
     IEnumerator reload()

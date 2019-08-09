@@ -10,9 +10,6 @@ using UnityEngine.Serialization;
 public class UbhRandomShot : UbhBaseShot
 {
     [Header("===== RandomShot Settings =====")]
-    // "Center angle of random range."
-    [Range(0f, 360f), FormerlySerializedAs("_RandomCenterAngle")]
-    public float m_randomCenterAngle = 180f;
     // "Set a angle size of random range. (0 to 360)"
     [Range(0f, 360f), FormerlySerializedAs("_RandomRangeSize")]
     public float m_randomRangeSize = 360f;
@@ -93,8 +90,8 @@ public class UbhRandomShot : UbhBaseShot
 
         float bulletSpeed = Random.Range(m_randomSpeedMin, m_randomSpeedMax);
 
-        float minAngle = m_randomCenterAngle - (m_randomRangeSize / 2f);
-        float maxAngle = m_randomCenterAngle + (m_randomRangeSize / 2f);
+        float minAngle = m_angle - (m_randomRangeSize / 2f);
+        float maxAngle = m_angle + (m_randomRangeSize / 2f);
         float angle = 0f;
 
         if (m_evenlyDistribute)

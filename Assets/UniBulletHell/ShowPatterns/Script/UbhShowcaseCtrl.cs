@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -8,9 +9,10 @@ public class UbhShowcaseCtrl : MonoBehaviour
     [SerializeField, FormerlySerializedAs("_GoShotCtrlList")]
     private GameObject[] m_goShotCtrlList = null;
 
-    [SerializeField]
+    [NonSerialized]
     private Text m_shotNameText = null;
-
+    [NonSerialized]
+    public UbhShotCtrl activeShotCtrl = null;
     private int m_nowIndex = 0;
     private string m_nowGoName;
 
@@ -59,14 +61,35 @@ public class UbhShowcaseCtrl : MonoBehaviour
         {
             m_goShotCtrlList[m_nowIndex].SetActive(true);
 
-            m_nowGoName = m_goShotCtrlList[m_nowIndex].name;
+            //Updates name on UI in showcase scene
+            if (m_shotNameText != null)
+            {
+                m_nowGoName = m_goShotCtrlList[m_nowIndex].name;
+                m_shotNameText.text = "No." + (m_nowIndex + 1).ToString() + " : " + m_nowGoName;
 
-            m_shotNameText.text = "No." + (m_nowIndex + 1).ToString() + " : " + m_nowGoName;
-
-            StartCoroutine(StartShot());
+                //Starts shot in Showcase scene
+                StartCoroutine(StartShot());
+            }
+            else
+            {
+                print("REACHING THIS PART");
+                activeShotCtrl = m_goShotCtrlList[m_nowIndex].GetComponent<UbhShotCtrl>();
+            }
         }
     }
+    private IEnumerator SwitchShots()
+    {
 
+        float cntTimer = 0f;
+        while (cntTimer < 1f)
+        {
+            cntTimer += UbhTimer.instance.deltaTime;
+            yield return null;
+        }
+
+        yield return null;
+        activeShotCtrl = m_goShotCtrlList[m_nowIndex].GetComponent<UbhShotCtrl>();
+    }
     private IEnumerator StartShot()
     {
         float cntTimer = 0f;
@@ -77,7 +100,6 @@ public class UbhShowcaseCtrl : MonoBehaviour
         }
 
         yield return null;
-
         UbhShotCtrl shotCtrl = m_goShotCtrlList[m_nowIndex].GetComponent<UbhShotCtrl>();
         if (shotCtrl != null)
         {

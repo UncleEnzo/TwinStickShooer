@@ -7,7 +7,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public sealed class UbhBulletManager : UbhSingletonMonoBehavior<UbhBulletManager>
 {
-    private List<UbhBullet> m_bulletList = new List<UbhBullet>(2048);
+    public List<UbhBullet> m_bulletList = new List<UbhBullet>(2048);
     private HashSet<UbhBullet> m_bulletHashSet = new HashSet<UbhBullet>();
 
     public int activeBulletCount { get { return m_bulletList.Count; } }

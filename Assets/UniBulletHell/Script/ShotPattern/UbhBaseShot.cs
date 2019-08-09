@@ -16,6 +16,9 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
     // "Set a bullet number of shot."
     [FormerlySerializedAs("_BulletNum")]
     public int m_bulletNum = 10;
+    // "Set a angle of shot. (0 to 360)"
+    [Range(0f, 360f), FormerlySerializedAs("_Angle")]
+    public float m_angle = 180f;
     // "Set a bullet base speed of shot."
     [FormerlySerializedAs("_BulletSpeed")]
     public float m_bulletSpeed = 2f;
@@ -147,7 +150,7 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
     /// <summary>
     /// Shot UbhBullet object.
     /// </summary>
-    protected void ShotBullet(UbhBullet bullet, float speed, float angle,
+    public void ShotBullet(UbhBullet bullet, float speed, float angle,
                                bool homing = false, Transform homingTarget = null, float homingAngleSpeed = 0f,
                                bool sinWave = false, float sinWaveSpeed = 0f, float sinWaveRangeSize = 0f, bool sinWaveInverse = false)
     {

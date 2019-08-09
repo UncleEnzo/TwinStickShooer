@@ -10,8 +10,9 @@ public class EnemyGun : Gun
         base.Start();
         isPlayer = false;
     }
-    void Update()
+    new void Update()
     {
+        base.Update();
         Vector3 gunTransform = transform.position;
         Transform WeilderTransform = gameObject.transform.root;
         Vector3 playerTransform = Player.Instance.transform.position;

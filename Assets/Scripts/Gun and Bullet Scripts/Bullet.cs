@@ -25,13 +25,16 @@ public class Bullet : MonoBehaviour
     public Sprite bulletSprite;
     private int bounces = 0;
     public int bulletBounceMaxNum;
+    private UbhBullet bullet;
 
     protected void OnEnable()
     {
         bounces = 0;
         bulletSprite = GetComponent<SpriteRenderer>().sprite;
         rigidBody2D = GetComponent<Rigidbody2D>();
+        bullet = GetComponent<UbhBullet>();
     }
+
     protected void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if (collisionInfo.gameObject.layer == LayerMask.NameToLayer(TagsAndLabels.ChestLabel))
@@ -49,12 +52,18 @@ public class Bullet : MonoBehaviour
             bounces++;
             if (bounces >= bulletBounceMaxNum)
             {
-                gameObject.SetActive(false);
+                if (bullet != null && bullet.isActive)
+                {
+                    UbhObjectPool.instance.ReleaseBullet(bullet);
+                }
             }
         }
         if (!bulletBounce)
         {
-            gameObject.SetActive(false);
+            if (bullet != null && bullet.isActive)
+            {
+                UbhObjectPool.instance.ReleaseBullet(bullet);
+            }
         }
     }
     protected void explosiveBullet()

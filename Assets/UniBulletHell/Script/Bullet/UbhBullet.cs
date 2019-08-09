@@ -12,6 +12,7 @@ public class UbhBullet : UbhMonoBehaviour
     private float m_angle;
     private float m_accelSpeed;
     private float m_accelTurn;
+
     private bool m_homing;
     private Transform m_homingTarget;
     private float m_homingAngleSpeed;
@@ -29,7 +30,6 @@ public class UbhBullet : UbhMonoBehaviour
     private float m_maxSpeed;
     private bool m_useMinSpeed;
     private float m_minSpeed;
-
     private float m_baseAngle;
     private float m_selfFrameCnt;
     private float m_selfTimeCount;

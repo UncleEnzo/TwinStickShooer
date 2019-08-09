@@ -8,9 +8,6 @@ using UnityEngine.Serialization;
 public class UbhHoleCircleShot : UbhBaseShot
 {
     [Header("===== HoleCircleShot Settings =====")]
-    // "Set a center angle of hole. (0 to 360)"
-    [Range(0f, 360f), FormerlySerializedAs("_HoleCenterAngle")]
-    public float m_holeCenterAngle = 180f;
     // "Set a size of hole. (0 to 360)"
     [Range(0f, 360f), FormerlySerializedAs("_HoleSize")]
     public float m_holeSize = 20f;
@@ -38,9 +35,9 @@ public class UbhHoleCircleShot : UbhBaseShot
             return;
         }
 
-        m_holeCenterAngle = UbhUtil.GetNormalizedAngle(m_holeCenterAngle);
-        float startAngle = m_holeCenterAngle - (m_holeSize / 2f);
-        float endAngle = m_holeCenterAngle + (m_holeSize / 2f);
+        m_angle = UbhUtil.GetNormalizedAngle(m_angle);
+        float startAngle = m_angle - (m_holeSize / 2f);
+        float endAngle = m_angle + (m_holeSize / 2f);
 
         float shiftAngle = 360f / (float)m_bulletNum;
 

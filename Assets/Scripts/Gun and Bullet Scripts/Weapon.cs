@@ -76,15 +76,15 @@ public class Weapon : MonoBehaviour
 
     protected void Aim(Vector3 target, Vector3 Wielder)
     {
-        lookAtPoint(target, Wielder);
+        float angle = lookAtPoint(target, Wielder);
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         rotateAroundShoulder(target, armLength, Wielder);
     }
 
-    private void lookAtPoint(Vector3 target, Vector3 Wielder)
+    protected float lookAtPoint(Vector3 target, Vector3 Wielder)
     {
         Vector3 dir = target - Wielder;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        return Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
     }
 
     private void rotateAroundShoulder(Vector3 target, float armLength, Vector3 Wielder)

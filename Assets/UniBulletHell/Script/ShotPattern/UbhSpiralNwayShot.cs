@@ -12,9 +12,6 @@ public class UbhSpiralNwayShot : UbhBaseShot
     // "Set a number of shot way."
     [FormerlySerializedAs("_WayNum")]
     public int m_wayNum = 5;
-    // "Set a starting angle of shot. (0 to 360)"
-    [Range(0f, 360f), FormerlySerializedAs("_StartAngle")]
-    public float m_startAngle = 180f;
     // "Set a shift angle of spiral. (-360 to 360)"
     [Range(-360f, 360f), FormerlySerializedAs("_ShiftAngle")]
     public float m_shiftAngle = 5f;
@@ -70,7 +67,7 @@ public class UbhSpiralNwayShot : UbhBaseShot
                 break;
             }
 
-            float centerAngle = m_startAngle + (m_shiftAngle * Mathf.Floor(m_nowIndex / m_wayNum));
+            float centerAngle = m_angle + (m_shiftAngle * Mathf.Floor(m_nowIndex / m_wayNum));
 
             float baseAngle = m_wayNum % 2 == 0 ? centerAngle - (m_betweenAngle / 2f) : centerAngle;
 

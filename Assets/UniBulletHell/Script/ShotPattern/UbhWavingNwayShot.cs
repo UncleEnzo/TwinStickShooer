@@ -12,9 +12,6 @@ public class UbhWavingNwayShot : UbhBaseShot
     // "Set a number of shot way."
     [FormerlySerializedAs("_WayNum")]
     public int m_wayNum = 5;
-    // "Set a center angle of wave range. (0 to 360)"
-    [Range(0f, 360f), FormerlySerializedAs("_WaveCenterAngle")]
-    public float m_waveCenterAngle = 180f;
     // "Set a size of wave range. (0 to 360)"
     [Range(0f, 360f), FormerlySerializedAs("_WaveRangeSize")]
     public float m_waveRangeSize = 40f;
@@ -73,7 +70,7 @@ public class UbhWavingNwayShot : UbhBaseShot
                 break;
             }
 
-            float centerAngle = m_waveCenterAngle + (m_waveRangeSize / 2f * Mathf.Sin(UbhTimer.instance.totalFrameCount * m_waveSpeed / 100f));
+            float centerAngle = m_angle + (m_waveRangeSize / 2f * Mathf.Sin(UbhTimer.instance.totalFrameCount * m_waveSpeed / 100f));
 
             float baseAngle = m_wayNum % 2 == 0 ? centerAngle - (m_betweenAngle / 2f) : centerAngle;
 

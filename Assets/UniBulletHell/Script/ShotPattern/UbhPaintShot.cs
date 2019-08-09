@@ -16,9 +16,6 @@ public class UbhPaintShot : UbhBaseShot
     // "BulletNum is ignored."
     [FormerlySerializedAs("_PaintDataText")]
     public TextAsset m_paintDataText;
-    // "Set a center angle of shot. (0 to 360) (center of first line)"
-    [Range(0f, 360f), FormerlySerializedAs("_PaintCenterAngle")]
-    public float m_paintCenterAngle = 180f;
     // "Set a angle between bullet and next bullet. (0 to 360)"
     [Range(0f, 360f), FormerlySerializedAs("_BetweenAngle")]
     public float m_betweenAngle = 3f;
@@ -63,7 +60,7 @@ public class UbhPaintShot : UbhBaseShot
             return;
         }
 
-        m_paintStartAngle = m_paintCenterAngle - (m_paintData[0].Count % 2 == 0 ?
+        m_paintStartAngle = m_angle - (m_paintData[0].Count % 2 == 0 ?
                                                   (m_betweenAngle * m_paintData[0].Count / 2f) + (m_betweenAngle / 2f) :
                                                   m_betweenAngle * Mathf.Floor(m_paintData[0].Count / 2f));
 

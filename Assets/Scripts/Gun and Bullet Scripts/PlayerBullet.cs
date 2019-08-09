@@ -5,13 +5,12 @@ using UnityEngine;
 public class PlayerBullet : Bullet
 {
 
-    new void OnEnable()
-    {
-        base.OnEnable();
-        StartCoroutine(SetInactiveSelf());
-        bulletTrajectory = bulletDirection();
-        rigidBody2D.velocity = bulletTrajectory * bulletSpeed;
-    }
+    // new void OnEnable()
+    // {
+    //     base.OnEnable();
+    //     // bulletTrajectory = bulletDirection();
+    //     // rigidBody2D.velocity = bulletTrajectory * bulletSpeed;
+    // }
 
     new void OnCollisionEnter2D(Collision2D collisionInfo)
     {
@@ -26,11 +25,6 @@ public class PlayerBullet : Bullet
         base.OnCollisionEnter2D(collisionInfo);
     }
 
-    protected IEnumerator SetInactiveSelf()
-    {
-        yield return new WaitForSeconds(timeBulletSelfDestruct);
-        gameObject.SetActive(false);
-    }
     private Vector2 bulletDirection()
     {
         // Randomize angle variation between bullets

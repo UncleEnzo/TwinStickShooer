@@ -9,9 +9,6 @@ using UnityEngine.Serialization;
 public class UbhRandomSpiralShot : UbhBaseShot
 {
     [Header("===== RandomSpiralShot Settings =====")]
-    // "Set a starting angle of shot. (0 to 360)"
-    [Range(0f, 360f), FormerlySerializedAs("_StartAngle")]
-    public float m_startAngle = 180f;
     // "Set a shift angle of spiral. (-360 to 360)"
     [Range(-360f, 360f), FormerlySerializedAs("_ShiftAngle")]
     public float m_shiftAngle = 5f;
@@ -79,7 +76,7 @@ public class UbhRandomSpiralShot : UbhBaseShot
 
         float bulletSpeed = Random.Range(m_randomSpeedMin, m_randomSpeedMax);
 
-        float centerAngle = m_startAngle + (m_shiftAngle * m_nowIndex);
+        float centerAngle = m_angle + (m_shiftAngle * m_nowIndex);
         float minAngle = centerAngle - (m_randomRangeSize / 2f);
         float maxAngle = centerAngle + (m_randomRangeSize / 2f);
         float angle = Random.Range(minAngle, maxAngle);

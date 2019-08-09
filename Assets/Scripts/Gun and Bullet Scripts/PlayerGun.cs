@@ -14,10 +14,9 @@ public class PlayerGun : Gun
         isPlayer = true;
     }
 
-    void Update()
+    new void Update()
     {
-        Vector3 mousePosTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Transform playerTransform = Player.Instance.transform;
+        base.Update();
         Aim(mousePosTarget, playerTransform.position);
         SpriteFlip(playerTransform, mousePosTarget);
         FireGun(isPlayer);
