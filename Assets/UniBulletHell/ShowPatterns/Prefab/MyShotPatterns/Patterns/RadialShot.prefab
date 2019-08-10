@@ -43,6 +43,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e50f91ef29dcf45a6d866be09fbb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_damage: 0
+  m_knockBack: 0
+  m_bulletAccuracy: 0
+  m_isBulletBounce: 0
+  m_bulletBounceMaxNum: 0
+  m_isExplosive: 0
+  m_explosionDamage: 0
+  m_explosiveForce: 0
+  m_explosiveRadius: 0
+  m_explosionEffect: {fileID: 0}
   m_bulletPrefab: {fileID: 7991890147027848265, guid: 27d7034641cfc714d96d226274344496,
     type: 3}
   m_bulletNum: 60
@@ -57,7 +67,7 @@ MonoBehaviour:
   m_usePauseAndResume: 0
   m_pauseTime: 0
   m_resumeTime: 0
-  m_useAutoRelease: 0
+  m_useAutoRelease: 1
   m_autoReleaseTime: 10
   m_shotFiredCallbackEvents:
     m_PersistentCalls:

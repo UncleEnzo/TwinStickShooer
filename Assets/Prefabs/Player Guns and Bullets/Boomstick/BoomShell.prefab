@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5850502352277750035}
   - component: {fileID: 5850502352277750028}
-  - component: {fileID: 5850502352277750030}
   - component: {fileID: 7815746468472876935}
   - component: {fileID: 8215843367249807550}
+  - component: {fileID: 1103087800449407055}
   m_Layer: 8
   m_Name: BoomShell
   m_TagString: PlayerBullet
@@ -55,20 +55,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &5850502352277750030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5850502352277750034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9491c5266b062b4a993de2d1c800b5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidBody2D: {fileID: 5850502352277750028}
-  bulletSprite: {fileID: 0}
 --- !u!58 &7815746468472876935
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,3 +119,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1103087800449407055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5850502352277750034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1ed3619910bf049a0d32db6fc4f924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rigidbody2d: {fileID: 5850502352277750028}
+  m_collider2ds:
+  - {fileID: 7815746468472876935}
+  m_spriteRenderers:
+  - {fileID: 8215843367249807550}

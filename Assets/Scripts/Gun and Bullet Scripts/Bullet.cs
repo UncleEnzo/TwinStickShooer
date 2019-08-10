@@ -11,7 +11,6 @@ public class Bullet : MonoBehaviour
     public float bulletSpeed;
     public float knockBack;
     public float bulletAccuracy;
-    public float bulletAngle;
     public float timeBulletSelfDestruct;
     public bool bulletBounce;
     public bool isExplosive;
@@ -114,7 +113,6 @@ public class Bullet : MonoBehaviour
         this.timeBulletSelfDestruct = timeBulletSelfDestruct;
         this.knockBack = knockBack;
         this.bulletAccuracy = bulletAccuracy;
-        this.bulletAngle = bulletAngle;
         this.bulletBounce = bulletBounce;
         this.bulletBounceMaxNum = bulletBounceMaxNum;
         this.isExplosive = isExplosive;

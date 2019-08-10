@@ -101,5 +101,30 @@ public class Cheats : MonoBehaviour
                 Inventory.Instance.AddItem(Inventory.Instance.explosiveComponent);
             }
         }
+
+        //Next Shot
+        if (Input.GetKeyDown("9"))
+        {
+            Gun[] guns = WeaponSwitching.Instance.gameObject.GetComponentsInChildren<Gun>();
+            foreach (Gun gun in guns)
+            {
+                if (gun.isActiveAndEnabled)
+                {
+                    gun.shotControllerShowCase.ChangeShot(true);
+                }
+            }
+        }
+        //previous shot
+        if (Input.GetKeyDown("0"))
+        {
+            Gun[] guns = WeaponSwitching.Instance.gameObject.GetComponentsInChildren<Gun>();
+            foreach (Gun gun in guns)
+            {
+                if (gun.isActiveAndEnabled)
+                {
+                    gun.shotControllerShowCase.ChangeShot(false);
+                }
+            }
+        }
     }
 }

@@ -122,7 +122,7 @@ public class PowerUpAction : MonoBehaviour
         }
         foreach (GunProperties gunProperty in gunProperties)
         {
-            gunProperty.bulletBounce = true;
+            gunProperty.isBulletBounce = true;
             gunProperty.bulletBounceMaxNum += bulletBounceIncrease;
         }
     }
@@ -138,7 +138,7 @@ public class PowerUpAction : MonoBehaviour
         foreach (GunProperties gunProperty in gunProperties)
         {
             gunProperty.bulletBounceMaxNum = 0;
-            gunProperty.bulletBounce = false;
+            gunProperty.isBulletBounce = false;
         }
     }
     public void ExplosiveBulletStartAction()

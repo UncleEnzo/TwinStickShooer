@@ -16,6 +16,7 @@ public enum EnemyStates
 }
 public class Enemy : MonoBehaviour
 {
+    public bool isSpawned = false;
     public float knockBack = 5f;
     public Vector2 enemyTrajectory;
     public float startingHealth = 3f;
@@ -105,10 +106,10 @@ public class Enemy : MonoBehaviour
         FloatingText floatingDamageText = FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
         floatingText.Add(floatingDamageText);
         health -= Damage;
+        enemyTrajectory = Vector2.zero;
         if (gameObject.activeInHierarchy == true)
         {
             aiPath.canMove = false;
-            rb.velocity = Vector2.zero;
             Vector2 difference = knockBackTrajectory;
             difference = difference.normalized * knockBackForce;
             rb.AddForce(difference, ForceMode2D.Impulse);

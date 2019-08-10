@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5837125228297392071}
-  - component: {fileID: 5837125228297392088}
   - component: {fileID: 8551589579257168655}
   - component: {fileID: 2634197336552115595}
   m_Layer: 0
@@ -37,18 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5837125228297392088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5837125228297392094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a45e72de52baec540a9dfa48ac4fe0ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8551589579257168655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,78 +292,78 @@ PrefabInstance:
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
       propertyPath: itemsToPool.Array.size
-      value: 12
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[5].objectToPool
+      propertyPath: itemsToPool.Array.data[0].objectToPool
       value: 
       objectReference: {fileID: 309343144516758889, guid: 22c7e87a7eea1b54f969c0e72a54dc4c,
         type: 3}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[5].amountToPool
+      propertyPath: itemsToPool.Array.data[0].amountToPool
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[6].objectToPool
+      propertyPath: itemsToPool.Array.data[1].objectToPool
       value: 
       objectReference: {fileID: 309343144516758889, guid: 34c70e5240a91e643a56d1a07696ea01,
         type: 3}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[7].objectToPool
+      propertyPath: itemsToPool.Array.data[1].amountToPool
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
+        type: 3}
+      propertyPath: itemsToPool.Array.data[2].objectToPool
       value: 
       objectReference: {fileID: 309343144516758889, guid: bc87a544df1ccbd4a8450c6c5d4256d6,
         type: 3}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[7].amountToPool
+      propertyPath: itemsToPool.Array.data[2].amountToPool
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[8].objectToPool
+      propertyPath: itemsToPool.Array.data[3].objectToPool
       value: 
       objectReference: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
         type: 3}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[8].amountToPool
+      propertyPath: itemsToPool.Array.data[3].amountToPool
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[9].objectToPool
+      propertyPath: itemsToPool.Array.data[4].objectToPool
       value: 
       objectReference: {fileID: 5643607579732925551, guid: c2c8ffbfb808e1e419e25b22850099ff,
         type: 3}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[9].amountToPool
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
-        type: 3}
-      propertyPath: itemsToPool.Array.data[10].objectToPool
+      propertyPath: itemsToPool.Array.data[5].objectToPool
       value: 
       objectReference: {fileID: 3085158205632521483, guid: 7c730ae6c09ae754e95abae41b190de9,
         type: 3}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[10].amountToPool
+      propertyPath: itemsToPool.Array.data[5].amountToPool
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[11].objectToPool
+      propertyPath: itemsToPool.Array.data[6].objectToPool
       value: 
       objectReference: {fileID: 2681540612826855184, guid: 1b94b1b7cf07dd348a162dc6b72bb9d0,
         type: 3}
     - target: {fileID: 1589050017157952193, guid: 18b7881788aec5a499b3f2c28bc08163,
         type: 3}
-      propertyPath: itemsToPool.Array.data[11].amountToPool
+      propertyPath: itemsToPool.Array.data[6].amountToPool
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Ubh bullet.
@@ -6,13 +7,41 @@
 [DisallowMultipleComponent]
 public class UbhBullet : UbhMonoBehaviour
 {
+    //Mine
+    [NonSerializedAttribute]
+    public float m_damage;
+    [NonSerializedAttribute]
+    public float m_knockBack;
+    [NonSerializedAttribute]
+    public float m_bulletAccuracy;
+    [NonSerializedAttribute]
+    public bool m_isBulletBounce;
+    [NonSerializedAttribute]
+    public bool m_isExplosive;
+    [NonSerializedAttribute]
+    public float m_explosionDamage;
+    [NonSerializedAttribute]
+    public float m_explosiveForce;
+    [NonSerializedAttribute]
+    public float m_explosiveRadius;
+    protected int m_bounces;
+    protected int m_bulletBounceMaxNum;
+    protected bool disableForBounce = false;
+    protected bool isBounceSet = false;
+    [NonSerializedAttribute]
+    public GameObject m_explosionEffect;
+    [NonSerializedAttribute]
+    public Vector2 m_bulletTrajectory;
+    [NonSerializedAttribute]
+    public Rigidbody2D m_rigidBody2D;
+    //His
     private Transform m_transformCache;
     private UbhBaseShot m_parentBaseShot;
-    private float m_speed;
+    [NonSerializedAttribute]
+    public float m_speed;
     private float m_angle;
     private float m_accelSpeed;
     private float m_accelTurn;
-
     private bool m_homing;
     private Transform m_homingTarget;
     private float m_homingAngleSpeed;
@@ -50,6 +79,7 @@ public class UbhBullet : UbhMonoBehaviour
     {
         m_transformCache = transform;
         m_tentacleBullet = GetComponent<UbhTentacleBullet>();
+        m_rigidBody2D = GetComponent<Rigidbody2D>();
     }
 
     private void OnDisable()
@@ -58,7 +88,9 @@ public class UbhBullet : UbhMonoBehaviour
         {
             return;
         }
-
+        m_bounces = 0;
+        disableForBounce = false;
+        isBounceSet = false;
         UbhObjectPool.instance.ReleaseBullet(this);
     }
 
@@ -84,15 +116,20 @@ public class UbhBullet : UbhMonoBehaviour
 
         m_parentBaseShot = null;
         m_homingTarget = null;
+        m_rigidBody2D.velocity = Vector2.zero;
+        isBounceSet = false;
         m_transformCache.ResetPosition();
         m_transformCache.ResetRotation();
+
     }
 
     /// <summary>
     /// Bullet Shot
     /// </summary>
-    public void Shot(UbhBaseShot parentBaseShot,
-                     float speed, float angle, float accelSpeed, float accelTurn,
+    public void Shot(float damage, float knockBack, float bulletAccuracy,
+                     bool isBulletBounce, int bulletBounceMaxNum, bool isExplosive,
+                     float explosionDamage, float explosiveForce, float explosiveRadius, GameObject explosionEffect,
+                     UbhBaseShot parentBaseShot, float speed, float angle, float accelSpeed, float accelTurn,
                      bool homing, Transform homingTarget, float homingAngleSpeed,
                      bool sinWave, float sinWaveSpeed, float sinWaveRangeSize, bool sinWaveInverse,
                      bool pauseAndResume, float pauseTime, float resumeTime,
@@ -106,8 +143,20 @@ public class UbhBullet : UbhMonoBehaviour
         }
         m_shooting = true;
 
-        m_parentBaseShot = parentBaseShot;
+        //Mine
+        m_damage = damage;
+        m_knockBack = knockBack;
+        m_bulletAccuracy = bulletAccuracy;
+        m_isBulletBounce = isBulletBounce;
+        m_bulletBounceMaxNum = bulletBounceMaxNum;
+        m_isExplosive = isExplosive;
+        m_explosionDamage = explosionDamage;
+        m_explosiveForce = explosiveForce;
+        m_explosiveRadius = explosiveRadius;
+        m_explosionEffect = explosionEffect;
 
+        //His
+        m_parentBaseShot = parentBaseShot;
         m_speed = speed;
         m_angle = angle;
         m_accelSpeed = accelSpeed;
@@ -178,6 +227,9 @@ public class UbhBullet : UbhMonoBehaviour
             if (m_selfTimeCount >= m_autoReleaseTime)
             {
                 // Release
+                m_bounces = 0;
+                disableForBounce = false;
+                isBounceSet = false;
                 UbhObjectPool.instance.ReleaseBullet(this);
                 return;
             }
@@ -192,111 +244,124 @@ public class UbhBullet : UbhMonoBehaviour
             }
         }
 
-        Vector3 myAngles = m_transformCache.rotation.eulerAngles;
-
-        Quaternion newRotation = m_transformCache.rotation;
-        if (m_homing)
+        //No bounce
+        if (!disableForBounce)
         {
-            // homing target.
-            if (m_homingTarget != null && 0f < m_homingAngleSpeed)
+            Vector3 myAngles = m_transformCache.rotation.eulerAngles;
+
+            Quaternion newRotation = m_transformCache.rotation;
+            if (m_homing)
             {
-                float rotAngle = UbhUtil.GetAngleFromTwoPosition(m_transformCache, m_homingTarget, m_axisMove);
-                float myAngle = 0f;
-                if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
+                // homing target.
+                if (m_homingTarget != null && 0f < m_homingAngleSpeed)
                 {
-                    // X and Z axis
-                    myAngle = -myAngles.y;
-                }
-                else
-                {
-                    // X and Y axis
-                    myAngle = myAngles.z;
-                }
+                    float rotAngle = UbhUtil.GetAngleFromTwoPosition(m_transformCache, m_homingTarget, m_axisMove);
+                    float myAngle = 0f;
+                    if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
+                    {
+                        // X and Z axis
+                        myAngle = -myAngles.y;
+                    }
+                    else
+                    {
+                        // X and Y axis
+                        myAngle = myAngles.z;
+                    }
 
-                float toAngle = Mathf.MoveTowardsAngle(myAngle, rotAngle, deltaTime * m_homingAngleSpeed);
+                    float toAngle = Mathf.MoveTowardsAngle(myAngle, rotAngle, deltaTime * m_homingAngleSpeed);
 
-                if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
-                {
-                    // X and Z axis
-                    newRotation = Quaternion.Euler(myAngles.x, -toAngle, myAngles.z);
-                }
-                else
-                {
-                    // X and Y axis
-                    newRotation = Quaternion.Euler(myAngles.x, myAngles.y, toAngle);
+                    if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
+                    {
+                        // X and Z axis
+                        newRotation = Quaternion.Euler(myAngles.x, -toAngle, myAngles.z);
+                    }
+                    else
+                    {
+                        // X and Y axis
+                        newRotation = Quaternion.Euler(myAngles.x, myAngles.y, toAngle);
+                    }
                 }
             }
-        }
-        else if (m_sinWave)
-        {
-            // acceleration turning.
-            m_angle += (m_accelTurn * deltaTime);
-            // sin wave.
-            if (0f < m_sinWaveSpeed && 0f < m_sinWaveRangeSize)
+            else if (m_sinWave)
             {
-                float waveAngle = m_angle + (m_sinWaveRangeSize / 2f * (Mathf.Sin(m_selfFrameCnt * m_sinWaveSpeed / 100f) * (m_sinWaveInverse ? -1f : 1f)));
+                // acceleration turning.
+                m_angle += (m_accelTurn * deltaTime);
+                // sin wave.
+                if (0f < m_sinWaveSpeed && 0f < m_sinWaveRangeSize)
+                {
+                    float waveAngle = m_angle + (m_sinWaveRangeSize / 2f * (Mathf.Sin(m_selfFrameCnt * m_sinWaveSpeed / 100f) * (m_sinWaveInverse ? -1f : 1f)));
+                    if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
+                    {
+                        // X and Z axis
+                        newRotation = Quaternion.Euler(myAngles.x, m_baseAngle - waveAngle, myAngles.z);
+                    }
+                    else
+                    {
+                        // X and Y axis
+                        newRotation = Quaternion.Euler(myAngles.x, myAngles.y, m_baseAngle + waveAngle);
+                    }
+                }
+                m_selfFrameCnt += UbhTimer.instance.deltaFrameCount;
+            }
+            else
+            {
+                // acceleration turning.
+                float addAngle = m_accelTurn * deltaTime;
                 if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
                 {
                     // X and Z axis
-                    newRotation = Quaternion.Euler(myAngles.x, m_baseAngle - waveAngle, myAngles.z);
+                    newRotation = Quaternion.Euler(myAngles.x, myAngles.y - addAngle, myAngles.z);
                 }
                 else
                 {
                     // X and Y axis
-                    newRotation = Quaternion.Euler(myAngles.x, myAngles.y, m_baseAngle + waveAngle);
+                    newRotation = Quaternion.Euler(myAngles.x, myAngles.y, myAngles.z + addAngle);
                 }
             }
-            m_selfFrameCnt += UbhTimer.instance.deltaFrameCount;
-        }
-        else
-        {
-            // acceleration turning.
-            float addAngle = m_accelTurn * deltaTime;
+
+            // acceleration speed.
+            m_speed += (m_accelSpeed * deltaTime);
+
+            if (m_useMaxSpeed && m_speed > m_maxSpeed)
+            {
+                m_speed = m_maxSpeed;
+            }
+
+            if (m_useMinSpeed && m_speed < m_minSpeed)
+            {
+                m_speed = m_minSpeed;
+            }
+
+            // move.
+            Vector3 newPosition;
             if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
             {
                 // X and Z axis
-                newRotation = Quaternion.Euler(myAngles.x, myAngles.y - addAngle, myAngles.z);
+                newPosition = m_transformCache.position + (m_transformCache.forward * (m_speed * deltaTime));
             }
             else
             {
                 // X and Y axis
-                newRotation = Quaternion.Euler(myAngles.x, myAngles.y, myAngles.z + addAngle);
+                newPosition = m_transformCache.position + (m_transformCache.up * (m_speed * deltaTime));
             }
-        }
 
-        // acceleration speed.
-        m_speed += (m_accelSpeed * deltaTime);
+            // set new position and rotation
+            m_transformCache.SetPositionAndRotation(newPosition, newRotation);
 
-        if (m_useMaxSpeed && m_speed > m_maxSpeed)
-        {
-            m_speed = m_maxSpeed;
-        }
-
-        if (m_useMinSpeed && m_speed < m_minSpeed)
-        {
-            m_speed = m_minSpeed;
-        }
-
-        // move.
-        Vector3 newPosition;
-        if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
-        {
-            // X and Z axis
-            newPosition = m_transformCache.position + (m_transformCache.forward * (m_speed * deltaTime));
+            if (m_tentacleBullet != null)
+            {
+                // Update tentacles
+                m_tentacleBullet.UpdateRotate();
+            }
+            m_bulletTrajectory = newPosition / m_speed;
         }
         else
         {
-            // X and Y axis
-            newPosition = m_transformCache.position + (m_transformCache.up * (m_speed * deltaTime));
-        }
-
-        // set new position and rotation
-        m_transformCache.SetPositionAndRotation(newPosition, newRotation);
-
-        if (m_tentacleBullet != null)
-        {
-            // Update tentacles
-            m_tentacleBullet.UpdateRotate();
+            if (isBounceSet == false)
+            {
+                m_rigidBody2D.velocity = m_bulletTrajectory;
+                isBounceSet = true;
+            }
         }
     }
 }

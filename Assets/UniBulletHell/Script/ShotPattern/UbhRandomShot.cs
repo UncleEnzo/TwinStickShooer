@@ -106,7 +106,9 @@ public class UbhRandomShot : UbhBaseShot
             angle = Random.Range(minAngle, maxAngle);
         }
 
-        ShotBullet(bullet, bulletSpeed, angle);
+        ShotBullet(m_damage, m_knockBack, m_bulletAccuracy, m_isBulletBounce, m_bulletBounceMaxNum,
+                            m_isExplosive, m_explosionDamage, m_explosiveForce, m_explosiveRadius,
+                            m_explosionEffect, bullet, bulletSpeed, angle);
         FiredShot();
 
         m_numList.RemoveAt(index);

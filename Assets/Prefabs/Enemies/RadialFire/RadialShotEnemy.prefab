@@ -23,7 +23,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5186730268832200255
 Transform:
   m_ObjectHideFlags: 0
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39297e18e02c1424d9bdbcddbd1c6535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpawned: 0
   knockBack: 5
   enemyTrajectory: {x: 0, y: 0}
   startingHealth: 10
@@ -291,6 +292,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: RadialShot
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
+      propertyPath: m_bulletPrefab
+      value: 
+      objectReference: {fileID: 7991890147027848265, guid: 6ea430b99f406be46a8a52e7c463cdad,
+        type: 3}
+    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
+      propertyPath: m_bulletNum
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
+      propertyPath: m_bulletSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
+      propertyPath: m_useAutoRelease
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -334,19 +352,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
-      propertyPath: m_bulletPrefab
-      value: 
-      objectReference: {fileID: 7991890147027848265, guid: 6ea430b99f406be46a8a52e7c463cdad,
-        type: 3}
-    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
-      propertyPath: m_bulletNum
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
-      propertyPath: m_bulletSpeed
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}

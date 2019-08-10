@@ -102,6 +102,7 @@ public class EnemySpawner : MonoBehaviour
                     {
                         newEnemy.transform.position = spawnPos;
                         newEnemy.transform.rotation = Quaternion.identity;
+                        newEnemy.GetComponent<Enemy>().isSpawned = true;
                         newEnemy.SetActive(true);
                     }
                 }

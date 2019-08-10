@@ -45,7 +45,10 @@ public class Player : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
         {
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
-            health = SavePersistentData.health;
+            if (SavePersistentData != null)
+            {
+                health = SavePersistentData.health;
+            }
             PlayerHUBController.Instance.updateDisplayHubHealth(health);
         }
     }
@@ -101,6 +104,7 @@ public class Player : MonoBehaviour
         if (!iFramesActive)
         {
             health -= Damage;
+            print(Damage);
         }
         PlayerHUBController.Instance.updateDisplayHubHealth(health);
         if (!iFramesActive)

@@ -72,7 +72,6 @@ public class UbhShowcaseCtrl : MonoBehaviour
             }
             else
             {
-                print("REACHING THIS PART");
                 activeShotCtrl = m_goShotCtrlList[m_nowIndex].GetComponent<UbhShotCtrl>();
             }
         }

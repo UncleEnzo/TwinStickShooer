@@ -34,7 +34,11 @@ public class StateDie : State<Enemy>
         //Play some animation, particles, and sounds
         dropCraftComponents(owner);
         dropKey(owner);
-        owner.enemyKilled.Raise();
+        if (owner.isSpawned)
+        {
+            owner.isSpawned = false;
+            owner.enemyKilled.Raise();
+        }
     }
     public override void ExitState(Enemy owner)
     {

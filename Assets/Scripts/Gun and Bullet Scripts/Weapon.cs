@@ -26,19 +26,17 @@ public class GunProperties
 
     [Header("Bullet Properties")]
     [SerializeField]
-    public float bulletSpeed = 15f;
-    [SerializeField]
     public float bulletDamage = 1f;
     [SerializeField]
-    public float timeBulletSelfDestruct = 3f;
+    public float bulletSpeed = 10f;
     [SerializeField]
-    public float knockBack = 5;
+    public float timeBulletSelfDestruct = 10f;
+    [SerializeField]
+    public float knockBack = 5f;
     [SerializeField]
     public float bulletAccuracy = 0f; //0 = perfect accuracy
     [SerializeField]
-    public float bulletAngle = 0f;
-    [SerializeField]
-    public bool bulletBounce = false;
+    public bool isBulletBounce = false;
     public int bulletBounceMaxNum = 0;
     [SerializeField]
     public bool isExplosive = false;

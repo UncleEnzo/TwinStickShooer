@@ -80,7 +80,9 @@ public class UbhOverTakeNwayShot : UbhBaseShot
 
             float angle = UbhUtil.GetShiftedAngle(i, baseAngle, m_betweenAngle) + m_nowShiftAngle;
 
-            ShotBullet(bullet, m_nowBulletSpeed, angle);
+            ShotBullet(m_damage, m_knockBack, m_bulletAccuracy, m_isBulletBounce, m_bulletBounceMaxNum,
+                            m_isExplosive, m_explosionDamage, m_explosiveForce, m_explosiveRadius,
+                            m_explosionEffect, bullet, m_nowBulletSpeed, angle);
 
             m_nowIndex++;
             if (m_nowIndex >= m_bulletNum)

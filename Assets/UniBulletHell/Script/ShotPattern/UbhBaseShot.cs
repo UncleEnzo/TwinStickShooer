@@ -9,6 +9,38 @@ using UnityEngine.Serialization;
 /// </summary>
 public abstract class UbhBaseShot : UbhMonoBehaviour
 {
+    [Header("My Properties | Adjust in GunProperties")]
+    // "Set the damage of bullets."
+    [FormerlySerializedAs("_Damage")]
+    public float m_damage;
+    // "Set the knockBack force of bullets."
+    [FormerlySerializedAs("_KnockBack")]
+    public float m_knockBack;
+    // "Set the accuracy of bullets."
+    [FormerlySerializedAs("_BulletAccuracy")]
+    public float m_bulletAccuracy;
+    // "Sets whether bullets bounce."
+    [FormerlySerializedAs("_IsBulletBounce")]
+    public bool m_isBulletBounce;
+    // "Sets the maximum number of bullet bounces."
+    [FormerlySerializedAs("_BulletBounceMaxNum")]
+    public int m_bulletBounceMaxNum;
+    // "Sets whether bullets are explosive."
+    [FormerlySerializedAs("_IsExplosive")]
+    public bool m_isExplosive;
+    // "Sets bullet explosion damage."
+    [FormerlySerializedAs("_ExplosionDamage")]
+    public float m_explosionDamage;
+    // "Sets bullet explosion force."
+    [FormerlySerializedAs("_ExplosiveForce")]
+    public float m_explosiveForce;
+    // "Sets bullet explosion radius."
+    [FormerlySerializedAs("_ExplosiveRadius")]
+    public float m_explosiveRadius;
+    // "Sets bullet explosion effect."
+    [FormerlySerializedAs("_ExplosionEffect")]
+    public GameObject m_explosionEffect;
+
     [Header("===== Common Settings =====")]
     // "Set a bullet prefab for the shot. (ex. sprite or model)"
     [FormerlySerializedAs("_BulletPrefab")]
@@ -49,7 +81,7 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
     public float m_resumeTime = 0f;
     // "This flag is automatically release the bullet GameObject at the specified time."
     [FormerlySerializedAs("_UseAutoRelease")]
-    public bool m_useAutoRelease = false;
+    public bool m_useAutoRelease = true;
     // "Set a time to automatically release after the shot at using UseAutoRelease. (sec)"
     [FormerlySerializedAs("_AutoReleaseTime"), UbhConditionalHide("m_useAutoRelease")]
     public float m_autoReleaseTime = 10f;
@@ -150,16 +182,19 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
     /// <summary>
     /// Shot UbhBullet object.
     /// </summary>
-    public void ShotBullet(UbhBullet bullet, float speed, float angle,
-                               bool homing = false, Transform homingTarget = null, float homingAngleSpeed = 0f,
-                               bool sinWave = false, float sinWaveSpeed = 0f, float sinWaveRangeSize = 0f, bool sinWaveInverse = false)
+    public void ShotBullet(float damage, float knockBack, float bulletAccuracy, bool isBulletBounce, int bulletBounceMaxNum,
+                            bool isExplosive, float explosionDamage, float explosiveForce, float explosiveRadius,
+                            GameObject explosionEffect, UbhBullet bullet, float speed, float angle,
+                            bool homing = false, Transform homingTarget = null, float homingAngleSpeed = 0f,
+                            bool sinWave = false, float sinWaveSpeed = 0f, float sinWaveRangeSize = 0f, bool sinWaveInverse = false)
     {
         if (bullet == null)
         {
             return;
         }
-        bullet.Shot(this,
-                    speed, angle, m_accelerationSpeed, m_accelerationTurn,
+        bullet.Shot(damage, knockBack, bulletAccuracy, isBulletBounce, bulletBounceMaxNum,
+                    isExplosive, explosionDamage, explosiveForce, explosiveRadius, explosionEffect,
+                    this, speed, angle, m_accelerationSpeed, m_accelerationTurn,
                     homing, homingTarget, homingAngleSpeed,
                     sinWave, sinWaveSpeed, sinWaveRangeSize, sinWaveInverse,
                     m_usePauseAndResume, m_pauseTime, m_resumeTime,

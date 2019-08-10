@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TagsAndLabels : MonoBehaviour
+public static class TagsAndLabels
 {
     [Header("Tags")]
     public const string PlayerTag = "Player";

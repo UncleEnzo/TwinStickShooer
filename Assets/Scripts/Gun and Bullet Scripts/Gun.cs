@@ -11,12 +11,10 @@ public class Gun : Weapon
     protected int currentAmmo;
     protected GameObject player;
     //Properties for the gun and bullet
-
-    public GameObject bullet;
     protected AudioSource gunSounds;
     public AudioClip gunShotSound;
     public AudioClip gunReloadSound;
-    private UbhShowcaseCtrl shotControllerShowCase;
+    public UbhShowcaseCtrl shotControllerShowCase;
     protected Vector3 mousePosTarget;
     protected Transform playerTransform;
 
@@ -73,15 +71,51 @@ public class Gun : Weapon
         if (Input.GetMouseButton(0) && (Time.time - lastfired) > (1 / GunProperties.bulletsPerSecond))
         {
             lastfired = Time.time;
-            // foreach (Transform bulletShot in GunProperties.bulletSpawnPoint)
-            // {
-            shotControllerShowCase.activeShotCtrl.StartShotRoutine();
-            // }
+            Shoot();
             gunSounds.PlayOneShot(gunShotSound);
             currentAmmo--;
             PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
             CameraController.Instance.Shake((player.transform.position - transform.position).normalized, GunProperties.camShakeMagnitude, GunProperties.camShakeLength);
         }
+    }
+
+    private void FireEnemyGun()
+    {
+        if ((Time.time - lastfired) > (1 / GunProperties.bulletsPerSecond))
+        {
+            lastfired = Time.time;
+            //note: Enemy does not need aim since it uses lock on Patterns
+            Shoot();
+            gunSounds.PlayOneShot(gunShotSound);
+            currentAmmo--;
+        }
+    }
+
+    private void Shoot()
+    {
+        //Update bullets with gun Properties
+        foreach (var shotInfo in shotControllerShowCase.activeShotCtrl.m_shotList)
+        {
+            ApplyGunProperties(shotInfo.m_shotObj.GetComponent<UbhBaseShot>());
+        }
+        shotControllerShowCase.activeShotCtrl.StartShotRoutine();
+    }
+
+    private void ApplyGunProperties(UbhBaseShot baseShot)
+    {
+        baseShot.m_damage = GunProperties.bulletDamage;
+        baseShot.m_bulletSpeed = GunProperties.bulletSpeed;
+        baseShot.m_knockBack = GunProperties.knockBack;
+        baseShot.m_bulletAccuracy = GunProperties.bulletAccuracy; //Not sure about this one
+        baseShot.m_autoReleaseTime = GunProperties.timeBulletSelfDestruct;
+        baseShot.m_isBulletBounce = GunProperties.isBulletBounce;
+        baseShot.m_bulletBounceMaxNum = GunProperties.bulletBounceMaxNum;
+        baseShot.m_isExplosive = GunProperties.isExplosive;
+        baseShot.m_explosionDamage = GunProperties.explosionDamage;
+        baseShot.m_explosiveForce = GunProperties.explosiveForce;
+        baseShot.m_explosiveRadius = GunProperties.explosiveRadius;
+        baseShot.m_explosionEffect = GunProperties.explosionEffect;
+        baseShot.m_explosionEffect = GunProperties.explosionEffect;
     }
 
     protected void Update()
@@ -98,32 +132,6 @@ public class Gun : Weapon
             {
                 shotInfo.m_shotObj.GetComponent<UbhBaseShot>().m_angle = angle;
             }
-        }
-
-        //  MOVE TO CHEATS, USE LATER FOR RECIPES THAT CHANGE UP FIRE PATTERNS :D
-        //Next Shot
-        if (Input.GetKeyDown("9"))
-        {
-            shotControllerShowCase.ChangeShot(true);
-        }
-        //previous shot
-        if (Input.GetKeyDown("0"))
-        {
-            shotControllerShowCase.ChangeShot(false);
-        }
-
-    }
-
-    private void FireEnemyGun()
-    {
-        if ((Time.time - lastfired) > (1 / GunProperties.bulletsPerSecond))
-        {
-            lastfired = Time.time;
-            //note: does not need bullet angle because it always has lock-on set to player
-            //Note: There may be some enemies that fire weird patterns that require manual aim
-            shotControllerShowCase.activeShotCtrl.StartShotRoutine();
-            gunSounds.PlayOneShot(gunShotSound);
-            currentAmmo--;
         }
     }
 

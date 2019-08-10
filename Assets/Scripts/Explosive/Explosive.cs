@@ -52,7 +52,7 @@ public class Explosive : MonoBehaviour
         foreach (Collider2D nearbyObject in colliders)
         {
             //Destroys enemy bullets caught in the explosion
-            if (!nearbyObject.isTrigger && nearbyObject.GetComponent<EnemyBullet>())
+            if (!nearbyObject.isTrigger && nearbyObject.gameObject.tag == TagsAndLabels.EnemyBulletTag)
             {
                 nearbyObject.gameObject.SetActive(false);
             }

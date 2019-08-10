@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863462df38b6225449e9659674736b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpawned: 0
   knockBack: 5
   enemyTrajectory: {x: 0, y: 0}
   startingHealth: 3
@@ -265,7 +266,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_goShotCtrlList:
   - {fileID: 707076731696157289}
-  activeShotCtrl: {fileID: 0}
 --- !u!1001 &3390633828425461417
 PrefabInstance:
   m_ObjectHideFlags: 0
