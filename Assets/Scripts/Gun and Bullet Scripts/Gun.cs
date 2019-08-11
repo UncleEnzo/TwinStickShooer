@@ -71,11 +71,15 @@ public class Gun : Weapon
         if (Input.GetMouseButton(0) && (Time.time - lastfired) > (1 / GunProperties.bulletsPerSecond))
         {
             lastfired = Time.time;
-            Shoot();
-            gunSounds.PlayOneShot(gunShotSound);
-            currentAmmo--;
-            PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
-            CameraController.Instance.Shake((player.transform.position - transform.position).normalized, GunProperties.camShakeMagnitude, GunProperties.camShakeLength);
+            bool isShooting = Shoot();
+            if (!isShooting)
+            {
+                gunSounds.PlayOneShot(gunShotSound);
+                currentAmmo--;
+                PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
+                CameraController.Instance.Shake((player.transform.position - transform.position).normalized,
+                                                GunProperties.camShakeMagnitude, GunProperties.camShakeLength);
+            }
         }
     }
 
@@ -85,24 +89,33 @@ public class Gun : Weapon
         {
             lastfired = Time.time;
             //note: Enemy does not need aim since it uses lock on Patterns
-            Shoot();
-            gunSounds.PlayOneShot(gunShotSound);
-            currentAmmo--;
+            bool isShooting = Shoot();
+            if (!isShooting)
+            {
+                gunSounds.PlayOneShot(gunShotSound);
+                currentAmmo--;
+            }
         }
     }
 
-    private void Shoot()
+    private bool Shoot()
     {
         //Update bullets with gun Properties
         foreach (var shotInfo in shotControllerShowCase.activeShotCtrl.m_shotList)
         {
             ApplyGunProperties(shotInfo.m_shotObj.GetComponent<UbhBaseShot>());
         }
-        shotControllerShowCase.activeShotCtrl.StartShotRoutine();
+        bool isShooting = shotControllerShowCase.activeShotCtrl.shooting;
+        if (!isShooting)
+        {
+            shotControllerShowCase.activeShotCtrl.StartShotRoutine();
+        }
+        return isShooting;
     }
 
     private void ApplyGunProperties(UbhBaseShot baseShot)
     {
+        baseShot.m_bulletTag = GunProperties.bulletTag;
         baseShot.m_damage = GunProperties.bulletDamage;
         baseShot.m_bulletSpeed = GunProperties.bulletSpeed;
         baseShot.m_knockBack = GunProperties.knockBack;

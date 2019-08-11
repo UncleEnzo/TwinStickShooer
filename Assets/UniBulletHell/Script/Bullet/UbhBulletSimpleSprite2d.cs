@@ -76,15 +76,17 @@ public class UbhBulletSimpleSprite2d : UbhBullet
         if (m_isBulletBounce)
         {
             //Recalculating bullet trajectory for next hit :)
-            disableForBounce = true;
+            rbMovement = true;
             m_bounces++;
             if (m_bounces >= m_bulletBounceMaxNum)
             {
                 if (this != null && this.isActive)
                 {
                     m_bounces = 0;
-                    disableForBounce = false;
-                    isBounceSet = false;
+                    rbMovement = false;
+                    isRbTrajConfigured = false;
+                    gameObject.tag = "Untagged";
+                    gameObject.layer = 0;
                     UbhObjectPool.instance.ReleaseBullet(this);
                 }
             }
@@ -94,8 +96,10 @@ public class UbhBulletSimpleSprite2d : UbhBullet
             if (this != null && this.isActive)
             {
                 m_bounces = 0;
-                disableForBounce = false;
-                isBounceSet = false;
+                rbMovement = false;
+                isRbTrajConfigured = false;
+                gameObject.tag = "Untagged";
+                gameObject.layer = 0;
                 UbhObjectPool.instance.ReleaseBullet(this);
             }
         }

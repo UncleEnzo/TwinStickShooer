@@ -57,7 +57,10 @@ public class Enemy : MonoBehaviour
 
     protected void OnEnable()
     {
-        StartOrEnableEnemy();
+        if (Player.Instance)
+        {
+            StartOrEnableEnemy();
+        }
         activateStateMachine();
     }
 
@@ -73,7 +76,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         aiPath.canMove = false;
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
-        AIDestinationSetter.target = Player.Instance.transform;
+        AIDestinationSetter.target = Player.Instance.gameObject.transform;
         health = startingHealth;
     }
 

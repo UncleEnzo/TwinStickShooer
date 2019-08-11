@@ -10,6 +10,9 @@ using UnityEngine.Serialization;
 public abstract class UbhBaseShot : UbhMonoBehaviour
 {
     [Header("My Properties | Adjust in GunProperties")]
+    // "Sets the bullet tag.  All bullets are player/enemy agnostic until shot."
+    [FormerlySerializedAs("_BulletTag")]
+    public bool m_bulletTag;
     // "Set the damage of bullets."
     [FormerlySerializedAs("_Damage")]
     public float m_damage;
@@ -182,7 +185,7 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
     /// <summary>
     /// Shot UbhBullet object.
     /// </summary>
-    public void ShotBullet(float damage, float knockBack, float bulletAccuracy, bool isBulletBounce, int bulletBounceMaxNum,
+    public void ShotBullet(bool bulletTag, float damage, float knockBack, float bulletAccuracy, bool isBulletBounce, int bulletBounceMaxNum,
                             bool isExplosive, float explosionDamage, float explosiveForce, float explosiveRadius,
                             GameObject explosionEffect, UbhBullet bullet, float speed, float angle,
                             bool homing = false, Transform homingTarget = null, float homingAngleSpeed = 0f,
@@ -192,7 +195,7 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
         {
             return;
         }
-        bullet.Shot(damage, knockBack, bulletAccuracy, isBulletBounce, bulletBounceMaxNum,
+        bullet.Shot(bulletTag, damage, knockBack, bulletAccuracy, isBulletBounce, bulletBounceMaxNum,
                     isExplosive, explosionDamage, explosiveForce, explosiveRadius, explosionEffect,
                     this, speed, angle, m_accelerationSpeed, m_accelerationTurn,
                     homing, homingTarget, homingAngleSpeed,

@@ -6,6 +6,7 @@ public class Parry : MonoBehaviour
 {
     BoxCollider2D boxCollider;
     private GameObject weaponHolder;
+    float reflectBulletSpeed = 14f;
     private float coolDownOnParry = 3f;
     private float defaultCoolDownOnParry = 3f;
     public float coolDownResetValue;
@@ -16,6 +17,7 @@ public class Parry : MonoBehaviour
     public float defaultColliderOffSetX = .5f;
     private float defaultcolliderSizeX = 1f;
     private float defaultcolliderSizeY = 2.5f;
+    private bool colliderCacheCleared = false;
     public GameObject bullet;
     private List<Collider2D> bulletsInCollider = new List<Collider2D>();
 
@@ -49,12 +51,16 @@ public class Parry : MonoBehaviour
         //CoolDown for parry
         if (!readyToSwipe)
         {
+            if (!colliderCacheCleared)
+            {
+                bulletsInCollider.Clear();
+                colliderCacheCleared = true;
+            }
             coolDownOnParry -= Time.deltaTime;
             if (coolDownOnParry <= 0)
             {
                 readyToSwipe = true;
                 coolDownOnParry = coolDownResetValue;
-                print("COOLDOWN RESET: " + coolDownOnParry);
             }
         }
 
@@ -74,27 +80,29 @@ public class Parry : MonoBehaviour
         // print("Parrying");
         List<Collider2D> colliderBulletsToRemove = new List<Collider2D>();
 
+        //paints a single target for all parry bullets to attack
+        Transform enemyTransform = null;
+
         //Perform the parry
         foreach (Collider2D collider in bulletsInCollider)
         {
             colliderBulletsToRemove.Add(collider);
-            EnemyBullet enemyBullet = collider.gameObject.GetComponent<EnemyBullet>();
-            Vector3 enemyBulletPos = enemyBullet.transform.position;
-            Quaternion enemyBulletRotation = enemyBullet.transform.rotation;
-            float reflectBulletSpeed = 1f;
-            Vector2 trajectory = new Vector2(-enemyBullet.rigidBody2D.velocity.x, -enemyBullet.rigidBody2D.velocity.y);
-            enemyBullet.gameObject.SetActive(false);
-            GameObject playerBullet = ObjectPooler.SharedInstance.GetPooledObject(bullet.name + "(Clone)");
-            if (playerBullet != null)
+            if (collider.gameObject.activeInHierarchy)
             {
-                playerBullet.transform.position = enemyBulletPos;
-                playerBullet.transform.rotation = enemyBulletRotation;
-                playerBullet.GetComponent<PlayerBullet>().setBulletProperties(enemyBullet.bulletSpeed, enemyBullet.bulletDamage, enemyBullet.timeBulletSelfDestruct, 3f, 0, 0, enemyBullet.bulletBounce, enemyBullet.bulletBounceMaxNum, enemyBullet.isExplosive, enemyBullet.explosionDamage, enemyBullet.explosiveForce, enemyBullet.explosiveRadius, enemyBullet.explosionEffect);
-                playerBullet.SetActive(true);
-                playerBullet.GetComponent<SpriteRenderer>().sprite = playerBullet.GetComponent<SpriteRenderer>().sprite;
-                playerBullet.GetComponent<PlayerBullet>().bulletTrajectory = trajectory * reflectBulletSpeed;
-                playerBullet.GetComponent<Rigidbody2D>().velocity = playerBullet.GetComponent<PlayerBullet>().bulletTrajectory;
+                if (enemyTransform == null)
+                {
+                    enemyTransform = UbhUtil.GetTransformFromTagName(TagsAndLabels.EnemyTag, false, true, collider.gameObject.transform);
+                }
+                UbhBulletSimpleSprite2d enemyBullet = collider.gameObject.GetComponent<UbhBulletSimpleSprite2d>();
+                collider.gameObject.tag = TagsAndLabels.PlayerBulletTag;
+                collider.gameObject.layer = 8;
+                enemyBullet.rbMovement = true;
+                enemyBullet.isRbTrajConfigured = false;
+                Vector2 currentTrajectory = (enemyTransform.position - collider.gameObject.transform.position) / enemyBullet.m_speed;
+                enemyBullet.m_speed = reflectBulletSpeed;
+                enemyBullet.m_bulletTrajectory = currentTrajectory * enemyBullet.m_speed;
             }
+            colliderCacheCleared = false;
         }
 
         //removes parried bullets from list because otherwise they never exit collider
@@ -123,7 +131,7 @@ public class Parry : MonoBehaviour
     void OnTriggerExit2D(Collider2D collider)
     {
         //if the object is in the list
-        if (bulletsInCollider.Contains(collider) && collider.gameObject.activeInHierarchy)
+        if (bulletsInCollider.Contains(collider))
         {
             //remove it from the list
             bulletsInCollider.Remove(collider);

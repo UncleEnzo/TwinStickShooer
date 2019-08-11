@@ -122,19 +122,19 @@ public class TreasureChest : Interactable
 
     protected GameObject spawnRecipe(LootListType loot, float coordinateX, float coordinateY, int chestID)
     {
-        GameObject item = LootTable.instance.generateRandomLootFromDeductable(loot, chestRarityRange).item;
-        if (item != null)
+        Loot generatedLoot = null;
+        generatedLoot = LootTable.instance.generateRandomLootFromDeductable(loot, chestRarityRange);
+        if (generatedLoot != null)
         {
-            GameObject recipe = Instantiate(LootTable.instance.generateRandomLootFromDeductable(loot, chestRarityRange).item, new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
+            GameObject recipe = Instantiate(generatedLoot.item, new Vector2(transform.position.x + coordinateX, transform.position.y + coordinateY), Quaternion.identity);
             recipe.GetComponent<RecipePickUp>().chestID = chestID;
             recipe.GetComponent<RecipePickUp>().isFromChest = true;
             return recipe;
         }
         else
         {
-            return item;
+            return null;
         }
-
     }
 
     protected void spawnItem(LootListType loot, float coordinateX, float coordinateY, int chestID)

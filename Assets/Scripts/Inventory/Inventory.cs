@@ -103,35 +103,49 @@ public class Inventory : MonoBehaviour
 
             //Load inventory from save data
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
-            if (keys.Count() != SavePersistentData.keys)
+            if (SavePersistentData != null)
             {
-                LoadInventory(SavePersistentData.keys, key);
-            }
-            if (physicalCraftComponents.Count() != SavePersistentData.physicalCraftComponents)
-            {
-                LoadInventory(SavePersistentData.physicalCraftComponents, physicalComponent);
-            }
-            if (gunpowderCraftComponents.Count() != SavePersistentData.gunpowderCraftComponents)
-            {
-                LoadInventory(SavePersistentData.gunpowderCraftComponents, gunpowderCompontent);
-            }
-            if (explosiveCraftComponents.Count() != SavePersistentData.explosiveCraftComponents)
-            {
-                LoadInventory(SavePersistentData.explosiveCraftComponents, explosiveComponent);
-            }
-            //Plus one to recipes.count because we automatically get the healing pot
-            if ((recipes.Count() + 1) != SavePersistentData.acquiredRecipes.Count)
-            {
-                foreach (string item in SavePersistentData.acquiredRecipes)
+                if (keys.Count() != SavePersistentData.keys)
                 {
-                    AddItem(LootLedger.LootLedgerDict[item].item.GetComponent<RecipePickUp>().item);
+                    LoadInventory(SavePersistentData.keys, key);
                 }
+                if (physicalCraftComponents.Count() != SavePersistentData.physicalCraftComponents)
+                {
+                    LoadInventory(SavePersistentData.physicalCraftComponents, physicalComponent);
+                }
+                if (gunpowderCraftComponents.Count() != SavePersistentData.gunpowderCraftComponents)
+                {
+                    LoadInventory(SavePersistentData.gunpowderCraftComponents, gunpowderCompontent);
+                }
+                if (explosiveCraftComponents.Count() != SavePersistentData.explosiveCraftComponents)
+                {
+                    LoadInventory(SavePersistentData.explosiveCraftComponents, explosiveComponent);
+                }
+                //Plus one to recipes.count because we automatically get the healing pot
+                if ((recipes.Count() + 1) != SavePersistentData.acquiredRecipes.Count)
+                {
+                    foreach (string item in SavePersistentData.acquiredRecipes)
+                    {
+                        AddItem(LootLedger.LootLedgerDict[item].item.GetComponent<RecipePickUp>().item);
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("No Persistent Save data found. Are you in a Dev Testing Scene?");
             }
         }
         SaveGlobalMoney SaveGlobalMoney = SaveSystem.LoadMoneyData();
-        if (money.Count() != SaveGlobalMoney.money)
+        if (SaveGlobalMoney != null)
         {
-            LoadInventory(SaveGlobalMoney.money, moneyCoin);
+            if (money.Count() != SaveGlobalMoney.money)
+            {
+                LoadInventory(SaveGlobalMoney.money, moneyCoin);
+            }
+        }
+        else
+        {
+            Debug.Log("No Global Money Save Found. Are you in a Dev Testing Scene?");
         }
     }
 

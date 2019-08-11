@@ -9,6 +9,8 @@ public class UbhBullet : UbhMonoBehaviour
 {
     //Mine
     [NonSerializedAttribute]
+    public bool m_bulletTag;
+    [NonSerializedAttribute]
     public float m_damage;
     [NonSerializedAttribute]
     public float m_knockBack;
@@ -26,8 +28,10 @@ public class UbhBullet : UbhMonoBehaviour
     public float m_explosiveRadius;
     protected int m_bounces;
     protected int m_bulletBounceMaxNum;
-    protected bool disableForBounce = false;
-    protected bool isBounceSet = false;
+    [NonSerializedAttribute]
+    public bool rbMovement = false;
+    [NonSerializedAttribute]
+    public bool isRbTrajConfigured = false;
     [NonSerializedAttribute]
     public GameObject m_explosionEffect;
     [NonSerializedAttribute]
@@ -89,8 +93,10 @@ public class UbhBullet : UbhMonoBehaviour
             return;
         }
         m_bounces = 0;
-        disableForBounce = false;
-        isBounceSet = false;
+        rbMovement = false;
+        isRbTrajConfigured = false;
+        gameObject.tag = "Untagged";
+        gameObject.layer = 0;
         UbhObjectPool.instance.ReleaseBullet(this);
     }
 
@@ -117,7 +123,10 @@ public class UbhBullet : UbhMonoBehaviour
         m_parentBaseShot = null;
         m_homingTarget = null;
         m_rigidBody2D.velocity = Vector2.zero;
-        isBounceSet = false;
+        rbMovement = false;
+        isRbTrajConfigured = false;
+        gameObject.tag = "Untagged";
+        gameObject.layer = 0;
         m_transformCache.ResetPosition();
         m_transformCache.ResetRotation();
 
@@ -126,7 +135,7 @@ public class UbhBullet : UbhMonoBehaviour
     /// <summary>
     /// Bullet Shot
     /// </summary>
-    public void Shot(float damage, float knockBack, float bulletAccuracy,
+    public void Shot(bool bulletTag, float damage, float knockBack, float bulletAccuracy,
                      bool isBulletBounce, int bulletBounceMaxNum, bool isExplosive,
                      float explosionDamage, float explosiveForce, float explosiveRadius, GameObject explosionEffect,
                      UbhBaseShot parentBaseShot, float speed, float angle, float accelSpeed, float accelTurn,
@@ -144,6 +153,7 @@ public class UbhBullet : UbhMonoBehaviour
         m_shooting = true;
 
         //Mine
+        m_bulletTag = bulletTag;
         m_damage = damage;
         m_knockBack = knockBack;
         m_bulletAccuracy = bulletAccuracy;
@@ -180,6 +190,16 @@ public class UbhBullet : UbhMonoBehaviour
         m_minSpeed = minSpeed;
 
         m_baseAngle = 0f;
+        if (m_bulletTag)
+        {
+            gameObject.tag = TagsAndLabels.PlayerBulletTag;
+            gameObject.layer = 8;
+        }
+        else
+        {
+            gameObject.tag = TagsAndLabels.EnemyBulletTag;
+            gameObject.layer = 9;
+        }
         if (inheritAngle && m_parentBaseShot.lockOnShot == false)
         {
             if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
@@ -228,8 +248,10 @@ public class UbhBullet : UbhMonoBehaviour
             {
                 // Release
                 m_bounces = 0;
-                disableForBounce = false;
-                isBounceSet = false;
+                rbMovement = false;
+                isRbTrajConfigured = false;
+                gameObject.tag = "Untagged";
+                gameObject.layer = 0;
                 UbhObjectPool.instance.ReleaseBullet(this);
                 return;
             }
@@ -244,8 +266,8 @@ public class UbhBullet : UbhMonoBehaviour
             }
         }
 
-        //No bounce
-        if (!disableForBounce)
+        //Transform shift movement
+        if (!rbMovement)
         {
             Vector3 myAngles = m_transformCache.rotation.eulerAngles;
 
@@ -355,12 +377,13 @@ public class UbhBullet : UbhMonoBehaviour
             }
             m_bulletTrajectory = newPosition / m_speed;
         }
+        //rb velocity setting movement
         else
         {
-            if (isBounceSet == false)
+            if (!isRbTrajConfigured)
             {
                 m_rigidBody2D.velocity = m_bulletTrajectory;
-                isBounceSet = true;
+                isRbTrajConfigured = true;
             }
         }
     }

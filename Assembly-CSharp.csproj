@@ -88,13 +88,10 @@
      <Compile Include="Assets\Scripts\Global\Signal.cs" />
      <Compile Include="Assets\Scripts\Global\SignalListener.cs" />
      <Compile Include="Assets\Scripts\Global\TagsAndLabels.cs" />
-     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\BulletSpawnController.cs" />
-     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EnemyGun.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EquipToPlayer.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Gun.cs" />
-     <Compile Include="Assets\Scripts\Gun and Bullet Scripts\PlayerBullet.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\PlayerGun.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\Weapon.cs" />
      <Compile Include="Assets\Scripts\Inventory\Inventory.cs" />

@@ -104,6 +104,7 @@ MonoBehaviour:
     bulletsPerSecond: 4
     maxAmmo: 10
     reloadTime: 2
+    bulletTag: 0
     bulletDamage: 1
     bulletSpeed: 5
     timeBulletSelfDestruct: 3
@@ -119,6 +120,7 @@ MonoBehaviour:
   armLength: 0.5
   gunShotSound: {fileID: 8300000, guid: 611f65b2aba4a4af7b4ab3d6ddb5b546, type: 3}
   gunReloadSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
+  shotControllerShowCase: {fileID: 0}
 --- !u!114 &3159593649361123645
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -59,23 +59,30 @@ public class LootTable : MonoBehaviour
             print("Entering next level. Retrieving saved Deductable lists");
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
 
-            //Step 1 > Takes Entries from the persistent map, and adds them to the deductable map
-            foreach (KeyValuePair<LootListType, List<string>> entry in SavePersistentData.DeductableLootDict)
+            if (SavePersistentData != null)
             {
-                List<Loot> entryValues = new List<Loot>();
-                foreach (string listLoot in entry.Value)
+                //Step 1 > Takes Entries from the persistent map, and adds them to the deductable map
+                foreach (KeyValuePair<LootListType, List<string>> entry in SavePersistentData.DeductableLootDict)
                 {
-                    entryValues.Add(LootLedger.LootLedgerDict[listLoot]);
+                    List<Loot> entryValues = new List<Loot>();
+                    foreach (string listLoot in entry.Value)
+                    {
+                        entryValues.Add(LootLedger.LootLedgerDict[listLoot]);
+                    }
+                    //Leave this for each loop to load in components and other values to loot table that are not deductable
+                    deductableLootMap.Add(entry.Key, entryValues);
                 }
-                //Leave this for each loop to load in components and other values to loot table that are not deductable
-                deductableLootMap.Add(entry.Key, entryValues);
-            }
 
-            //Step 2 > Takes Entries from the Deductable loot map in this class and adds them to the deductable lists
-            PersistDeductableList(DeductablePhysicalRecipes, LootListType.PhysicalRecipe);
-            PersistDeductableList(DeductableGunpowderRecipes, LootListType.GunpowderRecipe);
-            PersistDeductableList(DeductableExplosiveRecipes, LootListType.ExplosiveRecipe);
-            PersistDeductableList(DeductableWeapons, LootListType.Weapon);
+                //Step 2 > Takes Entries from the Deductable loot map in this class and adds them to the deductable lists
+                PersistDeductableList(DeductablePhysicalRecipes, LootListType.PhysicalRecipe);
+                PersistDeductableList(DeductableGunpowderRecipes, LootListType.GunpowderRecipe);
+                PersistDeductableList(DeductableExplosiveRecipes, LootListType.ExplosiveRecipe);
+                PersistDeductableList(DeductableWeapons, LootListType.Weapon);
+            }
+            else
+            {
+                Debug.Log("No Persistent Save data found. Are you in a Dev Testing Scene?");
+            }
         }
         else
         {

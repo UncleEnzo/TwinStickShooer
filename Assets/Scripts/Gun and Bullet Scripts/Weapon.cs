@@ -25,6 +25,9 @@ public class GunProperties
     public float reloadTime = 2f;
 
     [Header("Bullet Properties")]
+    [Header("PlayerBullet tag = true | EnemyBullet tag = false")]
+    [SerializeField]
+    public bool bulletTag = true;
     [SerializeField]
     public float bulletDamage = 1f;
     [SerializeField]

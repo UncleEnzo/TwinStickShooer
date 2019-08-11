@@ -309,6 +309,10 @@ PrefabInstance:
       propertyPath: m_useAutoRelease
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
+      propertyPath: m_bulletTag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

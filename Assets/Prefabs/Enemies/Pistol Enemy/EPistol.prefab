@@ -103,13 +103,13 @@ MonoBehaviour:
     bulletsPerSecond: 1
     maxAmmo: 10
     reloadTime: 2
-    bulletSpeed: 6
+    bulletTag: 0
     bulletDamage: 1
+    bulletSpeed: 6
     timeBulletSelfDestruct: 3
     knockBack: 5
     bulletAccuracy: 0
-    bulletAngle: 0
-    bulletBounce: 0
+    isBulletBounce: 0
     bulletBounceMaxNum: 0
     isExplosive: 0
     explosionDamage: 3
@@ -117,9 +117,9 @@ MonoBehaviour:
     explosiveRadius: 3
     explosionEffect: {fileID: 0}
   armLength: 0.5
-  bullet: {fileID: 7991890147027848265, guid: 6ea430b99f406be46a8a52e7c463cdad, type: 3}
   gunShotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   gunReloadSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
+  shotControllerShowCase: {fileID: 0}
 --- !u!82 &5247084171877844404
 AudioSource:
   m_ObjectHideFlags: 0
