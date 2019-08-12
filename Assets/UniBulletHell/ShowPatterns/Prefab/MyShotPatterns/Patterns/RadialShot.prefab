@@ -43,7 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e50f91ef29dcf45a6d866be09fbb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 0
+  m_bulletTag: 0
+  m_damage: 1
   m_knockBack: 0
   m_bulletAccuracy: 0
   m_isBulletBounce: 0
@@ -53,11 +54,11 @@ MonoBehaviour:
   m_explosiveForce: 0
   m_explosiveRadius: 0
   m_explosionEffect: {fileID: 0}
-  m_bulletPrefab: {fileID: 7991890147027848265, guid: 27d7034641cfc714d96d226274344496,
+  m_bulletPrefab: {fileID: 7991890147027848265, guid: 6ea430b99f406be46a8a52e7c463cdad,
     type: 3}
-  m_bulletNum: 60
+  m_bulletNum: 20
   m_angle: 180
-  m_bulletSpeed: 2
+  m_bulletSpeed: 4
   m_accelerationSpeed: 0
   m_useMaxSpeed: 0
   m_maxSpeed: 0

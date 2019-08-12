@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863462df38b6225449e9659674736b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSpawned: 0
   knockBack: 5
   enemyTrajectory: {x: 0, y: 0}
   startingHealth: 3
@@ -153,8 +154,8 @@ MonoBehaviour:
   stopAndFireRange: 5
   walkAndFireRange: 7
   collideDamageToPlayer: 2
-  moveSpeed: 5
-  preparingToFire: 0
+  moveSpeed: 2
+  knockedBack: 0
   aiPath: {fileID: 888971288}
   enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
@@ -171,6 +172,8 @@ MonoBehaviour:
   coolDownOnMovementTimer: 0.5
   movementCoolDownReset: 0.5
   floatingText: []
+  enemyStates: 0
+  distFromPlayer: 0
 --- !u!114 &888971287
 MonoBehaviour:
   m_ObjectHideFlags: 0

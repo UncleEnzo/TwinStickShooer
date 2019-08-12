@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyRadialFire : Enemy
 {
+    new private void Start()
+    {
+        base.Start();
+        aiPath.canMove = true;
+    }
     // Update is called once per frame
     protected new void Update()
     {

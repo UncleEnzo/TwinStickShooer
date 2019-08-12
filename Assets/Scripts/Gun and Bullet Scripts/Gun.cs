@@ -8,7 +8,7 @@ public class Gun : Weapon
     protected bool isPlayer;
     protected float lastfired;
     protected bool isReloading = false;
-    protected int currentAmmo;
+    public int currentAmmo;
     protected GameObject player;
     //Properties for the gun and bullet
     protected AudioSource gunSounds;

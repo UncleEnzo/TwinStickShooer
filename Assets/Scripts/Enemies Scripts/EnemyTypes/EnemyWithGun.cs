@@ -8,60 +8,68 @@ public class EnemyWithGun : Enemy
     protected new void Update()
     {
         base.Update();
-
-        //CoolDown for Movement after being knocked back
-        if (!aiPath.canMove)
-        {
-            coolDownOnMovementTimer -= Time.deltaTime;
-            if (coolDownOnMovementTimer <= 0)
-            {
-                aiPath.canMove = true;
-                coolDownOnMovementTimer = movementCoolDownReset;
-            }
-        }
+        knockBackAction();
     }
 
     // Update is called once per frame
     protected new void FixedUpdate()
     {
         distFromPlayer = Vector3.Distance(Player.Instance.transform.position, transform.position);
-        if (!preparingToFire)
+        if (!knockedBack)
         {
             switch (enemyStates)
             {
                 case EnemyStates.FollowPlayer:
-                    if (aiPath.canMove == true)
-                    {
-                        stateMachine.ChangeState(StatePlayerFollow.Instance);
-                    }
-                    if (aiPath.canMove == true && distFromPlayer <= walkAndFireRange && distFromPlayer >= stopAndFireRange)
+                    //Case Switching
+                    if (distFromPlayer < walkAndFireRange && distFromPlayer > stopAndFireRange)
                     {
                         enemyStates = EnemyStates.MoveShoot;
                     }
-                    break;
-                case EnemyStates.MoveShoot:
-                    if (aiPath.canMove == true)
-                    {
-                        stateMachine.ChangeState(StateMoveShoot.Instance);
-                    }
-                    if (aiPath.canMove == true && distFromPlayer >= walkAndFireRange)
-                    {
-                        enemyStates = EnemyStates.FollowPlayer;
-                    }
-                    else if (distFromPlayer <= stopAndFireRange)
+                    if (distFromPlayer < stopAndFireRange)
                     {
                         enemyStates = EnemyStates.StopShoot;
                     }
+                    //functionality of case > Inheritly the functionality is moving and nothing else
+                    aiPath.canMove = true;
+                    break;
+                case EnemyStates.MoveShoot:
+                    //Case Switching
+                    if (distFromPlayer > walkAndFireRange)
+                    {
+                        enemyStates = EnemyStates.FollowPlayer;
+                    }
+                    else if (distFromPlayer < stopAndFireRange)
+                    {
+                        enemyStates = EnemyStates.StopShoot;
+                    }
+                    //functionality of case
+                    GetComponentInChildren<EnemyGun>().EnemyFireGun();
                     break;
                 case EnemyStates.StopShoot:
-                    stateMachine.ChangeState(StateStopShoot.Instance);
-                    if (aiPath.canMove == true && distFromPlayer <= walkAndFireRange && distFromPlayer >= stopAndFireRange)
+                    // StartCoroutine(takeAimThenFire());
+                    if (distFromPlayer > stopAndFireRange && distFromPlayer < walkAndFireRange)
                     {
+                        aiPath.canMove = true;
                         enemyStates = EnemyStates.MoveShoot;
                     }
+                    if (distFromPlayer > walkAndFireRange)
+                    {
+                        aiPath.canMove = true;
+                        enemyStates = EnemyStates.FollowPlayer;
+                    }
+                    //functionality of case
+                    aiPath.canMove = false;
+                    GetComponentInChildren<EnemyGun>().EnemyFireGun();
                     break;
             }
         }
         base.FixedUpdate();
     }
+    // IEnumerator takeAimThenFire()
+    // {
+    //     knockedBack = true;
+    //     yield return new WaitForSeconds(waitBeforeFire);
+    //     GetComponentInChildren<EnemyGun>().EnemyFireGun();
+    //     knockedBack = false;
+    // }
 }

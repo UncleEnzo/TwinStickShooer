@@ -154,8 +154,8 @@ MonoBehaviour:
   stopAndFireRange: 5
   walkAndFireRange: 9
   collideDamageToPlayer: 2
-  moveSpeed: 5
-  preparingToFire: 0
+  moveSpeed: 2
+  knockedBack: 0
   aiPath: {fileID: 518032821}
   enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,

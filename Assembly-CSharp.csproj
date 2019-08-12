@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemySpawner.cs" />
+     <Compile Include="Assets\Scripts\Enemies Scripts\EnemyTypes\EnemyMelee.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyTypes\EnemyRadialFire.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\EnemyTypes\EnemyWithGun.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StateDie.cs" />

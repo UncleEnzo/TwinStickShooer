@@ -23,7 +23,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5186730268832200255
 Transform:
   m_ObjectHideFlags: 0
@@ -233,8 +233,7 @@ MonoBehaviour:
   stopAndFireRange: 7
   walkAndFireRange: 9
   collideDamageToPlayer: 2
-  moveSpeed: 5
-  preparingToFire: 0
+  knockedBack: 0
   aiPath: {fileID: 4877950633136445149}
   enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
@@ -291,27 +290,6 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
       propertyPath: m_Name
       value: RadialShot
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
-      propertyPath: m_bulletPrefab
-      value: 
-      objectReference: {fileID: 7991890147027848265, guid: 6ea430b99f406be46a8a52e7c463cdad,
-        type: 3}
-    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
-      propertyPath: m_bulletNum
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
-      propertyPath: m_bulletSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
-      propertyPath: m_useAutoRelease
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
-      propertyPath: m_bulletTag
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3a8dbadaa89dde345b946df5453b4c2a, type: 3}
       propertyPath: m_LocalPosition.x

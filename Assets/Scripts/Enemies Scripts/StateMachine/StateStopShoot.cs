@@ -49,9 +49,9 @@ public class StateStopShoot : State<Enemy>
 
     IEnumerator takeAimThenFire(Enemy owner)
     {
-        owner.preparingToFire = true;
+        owner.knockedBack = true;
         yield return new WaitForSeconds(owner.waitBeforeFire);
         owner.GetComponentInChildren<EnemyGun>().EnemyFireGun();
-        owner.preparingToFire = false;
+        owner.knockedBack = false;
     }
 }

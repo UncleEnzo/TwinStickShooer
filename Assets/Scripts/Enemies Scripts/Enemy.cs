@@ -16,6 +16,7 @@ public enum EnemyStates
 }
 public class Enemy : MonoBehaviour
 {
+    [Header("Note: Move speed is set in AiPath. It's called Max Speed")]
     public bool isSpawned = false;
     public float knockBack = 5f;
     public Vector2 enemyTrajectory;
@@ -25,8 +26,7 @@ public class Enemy : MonoBehaviour
     public float stopAndFireRange = 7f;
     public float walkAndFireRange = 9f;
     public float collideDamageToPlayer = 2f;
-    public float moveSpeed = 5f;
-    public bool preparingToFire = false;
+    public bool knockedBack = false;
     [System.NonSerialized]
     public Rigidbody2D rb;
     public AIPath aiPath;
@@ -52,7 +52,6 @@ public class Enemy : MonoBehaviour
     protected void Start()
     {
         StartOrEnableEnemy();
-        activateStateMachine();
     }
 
     protected void OnEnable()
@@ -61,28 +60,22 @@ public class Enemy : MonoBehaviour
         {
             StartOrEnableEnemy();
         }
-        activateStateMachine();
-    }
-
-    protected void activateStateMachine()
-    {
-        stateMachine = new StateMachine<Enemy>(this);
-        stateMachine.ChangeState(StatePlayerFollow.Instance);
     }
 
     private void StartOrEnableEnemy()
     {
         floatingText = new List<FloatingText>();
         rb = GetComponent<Rigidbody2D>();
-        aiPath.canMove = false;
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
         AIDestinationSetter.target = Player.Instance.gameObject.transform;
         health = startingHealth;
+        enemyStates = EnemyStates.FollowPlayer;
     }
 
-    void OnDisable()
+    protected void OnDisable()
     {
         TrackFloatingTextPos();
+        aiPath.canMove = true;
     }
     protected void Update()
     {
@@ -94,7 +87,6 @@ public class Enemy : MonoBehaviour
     protected void FixedUpdate()
     {
         enemyTrajectory = rb.velocity;
-        stateMachine.Update();
     }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
@@ -104,7 +96,7 @@ public class Enemy : MonoBehaviour
             collisionInfo.gameObject.GetComponent<Player>().hit(collideDamageToPlayer);
         }
     }
-    public void hit(float Damage, float knockBackForce, Vector2 knockBackTrajectory)
+    public virtual void hit(float Damage, float knockBackForce, Vector2 knockBackTrajectory)
     {
         FloatingText floatingDamageText = FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
         floatingText.Add(floatingDamageText);
@@ -113,14 +105,42 @@ public class Enemy : MonoBehaviour
         if (gameObject.activeInHierarchy == true)
         {
             aiPath.canMove = false;
+            knockedBack = true;
             Vector2 difference = knockBackTrajectory;
             difference = difference.normalized * knockBackForce;
             rb.AddForce(difference, ForceMode2D.Impulse);
         }
         if (health <= 0f)
         {
-            stateMachine.ChangeState(StateDie.Instance);
-            stateMachine.Update();
+            //Play some animation, particles, and sounds
+            dropCraftComponents();
+            dropKey();
+            if (isSpawned)
+            {
+                isSpawned = false;
+                enemyKilled.Raise();
+            }
+            if (GetComponent<Gun>())
+            {
+                GetComponent<Gun>().currentAmmo = GetComponent<Weapon>().GunProperties.maxAmmo;
+            }
+            gameObject.SetActive(false);
+        }
+    }
+
+    protected void knockBackAction()
+    {
+        //CoolDown for Movement after being knocked back
+        if (knockedBack)
+        {
+            coolDownOnMovementTimer -= Time.deltaTime;
+            if (coolDownOnMovementTimer <= 0)
+            {
+                knockedBack = false;
+                aiPath.canMove = true;
+                rb.velocity = Vector2.zero;
+                coolDownOnMovementTimer = movementCoolDownReset;
+            }
         }
     }
     private void TrackFloatingTextPos()
@@ -144,5 +164,42 @@ public class Enemy : MonoBehaviour
                 floatingText.Remove(removableText);
             }
         }
+    }
+    private void dropCraftComponents()
+    {
+        enableComponents(greenCraftComponent.name);
+        enableComponents(purpleCraftComponent.name);
+        enableComponents(blackCraftComponent.name);
+    }
+    private void enableComponents(string craftComponentName)
+    {
+        for (int i = 0; i < Random.Range(minDropCount, maxDropCount); i++)
+        {
+            GameObject newComponent = ObjectPooler.SharedInstance.GetPooledObject(craftComponentName + "(Clone)");
+            if (newComponent != null)
+            {
+                newComponent.transform.position = new Vector2(randomDistFromEnemy(transform.position.x), randomDistFromEnemy(transform.position.y));
+                newComponent.transform.rotation = transform.rotation;
+                newComponent.SetActive(true);
+            }
+        }
+    }
+    private void dropKey()
+    {
+        int keyDropCheck = Random.Range(0, 10);
+        if (keyDropCheck == 1)
+        {
+            GameObject newKey = ObjectPooler.SharedInstance.GetPooledObject(key.name + "(Clone)");
+            if (newKey != null)
+            {
+                newKey.transform.position = new Vector2(randomDistFromEnemy(transform.position.x), randomDistFromEnemy(transform.position.y));
+                newKey.transform.rotation = transform.rotation;
+                newKey.SetActive(true);
+            }
+        }
+    }
+    private float randomDistFromEnemy(float pos)
+    {
+        return Random.Range(pos - minDropDist, pos + maxDropDist);
     }
 }
