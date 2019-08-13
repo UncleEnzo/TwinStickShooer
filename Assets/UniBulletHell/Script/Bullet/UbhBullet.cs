@@ -92,12 +92,7 @@ public class UbhBullet : UbhMonoBehaviour
         {
             return;
         }
-        m_bounces = 0;
-        rbMovement = false;
-        isRbTrajConfigured = false;
-        gameObject.tag = "Untagged";
-        gameObject.layer = 0;
-        UbhObjectPool.instance.ReleaseBullet(this);
+        disableBullet();
     }
 
     /// <summary>
@@ -123,13 +118,23 @@ public class UbhBullet : UbhMonoBehaviour
         m_parentBaseShot = null;
         m_homingTarget = null;
         m_rigidBody2D.velocity = Vector2.zero;
+        m_bounces = 0;
         rbMovement = false;
         isRbTrajConfigured = false;
         gameObject.tag = "Untagged";
         gameObject.layer = 0;
         m_transformCache.ResetPosition();
         m_transformCache.ResetRotation();
+    }
 
+    public void disableBullet()
+    {
+        m_bounces = 0;
+        rbMovement = false;
+        isRbTrajConfigured = false;
+        gameObject.tag = "Untagged";
+        gameObject.layer = 0;
+        UbhObjectPool.instance.ReleaseBullet(this);
     }
 
     /// <summary>
@@ -247,12 +252,7 @@ public class UbhBullet : UbhMonoBehaviour
             if (m_selfTimeCount >= m_autoReleaseTime)
             {
                 // Release
-                m_bounces = 0;
-                rbMovement = false;
-                isRbTrajConfigured = false;
-                gameObject.tag = "Untagged";
-                gameObject.layer = 0;
-                UbhObjectPool.instance.ReleaseBullet(this);
+                disableBullet();
                 return;
             }
         }

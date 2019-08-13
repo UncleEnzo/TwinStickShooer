@@ -82,12 +82,7 @@ public class UbhBulletSimpleSprite2d : UbhBullet
             {
                 if (this != null && this.isActive)
                 {
-                    m_bounces = 0;
-                    rbMovement = false;
-                    isRbTrajConfigured = false;
-                    gameObject.tag = "Untagged";
-                    gameObject.layer = 0;
-                    UbhObjectPool.instance.ReleaseBullet(this);
+                    disableBullet();
                 }
             }
         }
@@ -95,15 +90,11 @@ public class UbhBulletSimpleSprite2d : UbhBullet
         {
             if (this != null && this.isActive)
             {
-                m_bounces = 0;
-                rbMovement = false;
-                isRbTrajConfigured = false;
-                gameObject.tag = "Untagged";
-                gameObject.layer = 0;
-                UbhObjectPool.instance.ReleaseBullet(this);
+                disableBullet();
             }
         }
     }
+
     protected void explosiveBullet()
     {
         //create explosion
@@ -112,12 +103,11 @@ public class UbhBulletSimpleSprite2d : UbhBullet
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, m_explosiveRadius);
         foreach (Collider2D nearbyObject in colliders)
         {
-            //Note: only reinstate this if you will be only using player explosive bullets
-            // //Destroys enemy bullets caught in the explosion
-            // if (!nearbyObject.isTrigger && nearbyObject.GetComponent<EnemyBullet>())
-            // {
-            //     nearbyObject.gameObject.SetActive(false);
-            // }
+            //Destroys enemy bullets caught in the explosion
+            if (nearbyObject.GetComponent<UbhBulletSimpleSprite2d>() && nearbyObject.tag == TagsAndLabels.EnemyBulletTag)
+            {
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().disableBullet();
+            }
 
             //Applies explosion
             if (nearbyObject.tag != TagsAndLabels.PlayerBulletTag && !nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())

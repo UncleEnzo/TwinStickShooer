@@ -43,10 +43,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 681, y: 348}
-  m_MaxSize: {x: 12006, y: 8048}
+  m_MinSize: {x: 683, y: 348}
+  m_MaxSize: {x: 12008, y: 8048}
   vertical: 1
-  controlID: 79
+  controlID: 127
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 82
+  controlID: 130
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -149,10 +149,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 947
-  m_MinSize: {x: 681, y: 348}
-  m_MaxSize: {x: 12006, y: 8048}
+  m_MinSize: {x: 683, y: 348}
+  m_MaxSize: {x: 12008, y: 8048}
   vertical: 0
-  controlID: 80
+  controlID: 128
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,8 +172,8 @@ MonoBehaviour:
     y: 0
     width: 574
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 74}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -200,8 +200,8 @@ MonoBehaviour:
     y: 608
     width: 1346
     height: 339
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 124}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 24}
   m_Panes:
   - {fileID: 19}
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 348}
   m_MaxSize: {x: 8006, y: 8048}
   vertical: 1
-  controlID: 81
+  controlID: 129
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 83572
+  m_LastSelectedObjectID: -221176
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -975,22 +975,22 @@ MonoBehaviour:
     m_ReferencingInstanceIDs: 
     m_SceneHandles: 
     m_ShowAllHits: 0
-    m_SearchArea: 1
+    m_SearchArea: 3
     m_Folders:
-    - Assets/Prefabs/Enemies/Shotgun Enemy
+    - Assets/Scripts/Enemies Scripts/EnemyTypes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Enemies/Shotgun Enemy
+  - Assets/Scripts/Enemies Scripts/EnemyTypes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Alchemist Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 215}
-    m_SelectedIDs: ce0f0000
-    m_LastClickedID: 4046
-    m_ExpandedIDs: 00000000d80d0000b80e0000d40e0000a4100000f2120000de150000a2160000b2170000501b0000ae1b00003c1c0000161d0000ea1e0000905000009250000000ca9a3b
+    scrollPos: {x: 0, y: 847}
+    m_SelectedIDs: 601b0000
+    m_LastClickedID: 7008
+    m_ExpandedIDs: 00000000dc0d0000bc0e0000d80e0000a8100000f8120000e4150000a8160000b8170000b61b0000441c00001e1d0000921d0000f21e0000ac500000ae50000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1018,7 +1018,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d80d0000b80e0000d40e0000a4100000f2120000de150000a2160000b2170000501b00003c1c0000161d00009050000092500000
+    m_ExpandedIDs: 00000000dc0d0000bc0e0000d80e0000a8100000f8120000e4150000a8160000b8170000561b0000b61b0000441c00001e1d0000f21e0000ac500000ae500000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1043,8 +1043,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 6eb6fcff
+    m_LastClickedInstanceID: -215442
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000034290000ba2a00001ae7fffff83300002e320000ae7d000086e900008ee9000096e90000860e00003e0e0000aa0f0000ee3b0000284200001e100000808c0000d0150000860b0000920f0000a04b0000e83b00002a0f00004a0e0000b2260100ac11000020170000f20f0000c8130000040600006e170000fe1100000000000036100000a6160000361100008a110000ac670000
     m_RenameOverlay:
@@ -1062,7 +1062,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 8}
+      m_ClientGUIView: {fileID: 7}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -1137,23 +1137,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 42fbffff
-      m_LastClickedID: -1214
-      m_ExpandedIDs: 58e9ffffe4faffff0efbffffd6fbffff
+      m_SelectedIDs: 08a0fcff
+      m_LastClickedID: -221176
+      m_ExpandedIDs: 0ca0fcff6eb6fcff50d3fcff64d3fcffdafefcff1886fdff56d0fdff6ad0fdff46d2fdff54d2fdff06dafdffbce1fdff1ce8fdff2ee8fdff900dfeffcc93feffe893feff0094feff1e94feff3094feff3294feff3ed7feff3aecfeff4eecfeff004affffd6fbffffda7101001e7201000c1b0200501d0200361f0200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Pistol Enemy
-        m_OriginalName: Pistol Enemy
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -1152
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 3}
       m_SearchString: 
@@ -1194,9 +1194,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: 6.358978, y: 0.75022185, z: -0.047043994}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 6.358978, y: 0.75022185, z: -0.047043994}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1228,9 +1228,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: -1}
   m_Size:
-    m_Target: 22
+    m_Target: 7.825098
     speed: 2
-    m_Value: 22
+    m_Value: 7.825098
   m_Ortho:
     m_Target: 1
     speed: 2

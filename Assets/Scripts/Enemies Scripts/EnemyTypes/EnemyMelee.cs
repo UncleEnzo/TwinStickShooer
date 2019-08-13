@@ -36,11 +36,11 @@ public class EnemyMelee : Enemy
         base.OnDisable();
         aiPath.canMove = true;
         aiPath.maxSpeed = defaultSpeed;
-        transform.localScale.Set(defaultScale.x, defaultScale.y, 0);
+        transform.localScale = new Vector2(defaultScale.x, defaultScale.y);
         rb.mass = defaultMass;
     }
 
-    public override void hit(float Damage, float knockBackForce, Vector2 knockBackTrajectory)
+    public override void hit(float Damage, float knockBackForce, Vector2 knockBackTrajectory, bool showDamageText = true)
     {
         if (aiPath.maxSpeed < 10)
         {
@@ -60,7 +60,7 @@ public class EnemyMelee : Enemy
                 rb.mass -= reduceMassBy;
             }
         }
-        base.hit(Damage, knockBackForce, knockBackTrajectory);
+        base.hit(Damage, knockBackForce, knockBackTrajectory, showDamageText);
     }
 
     // Update is called once per frame

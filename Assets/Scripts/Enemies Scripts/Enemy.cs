@@ -12,6 +12,7 @@ public enum EnemyStates
     FollowPlayer,
     MoveShoot,
     StopShoot,
+
     Die
 }
 public class Enemy : MonoBehaviour
@@ -22,7 +23,8 @@ public class Enemy : MonoBehaviour
     public Vector2 enemyTrajectory;
     public float startingHealth = 3f;
     public float health;
-    public float waitBeforeFire = 1f;
+    protected bool preparingToFire = false;
+    public float waitBeforeFire = 2f;
     public float stopAndFireRange = 7f;
     public float walkAndFireRange = 9f;
     public float collideDamageToPlayer = 2f;
@@ -35,6 +37,8 @@ public class Enemy : MonoBehaviour
 
     //take damage variables
     public Signal enemyKilled;
+    protected EnemyGun enemyGun;
+    public bool destroyBulletsOnDeath = true;
     public GameObject greenCraftComponent;
     public GameObject purpleCraftComponent;
     public GameObject blackCraftComponent;
@@ -49,6 +53,7 @@ public class Enemy : MonoBehaviour
     public StateMachine<Enemy> stateMachine { get; set; }
     public EnemyStates enemyStates;
     public float distFromPlayer;
+    public float enemyCorpseTimer = 10f;
     protected void Start()
     {
         StartOrEnableEnemy();
@@ -66,6 +71,7 @@ public class Enemy : MonoBehaviour
     {
         floatingText = new List<FloatingText>();
         rb = GetComponent<Rigidbody2D>();
+        enemyGun = GetComponentInChildren<EnemyGun>();
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
         AIDestinationSetter.target = Player.Instance.gameObject.transform;
         health = startingHealth;
@@ -96,10 +102,14 @@ public class Enemy : MonoBehaviour
             collisionInfo.gameObject.GetComponent<Player>().hit(collideDamageToPlayer);
         }
     }
-    public virtual void hit(float Damage, float knockBackForce, Vector2 knockBackTrajectory)
+    public virtual void hit(float Damage, float knockBackForce,
+        Vector2 knockBackTrajectory, bool showDamageText = true)
     {
-        FloatingText floatingDamageText = FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
-        floatingText.Add(floatingDamageText);
+        if (showDamageText)
+        {
+            FloatingText floatingDamageText = FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
+            floatingText.Add(floatingDamageText);
+        }
         health -= Damage;
         enemyTrajectory = Vector2.zero;
         if (gameObject.activeInHierarchy == true)
@@ -112,7 +122,8 @@ public class Enemy : MonoBehaviour
         }
         if (health <= 0f)
         {
-            //Play some animation, particles, and sounds
+            //Stops enemy logic in this script
+            enemyStates = EnemyStates.Die;
             dropCraftComponents();
             dropKey();
             if (isSpawned)
@@ -124,7 +135,45 @@ public class Enemy : MonoBehaviour
             {
                 GetComponent<Gun>().currentAmmo = GetComponent<Weapon>().GunProperties.maxAmmo;
             }
-            gameObject.SetActive(false);
+            StopAllCoroutines();
+            StartCoroutine(enemyDeath());
+        }
+    }
+
+    IEnumerator enemyDeath()
+    {
+        //Play Death Animation >> Put a substitute 
+        //Play Death sound effect
+        if (destroyBulletsOnDeath)
+        {
+            if (enemyGun != null)
+            {
+                enemyGun.shotControllerShowCase.activeShotCtrl.StopShotRoutineAndPlayingShot();
+            }
+            else
+            {
+                UbhShotCtrl[] shotControllers = GetComponentsInChildren<UbhShotCtrl>();
+                foreach (UbhShotCtrl ubhShotCtrl in shotControllers)
+                {
+                    ubhShotCtrl.StopShotRoutineAndPlayingShot();
+                }
+            }
+        }
+        Collider2D collider = GetComponent<Collider2D>();
+        SwitchVitals(collider);
+        yield return new WaitForSeconds(enemyCorpseTimer);
+        SwitchVitals(collider);
+        gameObject.SetActive(false);
+    }
+
+    private void SwitchVitals(Collider2D collider)
+    {
+        aiPath.enabled = !aiPath.enabled;
+        collider.enabled = !collider.enabled;
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            GameObject child = gameObject.transform.GetChild(i).gameObject;
+            child.SetActive(!child.activeInHierarchy);
         }
     }
 

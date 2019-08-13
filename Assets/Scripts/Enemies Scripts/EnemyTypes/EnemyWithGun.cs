@@ -30,7 +30,10 @@ public class EnemyWithGun : Enemy
                         enemyStates = EnemyStates.StopShoot;
                     }
                     //functionality of case > Inheritly the functionality is moving and nothing else
-                    aiPath.canMove = true;
+                    if (!preparingToFire)
+                    {
+                        aiPath.canMove = true;
+                    }
                     break;
                 case EnemyStates.MoveShoot:
                     //Case Switching
@@ -43,33 +46,44 @@ public class EnemyWithGun : Enemy
                         enemyStates = EnemyStates.StopShoot;
                     }
                     //functionality of case
-                    GetComponentInChildren<EnemyGun>().EnemyFireGun();
+                    enemyGun.EnemyFireGun();
                     break;
                 case EnemyStates.StopShoot:
                     // StartCoroutine(takeAimThenFire());
                     if (distFromPlayer > stopAndFireRange && distFromPlayer < walkAndFireRange)
                     {
-                        aiPath.canMove = true;
+                        if (!preparingToFire)
+                        {
+                            aiPath.canMove = true;
+                        }
                         enemyStates = EnemyStates.MoveShoot;
                     }
                     if (distFromPlayer > walkAndFireRange)
                     {
-                        aiPath.canMove = true;
+                        if (!preparingToFire)
+                        {
+                            aiPath.canMove = true;
+                        }
                         enemyStates = EnemyStates.FollowPlayer;
                     }
                     //functionality of case
-                    aiPath.canMove = false;
-                    GetComponentInChildren<EnemyGun>().EnemyFireGun();
+                    if (!preparingToFire)
+                    {
+                        aiPath.canMove = false;
+                        StartCoroutine(takeAimThenFire());
+                    }
+                    break;
+                case EnemyStates.Die:
                     break;
             }
         }
         base.FixedUpdate();
     }
-    // IEnumerator takeAimThenFire()
-    // {
-    //     knockedBack = true;
-    //     yield return new WaitForSeconds(waitBeforeFire);
-    //     GetComponentInChildren<EnemyGun>().EnemyFireGun();
-    //     knockedBack = false;
-    // }
+    IEnumerator takeAimThenFire()
+    {
+        preparingToFire = true;
+        yield return new WaitForSeconds(waitBeforeFire);
+        enemyGun.EnemyFireGun();
+        preparingToFire = false;
+    }
 }

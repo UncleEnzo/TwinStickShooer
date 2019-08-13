@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public Rigidbody2D myRigidBody;
     public PlayerAnimController animator;
     public bool canMove = true;
+    private float damagedKnockBackForce = 13f;
+    private float damagedKnockBackRadius = 5f;
     private float coolDownOnMovementTimer = 1f;
     private float movementCoolDownReset = 1f;
     public bool playerUsable = true;
@@ -104,13 +106,17 @@ public class Player : MonoBehaviour
         if (!iFramesActive)
         {
             health -= Damage;
-            print(Damage);
         }
         PlayerHUBController.Instance.updateDisplayHubHealth(health);
         if (!iFramesActive)
         {
+            //knocks back surrounding enemies
+            knockBackEnemies();
+
+            //applies knockback to self
             if (knockbackForce != 0)
             {
+                StartCoroutine(FlashCo());
                 StartCoroutine(KnockCo(1f, knockbackForce, knockBackTrajectory));
             }
             if (knockbackForce == 0)
@@ -123,6 +129,38 @@ public class Player : MonoBehaviour
             die();
         }
     }
+
+    private void knockBackEnemies()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, damagedKnockBackRadius);
+        foreach (Collider2D nearbyObject in colliders)
+        {
+            //Destroys enemy bullets caught in the explosion
+            if (nearbyObject.GetComponent<UbhBulletSimpleSprite2d>() && nearbyObject.tag == TagsAndLabels.EnemyBulletTag)
+            {
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().disableBullet();
+            }
+
+            //Knocks Back Enemies And all other potential objects
+            if (nearbyObject.tag != TagsAndLabels.PlayerBulletTag && nearbyObject.tag != TagsAndLabels.PlayerTag
+                && !nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())
+            {
+                Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
+                Vector2 difference = rb.transform.position - transform.position;
+                difference = difference * damagedKnockBackForce;
+                if (rb.GetComponent<Enemy>())
+                {
+                    rb.GetComponent<Enemy>().hit(0, damagedKnockBackForce, difference, false);
+                }
+                else
+                {
+                    rb.AddForce(difference, ForceMode2D.Impulse);
+                }
+            }
+        }
+    }
+
+
     private void die()
     {
         SceneLoader.loadGameOverScene();
@@ -135,7 +173,6 @@ public class Player : MonoBehaviour
             Vector2 difference = trajectory;
             difference = difference.normalized * knockBack;
             rb.AddForce(difference, ForceMode2D.Impulse);
-            StartCoroutine(FlashCo());
             yield return new WaitForSeconds(knockTime);
             myRigidBody.velocity = Vector2.zero;
         }
