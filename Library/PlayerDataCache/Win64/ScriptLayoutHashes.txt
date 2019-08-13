@@ -197,7 +197,7 @@ e59b4ddbf539212f3d2f911f95cc1bb3 AstarPathfindingProject.dll:Pathfinding.Example
 d60c5d807fe386e8cc9c6f9ca7ba2fc1 Assembly-CSharp.dll:.UbhNwayShot
 0cceca996e1eb1401d74a841f34c4f83 AstarPathfindingProject.dll:Pathfinding.SimpleSmoothModifier
 0e8912470022d5fe8eb75aec52033f5b Assembly-CSharp.dll:.UbhEnemy
-efc6aaedb9be8b55c86261dde1d3ff6f Assembly-CSharp.dll:.EnemyRadialFire
+c436ca53b5a4076a0f32010155691ced Assembly-CSharp.dll:.EnemyRadialFire
 a4323774f1c9282d33fe57ec29ed9b01 Assembly-CSharp.dll:.UbhSpiralShot
 067da0bef6aeebd092e057e5e0e7d1be Assembly-CSharp.dll:.CraftComponent
 43acdecfcc62de1110964c47067c846f AstarPathfindingProject.dll:Pathfinding.AlternativePath
@@ -260,7 +260,7 @@ efc1af65c18d1cb56c472bfc44ed8cdc Assembly-CSharp.dll:.UbhOverTakeNwayLockOnShot
 58e68364412c67eae2bdb4954be2dcc2 Assembly-CSharp.dll:.Readme
 621ad124a52efdb2c7e0d62fd7dc7e63 Assembly-CSharp.dll:.UbhTentacleBullet
 8abe5c5970b933d28c84fe29c2232578 AstarPathfindingProject.dll:Pathfinding.RelevantGraphSurface
-800efd848e6d07c004d834e0bf2b79f2 Assembly-CSharp.dll:.Enemy
+475e862cc5d5c2b32264bc5ad05ac34f Assembly-CSharp.dll:.Enemy
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 a303283a7868d139c90ea4fa274e4f4b Assembly-CSharp.dll:.PowerUpUIDrawer
 95ec5ef41811e64837c657c402b6d78f AstarPathfindingProject.dll:Pathfinding.Seeker
@@ -301,10 +301,11 @@ bb0e3a3cd5a2787a80e116ea25eec39e Assembly-CSharp.dll:.UbhSpiralNwayShot
 b7a4d26c1f061dfb735d1ff7f468cb1a Assembly-CSharp.dll:.UbhSetting
 c6666661329916e218bee7f5e79e60f5 Unity.TextMeshPro.dll:TMPro.TextMeshPro
 3165968ba45c74472d279ba04455fccb Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
-961b018c6672dca6ad30e1d7942fe4e4 Assembly-CSharp.dll:.EnemyMelee
+801715579e9bc9f6e3942928fac67d48 Assembly-CSharp.dll:.EnemyMelee
 9c1e8f5e87971cf0efb75073f8204e39 Assembly-CSharp.dll:.PauseMenu
 c0e31dd31c35455f422978da26bb908a AstarPathfindingProject.dll:Pathfinding.Patrol
 e32ae1baa0287febe8d88610a8dddb3c Assembly-CSharp.dll:.UbhEmitter
+6a154fa6731c9021cc8413c61d3c1583 Assembly-CSharp.dll:.EnemyWaitAfterShot
 435e757263a037573919645ac8ff4319 Assembly-CSharp.dll:.ThrowExplosive
 4636f9224187c97272f06290d1f3838b Assembly-CSharp.dll:.UbhDebugInfo
 8649814970b42d345b89944b862453cc Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
@@ -317,4 +318,4 @@ f992a1316265ae0be6309a363585b781 Assembly-CSharp.dll:.CursorController
 27ddcaafb9c9cc04125dff0fb585ef78 Assembly-CSharp.dll:.UbhWavingNwayLockOnShot
 190d3bf2e660ceae9a7a9be330973d97 Assembly-CSharp.dll:.UbhBulletManager
 e9bda5582b47ddf056cf5127238c0a71 Assembly-CSharp.dll:.UbhPaintLockOnShot
-800efd848e6d07c004d834e0bf2b79f2 Assembly-CSharp.dll:.EnemyWithGun
+475e862cc5d5c2b32264bc5ad05ac34f Assembly-CSharp.dll:.EnemyWithGun

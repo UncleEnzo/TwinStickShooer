@@ -64,3 +64,6 @@ TagManager:
   - name: NPC
     uniqueID: 3233255235
     locked: 0
+  - name: DeadEnemyMarker
+    uniqueID: 2662094295
+    locked: 0

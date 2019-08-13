@@ -12,7 +12,6 @@ public enum EnemyStates
     FollowPlayer,
     MoveShoot,
     StopShoot,
-
     Die
 }
 public class Enemy : MonoBehaviour
@@ -54,6 +53,8 @@ public class Enemy : MonoBehaviour
     public EnemyStates enemyStates;
     public float distFromPlayer;
     public float enemyCorpseTimer = 10f;
+    public GameObject deadEnemyMarker;
+
     protected void Start()
     {
         StartOrEnableEnemy();
@@ -69,6 +70,7 @@ public class Enemy : MonoBehaviour
 
     private void StartOrEnableEnemy()
     {
+        deadEnemyMarker.SetActive(false);
         floatingText = new List<FloatingText>();
         rb = GetComponent<Rigidbody2D>();
         enemyGun = GetComponentInChildren<EnemyGun>();
@@ -136,13 +138,15 @@ public class Enemy : MonoBehaviour
                 GetComponent<Gun>().currentAmmo = GetComponent<Weapon>().GunProperties.maxAmmo;
             }
             StopAllCoroutines();
+            //Play Death Animation >> Need to switch death marker to animation up here 
+            deadEnemyMarker.SetActive(true);
             StartCoroutine(enemyDeath());
         }
     }
 
     IEnumerator enemyDeath()
     {
-        //Play Death Animation >> Put a substitute 
+
         //Play Death sound effect
         if (destroyBulletsOnDeath)
         {
@@ -161,8 +165,10 @@ public class Enemy : MonoBehaviour
         }
         Collider2D collider = GetComponent<Collider2D>();
         SwitchVitals(collider);
+        deadEnemyMarker.SetActive(true);
         yield return new WaitForSeconds(enemyCorpseTimer);
         SwitchVitals(collider);
+        deadEnemyMarker.SetActive(false);
         gameObject.SetActive(false);
     }
 
