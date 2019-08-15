@@ -105,6 +105,10 @@ public class EnemySpawner : MonoBehaviour
                         newEnemy.GetComponent<Enemy>().isSpawned = true;
                         newEnemy.SetActive(true);
                     }
+                    else
+                    {
+                        Debug.Log("Enemy you are trying to instantiate is not in the object pool.");
+                    }
                 }
                 else
                 {

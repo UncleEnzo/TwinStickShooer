@@ -62,11 +62,4 @@ public class EnemyMelee : Enemy
         }
         base.hit(Damage, knockBackForce, knockBackTrajectory, showDamageText);
     }
-
-    // Update is called once per frame
-    protected new void Update()
-    {
-        base.Update();
-        knockBackAction();
-    }
 }

@@ -6,6 +6,12 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum PlayerStates
+{
+    MovingShooting,
+    KnockedBack,
+    Die
+}
 public class Player : MonoBehaviour
 {
     #region Singleton
@@ -20,14 +26,14 @@ public class Player : MonoBehaviour
         Instance = this;
     }
     #endregion
+    private PlayerStates playerState;
     public float speed = 10f;
-    public Rigidbody2D myRigidBody;
+    public Rigidbody2D rb;
     public PlayerAnimController animator;
     public bool canMove = true;
     private float damagedKnockBackForce = 13f;
     private float damagedKnockBackRadius = 5f;
-    private float coolDownOnMovementTimer = 1f;
-    private float movementCoolDownReset = 1f;
+    private float knockedBackTimer = .2f;
     public bool playerUsable = true;
     public float health = 8f;
 
@@ -35,15 +41,22 @@ public class Player : MonoBehaviour
     #region IFrames
     public BoxCollider2D triggerCollider;
     public GameObject movementAnimation;
-    public SpriteRenderer mySprite;
     public Color flashColor;
     public Color regularColor;
     public float flashDuration;
     public int numberOfFlashes;
-    public bool iFramesActive = false;
+    private bool iFramesActive = false;
     #endregion
+    [Header("Sound Effects")]
+    [SerializeField]
+    private AudioClip hitSound;
+    private AudioSource playerSounds;
+
+
     public void Start()
     {
+        playerSounds = GetComponent<AudioSource>();
+        playerState = PlayerStates.MovingShooting;
         if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
         {
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
@@ -57,17 +70,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //CoolDown for Movement after being knocked back
-        if (!canMove)
-        {
-            coolDownOnMovementTimer -= Time.deltaTime;
-            if (coolDownOnMovementTimer <= 0)
-            {
-                canMove = true;
-                coolDownOnMovementTimer = movementCoolDownReset;
-            }
-        }
-        if (canMove)
+        if (playerState == PlayerStates.MovingShooting)
         {
             Move();
         }
@@ -77,7 +80,7 @@ public class Player : MonoBehaviour
     {
         Vector3 tempVect = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 1);
         tempVect = tempVect.normalized * speed * Time.deltaTime;
-        myRigidBody.MovePosition(transform.position + tempVect);
+        rb.MovePosition(transform.position + tempVect);
     }
     public void enablePlayer(Boolean playerUsable)
     {
@@ -117,10 +120,11 @@ public class Player : MonoBehaviour
             if (knockbackForce != 0)
             {
                 StartCoroutine(FlashCo());
-                StartCoroutine(KnockCo(1f, knockbackForce, knockBackTrajectory));
+                StartCoroutine(knockedBackCo(knockbackForce, knockBackTrajectory));
             }
             if (knockbackForce == 0)
             {
+                playerSounds.PlayOneShot(hitSound);
                 StartCoroutine(FlashCo());
             }
         }
@@ -159,22 +163,22 @@ public class Player : MonoBehaviour
             }
         }
     }
-
-
     private void die()
     {
         SceneLoader.loadGameOverScene();
     }
-    private IEnumerator KnockCo(float knockTime, float knockBack, Vector2 trajectory)
+    private IEnumerator knockedBackCo(float knockBackForce, Vector2 knockBackTrajectory)
     {
-        if (myRigidBody != null)
+        if (rb != null)
         {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            Vector2 difference = trajectory;
-            difference = difference.normalized * knockBack;
+            playerState = PlayerStates.KnockedBack;
+            canMove = false;
+            Vector2 difference = knockBackTrajectory.normalized * knockBackForce;
             rb.AddForce(difference, ForceMode2D.Impulse);
-            yield return new WaitForSeconds(knockTime);
-            myRigidBody.velocity = Vector2.zero;
+            yield return new WaitForSeconds(knockedBackTimer);
+            rb.velocity = Vector2.zero;
+            canMove = true;
+            playerState = PlayerStates.MovingShooting;
         }
     }
     private IEnumerator FlashCo()
@@ -182,18 +186,21 @@ public class Player : MonoBehaviour
         iFramesActive = true;
         int temp = 0;
         triggerCollider.enabled = false;
-        movementAnimation.SetActive(false);
-        mySprite.enabled = true;
+        SpriteRenderer[] animationColors = GetComponentsInChildren<SpriteRenderer>();
         while (temp < numberOfFlashes)
         {
-            mySprite.color = flashColor;
+            foreach (SpriteRenderer animationColor in animationColors)
+            {
+                animationColor.color = flashColor;
+            }
             yield return new WaitForSeconds(flashDuration);
-            mySprite.color = regularColor;
+            foreach (SpriteRenderer animationColor in animationColors)
+            {
+                animationColor.color = regularColor;
+            }
             yield return new WaitForSeconds(flashDuration);
             temp++;
         }
-        mySprite.enabled = false;
-        movementAnimation.SetActive(true);
         triggerCollider.enabled = true;
         iFramesActive = false;
     }

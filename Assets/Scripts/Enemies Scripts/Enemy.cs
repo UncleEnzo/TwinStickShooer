@@ -12,13 +12,14 @@ public enum EnemyStates
     FollowPlayer,
     MoveShoot,
     StopShoot,
+    KnockedBack,
     Die
 }
 public class Enemy : MonoBehaviour
 {
     [Header("Note: Move speed is set in AiPath. It's called Max Speed")]
     public bool isSpawned = false;
-    public float knockBack = 5f;
+    public float knockBackTimer = .2f;
     public Vector2 enemyTrajectory;
     public float startingHealth = 3f;
     public float health;
@@ -28,9 +29,21 @@ public class Enemy : MonoBehaviour
     public float walkAndFireRange = 9f;
     public float collideDamageToPlayer = 2f;
     public bool knockedBack = false;
+    public AIPath aiPath;
+    [Header("Sound Effects")]
+    public AudioClip enemyHitSound;
+    public AudioClip enemyDeathSound;
+    private AudioSource enemySounds;
+    [Header("IFrames")]
+    #region IFrames
+    private SpriteRenderer sprite;
+    private Color flashColor = new Color(255, 255, 255, 65);
+    private Color regularColor;
+    private float flashDuration = 0.07f;
+    private int numberOfFlashes = 1;
+    #endregion IFrames
     [System.NonSerialized]
     public Rigidbody2D rb;
-    public AIPath aiPath;
     [System.NonSerialized]
     public AIDestinationSetter AIDestinationSetter;
 
@@ -50,7 +63,7 @@ public class Enemy : MonoBehaviour
     public float movementCoolDownReset = .5f;
     public List<FloatingText> floatingText;
     public StateMachine<Enemy> stateMachine { get; set; }
-    public EnemyStates enemyStates;
+    public EnemyStates enemyState;
     public float distFromPlayer;
     public float enemyCorpseTimer = 10f;
     public GameObject deadEnemyMarker;
@@ -70,6 +83,9 @@ public class Enemy : MonoBehaviour
 
     private void StartOrEnableEnemy()
     {
+        sprite = GetComponent<SpriteRenderer>();
+        regularColor = sprite.color;
+        enemySounds = GetComponent<AudioSource>();
         deadEnemyMarker.SetActive(false);
         floatingText = new List<FloatingText>();
         rb = GetComponent<Rigidbody2D>();
@@ -77,7 +93,7 @@ public class Enemy : MonoBehaviour
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
         AIDestinationSetter.target = Player.Instance.gameObject.transform;
         health = startingHealth;
-        enemyStates = EnemyStates.FollowPlayer;
+        enemyState = EnemyStates.FollowPlayer;
     }
 
     protected void OnDisable()
@@ -112,20 +128,12 @@ public class Enemy : MonoBehaviour
             FloatingText floatingDamageText = FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
             floatingText.Add(floatingDamageText);
         }
+        enemySounds.PlayOneShot(enemyHitSound);
         health -= Damage;
-        enemyTrajectory = Vector2.zero;
-        if (gameObject.activeInHierarchy == true)
-        {
-            aiPath.canMove = false;
-            knockedBack = true;
-            Vector2 difference = knockBackTrajectory;
-            difference = difference.normalized * knockBackForce;
-            rb.AddForce(difference, ForceMode2D.Impulse);
-        }
         if (health <= 0f)
         {
             //Stops enemy logic in this script
-            enemyStates = EnemyStates.Die;
+            enemyState = EnemyStates.Die;
             dropCraftComponents();
             dropKey();
             if (isSpawned)
@@ -135,18 +143,50 @@ public class Enemy : MonoBehaviour
             }
             if (GetComponent<Gun>())
             {
-                GetComponent<Gun>().currentAmmo = GetComponent<Weapon>().GunProperties.maxAmmo;
+                GetComponent<Gun>().setCurrentAmmo(GetComponent<Weapon>().GunProperties.maxAmmo);
             }
             StopAllCoroutines();
             //Play Death Animation >> Need to switch death marker to animation up here 
             deadEnemyMarker.SetActive(true);
             StartCoroutine(enemyDeath());
         }
+        else
+        {
+            if (Damage > 0)
+            {
+                StartCoroutine(FlashCo());
+            }
+            StartCoroutine(knockedBackCo(knockBackForce, knockBackTrajectory));
+        }
+    }
+
+    private IEnumerator FlashCo()
+    {
+        //NOTE: When you get animations for enemies, mimic the method in player
+        int temp = 0;
+        while (temp < numberOfFlashes)
+        {
+            sprite.color = flashColor;
+            yield return new WaitForSeconds(flashDuration);
+            sprite.color = regularColor;
+            yield return new WaitForSeconds(flashDuration);
+            temp++;
+        }
+    }
+
+    private void SwitchVitals(Collider2D collider)
+    {
+        aiPath.enabled = !aiPath.enabled;
+        collider.enabled = !collider.enabled;
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            GameObject child = gameObject.transform.GetChild(i).gameObject;
+            child.SetActive(!child.activeInHierarchy);
+        }
     }
 
     IEnumerator enemyDeath()
     {
-
         //Play Death sound effect
         if (destroyBulletsOnDeath)
         {
@@ -172,31 +212,16 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void SwitchVitals(Collider2D collider)
+    IEnumerator knockedBackCo(float knockBackForce, Vector2 knockBackTrajectory)
     {
-        aiPath.enabled = !aiPath.enabled;
-        collider.enabled = !collider.enabled;
-        for (int i = 0; i < gameObject.transform.childCount; i++)
-        {
-            GameObject child = gameObject.transform.GetChild(i).gameObject;
-            child.SetActive(!child.activeInHierarchy);
-        }
-    }
-
-    protected void knockBackAction()
-    {
-        //CoolDown for Movement after being knocked back
-        if (knockedBack)
-        {
-            coolDownOnMovementTimer -= Time.deltaTime;
-            if (coolDownOnMovementTimer <= 0)
-            {
-                knockedBack = false;
-                aiPath.canMove = true;
-                rb.velocity = Vector2.zero;
-                coolDownOnMovementTimer = movementCoolDownReset;
-            }
-        }
+        enemyState = EnemyStates.KnockedBack;
+        aiPath.canMove = false;
+        Vector2 difference = knockBackTrajectory.normalized * knockBackForce;
+        rb.AddForce(difference, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(knockBackTimer);
+        rb.velocity = Vector2.zero;
+        aiPath.canMove = true;
+        enemyState = EnemyStates.FollowPlayer;
     }
     private void TrackFloatingTextPos()
     {

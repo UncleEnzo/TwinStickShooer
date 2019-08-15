@@ -5,7 +5,6 @@ using UnityEngine;
 public class Parry : MonoBehaviour
 {
     BoxCollider2D boxCollider;
-    private GameObject weaponHolder;
     float reflectBulletSpeed = 14f;
     private float coolDownOnParry = 3f;
     private float defaultCoolDownOnParry = 3f;
@@ -18,7 +17,6 @@ public class Parry : MonoBehaviour
     private float defaultcolliderSizeX = 1f;
     private float defaultcolliderSizeY = 2.5f;
     private bool colliderCacheCleared = false;
-    public GameObject bullet;
     private List<Collider2D> bulletsInCollider = new List<Collider2D>();
 
     void OnEnable()

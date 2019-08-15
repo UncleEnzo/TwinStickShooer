@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 363480459
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 950735bca4a4ec4469d8c9ed0b33d09a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -121,6 +121,7 @@ MonoBehaviour:
     bulletsPerSecond: 2
     maxAmmo: 10
     reloadTime: 2
+    bulletTag: 1
     bulletDamage: 1
     bulletSpeed: 20
     timeBulletSelfDestruct: 10
@@ -135,8 +136,10 @@ MonoBehaviour:
     explosionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
       type: 3}
   armLength: 0.5
+  currentAmmo: 0
   gunShotSound: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
   gunReloadSound: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
+  shotControllerShowCase: {fileID: 0}
   Cost: 35
   DamageDescription: Damage
   EffectDescription: Shoots

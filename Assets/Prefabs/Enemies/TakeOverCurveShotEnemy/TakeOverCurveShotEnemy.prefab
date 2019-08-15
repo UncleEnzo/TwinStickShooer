@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 6778655791128460761}
   - component: {fileID: 6778655791128460762}
   - component: {fileID: 6778655791128460758}
+  - component: {fileID: 3104117556431240736}
   m_Layer: 11
   m_Name: TakeOverCurveShotEnemy
   m_TagString: Enemy
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSpawned: 0
-  knockBack: 5
+  knockBackTimer: 0.2
   enemyTrajectory: {x: 0, y: 0}
   startingHealth: 3
   health: 3
@@ -236,6 +237,8 @@ MonoBehaviour:
   collideDamageToPlayer: 2
   knockedBack: 0
   aiPath: {fileID: 6778655791128460761}
+  enemyHitSound: {fileID: 8300000, guid: 2dc35d77cfe164a2eab57d08500740e2, type: 3}
+  enemyDeathSound: {fileID: 0}
   enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   destroyBulletsOnDeath: 1
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
@@ -252,7 +255,7 @@ MonoBehaviour:
   coolDownOnMovementTimer: 0.5
   movementCoolDownReset: 0.5
   floatingText: []
-  enemyStates: 0
+  enemyState: 0
   distFromPlayer: 0
   enemyCorpseTimer: 10
   deadEnemyMarker: {fileID: 253209315306425477}
@@ -334,6 +337,102 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+--- !u!82 &3104117556431240736
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510408964250017029}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &841889690299928686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -399,6 +498,11 @@ PrefabInstance:
     - target: {fileID: 7078561712508823929, guid: b0bc15b89fa7fe64c95fc574827498a0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 618926816692466898, guid: b0bc15b89fa7fe64c95fc574827498a0,
+        type: 3}
+      propertyPath: m_usePauseAndResume
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

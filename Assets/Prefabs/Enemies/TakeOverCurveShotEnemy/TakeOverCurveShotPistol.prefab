@@ -105,7 +105,7 @@ MonoBehaviour:
     reloadTime: 2
     bulletTag: 0
     bulletDamage: 1
-    bulletSpeed: 1
+    bulletSpeed: 0.2
     timeBulletSelfDestruct: 3
     knockBack: 5
     bulletAccuracy: 0

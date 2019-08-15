@@ -375,14 +375,14 @@ public class UbhBullet : UbhMonoBehaviour
                 // Update tentacles
                 m_tentacleBullet.UpdateRotate();
             }
-            m_bulletTrajectory = newPosition / m_speed;
+            m_bulletTrajectory = (m_transformCache.up * (m_speed * deltaTime));
         }
         //rb velocity setting movement
         else
         {
             if (!isRbTrajConfigured)
             {
-                m_rigidBody2D.velocity = m_bulletTrajectory;
+                m_rigidBody2D.velocity = m_bulletTrajectory.normalized * m_speed;
                 isRbTrajConfigured = true;
             }
         }

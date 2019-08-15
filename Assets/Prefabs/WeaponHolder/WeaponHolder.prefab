@@ -32,7 +32,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
-  - {fileID: 4638683277587302390}
+  - {fileID: 6400285440431186095}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -192,9 +192,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4940130093002732294, guid: a2655f28b64c3014583ab2cedf6543f3,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 363480459
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940130093002732294, guid: a2655f28b64c3014583ab2cedf6543f3,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3186281789060277356, guid: a2655f28b64c3014583ab2cedf6543f3,
+        type: 3}
+      propertyPath: m_betweenAngle
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2655f28b64c3014583ab2cedf6543f3, type: 3}
---- !u!4 &4638683277587302390 stripped
+--- !u!4 &6400285440431186095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1769220241367476178, guid: a2655f28b64c3014583ab2cedf6543f3,
     type: 3}

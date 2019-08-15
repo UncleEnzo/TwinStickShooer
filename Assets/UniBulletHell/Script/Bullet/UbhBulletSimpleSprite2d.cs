@@ -52,10 +52,10 @@ public class UbhBulletSimpleSprite2d : UbhBullet
         {
             if (!m_isExplosive)
             {
-                Rigidbody2D rb = collisionInfo.gameObject.GetComponent<Rigidbody2D>();
-                Vector2 difference = rb.transform.position - transform.position;
-                difference = difference * m_knockBack;
-                collisionInfo.gameObject.GetComponent<Enemy>().hit(m_damage, m_knockBack, difference);
+                Rigidbody2D rb = collisionInfo.gameObject.GetComponent<Rigidbody2D>(); //This IS THE ENEMY'S TRANSFORM
+                // Vector2 difference = rb.transform.position - transform.position;
+                // difference = difference * m_knockBack;
+                collisionInfo.gameObject.GetComponent<Enemy>().hit(m_damage, m_knockBack, m_bulletTrajectory);
             }
         }
         if (this.gameObject.tag == TagsAndLabels.EnemyBulletTag && collisionInfo.gameObject.tag == TagsAndLabels.PlayerTag)

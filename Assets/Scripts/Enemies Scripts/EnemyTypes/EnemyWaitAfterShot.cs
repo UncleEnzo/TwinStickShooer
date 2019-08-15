@@ -14,16 +14,19 @@ public class EnemyWaitAfterShot : Enemy
     // Update is called once per frame
     protected new void FixedUpdate()
     {
+        base.FixedUpdate();
         distFromPlayer = Vector3.Distance(Player.Instance.transform.position, transform.position);
         if (readyToMove)
         {
-            switch (enemyStates)
+            switch (enemyState)
             {
+                case EnemyStates.Die:
+                    break;
                 case EnemyStates.FollowPlayer:
                     //Case Switching
                     if (distFromPlayer < stopAndFireRange)
                     {
-                        enemyStates = EnemyStates.StopShoot;
+                        enemyState = EnemyStates.StopShoot;
                     }
                     //functionality of case > Inheritly the functionality is moving and nothing else
                     aiPath.canMove = true;
@@ -32,7 +35,7 @@ public class EnemyWaitAfterShot : Enemy
                     if (distFromPlayer > stopAndFireRange)
                     {
                         aiPath.canMove = true;
-                        enemyStates = EnemyStates.FollowPlayer;
+                        enemyState = EnemyStates.FollowPlayer;
                     }
                     //functionality of case
                     aiPath.canMove = false;
@@ -58,8 +61,6 @@ public class EnemyWaitAfterShot : Enemy
                         }
                     }
                     break;
-                case EnemyStates.Die:
-                    break;
             }
         }
         else
@@ -72,6 +73,5 @@ public class EnemyWaitAfterShot : Enemy
                 waitWhileShootTimer = waitWhileShootTimerReset;
             }
         }
-        base.FixedUpdate();
     }
 }

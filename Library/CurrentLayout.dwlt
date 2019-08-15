@@ -43,10 +43,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 498}
-  m_MaxSize: {x: 14004, y: 14048}
+  m_MinSize: {x: 681, y: 348}
+  m_MaxSize: {x: 12006, y: 8048}
   vertical: 1
-  controlID: 129
+  controlID: 89
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 132
+  controlID: 92
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -149,10 +149,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 498}
-  m_MaxSize: {x: 14004, y: 14048}
+  m_MinSize: {x: 681, y: 348}
+  m_MaxSize: {x: 12006, y: 8048}
   vertical: 0
-  controlID: 130
+  controlID: 90
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,8 +172,8 @@ MonoBehaviour:
     y: 0
     width: 574
     height: 947
-  m_MinSize: {x: 277, y: 74}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -200,15 +200,15 @@ MonoBehaviour:
     y: 609
     width: 1346
     height: 338
-  m_MinSize: {x: 232, y: 274}
-  m_MaxSize: {x: 10002, y: 10024}
-  m_ActualView: {fileID: 19}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 24}
   m_Panes:
   - {fileID: 19}
   - {fileID: 17}
   - {fileID: 24}
-  m_Selected: 0
-  m_LastSelected: 2
+  m_Selected: 2
+  m_LastSelected: 0
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -297,10 +297,10 @@ MonoBehaviour:
     y: 0
     width: 1346
     height: 947
-  m_MinSize: {x: 406, y: 498}
-  m_MaxSize: {x: 10002, y: 14048}
+  m_MinSize: {x: 406, y: 348}
+  m_MaxSize: {x: 8006, y: 8048}
   vertical: 1
-  controlID: 131
+  controlID: 91
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -867,10 +867,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 3a422ff8dc271fc44a7176d395585d28,
+  m_AnimatorController: {fileID: 9100000, guid: 372e2a9aab1467641913a23e43d9d4b9,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107787088982411980, guid: 3a422ff8dc271fc44a7176d395585d28,
+  - m_Target: {fileID: 1107928785809196378, guid: 372e2a9aab1467641913a23e43d9d4b9,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -1188
+  m_LastSelectedObjectID: -4452
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -977,20 +977,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/Player Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/Player Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Alchemist Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 23}
-    m_SelectedIDs: 48130000
-    m_LastClickedID: 4936
-    m_ExpandedIDs: 00000000f40d0000d80e0000c810000008160000ce160000e0170000781c0000521d0000c61d00002c1f00004c5100004e51000000ca9a3b
+    scrollPos: {x: 0, y: 287}
+    m_SelectedIDs: 3e180000
+    m_LastClickedID: 6206
+    m_ExpandedIDs: 00000000fc0d0000e00e0000181200002213000014160000dc160000ee170000301c00008e1c0000681d0000dc1d0000421f00002e5200003052000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1018,7 +1018,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f40d0000d80e0000f40e0000c81000001a13000008160000ce160000e0170000ea1b0000781c0000521d0000c61d00002c1f00004c5100004e510000
+    m_ExpandedIDs: 00000000fc0d0000e00e0000d010000014160000dc160000ee1700008e1c0000681d0000dc1d0000421f00002e52000030520000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1043,9 +1043,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: ca72feff
+    m_LastClickedInstanceID: -101686
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000034290000ba2a00001ae7fffff83300002e320000ae7d000086e900008ee9000096e90000860e00003e0e0000aa0f0000ee3b0000284200001e100000808c0000d0150000860b0000920f0000a04b0000e83b00002a0f00004a0e0000b2260100ac11000020170000f20f0000c8130000040600006e170000fe1100000000000036100000a6160000361100008a110000ac670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1137,20 +1137,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 8e88feffa288feff9a8afeffac8afeff6292feff7092feffd298feffe898feffa0a7feffbcb4feffd0b4feffa8b6feffb6b6feff68befeff1ec6feff7eccfeff90ccfeff86cdffffd0f2ffffd2f2ffffe6faffff5cfbffffd6fbffff
+      m_SelectedIDs: 78eeffff
+      m_LastClickedID: -4488
+      m_ExpandedIDs: 18edffffcceeffff0aefffffd6fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: RadialShotEnemy
-        m_OriginalName: RadialShotEnemy
+        m_Name: Player
+        m_OriginalName: Player
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 54382
+        m_UserData: -4820
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -1194,9 +1194,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 11.08739, y: -2.0176532, z: -0.19921875}
+    m_Target: {x: 5.901339, y: -2.3883128, z: -0.19921875}
     speed: 2
-    m_Value: {x: 11.08739, y: -2.0176532, z: -0.19921875}
+    m_Value: {x: 5.901339, y: -2.3883128, z: -0.19921875}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1228,9 +1228,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: -1}
   m_Size:
-    m_Target: 23.139517
+    m_Target: 22.854095
     speed: 2
-    m_Value: 23.139517
+    m_Value: 22.854095
   m_Ortho:
     m_Target: 1
     speed: 2

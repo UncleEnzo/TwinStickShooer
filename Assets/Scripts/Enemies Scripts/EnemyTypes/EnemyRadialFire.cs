@@ -11,59 +11,56 @@ public class EnemyRadialFire : Enemy
     protected new void Update()
     {
         base.Update();
-        knockBackAction();
+        // knockBackAction();
     }
 
     // Update is called once per frame
     protected new void FixedUpdate()
     {
-        distFromPlayer = Vector3.Distance(Player.Instance.transform.position, transform.position);
-        if (!knockedBack)
-        {
-            switch (enemyStates)
-            {
-                case EnemyStates.FollowPlayer:
-                    //Case Switching
-                    if (distFromPlayer < stopAndFireRange)
-                    {
-                        enemyStates = EnemyStates.StopShoot;
-                    }
-                    //functionality of case > Inheritly the functionality is moving and nothing else
-                    aiPath.canMove = true;
-                    break;
-                case EnemyStates.StopShoot:
-                    if (distFromPlayer > stopAndFireRange)
-                    {
-                        aiPath.canMove = true;
-                        enemyStates = EnemyStates.FollowPlayer;
-                    }
-                    //functionality of case
-                    aiPath.canMove = false;
-
-                    //Shoot
-                    if (distFromPlayer < stopAndFireRange)
-                    {
-                        //CoolDown for parry
-                        if (!readyToFire)
-                        {
-                            fireTimer -= Time.deltaTime;
-                            if (fireTimer <= 0)
-                            {
-                                readyToFire = true;
-                                fireTimer = fireTimerReset;
-                            }
-                        }
-                        else
-                        {
-                            GetComponentInChildren<UbhShotCtrl>().StartShotRoutine();
-                            readyToFire = false;
-                        }
-                    }
-                    break;
-                case EnemyStates.Die:
-                    break;
-            }
-        }
         base.FixedUpdate();
+        distFromPlayer = Vector3.Distance(Player.Instance.transform.position, transform.position);
+        switch (enemyState)
+        {
+            case EnemyStates.Die:
+                break;
+            case EnemyStates.FollowPlayer:
+                //Case Switching
+                if (distFromPlayer < stopAndFireRange)
+                {
+                    enemyState = EnemyStates.StopShoot;
+                }
+                //functionality of case > Inheritly the functionality is moving and nothing else
+                aiPath.canMove = true;
+                break;
+            case EnemyStates.StopShoot:
+                if (distFromPlayer > stopAndFireRange)
+                {
+                    aiPath.canMove = true;
+                    enemyState = EnemyStates.FollowPlayer;
+                }
+                //functionality of case
+                aiPath.canMove = false;
+
+                //Shoot
+                if (distFromPlayer < stopAndFireRange)
+                {
+                    //CoolDown for parry
+                    if (!readyToFire)
+                    {
+                        fireTimer -= Time.deltaTime;
+                        if (fireTimer <= 0)
+                        {
+                            readyToFire = true;
+                            fireTimer = fireTimerReset;
+                        }
+                    }
+                    else
+                    {
+                        GetComponentInChildren<UbhShotCtrl>().StartShotRoutine();
+                        readyToFire = false;
+                    }
+                }
+                break;
+        }
     }
 }

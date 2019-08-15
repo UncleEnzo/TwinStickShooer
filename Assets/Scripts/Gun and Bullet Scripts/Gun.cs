@@ -1,22 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class Gun : Weapon
 {
+    private int currentAmmo;
     protected bool isPlayer;
     protected float lastfired;
     protected bool isReloading = false;
-    public int currentAmmo;
     protected GameObject player;
-    //Properties for the gun and bullet
+    protected Vector3 mousePosTarget;
+    protected Transform playerTransform;
+    [Header("Sound effects")]
     protected AudioSource gunSounds;
     public AudioClip gunShotSound;
     public AudioClip gunReloadSound;
+
+    [NonSerializedAttribute]
     public UbhShowcaseCtrl shotControllerShowCase;
-    protected Vector3 mousePosTarget;
-    protected Transform playerTransform;
 
     protected void Start()
     {
@@ -168,5 +171,9 @@ public class Gun : Weapon
     public int getCurrentAmmo()
     {
         return currentAmmo;
+    }
+    public void setCurrentAmmo(int setAmmo)
+    {
+        currentAmmo = setAmmo;
     }
 }

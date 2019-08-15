@@ -56,10 +56,10 @@ MonoBehaviour:
   m_explosionEffect: {fileID: 0}
   m_bulletPrefab: {fileID: 7991890147027848265, guid: 6ea430b99f406be46a8a52e7c463cdad,
     type: 3}
-  m_bulletNum: 20
+  m_bulletNum: 8
   m_angle: 180
   m_bulletSpeed: 1
-  m_accelerationSpeed: 1
+  m_accelerationSpeed: 0.5
   m_useMaxSpeed: 0
   m_maxSpeed: 0
   m_useMinSpeed: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_usePauseAndResume: 0
   m_pauseTime: 0
   m_resumeTime: 0
-  m_useAutoRelease: 0
+  m_useAutoRelease: 1
   m_autoReleaseTime: 10
   m_shotFiredCallbackEvents:
     m_PersistentCalls:
@@ -80,11 +80,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_wayNum: 2
+  m_wayNum: 1
   m_betweenAngle: 15
   m_diffSpeed: 0.5
   m_shiftAngle: 2.5
-  m_nextLineDelay: 0.05
+  m_nextLineDelay: 0.03
   m_setTargetFromTag: 1
   m_targetTagName: Player
   m_randomSelectTagTarget: 0

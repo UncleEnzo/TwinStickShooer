@@ -67,3 +67,6 @@ TagManager:
   - name: DeadEnemyMarker
     uniqueID: 2662094295
     locked: 0
+  - name: Player
+    uniqueID: 363480459
+    locked: 0
