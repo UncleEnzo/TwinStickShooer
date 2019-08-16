@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1437955337732255192}
   - component: {fileID: 6284701098246655469}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: GunpowderVendorMiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -43,10 +43,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 681, y: 348}
-  m_MaxSize: {x: 12006, y: 8048}
+  m_MinSize: {x: 683, y: 498}
+  m_MaxSize: {x: 14004, y: 14048}
   vertical: 1
-  controlID: 89
+  controlID: 17
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 224}
   m_MaxSize: {x: 8006, y: 4024}
   vertical: 0
-  controlID: 92
+  controlID: 138
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -149,10 +149,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 947
-  m_MinSize: {x: 681, y: 348}
-  m_MaxSize: {x: 12006, y: 8048}
+  m_MinSize: {x: 683, y: 498}
+  m_MaxSize: {x: 14004, y: 14048}
   vertical: 0
-  controlID: 90
+  controlID: 18
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,8 +172,8 @@ MonoBehaviour:
     y: 0
     width: 574
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 74}
+  m_MaxSize: {x: 4002, y: 4024}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -200,15 +200,15 @@ MonoBehaviour:
     y: 609
     width: 1346
     height: 338
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 24}
+  m_MinSize: {x: 232, y: 274}
+  m_MaxSize: {x: 10002, y: 10024}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
   - {fileID: 17}
   - {fileID: 24}
-  m_Selected: 2
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -297,10 +297,10 @@ MonoBehaviour:
     y: 0
     width: 1346
     height: 947
-  m_MinSize: {x: 406, y: 348}
-  m_MaxSize: {x: 8006, y: 8048}
+  m_MinSize: {x: 406, y: 498}
+  m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 91
+  controlID: 137
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -867,10 +867,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 372e2a9aab1467641913a23e43d9d4b9,
+  m_AnimatorController: {fileID: 9100000, guid: 6b772ba57f973e343979193955f76013,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107928785809196378, guid: 372e2a9aab1467641913a23e43d9d4b9,
+  - m_Target: {fileID: 1107778524979620458, guid: 6b772ba57f973e343979193955f76013,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -905,14 +905,14 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 679
-    width: 1333
-    height: 313
+    x: 0
+    y: 682
+    width: 1344
+    height: 318
   m_PersistentViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -4452
+  m_LastSelectedObjectID: -2482
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -977,20 +977,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Player Scripts
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Player Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Alchemist Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 287}
-    m_SelectedIDs: 3e180000
-    m_LastClickedID: 6206
-    m_ExpandedIDs: 00000000fc0d0000e00e0000181200002213000014160000dc160000ee170000301c00008e1c0000681d0000dc1d0000421f00002e5200003052000000ca9a3b
+    scrollPos: {x: 0, y: 55}
+    m_SelectedIDs: 54130000
+    m_LastClickedID: 4948
+    m_ExpandedIDs: 00000000fe0d0000e40e0000d410000002120000041300001a160000e2160000f4170000361c0000941c00006e1d00000e5000001050000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1018,7 +1018,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fc0d0000e00e0000d010000014160000dc160000ee1700008e1c0000681d0000dc1d0000421f00002e52000030520000
+    m_ExpandedIDs: 00000000fe0d0000e40e0000d410000004130000261300001a160000e2160000f4170000fe180000361c0000941c00006e1d0000e21d00000e50000010500000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1043,10 +1043,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: ca72feff
-    m_LastClickedInstanceID: -101686
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c623000034290000ba2a00001ae7fffff83300002e320000ae7d000086e900008ee9000096e90000860e00003e0e0000aa0f0000ee3b0000284200001e100000808c0000d0150000860b0000920f0000a04b0000e83b00002a0f00004a0e0000b2260100ac11000020170000f20f0000c8130000040600006e170000fe1100000000000036100000a6160000361100008a110000ac670000
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c623000034290000ba2a00001ae7fffff83300002e320000ae7d000086e900008ee9000096e90000860e00003e0e0000aa0f0000ee3b0000284200001e100000808c0000d0150000860b0000920f0000a04b0000e83b00002a0f00004a0e0000b2260100ac11000020170000f20f0000c8130000040600006e170000fe1100000000000036100000a6160000361100008a110000ac6700002a160000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1137,20 +1137,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 78eeffff
-      m_LastClickedID: -4488
-      m_ExpandedIDs: 18edffffcceeffff0aefffffd6fbffff
+      m_SelectedIDs: 8c7cfeff
+      m_LastClickedID: -99188
+      m_ExpandedIDs: 8c7cfeffba7dfeffc4cafeffb8d5feffced5fefff6d5feff36d6feff70d6feff8ed6feffc2d6feffcad6feffccd6feffdc27ffff2228ffff7c28ffff0a29ffff5c50ffffb850ffff3251ffffd49effffda9effffea9efffff09effff069fffff0c9fffff209fffff289fffff349fffff429fffff4a9fffff529fffff7c9fffffc29fffffde9fffff1ca0ffff30a0ffffaaa0ffffd8faffff00fbffff40fbffff7afbffff88fbffff98fbffffd6fbffff8ea100007ce100000a740100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Player
-        m_OriginalName: Player
+        m_Name: TestNPC
+        m_OriginalName: TestNPC
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -4820
+        m_UserData: -99188
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -1194,9 +1194,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 5.901339, y: -2.3883128, z: -0.19921875}
+    m_Target: {x: 5.20363, y: -2.1858253, z: -0.0703125}
     speed: 2
-    m_Value: {x: 5.901339, y: -2.3883128, z: -0.19921875}
+    m_Value: {x: 5.20363, y: -2.1858253, z: -0.0703125}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1228,9 +1228,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: -1}
   m_Size:
-    m_Target: 22.854095
+    m_Target: 22
     speed: 2
-    m_Value: 22.854095
+    m_Value: 22
   m_Ortho:
     m_Target: 1
     speed: 2

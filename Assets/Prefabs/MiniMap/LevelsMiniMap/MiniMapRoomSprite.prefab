@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3201498015939371083}
   - component: {fileID: 1094182867181945905}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: MiniMapRoomSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

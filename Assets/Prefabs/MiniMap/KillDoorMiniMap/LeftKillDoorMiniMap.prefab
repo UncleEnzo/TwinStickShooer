@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3612652056235895979}
   - component: {fileID: 3788726991524623755}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: LeftKillDoorMiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

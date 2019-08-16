@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7369362803074532750}
   - component: {fileID: 7369362803074532849}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: MiniMapCooridorSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

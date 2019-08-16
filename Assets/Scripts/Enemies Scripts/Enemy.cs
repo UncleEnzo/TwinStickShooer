@@ -61,7 +61,8 @@ public class Enemy : MonoBehaviour
     public float maxDropDist = 2f;
     public float coolDownOnMovementTimer = .5f;
     public float movementCoolDownReset = .5f;
-    public List<FloatingText> floatingText;
+    private List<FloatingText> floatingText;
+    private List<FloatingText> removeText;
     public StateMachine<Enemy> stateMachine { get; set; }
     public EnemyStates enemyState;
     public float distFromPlayer;
@@ -88,6 +89,7 @@ public class Enemy : MonoBehaviour
         enemySounds = GetComponent<AudioSource>();
         deadEnemyMarker.SetActive(false);
         floatingText = new List<FloatingText>();
+        removeText = new List<FloatingText>();
         rb = GetComponent<Rigidbody2D>();
         enemyGun = GetComponentInChildren<EnemyGun>();
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
@@ -203,10 +205,12 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+        sprite.color = regularColor;
         Collider2D collider = GetComponent<Collider2D>();
         SwitchVitals(collider);
         deadEnemyMarker.SetActive(true);
         yield return new WaitForSeconds(enemyCorpseTimer);
+        CleanFloatingText();
         SwitchVitals(collider);
         deadEnemyMarker.SetActive(false);
         gameObject.SetActive(false);
@@ -225,7 +229,6 @@ public class Enemy : MonoBehaviour
     }
     private void TrackFloatingTextPos()
     {
-        List<FloatingText> removeText = new List<FloatingText>();
         foreach (FloatingText floatingText in floatingText)
         {
             if (floatingText != null)
@@ -237,6 +240,10 @@ public class Enemy : MonoBehaviour
                 removeText.Add(floatingText);
             }
         }
+    }
+
+    private void CleanFloatingText()
+    {
         foreach (FloatingText removableText in removeText)
         {
             if (floatingText.Contains(removableText))
@@ -244,6 +251,7 @@ public class Enemy : MonoBehaviour
                 floatingText.Remove(removableText);
             }
         }
+        removeText.Clear();
     }
     private void dropCraftComponents()
     {

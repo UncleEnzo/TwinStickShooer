@@ -35,8 +35,8 @@ TagManager:
   - Door
   - Recipe
   - Chest
+  - NPC
   - MiniMap
-  - 
   - 
   - 
   - 
@@ -61,11 +61,11 @@ TagManager:
   - name: Recipe
     uniqueID: 3348728041
     locked: 0
-  - name: NPC
-    uniqueID: 3233255235
-    locked: 0
   - name: DeadEnemyMarker
     uniqueID: 2662094295
+    locked: 0
+  - name: NPC
+    uniqueID: 3922275475
     locked: 0
   - name: Player
     uniqueID: 363480459

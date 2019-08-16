@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8233597629643784136}
   - component: {fileID: 3927288342185369597}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: MiniMapKeyDoorUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}

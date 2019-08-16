@@ -7,12 +7,6 @@ public class EnemyRadialFire : Enemy
     private bool readyToFire = false;
     public float fireTimer = 6f;
     public float fireTimerReset = 6f;
-    // Update is called once per frame
-    protected new void Update()
-    {
-        base.Update();
-        // knockBackAction();
-    }
 
     // Update is called once per frame
     protected new void FixedUpdate()
@@ -24,12 +18,10 @@ public class EnemyRadialFire : Enemy
             case EnemyStates.Die:
                 break;
             case EnemyStates.FollowPlayer:
-                //Case Switching
                 if (distFromPlayer < stopAndFireRange)
                 {
                     enemyState = EnemyStates.StopShoot;
                 }
-                //functionality of case > Inheritly the functionality is moving and nothing else
                 aiPath.canMove = true;
                 break;
             case EnemyStates.StopShoot:
@@ -44,7 +36,6 @@ public class EnemyRadialFire : Enemy
                 //Shoot
                 if (distFromPlayer < stopAndFireRange)
                 {
-                    //CoolDown for parry
                     if (!readyToFire)
                     {
                         fireTimer -= Time.deltaTime;

@@ -205,6 +205,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: R3_RecipeChestMiniMap
       objectReference: {fileID: 0}
+    - target: {fileID: 6452866569217859478, guid: f07ee20bccc0b404e8b534474e025682,
+        type: 3}
+      propertyPath: m_Layer
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8233597629643784136, guid: f07ee20bccc0b404e8b534474e025682,
         type: 3}
       propertyPath: m_LocalPosition.x

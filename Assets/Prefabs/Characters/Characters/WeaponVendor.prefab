@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3958973051263809874}
   - component: {fileID: 2249357666742285936}
   - component: {fileID: 5621312593681514205}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: WeaponVendor
   m_TagString: Interactable
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2931463572302728273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.95, y: 2.21, z: 10}
+  m_LocalPosition: {x: 10.95, y: 2.21, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children:
   - {fileID: 737429896807320037}
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1061712061
-  m_SortingLayer: 2
+  m_SortingLayerID: -372691821
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300004, guid: e2cfefa3c32f33a469d977fef424e081, type: 3}
   m_Color: {r: 0.98077697, g: 1, b: 0, a: 1}

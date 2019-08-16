@@ -199,11 +199,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftKillDoorMiniMap
       objectReference: {fileID: 0}
-    - target: {fileID: 3596990626481619362, guid: 91a895a4bbf4bd74da507238733414b3,
-        type: 3}
-      propertyPath: m_Layer
-      value: 16
-      objectReference: {fileID: 0}
     - target: {fileID: 3612652056235895979, guid: 91a895a4bbf4bd74da507238733414b3,
         type: 3}
       propertyPath: m_LocalPosition.x

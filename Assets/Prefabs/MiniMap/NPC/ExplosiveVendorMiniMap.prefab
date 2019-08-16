@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2445107656672039937}
   - component: {fileID: 7290728488612525108}
-  m_Layer: 19
+  m_Layer: 20
   m_Name: ExplosiveVendorMiniMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}

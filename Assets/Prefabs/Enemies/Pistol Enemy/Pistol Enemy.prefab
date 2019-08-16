@@ -160,6 +160,7 @@ MonoBehaviour:
   aiPath: {fileID: 518032821}
   enemyHitSound: {fileID: 8300000, guid: 2dc35d77cfe164a2eab57d08500740e2, type: 3}
   enemyDeathSound: {fileID: 0}
+  regularColor: {r: 0.9245283, g: 0.611192, b: 0.22241008, a: 1}
   enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   destroyBulletsOnDeath: 1
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
