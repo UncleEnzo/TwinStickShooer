@@ -42,22 +42,25 @@ public class EnemyMelee : Enemy
 
     public override void hit(float Damage, float knockBackForce, Vector2 knockBackTrajectory, bool showDamageText = true)
     {
-        if (aiPath.maxSpeed < 10)
+        if (enemyState != EnemyStates.Die)
         {
-            aiPath.maxSpeed++;
-        }
-        if (transform.localScale.x > 2)
-        {
-            if ((transform.localScale.x - reduceScaleBy) > 0)
+            if (aiPath.maxSpeed < 10)
             {
-                transform.localScale = new Vector2(transform.localScale.x - reduceScaleBy, transform.localScale.y - reduceScaleBy);
+                aiPath.maxSpeed++;
             }
-        }
-        if (rb.mass > 1.5) //min can't be less than 0 at the end of this equation
-        {
-            if ((rb.mass - reduceMassBy) > 0)
+            if (transform.localScale.x > 2)
             {
-                rb.mass -= reduceMassBy;
+                if ((transform.localScale.x - reduceScaleBy) > 0)
+                {
+                    transform.localScale = new Vector2(transform.localScale.x - reduceScaleBy, transform.localScale.y - reduceScaleBy);
+                }
+            }
+            if (rb.mass > 1.5) //min can't be less than 0 at the end of this equation
+            {
+                if ((rb.mass - reduceMassBy) > 0)
+                {
+                    rb.mass -= reduceMassBy;
+                }
             }
         }
         base.hit(Damage, knockBackForce, knockBackTrajectory, showDamageText);

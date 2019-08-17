@@ -93,7 +93,7 @@ public class Parry : MonoBehaviour
                 }
                 UbhBulletSimpleSprite2d enemyBullet = collider.gameObject.GetComponent<UbhBulletSimpleSprite2d>();
                 collider.gameObject.tag = TagsAndLabels.PlayerBulletTag;
-                collider.gameObject.layer = 8;
+                collider.gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.PlayerBulletLabel);
                 enemyBullet.rbMovement = true;
                 enemyBullet.isRbTrajConfigured = false;
                 Vector2 currentTrajectory = (enemyTransform.position - collider.gameObject.transform.position) / enemyBullet.m_speed;

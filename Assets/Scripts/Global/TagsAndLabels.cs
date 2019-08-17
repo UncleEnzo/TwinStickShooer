@@ -5,6 +5,7 @@ using UnityEngine;
 public static class TagsAndLabels
 {
     [Header("Tags")]
+    public const string UntaggedTag = "Untagged";
     public const string PlayerTag = "Player";
     public const string EnemyTag = "Enemy";
     public const string PlayerBulletTag = "PlayerBullet";
@@ -26,4 +27,11 @@ public static class TagsAndLabels
     [Header("Labels")]
     public const string DoorLabel = "Door";
     public const string ChestLabel = "Chest";
+    public const string DeadEnemyLabel = "DeadEnemy";
+    public const string EnemyLabel = "Enemy";
+    public const string PlayerLabel = "Player";
+    public const string PlayerBulletLabel = "PlayerBullet";
+    public const string EnemyBulletLabel = "EnemyBullet";
+    public const string NPCLabel = "NPC";
+    public const string DefaultLabel = "Default";
 }

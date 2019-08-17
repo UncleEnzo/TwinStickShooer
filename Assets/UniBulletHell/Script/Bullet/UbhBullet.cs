@@ -121,8 +121,8 @@ public class UbhBullet : UbhMonoBehaviour
         m_bounces = 0;
         rbMovement = false;
         isRbTrajConfigured = false;
-        gameObject.tag = "Untagged";
-        gameObject.layer = 0;
+        gameObject.tag = TagsAndLabels.UntaggedTag;
+        gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.DefaultLabel);
         m_transformCache.ResetPosition();
         m_transformCache.ResetRotation();
     }
@@ -132,8 +132,8 @@ public class UbhBullet : UbhMonoBehaviour
         m_bounces = 0;
         rbMovement = false;
         isRbTrajConfigured = false;
-        gameObject.tag = "Untagged";
-        gameObject.layer = 0;
+        gameObject.tag = TagsAndLabels.UntaggedTag;
+        gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.DefaultLabel);
         UbhObjectPool.instance.ReleaseBullet(this);
     }
 
@@ -198,12 +198,12 @@ public class UbhBullet : UbhMonoBehaviour
         if (m_bulletTag)
         {
             gameObject.tag = TagsAndLabels.PlayerBulletTag;
-            gameObject.layer = 8;
+            gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.PlayerBulletLabel);
         }
         else
         {
             gameObject.tag = TagsAndLabels.EnemyBulletTag;
-            gameObject.layer = 9;
+            gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.EnemyBulletLabel);
         }
         if (inheritAngle && m_parentBaseShot.lockOnShot == false)
         {

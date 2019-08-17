@@ -17,6 +17,8 @@ public enum EnemyStates
 }
 public class Enemy : MonoBehaviour
 {
+    Coroutine lastCoroutine = null;
+    private Collider2D Collider;
     [Header("Note: Move speed is set in AiPath. It's called Max Speed")]
     public bool isSpawned = false;
     public float knockBackTimer = .2f;
@@ -84,6 +86,7 @@ public class Enemy : MonoBehaviour
 
     private void StartOrEnableEnemy()
     {
+        Collider = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         regularColor = sprite.color;
         enemySounds = GetComponent<AudioSource>();
@@ -117,48 +120,67 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if (collisionInfo.gameObject.tag == TagsAndLabels.PlayerTag)
+        if (enemyState != EnemyStates.Die)
         {
-            collisionInfo.gameObject.GetComponent<Player>().hit(collideDamageToPlayer);
+            if (collisionInfo.gameObject.tag == TagsAndLabels.PlayerTag)
+            {
+                collisionInfo.gameObject.GetComponent<Player>().hit(collideDamageToPlayer);
+            }
+        }
+        else
+        {
+            // //NEED DON"T DAMAGE LOGIC AS WELL
+            // if (collisionInfo.gameObject.tag == TagsAndLabels.PlayerTag
+            //     || collisionInfo.gameObject.tag == TagsAndLabels.PlayerBulletTag
+            //     || collisionInfo.gameObject.tag == TagsAndLabels.EnemyBulletTag
+            //     || collisionInfo.gameObject.tag == TagsAndLabels.EnemyTag)
+            // {
+            //     print("ignoring player collsion");
+            //     rb.velocity = Vector2.zero;
+            Physics2D.IgnoreCollision(collisionInfo.collider, Collider, true);
+            // }
         }
     }
     public virtual void hit(float Damage, float knockBackForce,
         Vector2 knockBackTrajectory, bool showDamageText = true)
     {
-        if (showDamageText)
+        if (enemyState != EnemyStates.Die)
         {
-            FloatingText floatingDamageText = FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
-            floatingText.Add(floatingDamageText);
-        }
-        enemySounds.PlayOneShot(enemyHitSound);
-        health -= Damage;
-        if (health <= 0f)
-        {
-            //Stops enemy logic in this script
-            enemyState = EnemyStates.Die;
-            dropCraftComponents();
-            dropKey();
-            if (isSpawned)
+            if (showDamageText)
             {
-                isSpawned = false;
-                enemyKilled.Raise();
+                FloatingText floatingDamageText = FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
+                floatingText.Add(floatingDamageText);
             }
-            if (GetComponent<Gun>())
+            enemySounds.PlayOneShot(enemyHitSound);
+            health -= Damage;
+            if (health <= 0f)
             {
-                GetComponent<Gun>().setCurrentAmmo(GetComponent<Weapon>().GunProperties.maxAmmo);
+                //Stops enemy logic in this script
+                enemyState = EnemyStates.Die;
+                dropCraftComponents();
+                dropKey();
+                if (isSpawned)
+                {
+                    isSpawned = false;
+                    enemyKilled.Raise();
+                }
+                if (GetComponent<Gun>())
+                {
+                    GetComponent<Gun>().setCurrentAmmo(GetComponent<Weapon>().GunProperties.maxAmmo);
+                }
+                //Play Death Animation >> Need to switch death marker to animation up here 
+                deadEnemyMarker.SetActive(true);
+                StopAllCoroutines();
+                StartCoroutine(enemyDeath());
             }
-            StopAllCoroutines();
-            //Play Death Animation >> Need to switch death marker to animation up here 
-            deadEnemyMarker.SetActive(true);
-            StartCoroutine(enemyDeath());
-        }
-        else
-        {
-            if (Damage > 0)
+            else
             {
-                StartCoroutine(FlashCo());
+                if (Damage > 0)
+                {
+                    StartCoroutine(FlashCo());
+                }
+                lastCoroutine = StartCoroutine(knockedBackCo(knockBackForce, knockBackTrajectory));
             }
-            StartCoroutine(knockedBackCo(knockBackForce, knockBackTrajectory));
         }
     }
 
@@ -173,17 +195,6 @@ public class Enemy : MonoBehaviour
             sprite.color = regularColor;
             yield return new WaitForSeconds(flashDuration);
             temp++;
-        }
-    }
-
-    private void SwitchVitals(Collider2D collider)
-    {
-        aiPath.enabled = !aiPath.enabled;
-        collider.enabled = !collider.enabled;
-        for (int i = 0; i < gameObject.transform.childCount; i++)
-        {
-            GameObject child = gameObject.transform.GetChild(i).gameObject;
-            child.SetActive(!child.activeInHierarchy);
         }
     }
 
@@ -206,12 +217,13 @@ public class Enemy : MonoBehaviour
             }
         }
         sprite.color = regularColor;
-        Collider2D collider = GetComponent<Collider2D>();
-        SwitchVitals(collider);
+        gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel);
+        SwitchVitals();
         deadEnemyMarker.SetActive(true);
         yield return new WaitForSeconds(enemyCorpseTimer);
         CleanFloatingText();
-        SwitchVitals(collider);
+        SwitchVitals();
+        LayerMask.LayerToName(LayerMask.NameToLayer(TagsAndLabels.EnemyTag));
         deadEnemyMarker.SetActive(false);
         gameObject.SetActive(false);
     }
@@ -227,6 +239,19 @@ public class Enemy : MonoBehaviour
         aiPath.canMove = true;
         enemyState = EnemyStates.FollowPlayer;
     }
+    private void SwitchVitals()
+    {
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(TagsAndLabels.PlayerLabel), LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(TagsAndLabels.EnemyBulletLabel), LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(TagsAndLabels.PlayerBulletLabel), LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(TagsAndLabels.EnemyLabel), LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel));
+        aiPath.enabled = !aiPath.enabled;
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            GameObject child = gameObject.transform.GetChild(i).gameObject;
+            child.SetActive(!child.activeInHierarchy);
+        }
+    }
     private void TrackFloatingTextPos()
     {
         foreach (FloatingText floatingText in floatingText)
@@ -241,7 +266,6 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
     private void CleanFloatingText()
     {
         foreach (FloatingText removableText in removeText)

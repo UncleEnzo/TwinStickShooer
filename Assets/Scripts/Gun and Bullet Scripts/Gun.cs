@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Gun : Weapon
@@ -10,6 +11,9 @@ public class Gun : Weapon
     protected bool isPlayer;
     protected float lastfired;
     protected bool isReloading = false;
+    private Slider reloadSlider;
+    private GameObject reloadUIObject;
+    Coroutine lastCoroutine = null;
     protected GameObject player;
     protected Vector3 mousePosTarget;
     protected Transform playerTransform;
@@ -23,6 +27,8 @@ public class Gun : Weapon
 
     protected void Start()
     {
+        reloadUIObject = GameObject.Find("Canvas").transform.Find("ReloadSlider").gameObject;
+        reloadSlider = reloadUIObject.GetComponent<Slider>();
         gunSounds = GetComponent<AudioSource>();
         shotControllerShowCase = GetComponent<UbhShowcaseCtrl>();
         currentAmmo = GunProperties.maxAmmo;
@@ -32,12 +38,20 @@ public class Gun : Weapon
 
     private void OnEnable()
     {
+        if (reloadUIObject != null)
+        {
+            reloadUIObject.SetActive(false);
+        }
         isReloading = false;
     }
 
-    private void onDisable()
+    private void OnDisable()
     {
-        StopCoroutine(reload());
+        isReloading = false;
+        if (lastCoroutine != null)
+        {
+            StopCoroutine(lastCoroutine);
+        }
     }
 
     protected void FireGun(bool isPlayer)
@@ -50,13 +64,13 @@ public class Gun : Weapon
         {
             if (Input.GetKeyDown("r") && currentAmmo < GunProperties.maxAmmo)
             {
-                StartCoroutine(reload());
+                lastCoroutine = StartCoroutine(reload());
                 return;
             }
         }
         if (currentAmmo <= 0)
         {
-            StartCoroutine(reload());
+            lastCoroutine = StartCoroutine(reload());
             return;
         }
         if (isPlayer)
@@ -140,7 +154,10 @@ public class Gun : Weapon
         playerTransform = Player.Instance.transform;
         float angle = lookAtPoint(mousePosTarget, playerTransform.position);
         angle -= 90;
-
+        if (isReloading)
+        {
+            reloadSlider.value += Time.deltaTime;
+        }
         //Player weapon auto updates angle for any bulletPattern script
         if (gameObject.transform.IsChildOf(WeaponSwitching.Instance.gameObject.transform))
         {
@@ -153,14 +170,17 @@ public class Gun : Weapon
 
     IEnumerator reload()
     {
-        isReloading = true;
         if (isPlayer)
         {
-            print("Reloading");
+            reloadUIObject.SetActive(true);
+            reloadSlider.value = 0;
+            reloadSlider.maxValue = GunProperties.reloadTime;
         }
+        isReloading = true;
         gunSounds.PlayOneShot(gunReloadSound); //gunsound for starting reload
         yield return new WaitForSeconds(GunProperties.reloadTime);
         //When you have a new gunsound for reload finished, put it here
+        reloadUIObject.SetActive(false);
         currentAmmo = GunProperties.maxAmmo;
         if (isPlayer)
         {

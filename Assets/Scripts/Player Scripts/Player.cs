@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public bool canMove = true;
     private float damagedKnockBackForce = 13f;
     private float damagedKnockBackRadius = 5f;
+    private GameObject reloadUIObject;
     private float knockedBackTimer = .2f;
     public bool playerUsable = true;
     public float health = 8f;
@@ -55,6 +56,8 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
+        reloadUIObject = GameObject.Find("Canvas").transform.Find("ReloadSlider").gameObject;
+        reloadUIObject.SetActive(false);
         playerSounds = GetComponent<AudioSource>();
         playerState = PlayerStates.MovingShooting;
         if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
@@ -70,10 +73,28 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        UpdateReloadBarLocation();
+        //Note:Feels weird but if you ever decide to use this... I'm leaving it here
+        // if (playerState == PlayerStates.MovingShooting
+        //     && !Input.GetKey(KeyCode.W)
+        //     && !Input.GetKey(KeyCode.A)
+        //     && !Input.GetKey(KeyCode.S)
+        //     && !Input.GetKey(KeyCode.D))
+        // {
+        //     rb.velocity = Vector2.zero;
+        //     animator.topAnimator.StopPlayback();
+        //     animator.bottomAnimator.StopPlayback();
+        // }
         if (playerState == PlayerStates.MovingShooting)
         {
             Move();
         }
+    }
+
+    private void UpdateReloadBarLocation()
+    {
+        Vector2 screenPosition = Camera.main.WorldToScreenPoint(new Vector2(transform.position.x, transform.position.y + 1f));
+        reloadUIObject.transform.position = screenPosition;
     }
 
     public void Move()

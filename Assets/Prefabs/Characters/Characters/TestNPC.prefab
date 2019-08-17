@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1940034614}
   - component: {fileID: 1940034613}
   - component: {fileID: 5018380561713351444}
+  - component: {fileID: 5440137577162979678}
   m_Layer: 19
   m_Name: TestNPC
   m_TagString: Interactable
@@ -216,6 +217,32 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.5626106, y: 0.70348334}
+  m_EdgeRadius: 0
+--- !u!61 &5440137577162979678
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8231782970508570933}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.004641108, y: -0.029393494}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.2, y: 0.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.11269757, y: 0.19314331}
   m_EdgeRadius: 0
 --- !u!1001 &2516370448292350793
 PrefabInstance:

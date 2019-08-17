@@ -9,11 +9,25 @@ public class ToolTip : MonoBehaviour
 
     public void Enable()
     {
-        animator.SetBool("isOpen", true);
+        if (animator != null)
+        {
+            animator.SetBool("isOpen", true);
+        }
+        else
+        {
+            Debug.Log("ToolTip animator not set to an instance of an object!");
+        }
     }
 
     public void Disable()
     {
-        animator.SetBool("isOpen", false);
+        if (animator != null)
+        {
+            animator.SetBool("isOpen", false);
+        }
+        else
+        {
+            Debug.Log("ToolTip animator not set to an instance of an object!");
+        }
     }
 }
