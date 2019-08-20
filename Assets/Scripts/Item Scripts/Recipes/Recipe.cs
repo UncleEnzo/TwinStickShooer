@@ -15,7 +15,8 @@ public class Recipe : Item
     {
         base.useItem();
         bool hasEnoughComponents = checkRequirements();
-        usePowerUp(hasEnoughComponents);
+        bool satisfiesConditions = PowerUpConditions.Instance.checkConditions(powerUp);
+        usePowerUp(hasEnoughComponents, satisfiesConditions);
     }
     private bool checkRequirements()
     {
@@ -33,9 +34,9 @@ public class Recipe : Item
         }
     }
 
-    private void usePowerUp(bool hasEnoughComponents)
+    private void usePowerUp(bool hasEnoughComponents, bool satisfiesConditions)
     {
-        if (hasEnoughComponents)
+        if (hasEnoughComponents && satisfiesConditions)
         {
             RecipeItemManager.Instance.useRecipeComponents(physicalRequirement, gunPowderRequirement, explosiveRequirement);
             PowerUpController.Instance.ActivatePowerUp(powerUp);

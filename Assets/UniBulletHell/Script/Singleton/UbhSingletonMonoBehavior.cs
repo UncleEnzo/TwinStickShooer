@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Ubh singleton mono behavior.
@@ -23,7 +24,6 @@ public class UbhSingletonMonoBehavior<T> : UbhMonoBehaviour where T : UbhMonoBeh
             if (m_instance == null)
             {
                 m_instance = FindObjectOfType<T>();
-
                 if (m_instance == null)
                 {
                     Debug.Log("Created " + typeof(T).Name);

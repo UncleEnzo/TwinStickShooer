@@ -11,6 +11,7 @@ public class PersistentGameData : MonoBehaviour
     public static PersistentGameData Instance;
     public int currentLevel;
     public float currentHealth;
+    public float currentTotalHealth;
     public int currentWeaponCount;
     public List<WeaponType> currentGunTypes;
     public int currentKeys;
@@ -68,6 +69,7 @@ public class PersistentGameData : MonoBehaviour
     public void saveAndPersistGameData()
     {
         currentHealth = Player.Instance.health;
+        currentTotalHealth = Player.Instance.totalHealth;
         currentWeaponCount = WeaponSwitching.Instance.gameObject.transform.childCount;
         currentGunTypes = WeaponSwitching.Instance.gunTypes;
         currentExplosiveAmmo.Clear();

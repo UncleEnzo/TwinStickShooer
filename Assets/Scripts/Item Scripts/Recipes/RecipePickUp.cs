@@ -55,29 +55,22 @@ public class RecipePickUp : Interactable
 
     private void sendDestroyChestSiblingsSignal()
     {
-        foreach (RecipePickUp item in FindObjectsOfType<RecipePickUp>())
-        {
-            item.SendMessage("CompareChestID", chestID);
-        }
         recipePicked.Raise();
 
-        //calls the signal on itself as well to make sure all objects fomr the chest are deleted
+        //calls the signal on itself as well to make sure all objects form the chest are deleted
         compareChestID = chestID;
         RecipePicked();
     }
 
-    public void CompareChestID(int chestID)
-    {
-        compareChestID = chestID;
-    }
-
     public void RecipePicked()
     {
+        compareChestID = chestID;
         if (compareChestID != -1 && chestID != -1)
         {
             if (isFromChest && compareChestID == chestID)
             {
                 Destroy(gameObject);
+                print("Destroying item");
             }
         }
         else

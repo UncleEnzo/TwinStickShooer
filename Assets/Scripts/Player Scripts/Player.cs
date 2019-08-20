@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     private GameObject reloadUIObject;
     private float knockedBackTimer = .2f;
     public bool playerUsable = true;
+    public float totalHealth = 8f;
     public float health = 8f;
 
     [Header("IFrames")]
@@ -66,8 +67,18 @@ public class Player : MonoBehaviour
             if (SavePersistentData != null)
             {
                 health = SavePersistentData.health;
+                totalHealth = SavePersistentData.totalHealth;
             }
-            PlayerHUBController.Instance.updateDisplayHubHealth(health);
+            else
+            {
+                health = totalHealth;
+            }
+            PlayerHUBController.Instance.updateDisplayHubHealth(health, totalHealth);
+        }
+        else
+        {
+            health = totalHealth;
+            PlayerHUBController.Instance.updateDisplayHubHealth(health, totalHealth);
         }
     }
     // Update is called once per frame
@@ -131,7 +142,7 @@ public class Player : MonoBehaviour
         {
             health -= Damage;
         }
-        PlayerHUBController.Instance.updateDisplayHubHealth(health);
+        PlayerHUBController.Instance.updateDisplayHubHealth(health, totalHealth);
         if (!iFramesActive)
         {
             //knocks back surrounding enemies

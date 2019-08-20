@@ -9,6 +9,7 @@ public class SavePersistentData
     //This prevents farming a level for keys etc to get ahead
     public int level;
     public float health;
+    public float totalHealth;
     public int weaponCount;
     public List<WeaponType> gunTypes;
     public int keys;
@@ -23,6 +24,7 @@ public class SavePersistentData
     {
         level = PersistentGameData.currentLevel;
         health = PersistentGameData.currentHealth;
+        totalHealth = PersistentGameData.currentTotalHealth;
         weaponCount = PersistentGameData.currentWeaponCount;
         gunTypes = PersistentGameData.currentGunTypes;
         physicalCraftComponents = PersistentGameData.currentPhysicalCraftComponents;

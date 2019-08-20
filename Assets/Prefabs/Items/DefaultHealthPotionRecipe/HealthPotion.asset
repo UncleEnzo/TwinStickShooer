@@ -17,7 +17,7 @@ MonoBehaviour:
   itemType: 3
   Cost: 0
   powerUp:
-    name: HealthPotion
+    name: HealthPotionRecipe
     duration: -10
     stackCap: 2
     currentStack: 0

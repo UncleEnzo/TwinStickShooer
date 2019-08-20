@@ -4,6 +4,9 @@ using UnityEngine;
 
 public static class TagsAndLabels
 {
+    [Header("Potion Names")]
+    public const string HealthPotionRecipe = "HealthPotionRecipe";
+
     [Header("Tags")]
     public const string UntaggedTag = "Untagged";
     public const string PlayerTag = "Player";

@@ -126,6 +126,7 @@
      <Compile Include="Assets\Scripts\PowerUpBehavior\Parry.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUp.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpAction.cs" />
+     <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpConditions.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpController.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpUIDrawer.cs" />
      <Compile Include="Assets\Scripts\PowerUpBehavior\PowerUpUIInfo.cs" />

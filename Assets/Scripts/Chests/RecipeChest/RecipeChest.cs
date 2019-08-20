@@ -23,7 +23,7 @@ public class RecipeChest : TreasureChest
     }
     protected override int OpenChest()
     {
-        int chestID = base.OpenChest();
+        base.OpenChest();
         GameObject physicalRecipe = spawnRecipe(LootListType.PhysicalRecipe, -100, -100, chestID);
         GameObject gunPowderRecipe = spawnRecipe(LootListType.GunpowderRecipe, 0, 100, chestID);
         GameObject explosiveRecipe = spawnRecipe(LootListType.ExplosiveRecipe, 100, -100, chestID);

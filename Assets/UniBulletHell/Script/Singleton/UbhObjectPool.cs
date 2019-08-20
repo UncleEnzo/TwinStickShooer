@@ -229,8 +229,10 @@ public sealed class UbhObjectPool : UbhSingletonMonoBehavior<UbhObjectPool>
         }
 
         bullet.OnFinishedShot();
-
-        UbhBulletManager.instance.RemoveBullet(bullet);
+        if (UbhBulletManager.instance != null)
+        {
+            UbhBulletManager.instance.RemoveBullet(bullet);
+        }
 
 #if USING_CORE_GAME_KIT
         // +++++ Replace PoolingSystem with DarkTonic's CoreGameKit. +++++

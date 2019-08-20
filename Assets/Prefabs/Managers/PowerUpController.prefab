@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4693464106337697609}
   - component: {fileID: 1051054371756000732}
   - component: {fileID: 270274094}
+  - component: {fileID: 1007368042865339950}
   m_Layer: 0
   m_Name: PowerUpController
   m_TagString: Untagged
@@ -90,3 +91,15 @@ MonoBehaviour:
     type: 3}
   powerupTimerPause: {fileID: 1622945292431157724, guid: 0353090aa0984ae44bc2323672961145,
     type: 3}
+--- !u!114 &1007368042865339950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693464106337697614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f90d9db7edb7a44aab7c24fbe230a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

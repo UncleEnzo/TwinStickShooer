@@ -35,7 +35,7 @@ public class PowerUpAction : MonoBehaviour
     {
         Debug.Log("Triggered HP Up");
         Player.Instance.health += healingIncrease;
-        PlayerHUBController.Instance.updateDisplayHubHealth(Player.Instance.health);
+        PlayerHUBController.Instance.updateDisplayHubHealth(Player.Instance.health, Player.Instance.totalHealth);
     }
     public void HealEndAction()
     {

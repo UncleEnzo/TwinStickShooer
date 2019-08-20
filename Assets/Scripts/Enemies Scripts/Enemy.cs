@@ -223,7 +223,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(enemyCorpseTimer);
         CleanFloatingText();
         SwitchVitals();
-        LayerMask.LayerToName(LayerMask.NameToLayer(TagsAndLabels.EnemyTag));
+        LayerMask.LayerToName(LayerMask.NameToLayer(TagsAndLabels.EnemyLabel));
         deadEnemyMarker.SetActive(false);
         gameObject.SetActive(false);
     }
@@ -241,10 +241,6 @@ public class Enemy : MonoBehaviour
     }
     private void SwitchVitals()
     {
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(TagsAndLabels.PlayerLabel), LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel));
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(TagsAndLabels.EnemyBulletLabel), LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel));
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(TagsAndLabels.PlayerBulletLabel), LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel));
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer(TagsAndLabels.EnemyLabel), LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel));
         aiPath.enabled = !aiPath.enabled;
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {

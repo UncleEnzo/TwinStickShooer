@@ -7,15 +7,33 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public static int hubWorldIndex = 1;
+    public static bool LoadingNextScene = false;
+    void Awake()
+    {
+        LoadingNextScene = false;
+    }
 
     //Methods for buttons (Does not allow static method calls to be assigned to buttons)
     public void ButtonLoadSavedGame()
     {
+        LoadingNextScene = true;
         SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
-        SceneManager.LoadScene(SavePersistentData.level);
-        if (SavePersistentData.level == hubWorldIndex)
+        if (SavePersistentData != null)
         {
-            if (PersistentGameData.Instance)
+            SceneManager.LoadScene(SavePersistentData.level);
+            if (SavePersistentData.level == hubWorldIndex)
+            {
+                if (PersistentGameData.Instance)
+                {
+                    PersistentGameData.Instance.resetPersistentGameData();
+                }
+            }
+        }
+        else
+        {
+            print("No Save data (Probably because you made it to win screen or Hub, then quit). Taking player to hub world.");
+            SceneManager.LoadScene(hubWorldIndex);
+            if (PersistentGameData.Instance != null)
             {
                 PersistentGameData.Instance.resetPersistentGameData();
             }
@@ -24,7 +42,8 @@ public class SceneLoader : MonoBehaviour
 
     public void ButtonStartNewGame()
     {
-        print("STARTING NEW GAME");
+        print("Starting new game");
+        LoadingNextScene = true;
         SaveSystem.ResetGlobalMoneyData();
         SaveSystem.ResetPlayerLootPoolData(GetComponent<LootLedger>());
         SaveSystem.ResetVendorLootPoolData(GetComponent<LootLedger>());
@@ -37,6 +56,7 @@ public class SceneLoader : MonoBehaviour
 
     public void ButtonLoadStartScreen()
     {
+        LoadingNextScene = true;
         SceneManager.LoadScene(0);
         if (PersistentGameData.Instance != null)
         {
@@ -47,6 +67,7 @@ public class SceneLoader : MonoBehaviour
     public void ButtonLoadHubWorld()
     {
         //Todo: add save coins and loot table logic
+        LoadingNextScene = true;
         SceneManager.LoadScene(hubWorldIndex);
         if (PersistentGameData.Instance != null)
         {
@@ -63,6 +84,7 @@ public class SceneLoader : MonoBehaviour
     //In game methods
     public static void LoadNextScene()
     {
+        LoadingNextScene = true;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextScene = currentSceneIndex + 1;
         int lastScene = SceneManager.sceneCountInBuildSettings - 2;
@@ -84,7 +106,7 @@ public class SceneLoader : MonoBehaviour
 
     public static void LoadStartScene()
     {
-        PersistentGameData.Instance.saveAndPersistGameData();
+        LoadingNextScene = true;
         SceneManager.LoadScene(0);
         if (PersistentGameData.Instance != null)
         {
@@ -94,6 +116,7 @@ public class SceneLoader : MonoBehaviour
 
     public static void LoadHubWorld()
     {
+        LoadingNextScene = true;
         SceneManager.LoadScene(hubWorldIndex);
         if (PersistentGameData.Instance != null)
         {
@@ -104,7 +127,8 @@ public class SceneLoader : MonoBehaviour
     public static void loadGameOverScene()
     {
         print("Going to game over screen");
-        //Todo: Add save global data 
+        LoadingNextScene = true;
+        SaveSystem.SaveGlobalMoneyData(Inventory.Instance.getMoneyCount());
         int gameOverScene = SceneManager.sceneCountInBuildSettings - 1;
         SceneManager.LoadScene(gameOverScene);
         if (PersistentGameData.Instance != null)

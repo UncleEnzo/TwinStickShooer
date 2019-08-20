@@ -88,11 +88,14 @@ public class UbhBullet : UbhMonoBehaviour
 
     private void OnDisable()
     {
-        if (m_shooting == false || UbhObjectPool.instance == null)
+        if (SceneLoader.LoadingNextScene == false)
         {
-            return;
+            if (m_shooting == false || UbhObjectPool.instance == null)
+            {
+                return;
+            }
+            disableBullet();
         }
-        disableBullet();
     }
 
     /// <summary>
@@ -134,7 +137,11 @@ public class UbhBullet : UbhMonoBehaviour
         isRbTrajConfigured = false;
         gameObject.tag = TagsAndLabels.UntaggedTag;
         gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.DefaultLabel);
-        UbhObjectPool.instance.ReleaseBullet(this);
+        if (UbhObjectPool.instance != null)
+        {
+            UbhObjectPool.instance.ReleaseBullet(this);
+        }
+
     }
 
     /// <summary>
@@ -323,7 +330,10 @@ public class UbhBullet : UbhMonoBehaviour
                         newRotation = Quaternion.Euler(myAngles.x, myAngles.y, m_baseAngle + waveAngle);
                     }
                 }
-                m_selfFrameCnt += UbhTimer.instance.deltaFrameCount;
+                if (UbhTimer.instance != null)
+                {
+                    m_selfFrameCnt += UbhTimer.instance.deltaFrameCount;
+                }
             }
             else
             {

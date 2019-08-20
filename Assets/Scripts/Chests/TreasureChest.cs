@@ -8,6 +8,7 @@ using TMPro;
 
 public class TreasureChest : Interactable
 {
+    public Signal recipePicked;
     public float health;
     public bool isOpen;
     public Item key;
@@ -32,6 +33,7 @@ public class TreasureChest : Interactable
     protected TextMeshProUGUI damageTextExplosive;
     protected TextMeshProUGUI explosiveEffectText;
     protected Button explosiveButton;
+    protected int chestID;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -42,7 +44,8 @@ public class TreasureChest : Interactable
     {
         isOpen = true;
         anim.SetBool("opened", true);
-        return Random.Range(0, 100000);
+        chestID = Random.Range(0, 100000);
+        return chestID;
     }
 
     protected void GetRecipePanelUIButtons()
@@ -71,7 +74,8 @@ public class TreasureChest : Interactable
         {
             UISprite.sprite = null;
             UIDamage.text = "Place Holder";
-            UIEffect.text = "Place Holder. If null, should offer player health and gundamage for reaching end of list";
+            UIEffect.text = "Increase Player Health.";
+            button.onClick.AddListener(() => { NullRecipeSelection(); });
         }
         else
         {
@@ -81,6 +85,32 @@ public class TreasureChest : Interactable
             button.onClick.AddListener(() => { recipe.GetComponent<RecipePickUp>().MakeSelection(); });
         }
     }
+
+    public void NullRecipeSelection()
+    {
+        GameObject RecipeUIPanel = GameObject.Find("Canvas").transform.Find("RecipeSelectMenu").gameObject;
+        RecipeUIPanel.SetActive(false);
+        recipePicked.Raise();
+        Player.Instance.enablePlayer(true);
+        Player.Instance.totalHealth++;
+        Player.Instance.health++;
+        PlayerHUBController.Instance.updateDisplayHubHealth(Player.Instance.health, Player.Instance.totalHealth);
+        Time.timeScale = 1;
+
+        //Removes listeners from the UI
+        for (int i = 1; i < 4; i++)
+        {
+            RemoveButtonListeners(RecipeUIPanel, i);
+        }
+    }
+
+    private void RemoveButtonListeners(GameObject RecipeUIPanel, int RecipePanel)
+    {
+        GameObject Panel = RecipeUIPanel.transform.GetChild(RecipePanel).gameObject;
+        Button Button = Panel.transform.GetChild(3).GetComponent<Button>();
+        Button.onClick.RemoveAllListeners();
+    }
+
     protected void CheckDestroyChestHealth()
     {
         if (health <= 0)

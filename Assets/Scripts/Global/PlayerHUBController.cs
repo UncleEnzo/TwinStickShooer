@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 public class PlayerHUBController : MonoBehaviour
 {
@@ -16,20 +17,23 @@ public class PlayerHUBController : MonoBehaviour
     #endregion
 
     public static PlayerHUBController Instance;
+    public Slider healthSlider;
 
     //Call to update health on UI
     //Ammo for each gun
-    //crafing materials
+    //crafting materials
     //recipies
     //timers
     //powerups
-    public void updateDisplayHubHealth(float health)
+    public void updateDisplayHubHealth(float health, float totalHealth)
     {
         foreach (TextMeshProUGUI uiElement in GetComponentsInChildren<TextMeshProUGUI>())
         {
             if (uiElement.tag == TagsAndLabels.HealthUITag)
             {
-                uiElement.text = "Health: " + health.ToString();
+                uiElement.text = health.ToString() + "/" + totalHealth.ToString();
+                healthSlider.maxValue = totalHealth;
+                healthSlider.value = health;
             }
         }
     }

@@ -95,10 +95,13 @@ public sealed class UbhShotCtrl : UbhMonoBehaviour
     {
         m_shooting = false;
 
-        UbhShotManager shotMgr = UbhShotManager.instance;
-        if (shotMgr != null)
+        if (SceneLoader.LoadingNextScene == false)
         {
-            shotMgr.RemoveShot(this);
+            UbhShotManager shotMgr = UbhShotManager.instance;
+            if (shotMgr != null)
+            {
+                shotMgr.RemoveShot(this);
+            }
         }
     }
 
