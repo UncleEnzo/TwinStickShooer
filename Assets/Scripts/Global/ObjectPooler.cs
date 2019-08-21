@@ -43,6 +43,7 @@ public class ObjectPooler : MonoBehaviour
                 return pooledObjects[i];
             }
         }
+        //expands the item Pool of object is not present
         foreach (ObjectPoolItem item in itemsToPool)
         {
             string objToPoolName = item.objectToPool.name + "(Clone)";
@@ -57,6 +58,7 @@ public class ObjectPooler : MonoBehaviour
                 }
             }
         }
+        Debug.LogWarning("The following item or enemy does not exist in the item pooler: " + name);
         return null;
     }
 }

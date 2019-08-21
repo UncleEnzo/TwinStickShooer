@@ -3,24 +3,33 @@ using System.Collections;
 
 public class FloatingTextController : MonoBehaviour
 {
-    private static FloatingText popupText;
+    private static GameObject popupTextParentGO;
     private static GameObject canvas;
 
     public static void Initialize()
     {
         canvas = GameObject.Find("Canvas");
-        if (!popupText)
+        if (!popupTextParentGO)
         {
-            popupText = Resources.Load<FloatingText>("Prefabs/PopupTextParent");
+            popupTextParentGO = Resources.Load<GameObject>("Prefabs/PopupTextParent");
         }
     }
 
     public static FloatingText CreateFloatingText(string text, Transform location)
     {
-        FloatingText instance = Instantiate(popupText);
-        instance.transform.SetParent(canvas.transform, false);
-        instance.SetText(text);
-        return instance;
+        GameObject instanceGO = ObjectPooler.SharedInstance.GetPooledObject(popupTextParentGO.name + "(Clone)");
+        if (instanceGO != null)
+        {
+            instanceGO.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Could not find popup text in object pooler");
+        }
+        FloatingText instanceText = instanceGO.GetComponent<FloatingText>();
+        instanceText.transform.SetParent(canvas.transform, false);
+        instanceText.SetText(text);
+        return instanceText;
     }
     public static void SetFloatingTextLocation(FloatingText instance, Transform location)
     {

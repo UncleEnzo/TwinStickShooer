@@ -54,7 +54,8 @@ public class LootTable : MonoBehaviour
             deductableLootMap.Add(LootListType.CraftComponents, CraftComponents);
         }
         //This will also happen if you load into hub world, which we don't want
-        else if (PersistentGameData.Instance.currentDeductableLootMap != null && SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
+        else if (PersistentGameData.Instance.currentDeductableLootMap != null
+             && SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
         {
             print("Entering next level. Retrieving saved Deductable lists");
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
@@ -73,11 +74,18 @@ public class LootTable : MonoBehaviour
                     deductableLootMap.Add(entry.Key, entryValues);
                 }
 
-                //Step 2 > Takes Entries from the Deductable loot map in this class and adds them to the deductable lists
-                PersistDeductableList(DeductablePhysicalRecipes, LootListType.PhysicalRecipe);
-                PersistDeductableList(DeductableGunpowderRecipes, LootListType.GunpowderRecipe);
-                PersistDeductableList(DeductableExplosiveRecipes, LootListType.ExplosiveRecipe);
-                PersistDeductableList(DeductableWeapons, LootListType.Weapon);
+                if (deductableLootMap.Count > 0)
+                {
+                    //Step 2 > Takes Entries from the Deductable loot map in this class and adds them to the deductable lists
+                    PersistDeductableList(DeductablePhysicalRecipes, LootListType.PhysicalRecipe);
+                    PersistDeductableList(DeductableGunpowderRecipes, LootListType.GunpowderRecipe);
+                    PersistDeductableList(DeductableExplosiveRecipes, LootListType.ExplosiveRecipe);
+                    PersistDeductableList(DeductableWeapons, LootListType.Weapon);
+                }
+                else
+                {
+                    Debug.LogWarning("There are no items in your deductable loot map. This may be you have a persistent save file, but are in a dev test level.");
+                }
             }
             else
             {

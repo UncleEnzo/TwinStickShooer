@@ -63,8 +63,8 @@ public class Enemy : MonoBehaviour
     public float maxDropDist = 2f;
     public float coolDownOnMovementTimer = .5f;
     public float movementCoolDownReset = .5f;
-    private List<FloatingText> floatingText;
-    private List<FloatingText> removeText;
+    private List<FloatingText> floatingTextList;
+    private List<FloatingText> removeTextList;
     public StateMachine<Enemy> stateMachine { get; set; }
     public EnemyStates enemyState;
     public float distFromPlayer;
@@ -91,8 +91,8 @@ public class Enemy : MonoBehaviour
         regularColor = sprite.color;
         enemySounds = GetComponent<AudioSource>();
         deadEnemyMarker.SetActive(false);
-        floatingText = new List<FloatingText>();
-        removeText = new List<FloatingText>();
+        floatingTextList = new List<FloatingText>();
+        removeTextList = new List<FloatingText>();
         rb = GetComponent<Rigidbody2D>();
         enemyGun = GetComponentInChildren<EnemyGun>();
         AIDestinationSetter = GetComponent<AIDestinationSetter>();
@@ -127,19 +127,6 @@ public class Enemy : MonoBehaviour
                 collisionInfo.gameObject.GetComponent<Player>().hit(collideDamageToPlayer);
             }
         }
-        else
-        {
-            // //NEED DON"T DAMAGE LOGIC AS WELL
-            // if (collisionInfo.gameObject.tag == TagsAndLabels.PlayerTag
-            //     || collisionInfo.gameObject.tag == TagsAndLabels.PlayerBulletTag
-            //     || collisionInfo.gameObject.tag == TagsAndLabels.EnemyBulletTag
-            //     || collisionInfo.gameObject.tag == TagsAndLabels.EnemyTag)
-            // {
-            //     print("ignoring player collsion");
-            //     rb.velocity = Vector2.zero;
-            Physics2D.IgnoreCollision(collisionInfo.collider, Collider, true);
-            // }
-        }
     }
     public virtual void hit(float Damage, float knockBackForce,
         Vector2 knockBackTrajectory, bool showDamageText = true)
@@ -149,7 +136,7 @@ public class Enemy : MonoBehaviour
             if (showDamageText)
             {
                 FloatingText floatingDamageText = FloatingTextController.CreateFloatingText(Damage.ToString(), transform);
-                floatingText.Add(floatingDamageText);
+                floatingTextList.Add(floatingDamageText);
             }
             enemySounds.PlayOneShot(enemyHitSound);
             health -= Damage;
@@ -221,9 +208,8 @@ public class Enemy : MonoBehaviour
         SwitchVitals();
         deadEnemyMarker.SetActive(true);
         yield return new WaitForSeconds(enemyCorpseTimer);
-        CleanFloatingText();
         SwitchVitals();
-        LayerMask.LayerToName(LayerMask.NameToLayer(TagsAndLabels.EnemyLabel));
+        gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.EnemyLabel);
         deadEnemyMarker.SetActive(false);
         gameObject.SetActive(false);
     }
@@ -250,29 +236,25 @@ public class Enemy : MonoBehaviour
     }
     private void TrackFloatingTextPos()
     {
-        foreach (FloatingText floatingText in floatingText)
+        foreach (FloatingText floatingText in floatingTextList)
         {
-            if (floatingText != null)
+            if (floatingText.isActiveAndEnabled)
             {
                 FloatingTextController.SetFloatingTextLocation(floatingText, transform);
             }
             else
             {
-                removeText.Add(floatingText);
+                removeTextList.Add(floatingText);
             }
         }
-    }
-    private void CleanFloatingText()
-    {
-        foreach (FloatingText removableText in removeText)
+        foreach (FloatingText removedFloatingText in removeTextList)
         {
-            if (floatingText.Contains(removableText))
-            {
-                floatingText.Remove(removableText);
-            }
+            floatingTextList.Remove(removedFloatingText);
         }
-        removeText.Clear();
+        removeTextList.Clear();
+        print(floatingTextList.Count);
     }
+
     private void dropCraftComponents()
     {
         enableComponents(greenCraftComponent.name);

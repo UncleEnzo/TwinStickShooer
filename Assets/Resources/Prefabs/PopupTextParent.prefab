@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8363182259242635903}
+  randomPosMovementX: 0
+  randomPosMovementY: 0
 --- !u!1001 &4549952799253818515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -120,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 1082271581920011705, guid: d7e967b5d725c6049942128c6eced809,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -3.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1082271581920011705, guid: d7e967b5d725c6049942128c6eced809,
         type: 3}
