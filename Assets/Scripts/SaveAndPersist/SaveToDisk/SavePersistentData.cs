@@ -16,7 +16,7 @@ public class SavePersistentData
     public int physicalCraftComponents;
     public int gunpowderCraftComponents;
     public int explosiveCraftComponents;
-    public List<string> acquiredRecipes = new List<string>();
+    public List<string> Recipes = new List<string>();
     public Dictionary<LootListType, List<string>> DeductableLootDict = new Dictionary<LootListType, List<string>>();
     public Dictionary<WeaponType, int> ExplosiveAmmo = new Dictionary<WeaponType, int>();
 
@@ -31,10 +31,10 @@ public class SavePersistentData
         gunpowderCraftComponents = PersistentGameData.currentGunPowderCraftComponents;
         explosiveCraftComponents = PersistentGameData.currentExplosiveCraftComponents;
         keys = PersistentGameData.currentKeys;
-        acquiredRecipes.Clear();
+        Recipes.Clear();
         foreach (Item entry in PersistentGameData.currentRecipes)
         {
-            acquiredRecipes.Add(entry.name);
+            Recipes.Add(entry.name);
         }
         DeductableLootDict.Clear();
         foreach (KeyValuePair<LootListType, List<Loot>> entry in PersistentGameData.currentDeductableLootMap)

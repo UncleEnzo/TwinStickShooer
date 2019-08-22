@@ -53,7 +53,7 @@ public class VendorInventory : MonoBehaviour
         if (itemPurchased == true)
         {
             print("Selecting new item");
-            selectItemForSale(); // I think this is a janky solution because if you run out of items, this will constantly call null
+            selectItemForSale();
             itemPurchased = false;
         }
         if (playerInRange && Input.GetKeyDown("e") && !InventoryUI.UIOpen)

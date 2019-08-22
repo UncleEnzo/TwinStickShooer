@@ -105,29 +105,13 @@ public class Inventory : MonoBehaviour
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
             if (SavePersistentData != null)
             {
-                if (keys.Count() != SavePersistentData.keys)
+                LoadInventory(SavePersistentData.keys, key);
+                LoadInventory(SavePersistentData.physicalCraftComponents, physicalComponent);
+                LoadInventory(SavePersistentData.gunpowderCraftComponents, gunpowderCompontent);
+                LoadInventory(SavePersistentData.explosiveCraftComponents, explosiveComponent);
+                foreach (string item in SavePersistentData.Recipes)
                 {
-                    LoadInventory(SavePersistentData.keys, key);
-                }
-                if (physicalCraftComponents.Count() != SavePersistentData.physicalCraftComponents)
-                {
-                    LoadInventory(SavePersistentData.physicalCraftComponents, physicalComponent);
-                }
-                if (gunpowderCraftComponents.Count() != SavePersistentData.gunpowderCraftComponents)
-                {
-                    LoadInventory(SavePersistentData.gunpowderCraftComponents, gunpowderCompontent);
-                }
-                if (explosiveCraftComponents.Count() != SavePersistentData.explosiveCraftComponents)
-                {
-                    LoadInventory(SavePersistentData.explosiveCraftComponents, explosiveComponent);
-                }
-                //Plus one to recipes.count because we automatically get the healing pot
-                if ((recipes.Count() + 1) != SavePersistentData.acquiredRecipes.Count)
-                {
-                    foreach (string item in SavePersistentData.acquiredRecipes)
-                    {
-                        AddItem(LootLedger.LootLedgerDict[item].item.GetComponent<RecipePickUp>().item);
-                    }
+                    AddItem(LootLedger.LootLedgerDict[item].item.GetComponent<RecipePickUp>().item);
                 }
             }
             else

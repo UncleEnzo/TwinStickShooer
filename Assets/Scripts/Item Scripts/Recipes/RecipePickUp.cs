@@ -71,7 +71,6 @@ public class RecipePickUp : Interactable
             if (isFromChest && compareChestID == chestID)
             {
                 Destroy(gameObject);
-                print("Destroying item");
             }
         }
         else
