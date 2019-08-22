@@ -53,8 +53,6 @@ public class UbhBulletSimpleSprite2d : UbhBullet
             if (!m_isExplosive)
             {
                 Rigidbody2D rb = collisionInfo.gameObject.GetComponent<Rigidbody2D>(); //This IS THE ENEMY'S TRANSFORM
-                // Vector2 difference = rb.transform.position - transform.position;
-                // difference = difference * m_knockBack;
                 collisionInfo.gameObject.GetComponent<Enemy>().hit(m_damage, m_knockBack, m_bulletTrajectory);
             }
         }
@@ -106,11 +104,16 @@ public class UbhBulletSimpleSprite2d : UbhBullet
             //Destroys enemy bullets caught in the explosion
             if (nearbyObject.GetComponent<UbhBulletSimpleSprite2d>() && nearbyObject.tag == TagsAndLabels.EnemyBulletTag)
             {
-                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().disableBullet();
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_useAutoRelease = true;
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_autoReleaseTime = 1f;
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_selfTimeCount = 1f;
             }
 
             //Applies explosion
-            if (nearbyObject.tag != TagsAndLabels.PlayerBulletTag && !nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())
+            if (nearbyObject.tag != TagsAndLabels.PlayerBulletTag
+              && nearbyObject.tag != TagsAndLabels.EnemyBulletTag
+                && !nearbyObject.isTrigger
+                && nearbyObject.GetComponent<Rigidbody2D>())
             {
                 Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
                 Vector2 difference = rb.transform.position - transform.position;
@@ -130,6 +133,6 @@ public class UbhBulletSimpleSprite2d : UbhBullet
                 }
             }
         }
-        Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
+        Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration - .01f);
     }
 }

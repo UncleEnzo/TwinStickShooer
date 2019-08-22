@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2681540612826855181}
   - component: {fileID: 2681540612826855187}
   - component: {fileID: 2681540612826855182}
+  - component: {fileID: 1420799179994297846}
   m_Layer: 0
   m_Name: Key
   m_TagString: PickUp
@@ -111,7 +112,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3125
+  m_Radius: 0.3
 --- !u!50 &2681540612826855182
 Rigidbody2D:
   serializedVersion: 4
@@ -133,6 +134,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &1420799179994297846
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681540612826855184}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3125
 --- !u!1001 &471548507
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -92,6 +92,7 @@ public class TreasureChest : Interactable
         RecipeUIPanel.SetActive(false);
         recipePicked.Raise();
         Player.Instance.enablePlayer(true);
+        InventoryUI.canUseUI = true;
         Player.Instance.totalHealth++;
         Player.Instance.health++;
         PlayerHUBController.Instance.updateDisplayHubHealth(Player.Instance.health, Player.Instance.totalHealth);
@@ -122,7 +123,7 @@ public class TreasureChest : Interactable
     protected bool attemptToOpenChest()
     {
         bool success = false;
-        if (Input.GetKeyDown("e") && playerInRange)
+        if (Input.GetKeyDown("e") && playerInRange && !InventoryUI.UIOpen)
         {
             if (Inventory.Instance.getKeyCount() > 0)
             {

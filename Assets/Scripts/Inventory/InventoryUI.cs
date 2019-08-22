@@ -5,35 +5,40 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    private bool UIOpen;
+    public static bool canUseUI = true;
+    public static float UITimeScale = .1f;
+    public static bool UIOpen;
 
     void Update()
     {
-        openOrCloseInventory();
+        if (Input.GetButtonDown("Inventory")
+         && canUseUI
+         && (Player.Instance.playerState == PlayerStates.MovingShooting
+         || Player.Instance.playerState == PlayerStates.Disabled))
+        {
+            openOrCloseInventory();
+        }
     }
 
-    private void openOrCloseInventory()
+    public static void openOrCloseInventory()
     {
-        if (Input.GetButtonDown("Inventory"))
+        UIOpen = !UIOpen;
+        if (UIOpen == true)
         {
-            UIOpen = !UIOpen;
-            if (UIOpen == true)
+            Player.Instance.enablePlayer(false);
+            Time.timeScale = UITimeScale;
+            foreach (GameObject recipeIcon in Inventory.Instance.recipeIcons)
             {
-                Player.Instance.enablePlayer(false);
-                Time.timeScale = .2f;
-                foreach (GameObject recipeIcon in Inventory.Instance.recipeIcons)
-                {
-                    recipeIcon.transform.GetChild(1).GetComponent<Button>().interactable = true;
-                }
+                recipeIcon.transform.GetChild(1).GetComponent<Button>().interactable = true;
             }
-            if (UIOpen == false)
+        }
+        if (UIOpen == false)
+        {
+            Player.Instance.enablePlayer(true);
+            Time.timeScale = 1f;
+            foreach (GameObject recipeIcon in Inventory.Instance.recipeIcons)
             {
-                Player.Instance.enablePlayer(true);
-                Time.timeScale = 1f;
-                foreach (GameObject recipeIcon in Inventory.Instance.recipeIcons)
-                {
-                    recipeIcon.transform.GetChild(1).GetComponent<Button>().interactable = false;
-                }
+                recipeIcon.transform.GetChild(1).GetComponent<Button>().interactable = false;
             }
         }
     }

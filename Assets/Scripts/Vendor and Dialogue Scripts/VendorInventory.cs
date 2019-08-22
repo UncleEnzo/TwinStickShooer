@@ -56,10 +56,11 @@ public class VendorInventory : MonoBehaviour
             selectItemForSale(); // I think this is a janky solution because if you run out of items, this will constantly call null
             itemPurchased = false;
         }
-        if (playerInRange && Input.GetKeyDown("e"))
+        if (playerInRange && Input.GetKeyDown("e") && !InventoryUI.UIOpen)
         {
             Time.timeScale = 0;
             Player.Instance.enablePlayer(false);
+            InventoryUI.canUseUI = false;
             weeklyItemPopup.SetActive(false);
             updateVendorTradeUI();
             TradePanel.SetActive(true);
@@ -138,6 +139,7 @@ public class VendorInventory : MonoBehaviour
     {
         TradePanel.SetActive(false);
         Player.Instance.enablePlayer(true);
+        InventoryUI.canUseUI = true;
         Time.timeScale = 1;
 
         displaySaveIcon();
@@ -208,6 +210,7 @@ public class VendorInventory : MonoBehaviour
     {
         TradePanel.SetActive(false);
         Player.Instance.enablePlayer(true);
+        InventoryUI.canUseUI = true;
         Time.timeScale = 1;
         RemoveAllListeners();
     }

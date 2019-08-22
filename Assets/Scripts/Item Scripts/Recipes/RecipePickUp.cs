@@ -22,7 +22,7 @@ public class RecipePickUp : Interactable
     }
     void Update()
     {
-        if (Input.GetKeyDown("e") && playerInRange)
+        if (Input.GetKeyDown("e") && playerInRange && !InventoryUI.UIOpen)
         {
             pickUpItem();
             sendDestroyChestSiblingsSignal();
@@ -36,6 +36,7 @@ public class RecipePickUp : Interactable
         pickUpItem();
         sendDestroyChestSiblingsSignal();
         Player.Instance.enablePlayer(true);
+        InventoryUI.canUseUI = true;
         LootTable.instance.RemoveItemFromPool(gameObject);
         Time.timeScale = 1;
 

@@ -70,7 +70,7 @@ public class Enemy : MonoBehaviour
     public float distFromPlayer;
     public float enemyCorpseTimer = 10f;
     public GameObject deadEnemyMarker;
-
+    private bool m_isQuitting;
     protected void Start()
     {
         StartOrEnableEnemy();
@@ -101,15 +101,26 @@ public class Enemy : MonoBehaviour
         enemyState = EnemyStates.FollowPlayer;
     }
 
+    protected virtual void OnApplicationQuit()
+    {
+        m_isQuitting = true;
+    }
+
     protected void OnDisable()
     {
-        TrackFloatingTextPos();
+        if (!m_isQuitting && Application.isPlaying == true)
+        {
+            TrackFloatingTextPos();
+        }
         aiPath.canMove = true;
     }
     protected void Update()
     {
         //Tracks floating text number locations relative to the enemy
-        TrackFloatingTextPos();
+        if (!m_isQuitting && Application.isPlaying == true)
+        {
+            TrackFloatingTextPos();
+        }
     }
 
     // Update is called once per frame
@@ -204,11 +215,13 @@ public class Enemy : MonoBehaviour
             }
         }
         sprite.color = regularColor;
+        gameObject.tag = TagsAndLabels.UntaggedTag;
         gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.DeadEnemyLabel);
         SwitchVitals();
         deadEnemyMarker.SetActive(true);
         yield return new WaitForSeconds(enemyCorpseTimer);
         SwitchVitals();
+        gameObject.tag = TagsAndLabels.EnemyTag;
         gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.EnemyLabel);
         deadEnemyMarker.SetActive(false);
         gameObject.SetActive(false);
@@ -252,7 +265,6 @@ public class Enemy : MonoBehaviour
             floatingTextList.Remove(removedFloatingText);
         }
         removeTextList.Clear();
-        print(floatingTextList.Count);
     }
 
     private void dropCraftComponents()
@@ -268,9 +280,10 @@ public class Enemy : MonoBehaviour
             GameObject newComponent = ObjectPooler.SharedInstance.GetPooledObject(craftComponentName + "(Clone)");
             if (newComponent != null)
             {
-                newComponent.transform.position = new Vector2(randomDistFromEnemy(transform.position.x), randomDistFromEnemy(transform.position.y));
+                newComponent.transform.position = new Vector2(transform.position.x, transform.position.y);
                 newComponent.transform.rotation = transform.rotation;
                 newComponent.SetActive(true);
+                newComponent.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-5f, 5f), Random.Range(-5f, 5f)), ForceMode2D.Impulse);
             }
         }
     }
@@ -282,7 +295,7 @@ public class Enemy : MonoBehaviour
             GameObject newKey = ObjectPooler.SharedInstance.GetPooledObject(key.name + "(Clone)");
             if (newKey != null)
             {
-                newKey.transform.position = new Vector2(randomDistFromEnemy(transform.position.x), randomDistFromEnemy(transform.position.y));
+                newKey.transform.position = new Vector2(transform.position.x, transform.position.y);
                 newKey.transform.rotation = transform.rotation;
                 newKey.SetActive(true);
             }

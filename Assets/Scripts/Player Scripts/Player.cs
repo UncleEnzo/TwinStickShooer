@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Linq;
+using System.Runtime.InteropServices;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using UnityEngine.SceneManagement;
 public enum PlayerStates
 {
     MovingShooting,
+    Disabled,
     KnockedBack,
     Die
 }
@@ -26,15 +28,14 @@ public class Player : MonoBehaviour
         Instance = this;
     }
     #endregion
-    private PlayerStates playerState;
+    public PlayerStates playerState;
     public float speed = 10f;
     public Rigidbody2D rb;
     public PlayerAnimController animator;
-    public bool canMove = true;
     private float damagedKnockBackForce = 13f;
     private float damagedKnockBackRadius = 5f;
     private GameObject reloadUIObject;
-    private float knockedBackTimer = .2f;
+    private float knockedBackTimer = .5f;
     public bool playerUsable = true;
     public float totalHealth = 8f;
     public float health = 8f;
@@ -50,8 +51,7 @@ public class Player : MonoBehaviour
     private bool iFramesActive = false;
     #endregion
     [Header("Sound Effects")]
-    [SerializeField]
-    private AudioClip hitSound;
+    public AudioClip hitSound;
     private AudioSource playerSounds;
 
 
@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
             PlayerHUBController.Instance.updateDisplayHubHealth(health, totalHealth);
         }
     }
-    // Update is called once per frame
+
     void FixedUpdate()
     {
         UpdateReloadBarLocation();
@@ -114,30 +114,13 @@ public class Player : MonoBehaviour
         tempVect = tempVect.normalized * speed * Time.deltaTime;
         rb.MovePosition(transform.position + tempVect);
     }
-    public void enablePlayer(Boolean playerUsable)
-    {
-        this.playerUsable = playerUsable;
-        CameraController.Instance.enabled = playerUsable;
-        CursorController.Instance.enabled = playerUsable;
-        WeaponSwitching.Instance.GetComponent<SetGunPosition>().enabled = playerUsable;
-        Transform currentWeapon = WeaponSwitching.Instance.getSelectedWeapon();
-        if (currentWeapon)
-        {
-            currentWeapon.GetComponentInChildren<Weapon>().enabled = playerUsable;
-        }
-        animator.enabled = playerUsable;
-        canMove = playerUsable;
-    }
+
     public void hit(float Damage)
     {
         hit(Damage, 0, new Vector2(0, 0));
     }
     public void hit(float Damage, float knockbackForce, Vector2 knockBackTrajectory)
     {
-        if (knockbackForce != 0)
-        {
-            canMove = false;
-        }
         if (!iFramesActive)
         {
             health -= Damage;
@@ -147,6 +130,11 @@ public class Player : MonoBehaviour
         {
             //knocks back surrounding enemies
             knockBackEnemies();
+
+            if (InventoryUI.UIOpen)
+            {
+                InventoryUI.openOrCloseInventory();
+            }
 
             //applies knockback to self
             if (knockbackForce != 0)
@@ -166,20 +154,48 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void enablePlayer(Boolean playerUsableVar)
+    {
+        this.playerUsable = playerUsableVar;
+        if (!playerUsableVar)
+        {
+            playerState = PlayerStates.Disabled;
+        }
+        else
+        {
+            playerState = PlayerStates.MovingShooting;
+        }
+        CameraController.Instance.enabled = playerUsableVar;
+        CursorController.Instance.enabled = playerUsableVar;
+        WeaponSwitching.Instance.GetComponent<SetGunPosition>().enabled = playerUsableVar;
+        Transform currentWeapon = WeaponSwitching.Instance.getSelectedWeapon();
+        if (currentWeapon)
+        {
+            currentWeapon.GetComponentInChildren<Weapon>().enabled = playerUsableVar;
+        }
+        animator.enabled = playerUsableVar;
+    }
+
     private void knockBackEnemies()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, damagedKnockBackRadius);
         foreach (Collider2D nearbyObject in colliders)
         {
-            //Destroys enemy bullets caught in the explosion
-            if (nearbyObject.GetComponent<UbhBulletSimpleSprite2d>() && nearbyObject.tag == TagsAndLabels.EnemyBulletTag)
+            //disables enemy bullets caught in the knockBack effect
+            if (nearbyObject.GetComponent<UbhBulletSimpleSprite2d>()
+                && nearbyObject.tag == TagsAndLabels.EnemyBulletTag)
             {
-                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().disableBullet();
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_useAutoRelease = true;
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_autoReleaseTime = 1f;
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_selfTimeCount = 1f;
             }
 
             //Knocks Back Enemies And all other potential objects
-            if (nearbyObject.tag != TagsAndLabels.PlayerBulletTag && nearbyObject.tag != TagsAndLabels.PlayerTag
-                && !nearbyObject.isTrigger && nearbyObject.GetComponent<Rigidbody2D>())
+            if (nearbyObject.tag != TagsAndLabels.PlayerBulletTag
+                && nearbyObject.tag != TagsAndLabels.PlayerTag
+                && nearbyObject.tag != TagsAndLabels.EnemyBulletTag
+                && !nearbyObject.isTrigger
+                && nearbyObject.GetComponent<Rigidbody2D>())
             {
                 Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
                 Vector2 difference = rb.transform.position - transform.position;
@@ -199,17 +215,16 @@ public class Player : MonoBehaviour
     {
         SceneLoader.loadGameOverScene();
     }
+
     private IEnumerator knockedBackCo(float knockBackForce, Vector2 knockBackTrajectory)
     {
         if (rb != null)
         {
             playerState = PlayerStates.KnockedBack;
-            canMove = false;
             Vector2 difference = knockBackTrajectory.normalized * knockBackForce;
             rb.AddForce(difference, ForceMode2D.Impulse);
             yield return new WaitForSeconds(knockedBackTimer);
             rb.velocity = Vector2.zero;
-            canMove = true;
             playerState = PlayerStates.MovingShooting;
         }
     }

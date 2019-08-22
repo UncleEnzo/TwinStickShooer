@@ -8,7 +8,9 @@ public class DialogueTrigger : MonoBehaviour
 
     public void triggerDialogue()
     {
+        Time.timeScale = 1f;
         Player.Instance.enablePlayer(false);
+        InventoryUI.canUseUI = false;
         FindObjectOfType<DialogueManager>().startDialogue(dialogue);
     }
 }

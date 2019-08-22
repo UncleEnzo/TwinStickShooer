@@ -40,7 +40,7 @@ public class Door : Interactable
 
     void Update()
     {
-        if (thisDoorType == DoorType.key && remainingNumEnemies == 0 && otherColliderIsTrigger == true && Input.GetKeyDown("e"))
+        if (thisDoorType == DoorType.key && remainingNumEnemies == 0 && otherColliderIsTrigger == true && Input.GetKeyDown("e") && !InventoryUI.UIOpen)
         {
             if (Inventory.Instance.getKeyCount() > 0)
             {

@@ -14,7 +14,7 @@ public class EnemyGun : Gun
     {
         base.Update();
         Vector3 gunTransform = transform.position;
-        Transform WeilderTransform = gameObject.transform.root;
+        Transform WeilderTransform = gameObject.transform.parent.gameObject.transform;
         Vector3 playerTransform = Player.Instance.transform.position;
         Aim(playerTransform, WeilderTransform.position);
         SpriteFlip(WeilderTransform, gunTransform);

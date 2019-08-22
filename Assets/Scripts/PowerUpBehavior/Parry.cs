@@ -16,7 +16,6 @@ public class Parry : MonoBehaviour
     public float defaultColliderOffSetX = .5f;
     private float defaultcolliderSizeX = 1f;
     private float defaultcolliderSizeY = 2.5f;
-    private bool colliderCacheCleared = false;
     private List<Collider2D> bulletsInCollider = new List<Collider2D>();
 
     void OnEnable()
@@ -49,11 +48,6 @@ public class Parry : MonoBehaviour
         //CoolDown for parry
         if (!readyToSwipe)
         {
-            if (!colliderCacheCleared)
-            {
-                bulletsInCollider.Clear();
-                colliderCacheCleared = true;
-            }
             coolDownOnParry -= Time.deltaTime;
             if (coolDownOnParry <= 0)
             {
@@ -63,7 +57,7 @@ public class Parry : MonoBehaviour
         }
 
         //Parry Mechanic Trigger
-        if (readyToSwipe && Input.GetKeyDown(KeyCode.E))
+        if (readyToSwipe && Input.GetKeyDown(KeyCode.E) && !InventoryUI.UIOpen)
         {
             parry();
         }
@@ -75,16 +69,12 @@ public class Parry : MonoBehaviour
 
     void parry()
     {
-        // print("Parrying");
-        List<Collider2D> colliderBulletsToRemove = new List<Collider2D>();
-
         //paints a single target for all parry bullets to attack
         Transform enemyTransform = null;
 
         //Perform the parry
         foreach (Collider2D collider in bulletsInCollider)
         {
-            colliderBulletsToRemove.Add(collider);
             if (collider.gameObject.activeInHierarchy)
             {
                 if (enemyTransform == null)
@@ -92,26 +82,22 @@ public class Parry : MonoBehaviour
                     enemyTransform = UbhUtil.GetTransformFromTagName(TagsAndLabels.EnemyTag, false, true, collider.gameObject.transform);
                 }
                 UbhBulletSimpleSprite2d enemyBullet = collider.gameObject.GetComponent<UbhBulletSimpleSprite2d>();
+                enemyBullet.m_pauseAndResume = false;
+                enemyBullet.m_accelSpeed = 0;
                 collider.gameObject.tag = TagsAndLabels.PlayerBulletTag;
                 collider.gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.PlayerBulletLabel);
                 enemyBullet.rbMovement = true;
                 enemyBullet.isRbTrajConfigured = false;
-                Vector2 currentTrajectory = (enemyTransform.position - collider.gameObject.transform.position) / enemyBullet.m_speed;
+                //note: using mathf.abs to ensure that negative speeds don't cause issues (neg speeds set for decelerating bullets)
+                Vector2 currentTrajectory = (enemyTransform.position - collider.gameObject.transform.position) / Mathf.Abs(enemyBullet.m_speed);
                 enemyBullet.m_speed = reflectBulletSpeed;
                 enemyBullet.m_bulletTrajectory = currentTrajectory * enemyBullet.m_speed;
             }
-            colliderCacheCleared = false;
         }
 
         //removes parried bullets from list because otherwise they never exit collider
-        foreach (Collider2D collider in colliderBulletsToRemove)
-        {
-            if (bulletsInCollider.Contains(collider) && !collider.gameObject.activeInHierarchy)
-            {
-                //remove it from the list
-                bulletsInCollider.Remove(collider);
-            }
-        }
+        bulletsInCollider.Clear();
+
         readyToSwipe = false;
     }
 

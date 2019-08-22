@@ -31,8 +31,16 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1;
-        Player.Instance.enablePlayer(true);
+        if (InventoryUI.UIOpen)
+        {
+            Time.timeScale = InventoryUI.UITimeScale;
+        }
+        if (!InventoryUI.UIOpen)
+        {
+            Time.timeScale = 1;
+            Player.Instance.enablePlayer(true);
+        }
+        InventoryUI.canUseUI = true;
         GameIsPaused = false;
     }
 
@@ -40,7 +48,11 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0;
-        Player.Instance.enablePlayer(false);
+        if (!InventoryUI.UIOpen)
+        {
+            Player.Instance.enablePlayer(false);
+        }
+        InventoryUI.canUseUI = false;
         GameIsPaused = true;
     }
 

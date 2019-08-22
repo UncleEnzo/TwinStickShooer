@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_bulletTag: 0
-  m_damage: 0
+  m_damage: 1
   m_knockBack: 0
   m_bulletAccuracy: 0
   m_isBulletBounce: 0

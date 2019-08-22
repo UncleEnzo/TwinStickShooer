@@ -29,6 +29,7 @@ public class RecipeChest : TreasureChest
         GameObject explosiveRecipe = spawnRecipe(LootListType.ExplosiveRecipe, 100, -100, chestID);
         Time.timeScale = 0;
         Player.Instance.enablePlayer(false);
+        InventoryUI.canUseUI = false;
         //physical
         updateRecipeUI(physicalRecipe, physicalIcon, damageTextPhysical, physicalEffectText, physicalButton);
         //gunPowder

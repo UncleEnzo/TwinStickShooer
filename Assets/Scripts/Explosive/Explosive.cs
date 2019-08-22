@@ -55,7 +55,9 @@ public class Explosive : MonoBehaviour
             if (nearbyObject.GetComponent<UbhBulletSimpleSprite2d>() &&
                 nearbyObject.tag == TagsAndLabels.EnemyBulletTag)
             {
-                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().disableBullet();
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_useAutoRelease = true;
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_autoReleaseTime = 1f;
+                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_selfTimeCount = 1f;
             }
 
             //Applies knockback

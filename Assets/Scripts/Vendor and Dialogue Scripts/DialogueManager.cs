@@ -63,6 +63,8 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("isOpen", false);
         testNPC.dialogueTriggered = false;
+        Time.timeScale = 0f;
         Player.Instance.enablePlayer(true);
+        InventoryUI.canUseUI = true;
     }
 }

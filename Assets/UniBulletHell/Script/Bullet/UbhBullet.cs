@@ -44,7 +44,7 @@ public class UbhBullet : UbhMonoBehaviour
     [NonSerializedAttribute]
     public float m_speed;
     private float m_angle;
-    private float m_accelSpeed;
+    public float m_accelSpeed;
     private float m_accelTurn;
     private bool m_homing;
     private Transform m_homingTarget;
@@ -53,11 +53,11 @@ public class UbhBullet : UbhMonoBehaviour
     private float m_sinWaveSpeed;
     private float m_sinWaveRangeSize;
     private bool m_sinWaveInverse;
-    private bool m_pauseAndResume;
+    public bool m_pauseAndResume;
     private float m_pauseTime;
     private float m_resumeTime;
-    private bool m_useAutoRelease;
-    private float m_autoReleaseTime;
+    public bool m_useAutoRelease;
+    public float m_autoReleaseTime;
     private UbhUtil.AXIS m_axisMove;
     private bool m_useMaxSpeed;
     private float m_maxSpeed;
@@ -65,10 +65,8 @@ public class UbhBullet : UbhMonoBehaviour
     private float m_minSpeed;
     private float m_baseAngle;
     private float m_selfFrameCnt;
-    private float m_selfTimeCount;
-
+    public float m_selfTimeCount;
     private UbhTentacleBullet m_tentacleBullet;
-
     private bool m_shooting;
 
     public UbhBaseShot parentShot { get { return m_parentBaseShot; } }
@@ -141,7 +139,6 @@ public class UbhBullet : UbhMonoBehaviour
         {
             UbhObjectPool.instance.ReleaseBullet(this);
         }
-
     }
 
     /// <summary>

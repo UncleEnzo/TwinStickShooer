@@ -13,7 +13,7 @@ public class TestNPC : Interactable
 
     void Update()
     {
-        if (playerInRange && !dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue)
+        if (playerInRange && !dialogueTriggered && Input.GetKeyDown("e") && !InventoryUI.UIOpen && Time.time > nextDialogue)
         {
             print("Dialogue Triggered");
             ToolTipOff.Raise();
@@ -23,7 +23,7 @@ public class TestNPC : Interactable
         }
 
 
-        if ((dialogueTriggered && Input.GetKeyDown("e") && Time.time > nextDialogue) || (dialogueTriggered && Input.GetMouseButtonDown(0) && Time.time > nextDialogue))
+        if ((dialogueTriggered && Input.GetKeyDown("e") && !InventoryUI.UIOpen && Time.time > nextDialogue) || (dialogueTriggered && Input.GetMouseButtonDown(0) && Time.time > nextDialogue))
         {
             nextDialogue = Time.time + speechRate;
             Boolean lastSentence = FindObjectOfType<DialogueManager>().displayNextSentence();
