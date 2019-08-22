@@ -25,7 +25,7 @@ public class Follow : MonoBehaviour
     IEnumerator waitBeforeMagnetizing()
     {
         yield return new WaitForSeconds(1f);
-        AttractorSpeed += Random.Range(.05f, .1f);
+        AttractorSpeed += Random.Range(1f, 1.5f);
         lastCoroutine = null;
     }
 }
