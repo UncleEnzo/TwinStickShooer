@@ -122,8 +122,9 @@ MonoBehaviour:
     maxAmmo: 10
     reloadTime: 2
     bulletTag: 1
+    destroyBulletsOnDeath: 1
     bulletDamage: 1
-    bulletSpeed: 20
+    bulletSpeed: 6
     timeBulletSelfDestruct: 10
     knockBack: 5
     bulletAccuracy: 0
@@ -136,10 +137,8 @@ MonoBehaviour:
     explosionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
       type: 3}
   armLength: 0.5
-  currentAmmo: 0
   gunShotSound: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
   gunReloadSound: {fileID: 8300000, guid: cef0fa03af5b747f0abe82cde0b2bccc, type: 3}
-  shotControllerShowCase: {fileID: 0}
   Cost: 35
   DamageDescription: Damage
   EffectDescription: Shoots
@@ -343,13 +342,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6478021005786239304, guid: bc157eb8ac7baae43b7d4d6f3b098192,
         type: 3}
-      propertyPath: m_randomSpeedMin
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6478021005786239304, guid: bc157eb8ac7baae43b7d4d6f3b098192,
-        type: 3}
       propertyPath: m_randomSpeedMax
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc157eb8ac7baae43b7d4d6f3b098192, type: 3}

@@ -13,15 +13,10 @@ public class UbhRandomShot : UbhBaseShot
     // "Set a angle size of random range. (0 to 360)"
     [Range(0f, 360f), FormerlySerializedAs("_RandomRangeSize")]
     public float m_randomRangeSize = 360f;
-    // "Set a minimum bullet speed of shot."
-    // "BulletSpeed is ignored."
-    [FormerlySerializedAs("_RandomSpeedMin")]
-    public float m_randomSpeedMin = 1f;
-    // "Set a maximum bullet speed of shot."
-    // "BulletSpeed is ignored."
+    // "Set how much faster the bullet speed range can vary."
     [FormerlySerializedAs("_RandomSpeedMax")]
-    public float m_randomSpeedMax = 3f;
-    // "Set a minimum delay time between bullet and next bullet. (sec)"
+    [Header("This m_randomSpeedMax += bulletSpeed. Sets upper limit of how much faster a bullet can be.")]
+    public float m_randomSpeedMax = 1f;
     [FormerlySerializedAs("_RandomDelayMin")]
     public float m_randomDelayMin = 0.01f;
     // "Set a maximum delay time between bullet and next bullet. (sec)"
@@ -37,9 +32,9 @@ public class UbhRandomShot : UbhBaseShot
 
     public override void Shot()
     {
-        if (m_bulletNum <= 0 || m_randomSpeedMin <= 0f || m_randomSpeedMax <= 0)
+        if (m_bulletNum <= 0 || m_randomSpeedMax <= 0)
         {
-            Debug.LogWarning("Cannot shot because BulletNum or RandomSpeedMin or RandomSpeedMax is not set.");
+            Debug.LogWarning("Cannot shot because BulletNum or RandomSpeedMax is not set.");
             return;
         }
 
@@ -88,8 +83,6 @@ public class UbhRandomShot : UbhBaseShot
             return;
         }
 
-        float bulletSpeed = Random.Range(m_randomSpeedMin, m_randomSpeedMax);
-
         float minAngle = m_angle - (m_randomRangeSize / 2f);
         float maxAngle = m_angle + (m_randomRangeSize / 2f);
         float angle = 0f;
@@ -108,7 +101,7 @@ public class UbhRandomShot : UbhBaseShot
 
         ShotBullet(m_bulletTag, m_damage, m_knockBack, m_bulletAccuracy, m_isBulletBounce, m_bulletBounceMaxNum,
                             m_isExplosive, m_explosionDamage, m_explosiveForce, m_explosiveRadius,
-                            m_explosionEffect, bullet, bulletSpeed, angle);
+                            m_explosionEffect, bullet, Random.Range(m_bulletSpeed, m_bulletSpeed + m_randomSpeedMax), angle);
         FiredShot();
 
         m_numList.RemoveAt(index);

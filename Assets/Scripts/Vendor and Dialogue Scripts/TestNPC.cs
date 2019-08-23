@@ -7,7 +7,9 @@ public class TestNPC : Interactable
 {
     public Signal ToolTipOn;
     public Signal ToolTipOff;
-    public Boolean dialogueTriggered = false;
+    public bool dialogueTriggered = false;
+    private bool lastSentence = false;
+    private bool usingE = true;
     private float nextDialogue = 1F;
     public float speechRate = 1F;
 
@@ -23,15 +25,23 @@ public class TestNPC : Interactable
         }
 
 
-        if ((dialogueTriggered && Input.GetKeyDown("e") && !InventoryUI.UIOpen && Time.time > nextDialogue) || (dialogueTriggered && Input.GetMouseButtonDown(0) && Time.time > nextDialogue))
+        if ((dialogueTriggered && Input.GetKeyDown("e") && !InventoryUI.UIOpen && Time.time > nextDialogue)
+             || (dialogueTriggered && Input.GetMouseButtonDown(0) && Time.time > nextDialogue))
         {
             nextDialogue = Time.time + speechRate;
-            Boolean lastSentence = FindObjectOfType<DialogueManager>().displayNextSentence();
-
-            if (lastSentence)
+            lastSentence = FindObjectOfType<DialogueManager>().displayNextSentence();
+            if (Input.GetKeyDown("e"))
             {
-                EnemySpawner.Instance.activateRandomEnemies(6);
+                usingE = true;
             }
+            else
+            {
+                usingE = false;
+            }
+        }
+        if (lastSentence && ((usingE == true && Input.GetKeyDown("e")) || (usingE == false && Input.GetMouseButtonUp(0))))
+        {
+            EnemySpawner.Instance.activateRandomEnemies(6);
         }
     }
 

@@ -30,7 +30,14 @@ public class ThrowExplosive : Weapon
         }
         if (currentAmmo <= 0)
         {
-            Destroy(gameObject);
+            if (Input.GetMouseButtonUp(0))
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                return;
+            }
         }
         if (Player.Instance.playerUsable)
         {

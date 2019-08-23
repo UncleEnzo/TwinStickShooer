@@ -18,14 +18,10 @@ public class UbhRandomSpiralMultiShot : UbhBaseShot
     // "Set a angle size of random range. (0 to 360)"
     [Range(0f, 360f), FormerlySerializedAs("_RandomRangeSize")]
     public float m_randomRangeSize = 30f;
-    // "Set a minimum bullet speed of shot."
-    // "BulletSpeed is ignored."
-    [FormerlySerializedAs("_RandomSpeedMin")]
-    public float m_randomSpeedMin = 1f;
-    // "Set a maximum bullet speed of shot."
-    // "BulletSpeed is ignored."
+    // "Set how much faster the bullet speed range can vary."
     [FormerlySerializedAs("_RandomSpeedMax")]
-    public float m_randomSpeedMax = 3f;
+    [Header("This m_randomSpeedMax += bulletSpeed. Sets upper limit of how much faster a bullet can be.")]
+    public float m_randomSpeedMax = 1f;
     // "Set a minimum delay time between bullet and next bullet. (sec)"
     [FormerlySerializedAs("_RandomDelayMin")]
     public float m_randomDelayMin = 0.01f;
@@ -38,9 +34,9 @@ public class UbhRandomSpiralMultiShot : UbhBaseShot
 
     public override void Shot()
     {
-        if (m_bulletNum <= 0 || m_randomSpeedMin <= 0f || m_randomSpeedMax <= 0 || m_spiralWayNum <= 0)
+        if (m_bulletNum <= 0 || m_randomSpeedMax <= 0 || m_spiralWayNum <= 0)
         {
-            Debug.LogWarning("Cannot shot because BulletNum or RandomSpeedMin or RandomSpeedMax or SpiralWayNum is not set.");
+            Debug.LogWarning("Cannot shot because BulletNum or RandomSpeedMax or SpiralWayNum is not set.");
             return;
         }
 
@@ -80,8 +76,6 @@ public class UbhRandomSpiralMultiShot : UbhBaseShot
                 break;
             }
 
-            float bulletSpeed = Random.Range(m_randomSpeedMin, m_randomSpeedMax);
-
             float centerAngle = m_angle + (spiralWayShiftAngle * i) + (m_shiftAngle * Mathf.Floor(m_nowIndex / m_spiralWayNum));
             float minAngle = centerAngle - (m_randomRangeSize / 2f);
             float maxAngle = centerAngle + (m_randomRangeSize / 2f);
@@ -89,7 +83,7 @@ public class UbhRandomSpiralMultiShot : UbhBaseShot
 
             ShotBullet(m_bulletTag, m_damage, m_knockBack, m_bulletAccuracy, m_isBulletBounce, m_bulletBounceMaxNum,
                             m_isExplosive, m_explosionDamage, m_explosiveForce, m_explosiveRadius,
-                            m_explosionEffect, bullet, bulletSpeed, angle);
+                            m_explosionEffect, bullet, Random.Range(m_bulletSpeed, m_bulletSpeed + m_randomSpeedMax), angle);
 
             m_nowIndex++;
             if (m_nowIndex >= m_bulletNum)
