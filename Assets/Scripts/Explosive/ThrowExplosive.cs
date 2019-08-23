@@ -21,15 +21,21 @@ public class ThrowExplosive : Weapon
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePosTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Transform playerTransform = Player.Instance.transform;
-        Aim(mousePosTarget, playerTransform.position);
-        SpriteFlip(playerTransform, mousePosTarget);
+        if (Player.Instance.playerUsable)
+        {
+            Vector3 mousePosTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Transform playerTransform = Player.Instance.transform;
+            Aim(mousePosTarget, playerTransform.position);
+            SpriteFlip(playerTransform, mousePosTarget);
+        }
         if (currentAmmo <= 0)
         {
             Destroy(gameObject);
         }
-        Throw(isPlayer);
+        if (Player.Instance.playerUsable)
+        {
+            Throw(isPlayer);
+        }
         //Moving this outside of throw so that it is updated during timescale 0 as well
         PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
     }

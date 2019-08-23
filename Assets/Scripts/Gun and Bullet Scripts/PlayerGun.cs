@@ -17,8 +17,11 @@ public class PlayerGun : Gun
     new void Update()
     {
         base.Update();
-        Aim(mousePosTarget, playerTransform.position);
-        SpriteFlip(playerTransform, mousePosTarget);
-        FireGun(isPlayer);
+        if (Player.Instance.playerUsable)
+        {
+            Aim(mousePosTarget, playerTransform.position);
+            SpriteFlip(playerTransform, mousePosTarget);
+            FireGun(isPlayer);
+        }
     }
 }

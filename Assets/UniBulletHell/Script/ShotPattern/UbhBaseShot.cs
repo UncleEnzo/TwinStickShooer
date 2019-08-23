@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -13,6 +14,9 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
     // "Sets the bullet tag.  All bullets are player/enemy agnostic until shot."
     [FormerlySerializedAs("_BulletTag")]
     public bool m_bulletTag;
+    // "Determines whether the enemy's active bullets get destroyed on death."
+    [FormerlySerializedAs("_DestroyBulletsOnDeath")]
+    public bool m_destroyBulletsOnDeath;
     // "Set the damage of bullets."
     [FormerlySerializedAs("_Damage")]
     public float m_damage;
@@ -88,6 +92,8 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
     // "Set a time to automatically release after the shot at using UseAutoRelease. (sec)"
     [FormerlySerializedAs("_AutoReleaseTime"), UbhConditionalHide("m_useAutoRelease")]
     public float m_autoReleaseTime = 10f;
+
+    public List<UbhBullet> m_activeBullets = new List<UbhBullet>();
 
     [Space(10)]
 
@@ -178,7 +184,7 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
         {
             return null;
         }
-
+        m_activeBullets.Add(bullet);
         return bullet;
     }
 

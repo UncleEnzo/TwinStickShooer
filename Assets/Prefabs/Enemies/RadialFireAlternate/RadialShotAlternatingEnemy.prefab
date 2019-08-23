@@ -238,7 +238,6 @@ MonoBehaviour:
   aiPath: {fileID: 3486278988775579066}
   enemyHitSound: {fileID: 8300000, guid: 2dc35d77cfe164a2eab57d08500740e2, type: 3}
   enemyDeathSound: {fileID: 0}
-  regularColor: {r: 0.62415105, g: 0.8962264, b: 0.43543077, a: 1}
   enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   destroyBulletsOnDeath: 1
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
@@ -254,7 +253,6 @@ MonoBehaviour:
   maxDropDist: 2
   coolDownOnMovementTimer: 3
   movementCoolDownReset: 0.5
-  floatingText: []
   enemyState: 0
   distFromPlayer: 0
   enemyCorpseTimer: 10
@@ -423,7 +421,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1632873001
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3c84c3c92fe21fe419677cccf9c07f2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -523,6 +521,11 @@ PrefabInstance:
       propertyPath: m_nextLineDelay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8244202815016693326, guid: adc4e56e79d50b948b8efb68b185b6ee,
+        type: 3}
+      propertyPath: m_destroyBulletsOnDeath
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8697526187115260075, guid: adc4e56e79d50b948b8efb68b185b6ee,
         type: 3}
       propertyPath: m_bulletNum
@@ -536,6 +539,11 @@ PrefabInstance:
     - target: {fileID: 8697526187115260075, guid: adc4e56e79d50b948b8efb68b185b6ee,
         type: 3}
       propertyPath: m_nextLineDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8697526187115260075, guid: adc4e56e79d50b948b8efb68b185b6ee,
+        type: 3}
+      propertyPath: m_destroyBulletsOnDeath
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -97,11 +97,33 @@ public sealed class UbhShotCtrl : UbhMonoBehaviour
 
         if (SceneLoader.LoadingNextScene == false)
         {
+            disableBulletsOnDeath(m_shotList);
+            disableBulletsOnDeath(m_randomShotList);
             UbhShotManager shotMgr = UbhShotManager.instance;
             if (shotMgr != null)
             {
                 shotMgr.RemoveShot(this);
             }
+        }
+    }
+
+    private void disableBulletsOnDeath(List<ShotInfo> shotList)
+    {
+        foreach (ShotInfo shotInfo in m_shotList)
+        {
+            if (shotInfo.m_shotObj.m_destroyBulletsOnDeath)
+            {
+                foreach (UbhBullet activeBullet in shotInfo.m_shotObj.m_activeBullets)
+                {
+                    if (activeBullet.isActive)
+                    {
+                        activeBullet.m_useAutoRelease = true;
+                        activeBullet.m_autoReleaseTime = 1f;
+                        activeBullet.m_selfTimeCount = 1f;
+                    }
+                }
+            }
+            shotInfo.m_shotObj.m_activeBullets.Clear();
         }
     }
 

@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class SetGunPosition : MonoBehaviour
 {
+    private Vector3 cachedgunPos;
+    private Quaternion cachedRotation;
+    private float armLength = .5f;
     void Update()
     {
         Vector3 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        WeaponHolderPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition), .5f, Player.Instance.transform.position);
-    }
-    private void WeaponHolderPosition(Vector3 target, float armLength, Vector3 Wielder)
-    {
-        Vector3 shoulderToMouseDir = target - Wielder;
+        cachedRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        if (Player.Instance.playerUsable)
+        {
+            transform.rotation = cachedRotation;
+        }
+        Vector3 shoulderToMouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - Player.Instance.transform.position;
         shoulderToMouseDir.z = 0;
-        transform.position = Wielder + (armLength * shoulderToMouseDir.normalized);
+        cachedgunPos = Player.Instance.transform.position + (armLength * shoulderToMouseDir.normalized);
+        if (Player.Instance.playerUsable)
+        {
+            transform.position = cachedgunPos;
+        }
     }
 }

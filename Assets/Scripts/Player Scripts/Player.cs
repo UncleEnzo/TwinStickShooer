@@ -156,6 +156,8 @@ public class Player : MonoBehaviour
 
     public void enablePlayer(Boolean playerUsableVar)
     {
+        //note: Using this to disable gun firing (but keep reloading)
+        //note: Using this to keep tracking gun pos but not have it update
         this.playerUsable = playerUsableVar;
         if (!playerUsableVar)
         {
@@ -167,12 +169,6 @@ public class Player : MonoBehaviour
         }
         CameraController.Instance.enabled = playerUsableVar;
         CursorController.Instance.enabled = playerUsableVar;
-        WeaponSwitching.Instance.GetComponent<SetGunPosition>().enabled = playerUsableVar;
-        Transform currentWeapon = WeaponSwitching.Instance.getSelectedWeapon();
-        if (currentWeapon)
-        {
-            currentWeapon.GetComponentInChildren<Weapon>().enabled = playerUsableVar;
-        }
         animator.enabled = playerUsableVar;
     }
 

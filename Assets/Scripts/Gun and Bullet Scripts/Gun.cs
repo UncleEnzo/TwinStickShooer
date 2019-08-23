@@ -133,6 +133,7 @@ public class Gun : Weapon
     private void ApplyGunProperties(UbhBaseShot baseShot)
     {
         baseShot.m_bulletTag = GunProperties.bulletTag;
+        baseShot.m_destroyBulletsOnDeath = GunProperties.destroyBulletsOnDeath;
         baseShot.m_damage = GunProperties.bulletDamage;
         baseShot.m_bulletSpeed = GunProperties.bulletSpeed;
         baseShot.m_knockBack = GunProperties.knockBack;

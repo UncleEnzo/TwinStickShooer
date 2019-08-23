@@ -28,6 +28,7 @@ public class GunProperties
     [Header("PlayerBullet tag = true | EnemyBullet tag = false")]
     [SerializeField]
     public bool bulletTag = true;
+    public bool destroyBulletsOnDeath = true;
     [SerializeField]
     public float bulletDamage = 1f;
     [SerializeField]
