@@ -75,7 +75,7 @@ public class UbhRandomSpiralShot : UbhBaseShot
         float maxAngle = centerAngle + (m_randomRangeSize / 2f);
         float angle = Random.Range(minAngle, maxAngle);
 
-        ShotBullet(m_bulletTag, m_damage, m_knockBack, m_bulletAccuracy, m_isBulletBounce, m_bulletBounceMaxNum,
+        ShotBullet(m_bulletTag, m_damage, m_knockBack, m_bulletAccuracy, m_isExplosiveRecipe, m_isBulletBounce, m_bulletBounceMaxNum,
                             m_isExplosive, m_explosionDamage, m_explosiveForce, m_explosiveRadius,
                             m_explosionEffect, bullet, Random.Range(m_bulletSpeed, m_bulletSpeed + m_randomSpeedMax), angle);
         FiredShot();

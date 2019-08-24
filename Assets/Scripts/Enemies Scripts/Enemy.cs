@@ -169,6 +169,8 @@ public class Enemy : MonoBehaviour
                 //Play Death Animation >> Need to switch death marker to animation up here 
                 deadEnemyMarker.SetActive(true);
                 StopAllCoroutines();
+                //note: give the enemy a ragdoll motion upon death.  Want to increase linear drag to compensate
+                rb.AddForce(knockBackTrajectory.normalized * knockBackForce, ForceMode2D.Impulse);
                 StartCoroutine(enemyDeath());
             }
             else

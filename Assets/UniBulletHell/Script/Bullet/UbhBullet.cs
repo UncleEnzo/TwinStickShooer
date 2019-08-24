@@ -17,6 +17,8 @@ public class UbhBullet : UbhMonoBehaviour
     [NonSerializedAttribute]
     public float m_bulletAccuracy;
     [NonSerializedAttribute]
+    public bool m_isExplosiveRecipe;
+    [NonSerializedAttribute]
     public bool m_isBulletBounce;
     [NonSerializedAttribute]
     public bool m_isExplosive;
@@ -68,7 +70,6 @@ public class UbhBullet : UbhMonoBehaviour
     public float m_selfTimeCount;
     private UbhTentacleBullet m_tentacleBullet;
     private bool m_shooting;
-
     public UbhBaseShot parentShot { get { return m_parentBaseShot; } }
 
     /// <summary>
@@ -144,7 +145,7 @@ public class UbhBullet : UbhMonoBehaviour
     /// <summary>
     /// Bullet Shot
     /// </summary>
-    public void Shot(bool bulletTag, float damage, float knockBack, float bulletAccuracy,
+    public void Shot(bool bulletTag, float damage, float knockBack, float bulletAccuracy, bool isExplosiveRecipe,
                      bool isBulletBounce, int bulletBounceMaxNum, bool isExplosive,
                      float explosionDamage, float explosiveForce, float explosiveRadius, GameObject explosionEffect,
                      UbhBaseShot parentBaseShot, float speed, float angle, float accelSpeed, float accelTurn,
@@ -166,6 +167,7 @@ public class UbhBullet : UbhMonoBehaviour
         m_damage = damage;
         m_knockBack = knockBack;
         m_bulletAccuracy = bulletAccuracy;
+        m_isExplosiveRecipe = isExplosiveRecipe;
         m_isBulletBounce = isBulletBounce;
         m_bulletBounceMaxNum = bulletBounceMaxNum;
         m_isExplosive = isExplosive;
@@ -199,10 +201,15 @@ public class UbhBullet : UbhMonoBehaviour
         m_minSpeed = minSpeed;
 
         m_baseAngle = 0f;
-        if (m_bulletTag)
+        if (m_bulletTag && !isExplosiveRecipe)
         {
             gameObject.tag = TagsAndLabels.PlayerBulletTag;
             gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.PlayerBulletLabel);
+        }
+        else if (m_bulletTag && isExplosiveRecipe)
+        {
+            gameObject.tag = TagsAndLabels.PlayerBulletTag;
+            gameObject.layer = LayerMask.NameToLayer(TagsAndLabels.ExplosiveLabel);
         }
         else
         {
@@ -255,6 +262,11 @@ public class UbhBullet : UbhMonoBehaviour
         {
             if (m_selfTimeCount >= m_autoReleaseTime)
             {
+                //If it's an explosive recipe, this explodes before autoreleasing
+                if (m_isExplosiveRecipe)
+                {
+                    Explode();
+                }
                 // Release
                 disableBullet();
                 return;
@@ -269,7 +281,6 @@ public class UbhBullet : UbhMonoBehaviour
                 return;
             }
         }
-
         //Transform shift movement
         if (!rbMovement)
         {
@@ -360,7 +371,6 @@ public class UbhBullet : UbhMonoBehaviour
             {
                 m_speed = m_minSpeed;
             }
-
             // move.
             Vector3 newPosition;
             if (m_axisMove == UbhUtil.AXIS.X_AND_Z)
@@ -371,9 +381,8 @@ public class UbhBullet : UbhMonoBehaviour
             else
             {
                 // X and Y axis
-                newPosition = m_transformCache.position + (m_transformCache.up * (m_speed * deltaTime));
+                newPosition = m_transformCache.position + (m_transformCache.right * (m_speed * deltaTime));
             }
-
             // set new position and rotation
             m_transformCache.SetPositionAndRotation(newPosition, newRotation);
 
@@ -382,7 +391,12 @@ public class UbhBullet : UbhMonoBehaviour
                 // Update tentacles
                 m_tentacleBullet.UpdateRotate();
             }
-            m_bulletTrajectory = (m_transformCache.up * (m_speed * deltaTime));
+
+            if (m_isExplosiveRecipe)
+            {
+                rbMovement = true;
+            }
+            m_bulletTrajectory = (m_transformCache.right * (m_speed * deltaTime));
         }
         //rb velocity setting movement
         else
@@ -393,5 +407,48 @@ public class UbhBullet : UbhMonoBehaviour
                 isRbTrajConfigured = true;
             }
         }
+    }
+    protected void Explode()
+    {
+        //create explosion
+        GameObject explosion = Instantiate(m_explosionEffect, transform.position, transform.rotation);
+        explosion.GetComponent<ParticleSystem>().Play();
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, m_explosiveRadius);
+        foreach (Collider2D nearbyObject in colliders)
+        {
+            //Destroys enemy bullets caught in the explosion
+            if (nearbyObject.GetComponent<UbhBullet>() && nearbyObject.tag == TagsAndLabels.EnemyBulletTag)
+            {
+                UbhBullet bullet = nearbyObject.GetComponent<UbhBullet>();
+                bullet.m_useAutoRelease = true;
+                bullet.m_autoReleaseTime = 1f;
+                bullet.m_selfTimeCount = 1f;
+            }
+
+            //Applies explosion
+            if (nearbyObject.tag != TagsAndLabels.PlayerBulletTag
+              && nearbyObject.tag != TagsAndLabels.EnemyBulletTag
+                && !nearbyObject.isTrigger
+                && nearbyObject.GetComponent<Rigidbody2D>())
+            {
+                Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
+                Vector2 difference = rb.transform.position - transform.position;
+                difference = difference * m_explosiveForce;
+                if (rb.GetComponent<Player>())
+                {
+                    rb.GetComponent<Player>().hit(0, m_explosiveForce, difference);
+                }
+                //Applies explosive damage to the enemy
+                if (rb.GetComponent<Enemy>())
+                {
+                    rb.GetComponent<Enemy>().hit(m_explosionDamage, m_explosiveForce, difference);
+                }
+                else
+                {
+                    rb.AddForce(difference, ForceMode2D.Impulse);
+                }
+            }
+        }
+        Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration - .01f);
     }
 }

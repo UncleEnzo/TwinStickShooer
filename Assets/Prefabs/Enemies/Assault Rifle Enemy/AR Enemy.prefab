@@ -127,8 +127,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 6
-  m_AngularDrag: 0.05
+  m_LinearDrag: 3
+  m_AngularDrag: 3
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 1
@@ -160,7 +160,6 @@ MonoBehaviour:
   aiPath: {fileID: 888971288}
   enemyHitSound: {fileID: 8300000, guid: 2dc35d77cfe164a2eab57d08500740e2, type: 3}
   enemyDeathSound: {fileID: 0}
-  regularColor: {r: 0.9245283, g: 0.611192, b: 0.22241008, a: 1}
   enemyKilled: {fileID: 11400000, guid: fbd07d4c3f01c8244b2fdc220a204bef, type: 2}
   destroyBulletsOnDeath: 1
   greenCraftComponent: {fileID: 3085158205632521483, guid: 55666b6ed6b4d574a9577876cee30ac1,
@@ -176,7 +175,6 @@ MonoBehaviour:
   maxDropDist: 2
   coolDownOnMovementTimer: 0.5
   movementCoolDownReset: 0.5
-  floatingText: []
   enemyState: 0
   distFromPlayer: 0
   enemyCorpseTimer: 10
@@ -421,7 +419,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1632873001
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3c84c3c92fe21fe419677cccf9c07f2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

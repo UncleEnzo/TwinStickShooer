@@ -214,7 +214,11 @@ public class PowerUpAction : MonoBehaviour
             {
                 playerHasExplosive = true;
                 weapon.GetComponent<ThrowExplosive>().currentAmmo++;
-                PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<ThrowExplosive>().currentAmmo);
+                //note: Updates the ui component IF the explosive is the weapon in your hand, otherwise it gets updated when you switch to the weapon
+                if (weapon.GetComponent<SpriteRenderer>().enabled)
+                {
+                    PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<ThrowExplosive>().currentAmmo);
+                }
             }
         }
         if (playerHasExplosive == false)

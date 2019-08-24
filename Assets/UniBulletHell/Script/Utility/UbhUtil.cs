@@ -157,7 +157,7 @@ public static class UbhUtil
         }
         float xDistance = toTrans.position.x - fromTrans.position.x;
         float yDistance = toTrans.position.y - fromTrans.position.y;
-        float angle = (Mathf.Atan2(yDistance, xDistance) * Mathf.Rad2Deg) - 90f;
+        float angle = (Mathf.Atan2(yDistance, xDistance) * Mathf.Rad2Deg); //FIX THIS, AUTOLOCK IS OFF NOW
         angle = GetNormalizedAngle(angle);
 
         return angle;
@@ -174,7 +174,7 @@ public static class UbhUtil
         }
         float xDistance = toTrans.position.x - fromTrans.position.x;
         float zDistance = toTrans.position.z - fromTrans.position.z;
-        float angle = (Mathf.Atan2(zDistance, xDistance) * Mathf.Rad2Deg) - 90f;
+        float angle = (Mathf.Atan2(zDistance, xDistance) * Mathf.Rad2Deg);//FIX THIS, AUTOLOCK IS OFF NOW
         angle = GetNormalizedAngle(angle);
 
         return angle;

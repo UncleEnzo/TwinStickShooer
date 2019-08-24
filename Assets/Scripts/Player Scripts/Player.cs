@@ -178,12 +178,12 @@ public class Player : MonoBehaviour
         foreach (Collider2D nearbyObject in colliders)
         {
             //disables enemy bullets caught in the knockBack effect
-            if (nearbyObject.GetComponent<UbhBulletSimpleSprite2d>()
+            if (nearbyObject.GetComponent<UbhBullet>()
                 && nearbyObject.tag == TagsAndLabels.EnemyBulletTag)
             {
-                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_useAutoRelease = true;
-                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_autoReleaseTime = 1f;
-                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_selfTimeCount = 1f;
+                nearbyObject.GetComponent<UbhBullet>().m_useAutoRelease = true;
+                nearbyObject.GetComponent<UbhBullet>().m_autoReleaseTime = 1f;
+                nearbyObject.GetComponent<UbhBullet>().m_selfTimeCount = 1f;
             }
 
             //Knocks Back Enemies And all other potential objects

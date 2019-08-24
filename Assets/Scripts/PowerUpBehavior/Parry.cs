@@ -81,7 +81,7 @@ public class Parry : MonoBehaviour
                 {
                     enemyTransform = UbhUtil.GetTransformFromTagName(TagsAndLabels.EnemyTag, false, true, collider.gameObject.transform);
                 }
-                UbhBulletSimpleSprite2d enemyBullet = collider.gameObject.GetComponent<UbhBulletSimpleSprite2d>();
+                UbhBullet enemyBullet = collider.gameObject.GetComponent<UbhBullet>();
                 enemyBullet.m_pauseAndResume = false;
                 enemyBullet.m_accelSpeed = 0;
                 collider.gameObject.tag = TagsAndLabels.PlayerBulletTag;

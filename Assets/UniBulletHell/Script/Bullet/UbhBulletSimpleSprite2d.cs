@@ -69,7 +69,7 @@ public class UbhBulletSimpleSprite2d : UbhBullet
         }
         if (m_isExplosive)
         {
-            explosiveBullet();
+            Explode();
         }
         if (m_isBulletBounce)
         {
@@ -91,48 +91,5 @@ public class UbhBulletSimpleSprite2d : UbhBullet
                 disableBullet();
             }
         }
-    }
-
-    protected void explosiveBullet()
-    {
-        //create explosion
-        GameObject explosion = Instantiate(m_explosionEffect, transform.position, transform.rotation);
-        explosion.GetComponent<ParticleSystem>().Play();
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, m_explosiveRadius);
-        foreach (Collider2D nearbyObject in colliders)
-        {
-            //Destroys enemy bullets caught in the explosion
-            if (nearbyObject.GetComponent<UbhBulletSimpleSprite2d>() && nearbyObject.tag == TagsAndLabels.EnemyBulletTag)
-            {
-                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_useAutoRelease = true;
-                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_autoReleaseTime = 1f;
-                nearbyObject.GetComponent<UbhBulletSimpleSprite2d>().m_selfTimeCount = 1f;
-            }
-
-            //Applies explosion
-            if (nearbyObject.tag != TagsAndLabels.PlayerBulletTag
-              && nearbyObject.tag != TagsAndLabels.EnemyBulletTag
-                && !nearbyObject.isTrigger
-                && nearbyObject.GetComponent<Rigidbody2D>())
-            {
-                Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
-                Vector2 difference = rb.transform.position - transform.position;
-                difference = difference * m_explosiveForce;
-                if (rb.GetComponent<Player>())
-                {
-                    rb.GetComponent<Player>().hit(0, m_explosiveForce, difference);
-                }
-                //Applies explosive damage to the enemy
-                if (rb.GetComponent<Enemy>())
-                {
-                    rb.GetComponent<Enemy>().hit(m_explosionDamage, m_explosiveForce, difference);
-                }
-                else
-                {
-                    rb.AddForce(difference, ForceMode2D.Impulse);
-                }
-            }
-        }
-        Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration - .01f);
     }
 }

@@ -13,7 +13,7 @@ public class Follow : MonoBehaviour
         AttractorSpeed = 0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (lastCoroutine == null)
         {

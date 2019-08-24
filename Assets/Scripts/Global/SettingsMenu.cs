@@ -166,6 +166,7 @@ public class SettingsMenu : MonoBehaviour
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
+        print(resolution.width + " and " + resolution.height);
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         currentResolutionIndex = resolutionIndex;
     }

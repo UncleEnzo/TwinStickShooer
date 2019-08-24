@@ -52,10 +52,6 @@ public class ThrowExplosive : Weapon
                     currentAmmo--;
                     PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
                 }
-
-                //Note: Dig up bug and figure out if this is still a prob
-                // //Moving this outside of throw so that it is updated during timescale 0 as well
-                // PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
             }
         }
     }

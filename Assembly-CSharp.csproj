@@ -78,7 +78,6 @@
      <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StateMoveShoot.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StatePlayerFollow.cs" />
      <Compile Include="Assets\Scripts\Enemies Scripts\StateMachine\StateStopShoot.cs" />
-     <Compile Include="Assets\Scripts\Explosive\Explosive.cs" />
      <Compile Include="Assets\Scripts\Explosive\ThrowExplosive.cs" />
      <Compile Include="Assets\Scripts\FloatingDamageText\FloatingText.cs" />
      <Compile Include="Assets\Scripts\FloatingDamageText\FloatingTextController.cs" />
@@ -153,6 +152,7 @@
      <Compile Include="Assets\UniBulletHell\Script\Bullet\UbhBullet.cs" />
      <Compile Include="Assets\UniBulletHell\Script\Bullet\UbhBulletSimpleModel3d.cs" />
      <Compile Include="Assets\UniBulletHell\Script\Bullet\UbhBulletSimpleSprite2d.cs" />
+     <Compile Include="Assets\UniBulletHell\Script\Bullet\UbhExplosive.cs" />
      <Compile Include="Assets\UniBulletHell\Script\Bullet\UbhTentacleBullet.cs" />
      <Compile Include="Assets\UniBulletHell\Script\Controller\UbhShotCtrl.cs" />
      <Compile Include="Assets\UniBulletHell\Script\ShotPattern\UbhBaseShot.cs" />

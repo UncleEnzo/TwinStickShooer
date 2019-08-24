@@ -26,6 +26,9 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
     // "Set the accuracy of bullets."
     [FormerlySerializedAs("_BulletAccuracy")]
     public float m_bulletAccuracy;
+    // "Set the accuracy of bullets."
+    [FormerlySerializedAs("_IsExplosiveRecipe")]
+    public bool m_isExplosiveRecipe;
     // "Sets whether bullets bounce."
     [FormerlySerializedAs("_IsBulletBounce")]
     public bool m_isBulletBounce;
@@ -191,7 +194,7 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
     /// <summary>
     /// Shot UbhBullet object.
     /// </summary>
-    public void ShotBullet(bool bulletTag, float damage, float knockBack, float bulletAccuracy, bool isBulletBounce, int bulletBounceMaxNum,
+    public void ShotBullet(bool bulletTag, float damage, float knockBack, float bulletAccuracy, bool isExplosiveRecipe, bool isBulletBounce, int bulletBounceMaxNum,
                             bool isExplosive, float explosionDamage, float explosiveForce, float explosiveRadius,
                             GameObject explosionEffect, UbhBullet bullet, float speed, float angle,
                             bool homing = false, Transform homingTarget = null, float homingAngleSpeed = 0f,
@@ -201,7 +204,7 @@ public abstract class UbhBaseShot : UbhMonoBehaviour
         {
             return;
         }
-        bullet.Shot(bulletTag, damage, knockBack, bulletAccuracy, isBulletBounce, bulletBounceMaxNum,
+        bullet.Shot(bulletTag, damage, knockBack, bulletAccuracy, isExplosiveRecipe, isBulletBounce, bulletBounceMaxNum,
                     isExplosive, explosionDamage, explosiveForce, explosiveRadius, explosionEffect,
                     this, speed, angle, m_accelerationSpeed, m_accelerationTurn,
                     homing, homingTarget, homingAngleSpeed,

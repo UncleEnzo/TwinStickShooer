@@ -36,7 +36,9 @@ public class GunProperties
     [SerializeField]
     public float knockBack = 5f;
     [SerializeField]
-    public float bulletAccuracy = 0f; //0 = perfect accuracy
+    public float bulletAccuracy = 0f; //0f = perfect accuracy
+    [SerializeField]
+    public bool isExplosiveRecipe = false;
     [SerializeField]
     public bool isBulletBounce = false;
     public int bulletBounceMaxNum = 0;
@@ -103,7 +105,6 @@ public class Weapon : MonoBehaviour
         mousePosTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         playerTransform = Player.Instance.transform;
         float angle = lookAtPoint(mousePosTarget, playerTransform.position);
-        angle -= 90;
         //Player weapon auto updates angle for any bulletPattern script
         if (gameObject.transform.IsChildOf(WeaponSwitching.Instance.gameObject.transform))
         {
@@ -122,6 +123,7 @@ public class Weapon : MonoBehaviour
         baseShot.m_bulletSpeed = GunProperties.bulletSpeed;
         baseShot.m_knockBack = GunProperties.knockBack;
         baseShot.m_bulletAccuracy = GunProperties.bulletAccuracy; //Not sure about this one
+        baseShot.m_isExplosiveRecipe = GunProperties.isExplosiveRecipe;
         baseShot.m_autoReleaseTime = GunProperties.timeBulletSelfDestruct;
         baseShot.m_isBulletBounce = GunProperties.isBulletBounce;
         baseShot.m_bulletBounceMaxNum = GunProperties.bulletBounceMaxNum;

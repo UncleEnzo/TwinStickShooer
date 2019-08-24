@@ -28,6 +28,7 @@ public static class TagsAndLabels
     public const string WeaponsVendor = "WeaponsVendor";
 
     [Header("Labels")]
+    public const string ExplosiveLabel = "Explosive";
     public const string DoorLabel = "Door";
     public const string ChestLabel = "Chest";
     public const string DeadEnemyLabel = "DeadEnemy";
