@@ -27,8 +27,14 @@ public class EnemyRoom : MonoBehaviour
     public int randomNumEnemiesToSpawnRange = 3;
     private int numOfEnemiesToSpawn;
     public int numRemainingEnemies = 0;
+    private Animator miniMap;
+    private Animator miniMapMask;
     void Start()
     {
+        GameObject canvas = GameObject.Find("Canvas");
+        miniMapMask = canvas.transform.Find("MiniMapMask").gameObject.GetComponent<Animator>();
+        miniMap = canvas.transform.Find("MiniMapMask").gameObject.transform.Find("MiniMap").GetComponent<Animator>();
+
         //opens all kill doors in the map
         Door[] allDoorsInMap = FindObjectsOfType<Door>();
         foreach (Door door in allDoorsInMap)
@@ -65,6 +71,11 @@ public class EnemyRoom : MonoBehaviour
         }
         startTimers();
         cleanExpiredTimers();
+
+        //fades out the minimap
+        miniMapMask.SetBool("RoomEntered", true);
+        miniMap.SetBool("RoomEntered", true);
+
         EnemySpawner.Instance.spawnKillRoomRandomEnemies(numOfEnemiesToSpawn);
     }
 
@@ -89,6 +100,10 @@ public class EnemyRoom : MonoBehaviour
             PowerUpController.Instance.timerPaused = true;
             PowerUpUIDrawer.Instance.timerPaused = true;
             numRemainingEnemies = 0;
+
+            //fades in the minimap
+            miniMapMask.SetBool("RoomEntered", false);
+            miniMap.SetBool("RoomEntered", false);
         }
     }
 

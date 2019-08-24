@@ -34,6 +34,7 @@ e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.G
 e1bbf0ab858085e38fae6b12ebbdcd35 UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 201e3fde670b00545944bb3db215c80a UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.InventoryUI
+bafc2a1f36f80746d6e428fb6a19012d Assembly-CSharp.dll:.UbhExplosive
 482b4788a1650225af3664f1486faf28 AstarPathfindingProject.dll:Pathfinding.Examples.ObjectPlacer
 14cc44816c0ba29b72e8eb1f0f8e7b6f Assembly-CSharp.dll:.UbhBullet
 2d37f4c670895e23a6a2e57efe92ed33 Assembly-CSharp.dll:cakeslice.OutlineEffect
@@ -319,4 +320,3 @@ ed728f5ee02ca448dc0cb830a8cff303 Assembly-CSharp.dll:.UbhWavingNwayLockOnShot
 190d3bf2e660ceae9a7a9be330973d97 Assembly-CSharp.dll:.UbhBulletManager
 9e1d2d5702df521d081d762f40dbd635 Assembly-CSharp.dll:.UbhPaintLockOnShot
 61bff5b1d03925ad2c174fd02ce512f0 Assembly-CSharp.dll:.EnemyWithGun
-bafc2a1f36f80746d6e428fb6a19012d Assembly-CSharp.dll:.UbhExplosive

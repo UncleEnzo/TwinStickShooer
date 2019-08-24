@@ -37,7 +37,10 @@ public class SettingsMenu : MonoBehaviour
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+            if (!options.Contains(option))
+            {
+                options.Add(option);
+            }
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
@@ -165,8 +168,11 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
+        if (resolutionIndex < 0 || resolutionIndex > (resolutions.Length - 1))
+        {
+            resolutionIndex = resolutions.Length - 1;
+        }
         Resolution resolution = resolutions[resolutionIndex];
-        print(resolution.width + " and " + resolution.height);
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         currentResolutionIndex = resolutionIndex;
     }

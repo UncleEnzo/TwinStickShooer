@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9195980065495109612}
   - component: {fileID: 5050636366708862616}
   - component: {fileID: 8049117062314458319}
+  - component: {fileID: 7289915675175923563}
   m_Layer: 0
   m_Name: MiniMapMask
   m_TagString: Untagged
@@ -89,6 +90,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!95 &7289915675175923563
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157438208248983866}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d7eca62ee37a23244807d5a7d90c80cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4074737475964980418
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,6 +120,7 @@ GameObject:
   - component: {fileID: 235320244912361133}
   - component: {fileID: 5267023027393855957}
   - component: {fileID: 4356445951815324583}
+  - component: {fileID: 6253505591772071752}
   m_Layer: 0
   m_Name: MiniMap
   m_TagString: Untagged
@@ -161,3 +182,22 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!95 &6253505591772071752
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4074737475964980418}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7e4f253c2cb69424a8826a22c357e19b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
