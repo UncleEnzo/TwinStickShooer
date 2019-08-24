@@ -15,15 +15,10 @@ public class Gun : Weapon
     private GameObject reloadUIObject;
     Coroutine lastCoroutine = null;
     protected GameObject player;
-    protected Vector3 mousePosTarget;
-    protected Transform playerTransform;
     [Header("Sound effects")]
     protected AudioSource gunSounds;
     public AudioClip gunShotSound;
     public AudioClip gunReloadSound;
-
-    [NonSerializedAttribute]
-    public UbhShowcaseCtrl shotControllerShowCase;
 
     protected void Start()
     {
@@ -130,43 +125,13 @@ public class Gun : Weapon
         return isShooting;
     }
 
-    private void ApplyGunProperties(UbhBaseShot baseShot)
+    new protected void Update()
     {
-        baseShot.m_bulletTag = GunProperties.bulletTag;
-        baseShot.m_destroyBulletsOnDeath = GunProperties.destroyBulletsOnDeath;
-        baseShot.m_damage = GunProperties.bulletDamage;
-        baseShot.m_bulletSpeed = GunProperties.bulletSpeed;
-        baseShot.m_knockBack = GunProperties.knockBack;
-        baseShot.m_bulletAccuracy = GunProperties.bulletAccuracy; //Not sure about this one
-        baseShot.m_autoReleaseTime = GunProperties.timeBulletSelfDestruct;
-        baseShot.m_isBulletBounce = GunProperties.isBulletBounce;
-        baseShot.m_bulletBounceMaxNum = GunProperties.bulletBounceMaxNum;
-        baseShot.m_isExplosive = GunProperties.isExplosive;
-        baseShot.m_explosionDamage = GunProperties.explosionDamage;
-        baseShot.m_explosiveForce = GunProperties.explosiveForce;
-        baseShot.m_explosiveRadius = GunProperties.explosiveRadius;
-        baseShot.m_explosionEffect = GunProperties.explosionEffect;
-        baseShot.m_explosionEffect = GunProperties.explosionEffect;
-    }
-
-    protected void Update()
-    {
-        mousePosTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        playerTransform = Player.Instance.transform;
-        float angle = lookAtPoint(mousePosTarget, playerTransform.position);
-        angle -= 90;
         if (isReloading)
         {
             reloadSlider.value += Time.deltaTime;
         }
-        //Player weapon auto updates angle for any bulletPattern script
-        if (gameObject.transform.IsChildOf(WeaponSwitching.Instance.gameObject.transform))
-        {
-            foreach (var shotInfo in shotControllerShowCase.activeShotCtrl.m_shotList)
-            {
-                shotInfo.m_shotObj.GetComponent<UbhBaseShot>().m_angle = angle;
-            }
-        }
+        base.Update();
     }
 
     IEnumerator reload()

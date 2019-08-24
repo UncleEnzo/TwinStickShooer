@@ -1,14 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ThrowExplosive : Weapon
 {
-    public float throwForce = 100f;
     protected bool isPlayer = true;
     protected float lastThrown;
     public int currentAmmo = 1;
-    public GameObject bullet;
     protected AudioSource gunSounds;
     public AudioClip gunShotSound;
     public AudioClip gunReloadSound;
@@ -16,11 +15,13 @@ public class ThrowExplosive : Weapon
     {
         gunSounds = GetComponent<AudioSource>();
         PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
+        shotControllerShowCase = GetComponent<UbhShowcaseCtrl>();
     }
 
     // Update is called once per frame
-    void Update()
+    new void Update()
     {
+        base.Update();
         if (Player.Instance.playerUsable)
         {
             Vector3 mousePosTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -41,26 +42,36 @@ public class ThrowExplosive : Weapon
         }
         if (Player.Instance.playerUsable)
         {
-            Throw(isPlayer);
+            if (Input.GetMouseButton(0) && (Time.time - lastThrown) > (1 / GunProperties.bulletsPerSecond))
+            {
+                lastThrown = Time.time;
+                bool isShooting = Throw(isPlayer);
+                if (!isShooting)
+                {
+                    gunSounds.PlayOneShot(gunShotSound);
+                    currentAmmo--;
+                    PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
+                }
+
+                //Note: Dig up bug and figure out if this is still a prob
+                // //Moving this outside of throw so that it is updated during timescale 0 as well
+                // PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
+            }
         }
-        //Moving this outside of throw so that it is updated during timescale 0 as well
-        PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
     }
 
-    protected void Throw(bool isPlayer)
+    private bool Throw(bool isPlayer)
     {
-        if (Input.GetMouseButton(0) && (Time.time - lastThrown) > (1 / GunProperties.bulletsPerSecond))
+        foreach (var shotInfo in shotControllerShowCase.activeShotCtrl.m_shotList)
         {
-            lastThrown = Time.time;
-            foreach (Transform thrownExplosive in GunProperties.bulletSpawnPoint)
-            {
-                GameObject newExplosive = Instantiate(bullet, thrownExplosive.position, thrownExplosive.rotation);
-                Rigidbody2D rb = newExplosive.GetComponent<Rigidbody2D>();
-                rb.velocity = (transform.right * throwForce);
-                newExplosive.GetComponent<Explosive>().SetExplosiveProperties(GunProperties.explosionDamage, GunProperties.explosiveRadius, GunProperties.explosiveForce);
-            }
-            gunSounds.PlayOneShot(gunShotSound);
-            currentAmmo--;
+            ApplyGunProperties(shotInfo.m_shotObj.GetComponent<UbhBaseShot>());
         }
+        bool isShooting = shotControllerShowCase.activeShotCtrl.shooting;
+        if (!isShooting)
+        {
+            shotControllerShowCase.activeShotCtrl.StartShotRoutine();
+        }
+        return isShooting;
     }
 }
+

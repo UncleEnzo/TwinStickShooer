@@ -12,8 +12,6 @@ public class GunProperties
     [SerializeField]
     public WeaponType weaponType; //Defines the type of weapon this is
     [SerializeField]
-    public Transform[] bulletSpawnPoint; //Array so can fire multiple bullets at once
-    [SerializeField]
     [Range(.1f, 10f)] public float camShakeMagnitude = 1.5f;
     [SerializeField]
     [Range(.01f, .1f)] public float camShakeLength = .05f;
@@ -60,6 +58,10 @@ public class Weapon : MonoBehaviour
     [Header("Gun Variables")]
     public float armLength = .5f;
     protected bool gunFacingRight = true;
+    protected Vector3 mousePosTarget;
+    protected Transform playerTransform;
+    [NonSerializedAttribute]
+    public UbhShowcaseCtrl shotControllerShowCase;
 
     protected void SpriteFlip(Transform Weilder, Vector3 target)
     {
@@ -94,5 +96,40 @@ public class Weapon : MonoBehaviour
         Vector3 shoulderToMouseDir = target - Wielder;
         shoulderToMouseDir.z = 0;
         transform.position = Wielder + (armLength * shoulderToMouseDir.normalized);
+    }
+
+    protected void Update()
+    {
+        mousePosTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        playerTransform = Player.Instance.transform;
+        float angle = lookAtPoint(mousePosTarget, playerTransform.position);
+        angle -= 90;
+        //Player weapon auto updates angle for any bulletPattern script
+        if (gameObject.transform.IsChildOf(WeaponSwitching.Instance.gameObject.transform))
+        {
+            foreach (var shotInfo in shotControllerShowCase.activeShotCtrl.m_shotList)
+            {
+                shotInfo.m_shotObj.GetComponent<UbhBaseShot>().m_angle = angle;
+            }
+        }
+    }
+
+    protected void ApplyGunProperties(UbhBaseShot baseShot)
+    {
+        baseShot.m_bulletTag = GunProperties.bulletTag;
+        baseShot.m_destroyBulletsOnDeath = GunProperties.destroyBulletsOnDeath;
+        baseShot.m_damage = GunProperties.bulletDamage;
+        baseShot.m_bulletSpeed = GunProperties.bulletSpeed;
+        baseShot.m_knockBack = GunProperties.knockBack;
+        baseShot.m_bulletAccuracy = GunProperties.bulletAccuracy; //Not sure about this one
+        baseShot.m_autoReleaseTime = GunProperties.timeBulletSelfDestruct;
+        baseShot.m_isBulletBounce = GunProperties.isBulletBounce;
+        baseShot.m_bulletBounceMaxNum = GunProperties.bulletBounceMaxNum;
+        baseShot.m_isExplosive = GunProperties.isExplosive;
+        baseShot.m_explosionDamage = GunProperties.explosionDamage;
+        baseShot.m_explosiveForce = GunProperties.explosiveForce;
+        baseShot.m_explosiveRadius = GunProperties.explosiveRadius;
+        baseShot.m_explosionEffect = GunProperties.explosionEffect;
+        baseShot.m_explosionEffect = GunProperties.explosionEffect;
     }
 }
