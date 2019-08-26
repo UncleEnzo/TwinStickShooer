@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.ComponentModel.Design;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class EnemyRoom : MonoBehaviour
@@ -27,14 +29,26 @@ public class EnemyRoom : MonoBehaviour
     public int randomNumEnemiesToSpawnRange = 3;
     private int numOfEnemiesToSpawn;
     public int numRemainingEnemies = 0;
-    private Animator miniMap;
-    private Animator miniMapMask;
+    public bool isMiniMapFaded = true;
+    [NonSerializedAttribute]
+    public GameObject MiniMapMask;
+    private Animator miniMapAnim;
+    private Animator miniMapMaskAnim;
     void Start()
     {
         GameObject canvas = GameObject.Find("Canvas");
-        miniMapMask = canvas.transform.Find("MiniMapMask").gameObject.GetComponent<Animator>();
-        miniMap = canvas.transform.Find("MiniMapMask").gameObject.transform.Find("MiniMap").GetComponent<Animator>();
+        MiniMapMask = canvas.transform.Find("MiniMapMask").gameObject;
+        miniMapMaskAnim = MiniMapMask.GetComponent<Animator>();
+        miniMapAnim = MiniMapMask.transform.Find("MiniMap").GetComponent<Animator>();
 
+        if (SceneManager.GetActiveScene().buildIndex == SceneLoader.hubWorldIndex)
+        {
+            MiniMapMask.SetActive(false);
+        }
+        else
+        {
+            MiniMapMask.SetActive(true);
+        }
         //opens all kill doors in the map
         Door[] allDoorsInMap = FindObjectsOfType<Door>();
         foreach (Door door in allDoorsInMap)
@@ -62,7 +76,7 @@ public class EnemyRoom : MonoBehaviour
     }
     public void killDoorActivate()
     {
-        numOfEnemiesToSpawn = Random.Range(1, randomNumEnemiesToSpawnRange);
+        numOfEnemiesToSpawn = UnityEngine.Random.Range(1, randomNumEnemiesToSpawnRange);
         numRemainingEnemies = numOfEnemiesToSpawn;
         CloseDoors();
         foreach (GameObject door in doors)
@@ -71,12 +85,16 @@ public class EnemyRoom : MonoBehaviour
         }
         startTimers();
         cleanExpiredTimers();
-
-        //fades out the minimap
-        miniMapMask.SetBool("RoomEntered", true);
-        miniMap.SetBool("RoomEntered", true);
+        FadeInOutMiniMap(true);
 
         EnemySpawner.Instance.spawnKillRoomRandomEnemies(numOfEnemiesToSpawn);
+    }
+    private void FadeInOutMiniMap(bool isFadeIn)
+    {
+        //fades out the minimap
+        miniMapMaskAnim.SetBool("RoomEntered", isFadeIn);
+        miniMapAnim.SetBool("RoomEntered", isFadeIn);
+        isMiniMapFaded = isFadeIn;
     }
 
     private void startTimers()
@@ -100,10 +118,7 @@ public class EnemyRoom : MonoBehaviour
             PowerUpController.Instance.timerPaused = true;
             PowerUpUIDrawer.Instance.timerPaused = true;
             numRemainingEnemies = 0;
-
-            //fades in the minimap
-            miniMapMask.SetBool("RoomEntered", false);
-            miniMap.SetBool("RoomEntered", false);
+            FadeInOutMiniMap(false);
         }
     }
 

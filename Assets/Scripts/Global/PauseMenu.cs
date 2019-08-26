@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public static bool SettingsMenuOpen = false;
+    public static bool otherMenuOpen = false;
     public GameObject pauseMenuUI;
     public GameObject SettingsMenuUI;
 
@@ -31,11 +32,19 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        if (InventoryUI.UIOpen)
+        if (SceneLoader.getCurrentLevel() != SceneLoader.hubWorldIndex)
+        {
+            Inventory.Instance.moneyIconPanel.SetActive(false);
+            if (EnemyRoom.Instance.isMiniMapFaded == false)
+            {
+                EnemyRoom.Instance.MiniMapMask.SetActive(true);
+            }
+        }
+        if (InventoryUI.UIOpen || otherMenuOpen)
         {
             Time.timeScale = InventoryUI.UITimeScale;
         }
-        if (!InventoryUI.UIOpen)
+        else
         {
             Time.timeScale = 1;
             Player.Instance.enablePlayer(true);
@@ -48,7 +57,15 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0;
-        if (!InventoryUI.UIOpen)
+        if (SceneLoader.getCurrentLevel() != SceneLoader.hubWorldIndex)
+        {
+            Inventory.Instance.moneyIconPanel.SetActive(true);
+            if (EnemyRoom.Instance.isMiniMapFaded == false)
+            {
+                EnemyRoom.Instance.MiniMapMask.SetActive(false);
+            }
+        }
+        if (!InventoryUI.UIOpen && !otherMenuOpen)
         {
             Player.Instance.enablePlayer(false);
         }

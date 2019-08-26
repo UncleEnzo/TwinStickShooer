@@ -64,6 +64,7 @@ public class VendorInventory : MonoBehaviour
             weeklyItemPopup.SetActive(false);
             updateVendorTradeUI();
             TradePanel.SetActive(true);
+            PauseMenu.otherMenuOpen = true;
         }
     }
 
@@ -138,6 +139,7 @@ public class VendorInventory : MonoBehaviour
     private void BuyItemButton(int ItemCost)
     {
         TradePanel.SetActive(false);
+        PauseMenu.otherMenuOpen = false;
         Player.Instance.enablePlayer(true);
         InventoryUI.canUseUI = true;
         Time.timeScale = 1;
@@ -209,6 +211,7 @@ public class VendorInventory : MonoBehaviour
     public void ExitButton()
     {
         TradePanel.SetActive(false);
+        PauseMenu.otherMenuOpen = false;
         Player.Instance.enablePlayer(true);
         InventoryUI.canUseUI = true;
         Time.timeScale = 1;

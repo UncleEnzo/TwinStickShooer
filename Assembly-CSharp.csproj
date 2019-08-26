@@ -89,6 +89,7 @@
      <Compile Include="Assets\Scripts\Global\Signal.cs" />
      <Compile Include="Assets\Scripts\Global\SignalListener.cs" />
      <Compile Include="Assets\Scripts\Global\TagsAndLabels.cs" />
+     <Compile Include="Assets\Scripts\Global\UpdateLevelNumber.cs" />
      <Compile Include="Assets\Scripts\Global\Utils.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\BulletSpawnController.cs" />
      <Compile Include="Assets\Scripts\Gun and Bullet Scripts\EnemyGun.cs" />

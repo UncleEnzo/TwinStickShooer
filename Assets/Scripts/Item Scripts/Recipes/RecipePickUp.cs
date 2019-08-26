@@ -37,6 +37,7 @@ public class RecipePickUp : Interactable
         sendDestroyChestSiblingsSignal();
         Player.Instance.enablePlayer(true);
         InventoryUI.canUseUI = true;
+        PauseMenu.otherMenuOpen = false;
         LootTable.instance.RemoveItemFromPool(gameObject);
         Time.timeScale = 1;
 

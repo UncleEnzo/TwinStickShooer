@@ -13,6 +13,11 @@ public class SceneLoader : MonoBehaviour
         LoadingNextScene = false;
     }
 
+    public static int getCurrentLevel()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
+
     //Methods for buttons (Does not allow static method calls to be assigned to buttons)
     public void ButtonLoadSavedGame()
     {

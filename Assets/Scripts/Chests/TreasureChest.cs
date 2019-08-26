@@ -93,6 +93,7 @@ public class TreasureChest : Interactable
         recipePicked.Raise();
         Player.Instance.enablePlayer(true);
         InventoryUI.canUseUI = true;
+        PauseMenu.otherMenuOpen = false;
         Player.Instance.totalHealth++;
         Player.Instance.health++;
         PlayerHUBController.Instance.updateDisplayHubHealth(Player.Instance.health, Player.Instance.totalHealth);

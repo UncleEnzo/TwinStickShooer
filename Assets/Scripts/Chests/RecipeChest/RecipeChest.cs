@@ -30,6 +30,7 @@ public class RecipeChest : TreasureChest
         Time.timeScale = 0;
         Player.Instance.enablePlayer(false);
         InventoryUI.canUseUI = false;
+        PauseMenu.otherMenuOpen = true;
         //physical
         updateRecipeUI(physicalRecipe, physicalIcon, damageTextPhysical, physicalEffectText, physicalButton);
         //gunPowder

@@ -47,7 +47,8 @@ public class Inventory : MonoBehaviour
     public List<Item> explosiveCraftComponents = new List<Item>();
     public Item moneyCoin;
     private List<Item> money = new List<Item>();
-    private GameObject moneyIconPanel;
+    [NonSerialized]
+    public GameObject moneyIconPanel;
     public GameObject moneyIcon;
     private GameObject moneyIconCache;
     public int getKeyCount()
@@ -95,9 +96,11 @@ public class Inventory : MonoBehaviour
                 explosiveSlot = slot.gameObject;
             }
         }
-
         if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
         {
+            //Disables the money panel if it's not the hub world or pause menu
+            moneyIconPanel.SetActive(false);
+
             //Load in Health Recipe immediately 
             AddItem(healingPotion);
 
@@ -118,6 +121,11 @@ public class Inventory : MonoBehaviour
             {
                 Debug.Log("No Persistent Save data found. Are you in a Dev Testing Scene?");
             }
+        }
+        else
+        {
+            //if you're in levels, this disables the money icon
+            moneyIconPanel.SetActive(true);
         }
         SaveGlobalMoney SaveGlobalMoney = SaveSystem.LoadMoneyData();
         if (SaveGlobalMoney != null)
