@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PowerUpUIDrawer : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class PowerUpUIDrawer : MonoBehaviour
     public static PowerUpUIDrawer Instance;
     public bool timerPaused = true;
     public GameObject powerUpIcon;
+    public TextMeshProUGUI powerUpTimer;
+    public Animator powerUpTimerAnim;
     public Text powerupTimerPause;
     private GameObject powerUpIconPanel;
     private Dictionary<PowerUp, PowerUpUIInfo> powerUps = new Dictionary<PowerUp, PowerUpUIInfo>();
@@ -50,9 +53,12 @@ public class PowerUpUIDrawer : MonoBehaviour
             powerupSprite.GetComponent<Image>().sprite = item.icon;
             PowerUpUIInfo info = new PowerUpUIInfo(icon, powerup);
             powerUps.Add(powerup, info);
+            powerUpTimer = icon.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+            powerUpTimer.text = Mathf.RoundToInt(info.timeLeft).ToString();
+            powerUpTimerAnim = icon.transform.GetChild(3).GetComponent<Animator>();
+            powerUpTimerAnim.SetBool("Flashing", false);
             icon.transform.SetParent(powerUpIconPanel.transform);
             icon.SetActive(true);
-
             //sets the stack counter to false
             icon.transform.GetChild(1).GetChild(0).gameObject.SetActive(false);
             icon.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
@@ -98,6 +104,9 @@ public class PowerUpUIDrawer : MonoBehaviour
                     if (timerPaused)
                     {
                         powerupTimerPause.text = "Timers Paused";
+                        powerUpTimerAnim = powerupInfo.icon.transform.GetChild(3).GetComponent<Animator>();
+                        powerUpTimerAnim.SetBool("Flashing", false);
+                        powerUpTimer.color = new Color32(1, 1, 1, 235);
                     }
                     if (!timerPaused)
                     {
@@ -113,6 +122,22 @@ public class PowerUpUIDrawer : MonoBehaviour
                 {
                     //math to calculate percentage of current time left and apply it to the radial dial
                     powerupInfo.icon.transform.GetChild(0).GetComponent<Image>().fillAmount = powerupInfo.timeLeft / powerUps[effect].maxDuration;
+
+                    //Updates the timer at the bottom of the powerup
+                    TextMeshProUGUI powerUpTimer = powerupInfo.icon.transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+                    powerUpTimer.text = Mathf.RoundToInt(powerupInfo.timeLeft).ToString();
+                    if (Mathf.RoundToInt(powerupInfo.timeLeft) <= 5)
+                    {
+                        powerUpTimerAnim.SetBool("Flashing", true);
+                    }
+                    else
+                    {
+                        powerUpTimerAnim.SetBool("Flashing", false);
+                    }
+                    if (Mathf.RoundToInt(powerupInfo.timeLeft) <= 0)
+                    {
+                        powerUpTimer.text = "";
+                    }
                 }
             }
         }

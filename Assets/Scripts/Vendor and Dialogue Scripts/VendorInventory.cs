@@ -21,6 +21,9 @@ public class VendorInventory : MonoBehaviour
     private Image ItemColor;
     private TextMeshProUGUI ItemDamageText;
     private TextMeshProUGUI ItemEffectText;
+    private TextMeshProUGUI ItemPhysCraftText;
+    private TextMeshProUGUI ItemGunpowderCraftText;
+    private TextMeshProUGUI ItemExplosiveCraftText;
     private bool itemPurchased = false;
 
     void Start()
@@ -78,6 +81,9 @@ public class VendorInventory : MonoBehaviour
         ItemColor = TradePanel.transform.GetChild(5).GetComponent<Image>();
         ItemDamageText = TradePanel.transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>();
         ItemEffectText = TradePanel.transform.GetChild(6).GetChild(0).GetComponent<TextMeshProUGUI>();
+        ItemPhysCraftText = TradePanel.transform.GetChild(6).GetChild(1).GetComponent<TextMeshProUGUI>();
+        ItemGunpowderCraftText = TradePanel.transform.GetChild(6).GetChild(2).GetComponent<TextMeshProUGUI>();
+        ItemExplosiveCraftText = TradePanel.transform.GetChild(6).GetChild(3).GetComponent<TextMeshProUGUI>();
     }
 
     //Dynamically adds the gameobject to the UI Panel button so you can select it
@@ -92,12 +98,16 @@ public class VendorInventory : MonoBehaviour
             ItemColor.color = new Color32(0, 0, 0, 0);
             ItemDamageText.text = "This Vendor is Itemless";
             ItemEffectText.text = "You bought all the vendor's items";
+            ItemPhysCraftText.text = "";
+            ItemGunpowderCraftText.text = "";
+            ItemExplosiveCraftText.text = "";
+
         }
         else if (itemForSale.item.GetComponent<RecipePickUp>())
         {
             ItemCost = itemForSale.item.GetComponent<RecipePickUp>().item.Cost;
             ItemNameText.text = itemForSale.item.name;
-            ItemCostText.text = "Cost: " + ItemCost;
+            ItemCostText.text = "$" + ItemCost;
             ItemIcon.sprite = itemForSale.item.GetComponent<RecipePickUp>().item.icon;
             if (itemForSale.item.GetComponent<RecipePickUp>().recipeType == RecipeType.PhysicalRecipe)
             {
@@ -113,6 +123,9 @@ public class VendorInventory : MonoBehaviour
             }
             ItemDamageText.text = itemForSale.item.GetComponent<RecipePickUp>().DamageDescription;
             ItemEffectText.text = itemForSale.item.GetComponent<RecipePickUp>().EffectDescription;
+            ItemPhysCraftText.text = itemForSale.item.GetComponent<RecipePickUp>().recipe.physicalRequirement.ToString();
+            ItemGunpowderCraftText.text = itemForSale.item.GetComponent<RecipePickUp>().recipe.gunPowderRequirement.ToString();
+            ItemExplosiveCraftText.text = itemForSale.item.GetComponent<RecipePickUp>().recipe.explosiveRequirement.ToString();
         }
         else if (itemForSale.item.GetComponent<PlayerGun>())
         {

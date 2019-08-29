@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class Inventory : MonoBehaviour
@@ -149,7 +150,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(Item item)
+    public void AddItem(Item item, Recipe recipe = null)
     {
         //If the item is a key add it to the top left of the screen
         if (item.itemType == ItemType.Key)
@@ -207,6 +208,12 @@ public class Inventory : MonoBehaviour
                 icon.transform.SetParent(recipeIconPanel.transform);
                 icon.SetActive(true);
                 icon.GetComponent<TriggerRecipe>().item = item;
+                if (recipe != null)
+                {
+                    icon.transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = recipe.physicalRequirement.ToString();
+                    icon.transform.GetChild(1).GetChild(2).GetComponent<TextMeshProUGUI>().text = recipe.gunPowderRequirement.ToString();
+                    icon.transform.GetChild(1).GetChild(3).GetComponent<TextMeshProUGUI>().text = recipe.explosiveRequirement.ToString();
+                }
             }
         }
         else if (item.itemType == ItemType.Physical)

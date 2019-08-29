@@ -32,11 +32,17 @@ public class RecipeChest : TreasureChest
         InventoryUI.canUseUI = false;
         PauseMenu.otherMenuOpen = true;
         //physical
-        updateRecipeUI(physicalRecipe, physicalIcon, damageTextPhysical, physicalEffectText, physicalButton);
+        updateRecipeUI(physicalRecipe, physicalIcon, damageTextPhysical,
+            physicalEffectText, physicalCraftPhysText, physicalCraftGunpowderText,
+            physicalCraftExplosiveText, physicalButton);
         //gunPowder
-        updateRecipeUI(gunPowderRecipe, gunpowderIcon, damageTextGunPowder, gunPowderEffectText, gunPowderButton);
+        updateRecipeUI(gunPowderRecipe, gunpowderIcon, damageTextGunPowder,
+            gunPowderEffectText, gunpowderCraftPhysText, gunpowderCraftGunpowderText,
+            gunpowderCraftExplosiveText, gunPowderButton);
         //explosive
-        updateRecipeUI(explosiveRecipe, explosiveIcon, damageTextExplosive, explosiveEffectText, explosiveButton);
+        updateRecipeUI(explosiveRecipe, explosiveIcon, damageTextExplosive,
+            explosiveEffectText, explosiveCraftPhysText, explosiveCraftGunpowderText,
+            explosiveCraftExplosiveText, explosiveButton);
         RecipeUIPanel.SetActive(true);
         return chestID;
     }

@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: a668830b34cc153438097cbe191129c8, type: 2}
+  recipe: {fileID: 11400000, guid: a668830b34cc153438097cbe191129c8, type: 2}
   recipeType: 1
   recipePicked: {fileID: 11400000, guid: 86f2e6c9f146a2d419d096b8a212f4fe, type: 2}
   DamageDescription: 5% damage increase

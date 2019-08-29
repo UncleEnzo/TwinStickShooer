@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class RecipePickUp : Interactable
 {
     public Item item;
+    public Recipe recipe;
     public RecipeType recipeType;
     public Signal recipePicked;
     public string DamageDescription = "5% damage increase";
@@ -82,7 +83,7 @@ public class RecipePickUp : Interactable
 
     void pickUpItem()
     {
-        Inventory.Instance.AddItem(item);
+        Inventory.Instance.AddItem(item, recipe);
         gameObject.SetActive(false);
     }
 
