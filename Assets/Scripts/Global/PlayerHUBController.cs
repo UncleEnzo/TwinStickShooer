@@ -37,13 +37,13 @@ public class PlayerHUBController : MonoBehaviour
             }
         }
     }
-    public void updateDisplayHubGun(WeaponType gunName)
+    public void updateDisplayHubGun(Sprite gunImage)
     {
-        foreach (TextMeshProUGUI uiElement in GetComponentsInChildren<TextMeshProUGUI>())
+        foreach (Image uiElement in GetComponentsInChildren<Image>())
         {
             if (uiElement.tag == TagsAndLabels.GunUITag)
             {
-                uiElement.text = "Gun: " + gunName.ToString();
+                uiElement.sprite = gunImage;
             }
         }
     }
@@ -53,7 +53,7 @@ public class PlayerHUBController : MonoBehaviour
         {
             if (uiElement.tag == TagsAndLabels.AmmoUITag)
             {
-                uiElement.text = "Ammo: " + ammo.ToString();
+                uiElement.text = ammo.ToString();
             }
         }
     }

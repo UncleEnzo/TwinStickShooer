@@ -124,7 +124,14 @@ public class WeaponSwitching : MonoBehaviour
             if (i == selectedWeapon)
             {
                 gunEnabled(weapon, true);
-                PlayerHUBController.Instance.updateDisplayHubGun(weapon.GetComponent<Weapon>().GunProperties.weaponType);
+                if (weapon.GetComponent<PlayerGun>())
+                {
+                    PlayerHUBController.Instance.updateDisplayHubGun(weapon.GetComponent<PlayerGun>().gunUIImage);
+                }
+                if (weapon.GetComponent<ThrowExplosive>())
+                {
+                    PlayerHUBController.Instance.updateDisplayHubGun(weapon.GetComponent<ThrowExplosive>().explosiveUIImage);
+                }
                 if (weapon.GetComponent<Gun>())
                 {
                     PlayerHUBController.Instance.updateDisplayHubAmmo(weapon.GetComponent<Gun>().getCurrentAmmo());

@@ -25,7 +25,7 @@ public class Gun : Weapon
         reloadUIObject = GameObject.Find("Canvas").transform.Find("ReloadSlider").gameObject;
         reloadSlider = reloadUIObject.GetComponent<Slider>();
         gunSounds = GetComponent<AudioSource>();
-        shotControllerShowCase = GetComponent<UbhShowcaseCtrl>();
+        shotControllerShowCase = GetComponentInChildren<UbhShowcaseCtrl>();
         currentAmmo = GunProperties.maxAmmo;
         player = Player.Instance.transform.gameObject;
         PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);

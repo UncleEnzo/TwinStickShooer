@@ -9,7 +9,7 @@ public class Interactable : MonoBehaviour
     {
     }
 
-    void OnTriggerEnter2D(Collider2D collider2D)
+    void OnTriggerStay2D(Collider2D collider2D)
     {
         if (collider2D.tag == TagsAndLabels.PlayerTag && collider2D.isTrigger && gameObject.tag == TagsAndLabels.InteractableTag)
         {

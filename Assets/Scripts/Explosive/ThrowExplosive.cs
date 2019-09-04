@@ -9,13 +9,14 @@ public class ThrowExplosive : Weapon
     protected float lastThrown;
     public int currentAmmo = 1;
     protected AudioSource gunSounds;
+    public Sprite explosiveUIImage;
     public AudioClip gunShotSound;
     public AudioClip gunReloadSound;
     protected void Start()
     {
         gunSounds = GetComponent<AudioSource>();
         PlayerHUBController.Instance.updateDisplayHubAmmo(currentAmmo);
-        shotControllerShowCase = GetComponent<UbhShowcaseCtrl>();
+        shotControllerShowCase = GetComponentInChildren<UbhShowcaseCtrl>();
     }
 
     // Update is called once per frame

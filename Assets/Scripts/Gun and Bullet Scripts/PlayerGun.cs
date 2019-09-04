@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerGun : Gun
 {
+    public static bool weaponInWall = false;
+    public Sprite gunUIImage;
     public int Cost = 0;
     public string DamageDescription = "Damage";
     public string EffectDescription = "Shoots";
@@ -21,7 +23,10 @@ public class PlayerGun : Gun
         {
             Aim(mousePosTarget, playerTransform.position);
             SpriteFlip(playerTransform, mousePosTarget);
-            FireGun(isPlayer);
+            if (!weaponInWall)
+            {
+                FireGun(isPlayer);
+            }
         }
     }
 }
