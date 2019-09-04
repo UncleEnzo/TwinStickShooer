@@ -111,13 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunProperties:
     weaponType: 1
-    bulletSpawnPoint:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    camShakeMagnitude: 1.5
-    camShakeLength: 0.05
+    camShakeMagnitude: 0.4
+    camShakeLength: 0.03
     bulletsPerSecond: 2
     maxAmmo: 10
     reloadTime: 2
@@ -128,6 +123,7 @@ MonoBehaviour:
     timeBulletSelfDestruct: 10
     knockBack: 5
     bulletAccuracy: 0
+    isExplosiveRecipe: 0
     isBulletBounce: 0
     bulletBounceMaxNum: 0
     isExplosive: 0

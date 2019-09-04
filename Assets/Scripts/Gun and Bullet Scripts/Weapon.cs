@@ -12,9 +12,9 @@ public class GunProperties
     [SerializeField]
     public WeaponType weaponType; //Defines the type of weapon this is
     [SerializeField]
-    [Range(.1f, 10f)] public float camShakeMagnitude = 1.5f;
+    [Range(.1f, 10f)] public float camShakeMagnitude = .1f;
     [SerializeField]
-    [Range(.01f, .1f)] public float camShakeLength = .05f;
+    [Range(.01f, .1f)] public float camShakeLength = .03f;
     [SerializeField]
     public float bulletsPerSecond = 5;
     [SerializeField]

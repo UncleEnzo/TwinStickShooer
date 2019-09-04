@@ -70,6 +70,8 @@ public class UbhBullet : UbhMonoBehaviour
     public float m_selfTimeCount;
     private UbhTentacleBullet m_tentacleBullet;
     private bool m_shooting;
+    private float radius;
+    private LayerMask mask;
     public UbhBaseShot parentShot { get { return m_parentBaseShot; } }
 
     /// <summary>
@@ -80,6 +82,15 @@ public class UbhBullet : UbhMonoBehaviour
 
     private void Awake()
     {
+        mask = LayerMask.GetMask(TagsAndLabels.WallTag);
+        if (GetComponent<CircleCollider2D>())
+        {
+            radius = GetComponent<CircleCollider2D>().radius;
+        }
+        else
+        {
+            print("The collider on this bullet is not a Circle Collider2D. Bullet colliders need to be circle");
+        }
         m_transformCache = transform;
         m_tentacleBullet = GetComponent<UbhTentacleBullet>();
         m_rigidBody2D = GetComponent<Rigidbody2D>();
@@ -383,8 +394,17 @@ public class UbhBullet : UbhMonoBehaviour
                 // X and Y axis
                 newPosition = m_transformCache.position + (m_transformCache.right * (m_speed * deltaTime));
             }
-            // set new position and rotation
-            m_transformCache.SetPositionAndRotation(newPosition, newRotation);
+
+            RaycastHit2D rayHit = Physics2D.CircleCast(transform.position, radius, transform.right, Vector2.Distance(transform.position, newPosition), mask);
+            if (rayHit)
+            {
+                m_transformCache.SetPositionAndRotation(rayHit.centroid, newRotation); //SUBTRACT THE RADIUS
+            }
+            else
+            {
+                // set new position and rotation
+                m_transformCache.SetPositionAndRotation(newPosition, newRotation);
+            }
 
             if (m_tentacleBullet != null)
             {

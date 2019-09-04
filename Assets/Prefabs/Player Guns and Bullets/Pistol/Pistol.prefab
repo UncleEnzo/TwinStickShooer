@@ -113,8 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunProperties:
     weaponType: 0
-    camShakeMagnitude: 1.5
-    camShakeLength: 0.05
+    camShakeMagnitude: 0.1
+    camShakeLength: 0.03
     bulletsPerSecond: 5
     maxAmmo: 10
     reloadTime: 2

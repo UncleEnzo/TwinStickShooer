@@ -111,19 +111,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GunProperties:
     weaponType: 2
-    bulletSpawnPoint:
-    - {fileID: 0}
-    camShakeMagnitude: 1.5
-    camShakeLength: 0.05
+    camShakeMagnitude: 0.1
+    camShakeLength: 0.03
     bulletsPerSecond: 5
     maxAmmo: 10
     reloadTime: 2
     bulletTag: 1
+    destroyBulletsOnDeath: 1
     bulletDamage: 1
     bulletSpeed: 15
     timeBulletSelfDestruct: 7
     knockBack: 5
     bulletAccuracy: 0
+    isExplosiveRecipe: 0
     isBulletBounce: 0
     bulletBounceMaxNum: 0
     isExplosive: 0
@@ -133,10 +133,8 @@ MonoBehaviour:
     explosionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
       type: 3}
   armLength: 0.5
-  currentAmmo: 0
   gunShotSound: {fileID: 8300000, guid: 611f65b2aba4a4af7b4ab3d6ddb5b546, type: 3}
   gunReloadSound: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
-  shotControllerShowCase: {fileID: 0}
   Cost: 20
   DamageDescription: Damage
   EffectDescription: Shoots
