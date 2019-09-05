@@ -499,6 +499,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 152539266959043749, guid: f597f036daa41ea42a1a4782a9ea0873,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1118
+      objectReference: {fileID: 0}
+    - target: {fileID: 152539266959043749, guid: f597f036daa41ea42a1a4782a9ea0873,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0116
+      objectReference: {fileID: 0}
     - target: {fileID: 4905674349864378061, guid: f597f036daa41ea42a1a4782a9ea0873,
         type: 3}
       propertyPath: GunProperties.bulletSpawnPoint.Array.size

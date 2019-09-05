@@ -10,6 +10,9 @@ using UnityEngine.Serialization;
 public class UbhRandomShot : UbhBaseShot
 {
     [Header("===== RandomShot Settings =====")]
+    // "Sets weather the bullets should all fire at once as a cluster or as independant shots"
+    // "Shoot at once is useful for shotguns"
+    public bool shootAtOnce;
     // "Set a angle size of random range. (0 to 360)"
     [Range(0f, 360f), FormerlySerializedAs("_RandomRangeSize")]
     public float m_randomRangeSize = 360f;
@@ -17,6 +20,8 @@ public class UbhRandomShot : UbhBaseShot
     [FormerlySerializedAs("_RandomSpeedMax")]
     [Header("This m_randomSpeedMax += bulletSpeed. Sets upper limit of how much faster a bullet can be.")]
     public float m_randomSpeedMax = 1f;
+    [Header("Lose delay values if Shoot At Once Enabled.")]
+    [Header("Compensate by increasing random size range and speed.")]
     [FormerlySerializedAs("_RandomDelayMin")]
     public float m_randomDelayMin = 0.01f;
     // "Set a maximum delay time between bullet and next bullet. (sec)"
@@ -75,8 +80,36 @@ public class UbhRandomShot : UbhBaseShot
             }
         }
 
-        int index = Random.Range(0, m_numList.Count);
+        if (shootAtOnce)
+        {
+            int index = Random.Range(0, m_numList.Count);
+            distributeAnglesFireShot(index);
+            m_numList.RemoveAt(index);
+        }
+        else
+        {
+            foreach (int shot in m_numList)
+            {
+                distributeAnglesFireShot(Random.Range(0, m_numList.Count));
+            }
+            m_numList.Clear();
+        }
+        if (m_numList.Count <= 0)
+        {
+            FinishedShot();
+        }
+        else
+        {
+            m_delayTimer = Random.Range(m_randomDelayMin, m_randomDelayMax);
+            if (m_delayTimer <= 0f)
+            {
+                Update();
+            }
+        }
+    }
 
+    private void distributeAnglesFireShot(int index)
+    {
         UbhBullet bullet = GetBullet(transform.position);
         if (bullet == null)
         {
@@ -103,20 +136,5 @@ public class UbhRandomShot : UbhBaseShot
                             m_isExplosive, m_explosionDamage, m_explosiveForce, m_explosiveRadius,
                             m_explosionEffect, bullet, Random.Range(m_bulletSpeed, m_bulletSpeed + m_randomSpeedMax), angle);
         FiredShot();
-
-        m_numList.RemoveAt(index);
-
-        if (m_numList.Count <= 0)
-        {
-            FinishedShot();
-        }
-        else
-        {
-            m_delayTimer = Random.Range(m_randomDelayMin, m_randomDelayMax);
-            if (m_delayTimer <= 0f)
-            {
-                Update();
-            }
-        }
     }
 }

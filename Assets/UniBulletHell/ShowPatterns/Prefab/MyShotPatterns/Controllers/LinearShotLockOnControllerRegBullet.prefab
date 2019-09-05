@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1017402012815835004}
   - component: {fileID: 1870126343698041449}
   m_Layer: 0
-  m_Name: LinearShotLockOn
+  m_Name: LinearShotLockOnControllerRegBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

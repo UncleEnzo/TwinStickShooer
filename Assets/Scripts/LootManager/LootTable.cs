@@ -59,7 +59,6 @@ public class LootTable : MonoBehaviour
         {
             print("Entering next level. Retrieving saved Deductable lists");
             SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
-
             if (SavePersistentData != null)
             {
                 //Step 1 > Takes Entries from the persistent map, and adds them to the deductable map

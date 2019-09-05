@@ -41,7 +41,7 @@ public class EquipToPlayer : MonoBehaviour
                 GetComponent<Weapon>().enabled = true;
                 GetComponent<Collider2D>().enabled = false;
                 LootTable.instance.RemoveItemFromPool(gameObject);
-                print("New Gun added to WeaponHolster");
+                print("New Gun added to WeaponHolster: " + this.name);
             }
         }
     }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6014321896230244005}
   - component: {fileID: 4569944751179478676}
   - component: {fileID: 2929272523779517061}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: Assault Rifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,6 +286,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: bullet spawn
       objectReference: {fileID: 0}
+    - target: {fileID: 2792370334160564895, guid: 7609c0c7edcff854a90c34211832b93b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4999484583098298102, guid: 7609c0c7edcff854a90c34211832b93b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -340,6 +345,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501761350018234799, guid: 7609c0c7edcff854a90c34211832b93b,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7609c0c7edcff854a90c34211832b93b, type: 3}

@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 3861060769789230687}
   - component: {fileID: 8847598643853096899}
   - component: {fileID: 6067286278377457143}
-  m_Layer: 0
+  m_Layer: 22
   m_Name: BoomStick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,11 +349,16 @@ PrefabInstance:
     - target: {fileID: 6478021005786239304, guid: bc157eb8ac7baae43b7d4d6f3b098192,
         type: 3}
       propertyPath: m_randomRangeSize
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6478021005786239304, guid: bc157eb8ac7baae43b7d4d6f3b098192,
         type: 3}
       propertyPath: m_randomSpeedMax
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6478021005786239304, guid: bc157eb8ac7baae43b7d4d6f3b098192,
+        type: 3}
+      propertyPath: shootAtOnce
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
