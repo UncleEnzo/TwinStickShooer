@@ -223,7 +223,6 @@ public class Inventory : MonoBehaviour
         else if (item.itemType == ItemType.GunPowder)
         {
             AddCraftComponentToUI(gunpowderCraftComponents, item, gunpowderSlot);
-
         }
         else if (item.itemType == ItemType.Explosive)
         {
@@ -232,17 +231,24 @@ public class Inventory : MonoBehaviour
     }
     private void AddCraftComponentToUI(List<Item> itemList, Item item, GameObject slot)
     {
-        if (itemList.Count <= 0)
+        if (itemList.Count < 100)
         {
-            slot.GetComponentInChildren<Image>().sprite = item.icon;
-            slot.GetComponentInChildren<Image>().enabled = true;
-            slot.GetComponentInChildren<Text>().text = "";
-            itemList.Add(item);
+            if (itemList.Count <= 0)
+            {
+                slot.GetComponentInChildren<Image>().sprite = item.icon;
+                slot.GetComponentInChildren<Image>().enabled = true;
+                slot.GetComponentInChildren<Text>().text = "";
+                itemList.Add(item);
+            }
+            else
+            {
+                itemList.Add(item);
+                slot.GetComponentInChildren<Text>().text = itemList.Count.ToString();
+            }
         }
         else
         {
-            itemList.Add(item);
-            slot.GetComponentInChildren<Text>().text = itemList.Count.ToString();
+            print("You have reached the craft component limit. Use some before picking up more.");
         }
     }
 

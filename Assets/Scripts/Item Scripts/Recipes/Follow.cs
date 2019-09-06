@@ -5,45 +5,97 @@ using UnityEngine;
 public class Follow : MonoBehaviour
 {
     private Transform target;
-    private float AttractorSpeed = 0;
+    private float AttractorSpeed = 12f;
+    private float PullDist = 3f;
     private Coroutine lastCoroutine = null;
     private Rigidbody2D rb;
+    private float resetExpireTime = 8f;
+    private float ExpireCountDown = 8f;
+    private float StartFlashingTime = 3f;
+    private float flashDuration = .08f;
+    private bool StartedFlashing = false;
+    private SpriteRenderer sprite;
 
-    void OnEnable()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
+    void OnEnable()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+        if (!sprite.enabled)
+        {
+            sprite.enabled = true;
+        }
+    }
+
     void OnDisable()
     {
-        AttractorSpeed = 0f;
+        StartedFlashing = false;
+        ExpireCountDown = resetExpireTime;
     }
+
+    void Update()
+    {
+        ExpireCountDown -= Time.deltaTime;
+        if (ExpireCountDown <= StartFlashingTime && StartedFlashing == false)
+        {
+            StartedFlashing = true;
+            StartCoroutine(ExpiringFlashCo());
+        }
+        if (ExpireCountDown <= 0)
+        {
+            ExpireCountDown = resetExpireTime;
+            gameObject.SetActive(false);
+        }
+    }
+
 
     void FixedUpdate()
     {
-        if (lastCoroutine == null)
+        float PlayerDist = Vector3.Distance(Player.Instance.transform.position, transform.position);
+        if (lastCoroutine == null && PlayerDist < PullDist)
         {
-            StartCoroutine(waitBeforeMagnetizing());
+            if (GetComponent<ItemPickup>().item.itemType == ItemType.Physical)
+            {
+                if (Inventory.Instance.getPhysicalCount() < 100)
+                {
+                    MoveTowardPlayer();
+                }
+            }
+            else if (GetComponent<ItemPickup>().item.itemType == ItemType.GunPowder)
+            {
+                if (Inventory.Instance.getGunpowderCount() < 100)
+                {
+                    MoveTowardPlayer();
+                }
+            }
+            else if (GetComponent<ItemPickup>().item.itemType == ItemType.Explosive)
+            {
+                if (Inventory.Instance.getExplosiveCount() < 100)
+                {
+                    MoveTowardPlayer();
+                }
+            }
         }
-
-        //Todo > Expiration timer
-        //Todo > flashing effect
-        //todo > Only move towards you if you're close
-        //todo only move towards you if you have l00  or less
-        //Stop moving to you if you reach 100
-
-        // transform.position = Vector2.MoveTowards(transform.position, Player.Instance.transform.position, AttractorSpeed * Time.deltaTime);
     }
 
-    IEnumerator waitBeforeMagnetizing()
+    private void MoveTowardPlayer()
     {
-        yield return new WaitForSeconds(1f);
-        if (AttractorSpeed < 15)
-        {
-            AttractorSpeed += Random.Range(1f, 1.5f);
-        }
         Vector2 direction = (Player.Instance.transform.position - transform.position).normalized;
-        rb.velocity = direction * (AttractorSpeed);
-        lastCoroutine = null;
+        rb.velocity = direction * AttractorSpeed;
+    }
+
+    IEnumerator ExpiringFlashCo()
+    {
+        while (StartedFlashing)
+        {
+            sprite.enabled = false;
+            yield return new WaitForSeconds(flashDuration);
+            sprite.enabled = true;
+            yield return new WaitForSeconds(flashDuration);
+        }
     }
 }
+
