@@ -57,10 +57,8 @@ public class Enemy : MonoBehaviour
     public GameObject purpleCraftComponent;
     public GameObject blackCraftComponent;
     public GameObject key;
-    public int minDropCount = 0;
-    public int maxDropCount = 7;
-    public float minDropDist = 2f;
-    public float maxDropDist = 2f;
+    public int PercentDropChance = 90;
+    public int NumOfRolls = 7;
     public float coolDownOnMovementTimer = .5f;
     public float movementCoolDownReset = .5f;
     private List<FloatingText> floatingTextList;
@@ -155,8 +153,10 @@ public class Enemy : MonoBehaviour
             {
                 //Stops enemy logic in this script
                 enemyState = EnemyStates.Die;
-                dropCraftComponents();
-                dropKey();
+
+                dropCraftComponentsApplyPush(PercentDropChance, NumOfRolls);
+                dropLoot(key.name, 20, 1);
+
                 if (isSpawned)
                 {
                     isSpawned = false;
@@ -269,42 +269,44 @@ public class Enemy : MonoBehaviour
         removeTextList.Clear();
     }
 
-    private void dropCraftComponents()
+    private void dropCraftComponentsApplyPush(int PercentDropChance, int NumOfRolls)
     {
-        enableComponents(greenCraftComponent.name);
-        enableComponents(purpleCraftComponent.name);
-        enableComponents(blackCraftComponent.name);
-    }
-    private void enableComponents(string craftComponentName)
-    {
-        for (int i = 0; i < Random.Range(minDropCount, maxDropCount); i++)
+        float push = .0005f;
+        List<GameObject> GreenCraftComponents = dropLoot(greenCraftComponent.name, PercentDropChance, NumOfRolls);
+        foreach (GameObject droppedItem in GreenCraftComponents)
         {
-            GameObject newComponent = ObjectPooler.SharedInstance.GetPooledObject(craftComponentName + "(Clone)");
-            if (newComponent != null)
-            {
-                newComponent.transform.position = new Vector2(transform.position.x, transform.position.y);
-                newComponent.transform.rotation = transform.rotation;
-                newComponent.SetActive(true);
-                newComponent.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-5f, 5f), Random.Range(-5f, 5f)), ForceMode2D.Impulse);
-            }
+            droppedItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-push, push), Random.Range(-push, push)), ForceMode2D.Impulse);
+        }
+        List<GameObject> PurpleCraftComponents = dropLoot(purpleCraftComponent.name, PercentDropChance, NumOfRolls);
+        foreach (GameObject droppedItem in PurpleCraftComponents)
+        {
+            droppedItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-push, push), Random.Range(-push, push)), ForceMode2D.Impulse);
+        }
+        List<GameObject> ExplosiveCraftComponents = dropLoot(blackCraftComponent.name, PercentDropChance, NumOfRolls);
+        foreach (GameObject droppedItem in ExplosiveCraftComponents)
+        {
+            droppedItem.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-push, push), Random.Range(-push, push)), ForceMode2D.Impulse);
         }
     }
-    private void dropKey()
+
+    //PercentChanceDrop: Percent Drop chance out of 100
+    private List<GameObject> dropLoot(string ItemName, int PercentChanceDrop, int NumOfRolls)
     {
-        int keyDropCheck = Random.Range(0, 10);
-        if (keyDropCheck == 1)
+        List<GameObject> DroppedLoot = new List<GameObject>();
+        for (int i = 0; i < NumOfRolls; i++)
         {
-            GameObject newKey = ObjectPooler.SharedInstance.GetPooledObject(key.name + "(Clone)");
-            if (newKey != null)
+            if (Random.Range(0, 100) <= PercentChanceDrop)
             {
-                newKey.transform.position = new Vector2(transform.position.x, transform.position.y);
-                newKey.transform.rotation = transform.rotation;
-                newKey.SetActive(true);
+                GameObject droppedItem = ObjectPooler.SharedInstance.GetPooledObject(ItemName + "(Clone)");
+                if (droppedItem != null)
+                {
+                    droppedItem.transform.position = new Vector2(transform.position.x, transform.position.y);
+                    droppedItem.transform.rotation = transform.rotation;
+                    droppedItem.SetActive(true);
+                    DroppedLoot.Add(droppedItem);
+                }
             }
         }
-    }
-    private float randomDistFromEnemy(float pos)
-    {
-        return Random.Range(pos - minDropDist, pos + maxDropDist);
+        return DroppedLoot;
     }
 }

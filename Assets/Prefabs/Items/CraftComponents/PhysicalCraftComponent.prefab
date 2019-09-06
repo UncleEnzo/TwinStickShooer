@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3085158205632521480}
   - component: {fileID: 3085158205632521487}
   - component: {fileID: 6977203908504998877}
-  - component: {fileID: 5598992945875455879}
-  - component: {fileID: 1305444419221357268}
+  - component: {fileID: 7452017033496014756}
+  - component: {fileID: 8565551261184892253}
   m_Layer: 22
   m_Name: PhysicalCraftComponent
   m_TagString: PickUp
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30032df84faa14e439d2de08476ae147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &5598992945875455879
+--- !u!50 &7452017033496014756
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 0.0001
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -129,7 +129,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!58 &1305444419221357268
+--- !u!58 &8565551261184892253
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

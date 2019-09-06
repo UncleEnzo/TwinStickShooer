@@ -146,7 +146,6 @@
      <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\TestNPC.cs" />
      <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\ToolTip.cs" />
      <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\VendorInventory.cs" />
-     <Compile Include="Assets\Scripts\Weapon Swap Scripts\PersistWeaponHolder.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\SetGunPosition.cs" />
      <Compile Include="Assets\Scripts\Weapon Swap Scripts\WeaponSwitching.cs" />
      <Compile Include="Assets\UniBulletHell\Script\Attribute\UbhConditionalHideAttribute.cs" />

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WeaponSwitching : MonoBehaviour
 {
@@ -21,12 +22,58 @@ public class WeaponSwitching : MonoBehaviour
     public int weaponCount = 0;
     private int previousWeaponCount = 0;
     public List<WeaponType> gunTypes;
+    public Dictionary<WeaponType, int> currentExplosiveAmmo = new Dictionary<WeaponType, int>();
+    public GameObject[] arrayOfPossibleWeaponsToLoad;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
+        {
+            SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
+            if (SavePersistentData != null)
+            {
+                gunTypes = SavePersistentData.gunTypes;
+                weaponCount = SavePersistentData.weaponCount;
+                foreach (KeyValuePair<WeaponType, int> entry in SavePersistentData.ExplosiveAmmo)
+                {
+                    currentExplosiveAmmo.Clear();
+                    currentExplosiveAmmo.Add(entry.Key, entry.Value);
+                }
+            }
+        }
+
+        if (PersistentGameData.Instance.currentWeaponCount != this.transform.childCount)
+        {
+            //get all weaponTypes in the weaponholder
+            List<WeaponType> weaponsInHolder = new List<WeaponType>();
+            foreach (Transform weapon in this.transform)
+            {
+                weaponsInHolder.Add(weapon.GetComponentInChildren<Weapon>().GunProperties.weaponType);
+            }
+
+            //Compare weapons in weaponholder to weapons in persisted weapons and add missing ones
+            foreach (WeaponType weaponType in PersistentGameData.Instance.currentGunTypes)
+            {
+                if (!weaponsInHolder.Contains(weaponType))
+                {
+                    int weaponIndexValue = (int)weaponType;
+                    Instantiate(arrayOfPossibleWeaponsToLoad[weaponIndexValue], this.transform);
+                }
+            }
+            //For each explosive weapon in weapon holder, updates its current ammo
+            foreach (KeyValuePair<WeaponType, int> entry in PersistentGameData.Instance.currentExplosiveAmmo)
+            {
+                foreach (ThrowExplosive explosive in this.GetComponentsInChildren<ThrowExplosive>())
+                {
+                    if (explosive.GunProperties.weaponType == entry.Key)
+                    {
+                        explosive.currentAmmo = entry.Value;
+                    }
+                }
+            }
+        }
         selectWeapon();
-        weaponCount = transform.childCount;
         addWeaponToPersist();
     }
 

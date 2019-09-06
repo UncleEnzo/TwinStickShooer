@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class PlayerHUBController : MonoBehaviour
 {
     #region Singleton
@@ -19,12 +20,17 @@ public class PlayerHUBController : MonoBehaviour
     public static PlayerHUBController Instance;
     public Slider healthSlider;
 
-    //Call to update health on UI
-    //Ammo for each gun
-    //crafting materials
-    //recipies
-    //timers
-    //powerups
+    void Start()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == SceneLoader.hubWorldIndex)
+        {
+            GameObject Canvas = GameObject.Find("Canvas");
+            Canvas.transform.Find("HealthSlider").gameObject.SetActive(false);
+            Canvas.transform.Find("KeyPanel").gameObject.SetActive(false);
+            Canvas.transform.Find("Gun").gameObject.SetActive(false);
+            Canvas.transform.Find("Ammo").gameObject.SetActive(false);
+        }
+    }
     public void updateDisplayHubHealth(float health, float totalHealth)
     {
         foreach (TextMeshProUGUI uiElement in GetComponentsInChildren<TextMeshProUGUI>())

@@ -40,32 +40,6 @@ public class PersistentGameData : MonoBehaviour
     }
     #endregion
 
-    void Start()
-    {
-        // Note: Just call the method to load wherever it fucking works, there's no reason to it.
-        //Guns work here for some reason
-        //inventory only works in fucking inventory.instance for some reason
-        LoadWeapons();
-    }
-
-    private void LoadWeapons()
-    {
-        if (SceneManager.GetActiveScene().buildIndex != SceneLoader.hubWorldIndex)
-        {
-            SavePersistentData SavePersistentData = SaveSystem.LoadPersistentData();
-            if (SavePersistentData != null)
-            {
-                currentGunTypes = SavePersistentData.gunTypes;
-                currentWeaponCount = SavePersistentData.weaponCount;
-                foreach (KeyValuePair<WeaponType, int> entry in SavePersistentData.ExplosiveAmmo)
-                {
-                    currentExplosiveAmmo.Clear();
-                    currentExplosiveAmmo.Add(entry.Key, entry.Value);
-                }
-            }
-        }
-    }
-
     public void saveAndPersistGameData()
     {
         currentHealth = Player.Instance.health;

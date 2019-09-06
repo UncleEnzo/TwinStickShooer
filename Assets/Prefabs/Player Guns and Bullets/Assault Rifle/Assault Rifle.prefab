@@ -129,7 +129,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11991691623488481}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee2b57724a954f84a9a6ba554ff99600, type: 3}
   m_Name: 
@@ -286,11 +286,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: bullet spawn
       objectReference: {fileID: 0}
-    - target: {fileID: 2792370334160564895, guid: 7609c0c7edcff854a90c34211832b93b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4999484583098298102, guid: 7609c0c7edcff854a90c34211832b93b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -345,11 +340,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4501761350018234799, guid: 7609c0c7edcff854a90c34211832b93b,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7609c0c7edcff854a90c34211832b93b, type: 3}
