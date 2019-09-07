@@ -123,9 +123,9 @@ public class Player : MonoBehaviour
     {
         if (!iFramesActive)
         {
-            health -= Damage;
+            health -= Mathf.Round(Damage);
+            PlayerHUBController.Instance.updateDisplayHubHealth(health, totalHealth, Damage);
         }
-        PlayerHUBController.Instance.updateDisplayHubHealth(health, totalHealth);
         if (!iFramesActive)
         {
             //knocks back surrounding enemies

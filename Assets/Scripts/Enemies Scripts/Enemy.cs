@@ -148,7 +148,7 @@ public class Enemy : MonoBehaviour
                 floatingTextList.Add(floatingDamageText);
             }
             enemySounds.PlayOneShot(enemyHitSound);
-            health -= Damage;
+            health -= Mathf.Round(Damage);
             if (health <= 0f)
             {
                 //Stops enemy logic in this script

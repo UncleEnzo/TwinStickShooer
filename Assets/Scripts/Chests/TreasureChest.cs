@@ -128,8 +128,9 @@ public class TreasureChest : Interactable
         InventoryUI.canUseUI = true;
         PauseMenu.otherMenuOpen = false;
         Player.Instance.totalHealth++;
-        Player.Instance.health++;
-        PlayerHUBController.Instance.updateDisplayHubHealth(Player.Instance.health, Player.Instance.totalHealth);
+        float healthDifference = 1f;
+        Player.Instance.health += healthDifference;
+        PlayerHUBController.Instance.updateDisplayHubHealth(Player.Instance.health, healthDifference, Player.Instance.totalHealth);
         Time.timeScale = 1;
 
         //Removes listeners from the UI

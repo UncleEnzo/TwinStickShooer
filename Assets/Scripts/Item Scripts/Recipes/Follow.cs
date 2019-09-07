@@ -6,11 +6,13 @@ public class Follow : MonoBehaviour
 {
     private Transform target;
     private float AttractorSpeed = 12f;
-    private float PullDist = 3f;
+    private float PullDist = 4f;
     private Coroutine lastCoroutine = null;
     private Rigidbody2D rb;
     private float resetExpireTime = 8f;
     private float ExpireCountDown = 8f;
+    private float PauseBeforeAttract = .25f;
+    private float resetPauseBeforeAttract = .25f;
     private float StartFlashingTime = 3f;
     private float flashDuration = .08f;
     private bool StartedFlashing = false;
@@ -34,11 +36,13 @@ public class Follow : MonoBehaviour
     {
         StartedFlashing = false;
         ExpireCountDown = resetExpireTime;
+        PauseBeforeAttract = resetPauseBeforeAttract;
     }
 
     void Update()
     {
         ExpireCountDown -= Time.deltaTime;
+        PauseBeforeAttract -= Time.deltaTime;
         if (ExpireCountDown <= StartFlashingTime && StartedFlashing == false)
         {
             StartedFlashing = true;
@@ -55,7 +59,7 @@ public class Follow : MonoBehaviour
     void FixedUpdate()
     {
         float PlayerDist = Vector3.Distance(Player.Instance.transform.position, transform.position);
-        if (lastCoroutine == null && PlayerDist < PullDist)
+        if (lastCoroutine == null && PlayerDist < PullDist && PauseBeforeAttract <= 0)
         {
             if (GetComponent<ItemPickup>().item.itemType == ItemType.Physical)
             {
@@ -64,14 +68,14 @@ public class Follow : MonoBehaviour
                     MoveTowardPlayer();
                 }
             }
-            else if (GetComponent<ItemPickup>().item.itemType == ItemType.GunPowder)
+            else if (GetComponent<ItemPickup>().item.itemType == ItemType.GunPowder && PauseBeforeAttract <= 0)
             {
                 if (Inventory.Instance.getGunpowderCount() < 100)
                 {
                     MoveTowardPlayer();
                 }
             }
-            else if (GetComponent<ItemPickup>().item.itemType == ItemType.Explosive)
+            else if (GetComponent<ItemPickup>().item.itemType == ItemType.Explosive && PauseBeforeAttract <= 0)
             {
                 if (Inventory.Instance.getExplosiveCount() < 100)
                 {
