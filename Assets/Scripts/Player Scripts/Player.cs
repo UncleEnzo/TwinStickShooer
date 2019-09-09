@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
         if (!iFramesActive)
         {
             health -= Mathf.Round(Damage);
-            PlayerHUBController.Instance.updateDisplayHubHealth(health, totalHealth, Damage);
+            PlayerHUBController.Instance.updateDisplayHubHealth(health, totalHealth);
         }
         if (!iFramesActive)
         {

@@ -130,7 +130,7 @@ public class TreasureChest : Interactable
         Player.Instance.totalHealth++;
         float healthDifference = 1f;
         Player.Instance.health += healthDifference;
-        PlayerHUBController.Instance.updateDisplayHubHealth(Player.Instance.health, healthDifference, Player.Instance.totalHealth);
+        PlayerHUBController.Instance.updateDisplayHubHealth(Player.Instance.health, Player.Instance.totalHealth);
         Time.timeScale = 1;
 
         //Removes listeners from the UI

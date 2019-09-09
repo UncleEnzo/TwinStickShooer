@@ -18,75 +18,49 @@ public class PlayerHUBController : MonoBehaviour
     #endregion
 
     public static PlayerHUBController Instance;
-    private const float DAMAGED_HEALTH_FADE_TIMER_MAX = 1f;
-    private Image HealthBarImage;
-    private Transform BgFadeFillImageTemplate;
-    private Color bgFadeColor;
-    private float bgFadeTimer;
-    private GameObject healthSliderObj;
-    private float HealthBarWidth;
+    private float barWidth;
+    private GameObject healthbar;
+    private Image barImage;
+    private Transform damagedBarTemplate;
+    private GameObject damagedBars;
+    private TextMeshProUGUI healthText;
+
 
     void Start()
     {
         GameObject Canvas = GameObject.Find("Canvas");
-        healthSliderObj = Canvas.transform.Find("HealthSlider").gameObject;
-        HealthBarImage = healthSliderObj.transform.Find("Fill").GetComponent<Image>();
-        BgFadeFillImageTemplate = healthSliderObj.transform.Find("BackgroundFadeFill");
-        HealthBarWidth = healthSliderObj.GetComponent<RectTransform>().rect.width;
-        // bgFadeColor = BgFadeFillImageTemplate.color;
-        // bgFadeColor.a = 0f;
-        // BgFadeFillImageTemplate.color = bgFadeColor;
+        healthbar = Canvas.transform.Find("HealthBar").gameObject;
 
         if (SceneManager.GetActiveScene().buildIndex == SceneLoader.hubWorldIndex)
         {
-            healthSliderObj.gameObject.SetActive(false);
+            healthbar.gameObject.SetActive(false);
             Canvas.transform.Find("KeyPanel").gameObject.SetActive(false);
             Canvas.transform.Find("Gun").gameObject.SetActive(false);
             Canvas.transform.Find("Ammo").gameObject.SetActive(false);
         }
-    }
-    private void Update()
-    {
-        // if (bgFadeColor.a > 0)
-        // {
-        //     bgFadeTimer -= Time.deltaTime;
-        //     if (bgFadeTimer < 0)
-        //     {
-        //         float fadeAmount = 5f;
-        //         bgFadeColor.a -= fadeAmount * Time.deltaTime;
-        //         BgFadeFillImageTemplate.color = bgFadeColor;
-        //     }
-        // }
+
+        barImage = healthbar.transform.Find("bar").GetComponent<Image>();
+        damagedBarTemplate = healthbar.transform.Find("damagedBarTemplate");
+        barWidth = damagedBarTemplate.GetComponent<RectTransform>().rect.width;
+        damagedBars = healthbar.transform.Find("damagedBars").gameObject;
+        healthText = healthbar.transform.Find("HealthText").gameObject.GetComponent<TextMeshProUGUI>();
     }
 
-    public void updateDisplayHubHealth(float healthAfterDamage, float totalHealth, float healthDifference = 0)
+    private float getHealthNormalized(float healthAmount, float healthAmountMax)
     {
-        foreach (TextMeshProUGUI uiElement in GetComponentsInChildren<TextMeshProUGUI>())
-        {
-            if (uiElement.tag == TagsAndLabels.HealthUITag)
-            {
-                float beforeDamagedBarFillAmount = HealthBarImage.fillAmount;
-                uiElement.text = healthAfterDamage.ToString() + "/" + totalHealth.ToString();
-                HealthBarImage.fillAmount = (healthAfterDamage / totalHealth);
-                Transform bgFadeFillBar = Instantiate(BgFadeFillImageTemplate, BgFadeFillImageTemplate.transform);
-                // bgFadeFillBar.SetParent(BgFadeFillImageTemplate);
-                bgFadeFillBar.gameObject.GetComponent<Image>().enabled = true;
-                bgFadeFillBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(((HealthBarImage.fillAmount * HealthBarWidth) + (HealthBarWidth / 2)), bgFadeFillBar.GetComponent<RectTransform>().anchoredPosition.y);
-                bgFadeFillBar.GetComponent<Image>().fillAmount = beforeDamagedBarFillAmount - HealthBarImage.fillAmount;
-                bgFadeFillBar.gameObject.AddComponent<HealthBarCutFallDown>();
-                print(HealthBarImage.fillAmount);
-                //     if (bgFadeColor.a <= 0)
-                //     {
-                //         //damaged bar image is invisible
-                //         BgFadeFillImageTemplate.fillAmount = ((healthAfterDamage + healthDifference) / totalHealth);
-                //     }
-                //     //damaged bar is already visible
-                //     bgFadeColor.a = 1;
-                //     BgFadeFillImageTemplate.color = bgFadeColor;
-                //     bgFadeTimer = DAMAGED_HEALTH_FADE_TIMER_MAX;
-                // }
-            }
-        }
+        return (float)healthAmount / healthAmountMax;
+    }
+    public void updateDisplayHubHealth(float healthAmount, float healthAmountMax)
+    {
+        healthText.text = healthAmount + "/" + healthAmountMax;
+        float beforeDamagedBarFillAmount = barImage.fillAmount;
+        barImage.fillAmount = getHealthNormalized(healthAmount, healthAmountMax);
+        Transform damagedBar = Instantiate(damagedBarTemplate, damagedBars.transform);
+        damagedBar.gameObject.SetActive(true);
+        damagedBar.GetComponent<RectTransform>().anchoredPosition = new Vector2(barImage.fillAmount * barWidth,
+            damagedBar.GetComponent<RectTransform>().anchoredPosition.y);
+        damagedBar.GetComponent<Image>().fillAmount = beforeDamagedBarFillAmount - barImage.fillAmount;
+        damagedBar.gameObject.AddComponent<HealthBarCutFallDown>();
     }
     public void updateDisplayHubGun(Sprite gunImage)
     {

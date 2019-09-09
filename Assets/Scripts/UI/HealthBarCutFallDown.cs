@@ -37,6 +37,7 @@ public class HealthBarCutFallDown : MonoBehaviour
                 image.color = color;
                 if (color.a <= 0)
                 {
+                    // gameObject.SetActive(false);
                     Destroy(gameObject);
                 }
             }

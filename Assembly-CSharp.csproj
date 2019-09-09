@@ -287,6 +287,7 @@
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveSystem.cs" />
      <Compile Include="Assets\Scripts\SaveAndPersist\SaveToDisk\SaveVendorLootPool.cs" />
      <Compile Include="Assets\Scripts\UI\HealthBarCutFallDown.cs" />
+     <Compile Include="Assets\Scripts\UI\PlaceHealthDivideBar.cs" />
      <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\Dialogue.cs" />
      <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\Vendor and Dialogue Scripts\DialogueTrigger.cs" />
